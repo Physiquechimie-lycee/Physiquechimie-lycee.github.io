@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Réussir son Grand Oral de Physique-Chimie | Méthode, sujets et conseils</title>
+
+    <meta name="description"
+          content="Préparer son Grand Oral de Physique-Chimie : choisir une problématique, construire son plan, préparer sa présentation et comprendre les attentes du jury.">
+
+    <meta name="robots" content="index, follow">
+
+    <style>
+        /* =========================
+           STYLE GENERAL
+           ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Helvetica, Arial, sans-serif;
+            color: #202733;
+            background: #ffffff;
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .container {
+            width: min(1080px, 92%);
+            margin: auto;
+        }
+
+
+        /* =========================
+           MENU
+           ========================= */
+
+        header {
+            border-bottom: 1px solid #e6e9ed;
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav {
+            min-height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .logo {
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #172033;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-size: 0.95rem;
+            color: #4b5563;
+        }
+
+        nav a:hover {
+            color: #172033;
+        }
+
+
+        /* =========================
+           INTRODUCTION
+           ========================= */
+
+        .hero {
+            background: #f5f7fa;
+            padding: 90px 0 85px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.35fr 0.65fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #53657d;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            margin: 0 0 25px;
+            font-size: clamp(2.2rem, 5vw, 3.7rem);
+            line-height: 1.12;
+            letter-spacing: -0.03em;
+            color: #172033;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 700px;
+            color: #4b5563;
+            margin-bottom: 30px;
+        }
+
+        .hero-link {
+            display: inline-block;
+            padding: 12px 21px;
+            border: 1px solid #26364d;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            color: #ffffff;
+            background: #26364d;
+        }
+
+        .hero-link:hover {
+            background: #172033;
+        }
+
+        .hero-note {
+            margin-top: 14px;
+            font-size: 0.85rem;
+            color: #697586;
+        }
+
+
+        /* =========================
+           SECTIONS
+           ========================= */
+
+        section {
+            padding: 75px 0;
+        }
+
+        .section-light {
+            background: #ffffff;
+        }
+
+        .section-grey {
+            background: #f7f8fa;
+        }
+
+        .section-title {
+            max-width: 760px;
+            margin-bottom: 45px;
+        }
+
+        h2 {
+            margin: 0 0 16px;
+            font-size: 2rem;
+            line-height: 1.25;
+            color: #172033;
+        }
+
+        .section-title p {
+            margin: 0;
+            color: #596575;
+            font-size: 1.05rem;
+        }
+
+
+        /* =========================
+           CARTES
+           ========================= */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            border: 1px solid #e2e6eb;
+            border-radius: 8px;
+            padding: 28px;
+            background: #ffffff;
+        }
+
+        .card h3 {
+            margin: 0 0 12px;
+            font-size: 1.15rem;
+            color: #172033;
+        }
+
+        .card p {
+            margin: 0;
+            color: #5c6675;
+        }
+
+
+        /* =========================
+           CONSEILS
+           ========================= */
+
+        .advice-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px 50px;
+        }
+
+        .advice {
+            padding: 20px 0;
+            border-top: 1px solid #dfe3e8;
+        }
+
+        .advice h3 {
+            margin: 0 0 8px;
+            font-size: 1.1rem;
+            color: #172033;
+        }
+
+        .advice p {
+            margin: 0;
+            color: #5c6675;
+        }
+
+
+        /* =========================
+           LIVRE
+           ========================= */
+
+        .book-section {
+            background: #eef1f5;
+        }
+
+        .book {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 55px;
+            align-items: center;
+        }
+
+        .book-placeholder {
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 35px;
+            background: #dfe4ea;
+            border-radius: 8px;
+            text-align: center;
+            color: #536071;
+        }
+
+        .book-content h2 {
+            margin-bottom: 20px;
+        }
+
+        .book-content p {
+            color: #505b6a;
+        }
+
+        .book-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 11px 20px;
+            border: 1px solid #26364d;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            color: #ffffff;
+            background: #26364d;
+        }
+
+
+        /* =========================
+           AUTEUR
+           ========================= */
+
+        .author {
+            max-width: 800px;
+        }
+
+        .author p {
+            color: #555f6e;
+        }
+
+
+        /* =========================
+           FOOTER
+           ========================= */
+
+        footer {
+            padding: 35px 0;
+            border-top: 1px solid #e4e7eb;
+            color: #697586;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #53657d;
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           MOBILE
+           ========================= */
+
+        @media (max-width: 800px) {
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero-grid,
+            .book {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .advice-list {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                gap: 14px;
+            }
+
+            nav a {
+                font-size: 0.85rem;
+            }
+
+            section {
+                padding: 55px 0;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .nav {
+                min-height: 60px;
+            }
+
+            .logo {
+                font-size: 0.9rem;
+            }
+
+            nav {
+                gap: 10px;
+            }
+
+            nav a {
+                font-size: 0.78rem;
+            }
+
+            h2 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+<header>
+    <div class="container nav">
+
+        <a href="index.html" class="logo">
+            Physique-Chimie au lycée
+        </a>
+
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="preparer-grand-oral.html">
+                Préparer le Grand Oral
+            </a>
+            <a href="livre.html">
+                Le livre
+            </a>
+        </nav>
+
+    </div>
+</header>
+
+
+<main>
+
+    <!-- =========================
+         INTRODUCTION
+         ========================= -->
+
+    <section class="hero">
+
+        <div class="container hero-grid">
+
+            <div>
+
+                <div class="eyebrow">
+                    Grand Oral de physique-chimie
+                </div>
+
+                <h1>
+                    Réussir son Grand Oral de Physique-Chimie :
+                    méthode, sujets et conseils
+                </h1>
+
+                <p>
+                    Comment choisir une problématique pertinente ?
+                    Comment construire une présentation claire ?
+                    Comment se préparer aux questions du jury ?
+                    Cette page rassemble les principaux repères pour
+                    préparer son Grand Oral de physique-chimie.
+                </p>
+
+                <a class="hero-link"
+                   href="preparer-grand-oral.html">
+                    Préparer son Grand Oral
+                </a>
+
+            </div>
+
+            <div>
+                <!-- La couverture du livre pourra être placée ici
+                     lorsque tu me transmettras le PDF. -->
+
+                <div class="book-placeholder">
+                    <strong>
+                        Couverture du guide<br>
+                        à ajouter
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         POUR COMMENCER
+         ========================= -->
+
+    <section class="section-light">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Préparer son Grand Oral de Physique-Chimie
+                </h2>
+
+                <p>
+                    La préparation ne consiste pas seulement à rédiger
+                    puis à mémoriser un texte. Le choix de la problématique,
+                    l'organisation des connaissances et la capacité à
+                    expliquer un raisonnement jouent un rôle essentiel.
+                </p>
+
+            </div>
+
+
+            <div class="cards">
+
+                <article class="card">
+
+                    <h3>
+                        Choisir une problématique
+                    </h3>
+
+                    <p>
+                        Une bonne problématique doit permettre de construire
+                        un véritable raisonnement scientifique et de développer
+                        une présentation adaptée au format du Grand Oral.
+                    </p>
+
+                </article>
+
+
+                <article class="card">
+
+                    <h3>
+                        Construire un plan
+                    </h3>
+
+                    <p>
+                        Un plan efficace permet de guider l'auditoire,
+                        de sélectionner les connaissances pertinentes et
+                        de conserver un fil directeur pendant la présentation.
+                    </p>
+
+                </article>
+
+
+                <article class="card">
+
+                    <h3>
+                        Préparer l'oral
+                    </h3>
+
+                    <p>
+                        Connaître son sujet ne suffit pas : il faut également
+                        être capable de l'expliquer clairement et de répondre
+                        aux questions qui peuvent suivre la présentation.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONSEILS
+         ========================= -->
+
+    <section class="section-grey">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Quelques points essentiels
+                </h2>
+
+                <p>
+                    La préparation du Grand Oral demande de travailler
+                    à la fois le contenu scientifique et la présentation orale.
+                </p>
+
+            </div>
+
+
+            <div class="advice-list">
+
+                <article class="advice">
+
+                    <h3>
+                        Une question plutôt qu'un simple thème
+                    </h3>
+
+                    <p>
+                        Un thème comme « la radioactivité » ou « les batteries »
+                        ne constitue pas à lui seul une problématique.
+                        Il faut formuler une question permettant de développer
+                        une démonstration ou une explication.
+                    </p>
+
+                </article>
+
+
+                <article class="advice">
+
+                    <h3>
+                        Des connaissances réellement maîtrisées
+                    </h3>
+
+                    <p>
+                        Il est préférable de sélectionner quelques notions
+                        bien comprises plutôt que d'accumuler des connaissances
+                        difficiles à expliquer à l'oral.
+                    </p>
+
+                </article>
+
+
+                <article class="advice">
+
+                    <h3>
+                        Une présentation structurée
+                    </h3>
+
+                    <p>
+                        Le jury doit pouvoir suivre facilement le raisonnement.
+                        L'introduction, les différentes étapes du développement
+                        et la conclusion doivent former un ensemble cohérent.
+                    </p>
+
+                </article>
+
+
+                <article class="advice">
+
+                    <h3>
+                        Anticiper les questions
+                    </h3>
+
+                    <p>
+                        La préparation doit également prendre en compte
+                        l'échange avec le jury et les questions susceptibles
+                        d'être posées à partir du contenu présenté.
+                    </p>
+
+                </article>
+
+            </div>
+
+
+            <div style="margin-top:40px;">
+
+                <a class="hero-link"
+                   href="preparer-grand-oral.html">
+                    Voir la méthode complète
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         LE LIVRE
+         ========================= -->
+
+    <section class="book-section">
+
+        <div class="container book">
+
+            <div class="book-placeholder">
+
+                <strong>
+                    Image de couverture<br>
+                    à ajouter
+                </strong>
+
+            </div>
+
+
+            <div class="book-content">
+
+                <h2>
+                    Un guide pour préparer son Grand Oral
+                </h2>
+
+                <p>
+                    <em>
+                        Réussir son Grand Oral de Physique-Chimie
+                    </em>
+                    propose une méthode destinée aux élèves qui souhaitent
+                    préparer leur épreuve de manière structurée.
+                </p>
+
+                <p>
+                    Le guide aborde notamment le choix de la problématique,
+                    la construction de la présentation, la préparation
+                    de l'oral et les attentes liées à l'épreuve.
+                </p>
+
+                <a class="book-link"
+                   href="livre.html">
+                    Découvrir le guide
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         AUTEUR
+         ========================= -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="author">
+
+                <h2>
+                    À propos de l'auteur
+                </h2>
+
+                <p>
+                    Enseignant agrégé de physique-chimie depuis plus de
+                    vingt ans, dont plus de dix ans en lycée, l'auteur
+                    a également participé à plusieurs jurys du Grand Oral.
+                </p>
+
+                <p>
+                    Ce site propose des ressources et des conseils destinés
+                    aux élèves de lycée pour les accompagner dans leur
+                    préparation en physique-chimie.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="container">
+
+        <div>
+            Physique-Chimie au lycée
+        </div>
+
+        <div style="margin-top:8px;">
+            Ressources, méthodes et conseils pour les élèves du lycée.
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
