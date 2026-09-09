@@ -191,7 +191,10 @@
         font-size: 0.96rem;
     }
 
-    .status { text-align: right; font-size: 0.9rem; }
+    .status {
+        text-align: right;
+        font-size: 0.9rem;
+    }
 
     .status a {
         text-decoration: none;
@@ -200,11 +203,16 @@
         padding-bottom: 2px;
     }
 
-    .status.soon { color: #a3a3a3; }
+    .status.soon {
+        color: #a3a3a3;
+    }
 
     /* ================= FOCUS AIDE GRAND ORAL ================= */
 
-    .focus-content p { color: #4a5261; max-width: 640px; }
+    .focus-content p {
+        color: #4a5261;
+        max-width: 640px;
+    }
 
     .focus-links {
         margin-top: 22px;
@@ -240,31 +248,19 @@
         color: var(--cream);
     }
 
-    .author-section h2 { color: var(--white); }
-
-    .author-grid {
-        display: grid;
-        grid-template-columns: 0.7fr 1.3fr;
-        gap: 50px;
-        align-items: start;
+    .author-section h2 {
+        color: var(--white);
     }
 
-    .author-photo-placeholder {
-        min-height: 220px;
-        border: 1px solid rgba(176,141,43,0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: #9fb0c6;
-        font-size: 0.88rem;
-        padding: 20px;
+    .author-grid {
+        display: block;
+        max-width: 760px;
     }
 
     .author-section p {
         color: #cdd6e2;
         margin: 0 0 16px;
-        max-width: 600px;
+        max-width: 700px;
     }
 
     /* ================= FOOTER ================= */
@@ -279,13 +275,22 @@
     /* ================= MOBILE ================= */
 
     @media (max-width: 800px) {
-        .author-grid { grid-template-columns: 1fr; gap: 26px; }
-        .level-row { grid-template-columns: 1fr; gap: 6px; }
-        .status { text-align: left; }
-        nav.links { gap: 16px; }
-        nav.links a { font-size: 0.82rem; }
-        section { padding: 56px 0; }
-        .hero { padding: 64px 0; }
+
+        nav.links {
+            gap: 16px;
+        }
+
+        nav.links a {
+            font-size: 0.82rem;
+        }
+
+        section {
+            padding: 56px 0;
+        }
+
+        .hero {
+            padding: 64px 0;
+        }
     }
 </style>
 </head>
@@ -295,6 +300,7 @@
 <header>
     <div class="container nav">
         <a href="index.html" class="logo">Physique-Chimie au lycée</a>
+
         <nav class="links">
             <a href="index.html">Accueil</a>
             <a href="preparer-grand-oral.html">Aide au Grand Oral</a>
@@ -310,86 +316,182 @@
     <section class="hero">
         <div class="container">
             <div class="hero-inner">
+
                 <h1>Physique-chimie au lycée : cours, méthode et conseils</h1>
 
-                <p>Des ressources pour les élèves de Seconde, Première Spé, Terminale Spé, ainsi que pour la préparation du Grand Oral et des ECE.</p>
-
-                <p class="credential">
-                    Par <strong>Mathieu Tomah</strong>, professeur agrégé de physique-chimie, en poste en lycée.
+                <p>
+                    Des ressources pour les élèves de Seconde, Première Spé,
+                    Terminale Spé, ainsi que pour la préparation du Grand Oral
+                    et des ECE.
                 </p>
 
-                <a class="btn-gold" href="preparer-grand-oral.html">Voir l'aide au Grand Oral</a>
+                <p class="credential">
+                    Par <strong>Mathieu Tomah</strong>, professeur agrégé
+                    de physique-chimie, en poste en lycée.
+                </p>
+
+                <a class="btn-gold" href="preparer-grand-oral.html">
+                    Voir l'aide au Grand Oral
+                </a>
+
             </div>
         </div>
     </section>
 
+
     <!-- AIDE PAR NIVEAU -->
     <section class="section-cream">
+
         <div class="container">
+
             <div class="section-title">
+
                 <h2>De l'aide à chaque niveau</h2>
-                <p>Une page dédiée par niveau, avec des explications, des méthodes et des conseils. La collection s'étoffera progressivement.</p>
+
+                <p>
+                    Une page dédiée par niveau, avec des explications,
+                    des méthodes et des conseils. La collection s'étoffera progressivement.
+                </p>
+
             </div>
 
             <div class="levels">
 
                 <div class="level-row available">
-                    <div class="level-name">Grand Oral</div>
-                    <div class="level-desc">Choisir sa problématique, construire son plan, préparer l'oral et les questions du jury.</div>
-                    <div class="status"><a href="preparer-grand-oral.html">Voir l'aide</a></div>
+
+                    <div class="level-name">
+                        Grand Oral
+                    </div>
+
+                    <div class="level-desc">
+                        Choisir sa problématique, construire son plan,
+                        préparer l'oral et les questions du jury.
+                    </div>
+
+                    <div class="status">
+                        <a href="preparer-grand-oral.html">
+                            Voir l'aide
+                        </a>
+                    </div>
+
                 </div>
 
-                <div class="level-row">
-                    <div class="level-name">Seconde</div>
-                    <div class="level-desc">Cours et méthode pour la physique-chimie en Seconde.</div>
-                    <div class="status soon">Bientôt</div>
-                </div>
 
                 <div class="level-row">
-                    <div class="level-name">Première Spé SPC</div>
-                    <div class="level-desc">Cours et méthode pour la spécialité en Première.</div>
-                    <div class="status soon">Bientôt</div>
+
+                    <div class="level-name">
+                        Seconde
+                    </div>
+
+                    <div class="level-desc">
+                        Cours et méthode pour la physique-chimie en Seconde.
+                    </div>
+
+                    <div class="status soon">
+                        Bientôt
+                    </div>
+
                 </div>
 
-                <div class="level-row">
-                    <div class="level-name">Terminale Spé SPC</div>
-                    <div class="level-desc">Cours et méthode pour la spécialité en Terminale.</div>
-                    <div class="status soon">Bientôt</div>
-                </div>
 
                 <div class="level-row">
-                    <div class="level-name">ECE</div>
-                    <div class="level-desc">Préparation à l'épreuve de compétences expérimentales.</div>
-                    <div class="status soon">Bientôt</div>
+
+                    <div class="level-name">
+                        Première Spé SPC
+                    </div>
+
+                    <div class="level-desc">
+                        Cours et méthode pour la spécialité en Première.
+                    </div>
+
+                    <div class="status soon">
+                        Bientôt
+                    </div>
+
+                </div>
+
+
+                <div class="level-row">
+
+                    <div class="level-name">
+                        Terminale Spé SPC
+                    </div>
+
+                    <div class="level-desc">
+                        Cours et méthode pour la spécialité en Terminale.
+                    </div>
+
+                    <div class="status soon">
+                        Bientôt
+                    </div>
+
+                </div>
+
+
+                <div class="level-row">
+
+                    <div class="level-name">
+                        ECE
+                    </div>
+
+                    <div class="level-desc">
+                        Préparation à l'épreuve de compétences expérimentales.
+                    </div>
+
+                    <div class="status soon">
+                        Bientôt
+                    </div>
+
                 </div>
 
             </div>
+
         </div>
+
     </section>
 
-    
+
     <!-- AUTEUR -->
     <section class="author-section" id="auteur">
-        <div class="container author-grid">
-            <div class="author-photo-placeholder">
-                Photo de l'auteur<br>(à ajouter)
-            </div>
 
-            <div>
-                <h2>L'auteur</h2>
-                <p>Mathieu Tomah est professeur agrégé de physique-chimie, en poste en lycée. Il enseigne au quotidien à des élèves de Seconde, Première et Terminale, et accompagne chaque année des candidats au Grand Oral.</p>
-                <p>Ce site rassemble les ressources et conseils nés de cette expérience de terrain : ce qui fonctionne réellement pour préparer les épreuves, du cours aux examens.</p>
-            </div>
+        <div class="container author-grid">
+
+            <h2>L'auteur</h2>
+
+            <p>
+                Mathieu Tomah est professeur agrégé de physique-chimie,
+                en poste en lycée. Il enseigne au quotidien à des élèves
+                de Seconde, Première et Terminale, et accompagne chaque
+                année des candidats au Grand Oral.
+            </p>
+
+            <p>
+                Ce site rassemble les ressources et conseils nés de cette
+                expérience de terrain : ce qui fonctionne réellement pour
+                préparer les épreuves, du cours aux examens.
+            </p>
+
         </div>
+
     </section>
 
 </main>
 
+
 <footer>
+
     <div class="container">
-        <div>Physique-Chimie au lycée</div>
-        <div style="margin-top:6px;">Ressources, méthodes et conseils pour les élèves du lycée.</div>
+
+        <div>
+            Physique-Chimie au lycée
+        </div>
+
+        <div style="margin-top:6px;">
+            Ressources, méthodes et conseils pour les élèves du lycée.
+        </div>
+
     </div>
+
 </footer>
 
 </body>
