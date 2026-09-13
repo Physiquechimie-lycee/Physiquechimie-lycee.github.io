@@ -23,16 +23,22 @@
         --line: #e3ddd0;
     }
 
-    * { box-sizing: border-box; }
+    * {
+        box-sizing: border-box;
+    }
 
-    html { scroll-behavior: smooth; }
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 82px;
+    }
 
     body {
         margin: 0;
         font-family: Helvetica, Arial, sans-serif;
         color: var(--ink);
         background: var(--white);
-        line-height: 1.65;
+        line-height: 1.6;
+        -webkit-text-size-adjust: 100%;
     }
 
     h1, h2, h3, .logo {
@@ -41,12 +47,15 @@
         color: var(--navy);
     }
 
-    a { color: inherit; }
+    a {
+        color: inherit;
+    }
 
     .container {
         width: min(1040px, 90%);
         margin: auto;
     }
+
 
     /* ================= HEADER ================= */
 
@@ -59,21 +68,23 @@
     }
 
     .nav {
-        min-height: 74px;
+        min-height: 70px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 30px;
+        gap: 28px;
     }
 
     .logo {
         text-decoration: none;
-        font-size: 1.15rem;
+        font-size: 1.12rem;
+        white-space: nowrap;
     }
 
     nav.links {
         display: flex;
-        gap: 32px;
+        gap: 28px;
+        align-items: center;
     }
 
     nav.links a {
@@ -82,43 +93,46 @@
         color: var(--navy);
         border-bottom: 1px solid transparent;
         padding-bottom: 3px;
+        white-space: nowrap;
     }
 
     nav.links a:hover {
         border-bottom: 1px solid var(--gold);
     }
 
+
     /* ================= HERO ================= */
 
     .hero {
         background: var(--navy);
         color: var(--cream);
-        padding: 100px 0 90px;
+        padding: 78px 0 68px;
     }
 
     .hero-inner {
-        max-width: 680px;
+        max-width: 700px;
     }
 
     h1 {
         color: var(--white);
-        margin: 0 0 26px;
+        margin: 0 0 22px;
         font-size: clamp(2rem, 4.4vw, 3rem);
-        line-height: 1.3;
+        line-height: 1.25;
     }
 
     .hero p {
-        font-size: 1.08rem;
+        font-size: 1.05rem;
         color: #cdd6e2;
-        margin: 0 0 30px;
+        margin: 0 0 26px;
+        max-width: 660px;
     }
 
     .credential {
         border-left: 2px solid var(--gold);
-        padding-left: 18px;
-        margin: 0 0 36px;
-        font-size: 1.02rem;
-        color: var(--cream);
+        padding-left: 16px;
+        margin: 0 0 30px;
+        font-size: 1rem;
+        color: var(--cream) !important;
     }
 
     .credential strong {
@@ -127,39 +141,46 @@
 
     .btn-gold {
         display: inline-block;
-        padding: 13px 24px;
+        padding: 12px 22px;
         background: var(--gold);
         color: var(--navy);
         text-decoration: none;
         font-weight: bold;
-        font-size: 0.95rem;
+        font-size: 0.94rem;
     }
 
     .btn-gold:hover {
         background: #c49f3c;
     }
 
+
     /* ================= SECTIONS ================= */
 
-    section { padding: 80px 0; }
+    section {
+        padding: 72px 0;
+    }
 
-    .section-cream { background: var(--cream); }
+    .section-cream {
+        background: var(--cream);
+    }
 
     .section-title {
-        max-width: 640px;
-        margin-bottom: 44px;
+        max-width: 660px;
+        margin-bottom: 38px;
     }
 
     h2 {
-        font-size: 1.9rem;
-        margin: 0 0 14px;
+        font-size: 1.85rem;
+        line-height: 1.3;
+        margin: 0 0 12px;
     }
 
     .section-title p {
         margin: 0;
         color: var(--muted);
-        font-size: 1.02rem;
+        font-size: 1rem;
     }
+
 
     /* ================= AIDE PAR NIVEAU ================= */
 
@@ -172,23 +193,27 @@
         grid-template-columns: 1.4fr 2fr 0.9fr;
         gap: 20px;
         align-items: center;
-        padding: 24px 0;
+        padding: 22px 0;
         border-bottom: 1px solid var(--line);
     }
 
     .level-row.available {
-        background: linear-gradient(90deg, rgba(176,141,43,0.06), transparent 40%);
+        background: linear-gradient(
+            90deg,
+            rgba(176,141,43,0.06),
+            transparent 40%
+        );
     }
 
     .level-name {
-        font-family: Georgia, serif;
-        font-size: 1.1rem;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.08rem;
         color: var(--navy);
     }
 
     .level-desc {
         color: var(--muted);
-        font-size: 0.96rem;
+        font-size: 0.94rem;
     }
 
     .status {
@@ -207,39 +232,6 @@
         color: #a3a3a3;
     }
 
-    /* ================= FOCUS AIDE GRAND ORAL ================= */
-
-    .focus-content p {
-        color: #4a5261;
-        max-width: 640px;
-    }
-
-    .focus-links {
-        margin-top: 22px;
-        display: flex;
-        gap: 26px;
-        flex-wrap: wrap;
-    }
-
-    .focus-links a {
-        text-decoration: none;
-        font-size: 0.95rem;
-        color: var(--navy);
-        border-bottom: 1px solid var(--gold);
-        padding-bottom: 2px;
-    }
-
-    .further {
-        margin-top: 30px;
-        padding-top: 26px;
-        border-top: 1px solid var(--line);
-    }
-
-    .further p {
-        color: var(--muted);
-        font-size: 0.95rem;
-        margin: 0 0 10px;
-    }
 
     /* ================= AUTEUR ================= */
 
@@ -263,33 +255,213 @@
         max-width: 700px;
     }
 
+
     /* ================= FOOTER ================= */
 
     footer {
-        padding: 34px 0;
+        padding: 30px 0;
         border-top: 1px solid var(--line);
         color: var(--muted);
-        font-size: 0.88rem;
+        font-size: 0.86rem;
     }
 
-    /* ================= MOBILE ================= */
+
+    /* ================= TABLETTE / MOBILE ================= */
 
     @media (max-width: 800px) {
 
+        html {
+            scroll-padding-top: 65px;
+        }
+
+        .container {
+            width: 92%;
+        }
+
+        /* HEADER */
+
+        .nav {
+            min-height: auto;
+            padding: 13px 0 12px;
+            display: block;
+        }
+
+        .logo {
+            display: block;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+
         nav.links {
+            display: flex;
             gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
         }
 
         nav.links a {
             font-size: 0.82rem;
+            padding-bottom: 2px;
         }
 
+        /* HERO */
+
+        .hero {
+            padding: 48px 0 44px;
+        }
+
+        .hero-inner {
+            max-width: none;
+        }
+
+        h1 {
+            font-size: 1.95rem;
+            line-height: 1.25;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 22px;
+        }
+
+        .credential {
+            font-size: 0.94rem;
+            padding-left: 14px;
+            margin-bottom: 26px;
+        }
+
+        .btn-gold {
+            padding: 12px 19px;
+            font-size: 0.92rem;
+        }
+
+        /* SECTIONS */
+
         section {
-            padding: 56px 0;
+            padding: 52px 0;
+        }
+
+        .section-title {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.58rem;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            font-size: 0.96rem;
+            line-height: 1.6;
+        }
+
+        /* NIVEAUX */
+
+        .level-row {
+            display: block;
+            padding: 19px 0;
+        }
+
+        .level-name {
+            font-size: 1.08rem;
+            margin-bottom: 5px;
+        }
+
+        .level-desc {
+            font-size: 0.94rem;
+            line-height: 1.55;
+            margin-bottom: 9px;
+        }
+
+        .status {
+            text-align: left;
+            font-size: 0.88rem;
+        }
+
+        .level-row.available {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        /* AUTEUR */
+
+        .author-section p {
+            font-size: 0.96rem;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 26px 0;
+            font-size: 0.84rem;
+            line-height: 1.5;
+        }
+    }
+
+
+    /* ================= PETITS SMARTPHONES ================= */
+
+    @media (max-width: 430px) {
+
+        .container {
+            width: 91%;
+        }
+
+        .logo {
+            font-size: 1rem;
+        }
+
+        nav.links {
+            gap: 11px 15px;
+        }
+
+        nav.links a {
+            font-size: 0.78rem;
         }
 
         .hero {
-            padding: 64px 0;
+            padding: 42px 0 40px;
+        }
+
+        h1 {
+            font-size: 1.78rem;
+        }
+
+        .hero p {
+            font-size: 0.96rem;
+        }
+
+        .credential {
+            font-size: 0.9rem;
+        }
+
+        .btn-gold {
+            width: 100%;
+            text-align: center;
+        }
+
+        section {
+            padding: 46px 0;
+        }
+
+        h2 {
+            font-size: 1.48rem;
+        }
+
+        .level-row {
+            padding: 17px 0;
+        }
+
+        .level-name {
+            font-size: 1.04rem;
+        }
+
+        .level-desc {
+            font-size: 0.91rem;
         }
     }
 </style>
@@ -299,30 +471,41 @@
 
 <header>
     <div class="container nav">
-        <a href="index.html" class="logo">Physique-Chimie au lycée</a>
+
+        <a href="index.html" class="logo">
+            Physique-Chimie au lycée
+        </a>
 
         <nav class="links">
             <a href="index.html">Accueil</a>
-            <a href="preparer-grand-oral.html">Aide au Grand Oral</a>
+            <a href="preparer-grand-oral.html">Grand Oral</a>
             <a href="livre.html">Le livre</a>
             <a href="#auteur">L'auteur</a>
         </nav>
+
     </div>
 </header>
+
 
 <main>
 
     <!-- HERO -->
+
     <section class="hero">
+
         <div class="container">
+
             <div class="hero-inner">
 
-                <h1>Physique-chimie au lycée : cours, méthode et conseils</h1>
+                <h1>
+                    Physique-chimie au lycée :
+                    cours, méthode et conseils
+                </h1>
 
                 <p>
-                    Des ressources pour les élèves de Seconde, Première Spé,
-                    Terminale Spé, ainsi que pour la préparation du Grand Oral
-                    et des ECE.
+                    Des ressources pour les élèves de Seconde,
+                    Première Spé, Terminale Spé, ainsi que pour
+                    la préparation du Grand Oral et des ECE.
                 </p>
 
                 <p class="credential">
@@ -335,11 +518,14 @@
                 </a>
 
             </div>
+
         </div>
+
     </section>
 
 
     <!-- AIDE PAR NIVEAU -->
+
     <section class="section-cream">
 
         <div class="container">
@@ -350,10 +536,12 @@
 
                 <p>
                     Une page dédiée par niveau, avec des explications,
-                    des méthodes et des conseils. La collection s'étoffera progressivement.
+                    des méthodes et des conseils. La collection
+                    s'étoffera progressivement.
                 </p>
 
             </div>
+
 
             <div class="levels">
 
@@ -384,7 +572,8 @@
                     </div>
 
                     <div class="level-desc">
-                        Cours et méthode pour la physique-chimie en Seconde.
+                        Cours et méthode pour la physique-chimie
+                        en Seconde.
                     </div>
 
                     <div class="status soon">
@@ -401,7 +590,8 @@
                     </div>
 
                     <div class="level-desc">
-                        Cours et méthode pour la spécialité en Première.
+                        Cours et méthode pour la spécialité
+                        en Première.
                     </div>
 
                     <div class="status soon">
@@ -418,7 +608,8 @@
                     </div>
 
                     <div class="level-desc">
-                        Cours et méthode pour la spécialité en Terminale.
+                        Cours et méthode pour la spécialité
+                        en Terminale.
                     </div>
 
                     <div class="status soon">
@@ -435,7 +626,8 @@
                     </div>
 
                     <div class="level-desc">
-                        Préparation à l'épreuve de compétences expérimentales.
+                        Préparation à l'épreuve de compétences
+                        expérimentales.
                     </div>
 
                     <div class="status soon">
@@ -452,6 +644,7 @@
 
 
     <!-- AUTEUR -->
+
     <section class="author-section" id="auteur">
 
         <div class="container author-grid">
