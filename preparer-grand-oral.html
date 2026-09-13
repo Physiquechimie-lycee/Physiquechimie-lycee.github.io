@@ -25,7 +25,10 @@
 
     * { box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 90px;
+    }
 
     body {
         margin: 0;
@@ -171,6 +174,46 @@
         border: 0;
         border-top: 1px solid var(--line);
         margin: 58px 0;
+    }
+
+    /* ================= SOMMAIRE ================= */
+
+    .toc {
+        background: var(--cream);
+        border: 1px solid var(--line);
+        padding: 24px 26px;
+        margin-bottom: 58px;
+    }
+
+    .toc-title {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--navy);
+        font-size: 1.25rem;
+        margin-bottom: 14px;
+    }
+
+    .toc ol {
+        margin: 0;
+        padding-left: 24px;
+    }
+
+    .toc li {
+        margin-bottom: 8px;
+    }
+
+    .toc li:last-child {
+        margin-bottom: 0;
+    }
+
+    .toc a {
+        color: var(--navy);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+    }
+
+    .toc a:hover {
+        color: var(--gold);
+        border-bottom-color: var(--gold);
     }
 
     /* ================= TIMING ================= */
@@ -326,6 +369,15 @@
         .content h3 {
             font-size: 1.2rem;
         }
+
+        .toc {
+            padding: 20px 22px;
+            margin-bottom: 45px;
+        }
+
+        .toc li {
+            margin-bottom: 10px;
+        }
     }
 </style>
 </head>
@@ -389,7 +441,26 @@
 <article class="content">
 
 
-<h2>Comprendre le déroulement du Grand Oral</h2>
+<!-- ================= SOMMAIRE ================= -->
+
+<nav class="toc" aria-label="Sommaire">
+
+    <div class="toc-title">Sommaire</div>
+
+    <ol>
+        <li><a href="#grand-oral">Le Grand Oral</a></li>
+        <li><a href="#construire">Construire son Grand Oral</a></li>
+        <li><a href="#problematique">Problématiques et exemples</a></li>
+        <li><a href="#plan">Construire un plan : exemple</a></li>
+        <li><a href="#aller-plus-loin">Aller plus loin</a></li>
+    </ol>
+
+</nav>
+
+
+<!-- ================= PARTIE 1 ================= -->
+
+<h2 id="grand-oral">1. Le Grand Oral</h2>
 
 <p>
 Le Grand Oral est une épreuve qui demande beaucoup plus que la simple
@@ -518,7 +589,9 @@ Le jury peut ainsi vous demander de préciser ou d'approfondir certains
 <hr class="section-divider">
 
 
-<h2>Construire son Grand Oral de Physique-Chimie</h2>
+<!-- ================= PARTIE 2 ================= -->
+
+<h2 id="construire">2. Construire son Grand Oral</h2>
 
 <p>
 Le Grand Oral doit être envisagé comme un travail structuré en plusieurs
@@ -570,7 +643,9 @@ questions du jury.
 <hr class="section-divider">
 
 
-<h2>Comment construire une bonne problématique ?</h2>
+<!-- ================= PARTIE 3 ================= -->
+
+<h2 id="problematique">3. Problématiques et exemples</h2>
 
 <p>
 Une bonne problématique est essentielle car elle va déterminer tout le
@@ -770,7 +845,9 @@ de commencer le travail.
 <hr class="section-divider">
 
 
-<h2>Construire un plan solide</h2>
+<!-- ================= PARTIE 4 ================= -->
+
+<h2 id="plan">4. Construire un plan : exemple</h2>
 
 <p>
 Une bonne présentation doit avoir une structure facilement identifiable.
@@ -918,6 +995,10 @@ progrès possibles des cellules photovoltaïques.
 <hr class="section-divider">
 
 
+<!-- ================= PARTIE 5 ================= -->
+
+<h2 id="aller-plus-loin">5. Aller plus loin</h2>
+
 <h2>Le point essentiel à retenir</h2>
 
 <p>
@@ -948,6 +1029,7 @@ scientifique cohérent, puis une présentation orale claire.
 <p>
 C'est cette progression qui permet de construire un Grand Oral solide.
 </p>
+
 
 </article>
 
