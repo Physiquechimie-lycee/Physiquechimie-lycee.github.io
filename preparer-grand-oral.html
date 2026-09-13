@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,6 +13,7 @@
 <meta name="robots" content="noindex, nofollow">
 
 <style>
+
     :root {
         --navy: #14273d;
         --navy-light: #1f3552;
@@ -23,11 +25,13 @@
         --line: #e3ddd0;
     }
 
-    * { box-sizing: border-box; }
+    * {
+        box-sizing: border-box;
+    }
 
     html {
         scroll-behavior: smooth;
-        scroll-padding-top: 90px;
+        scroll-padding-top: 82px;
     }
 
     body {
@@ -36,6 +40,7 @@
         color: var(--ink);
         background: var(--white);
         line-height: 1.65;
+        -webkit-text-size-adjust: 100%;
     }
 
     h1, h2, h3, .logo {
@@ -44,12 +49,15 @@
         color: var(--navy);
     }
 
-    a { color: inherit; }
+    a {
+        color: inherit;
+    }
 
     .container {
         width: min(1040px, 90%);
         margin: auto;
     }
+
 
     /* ================= HEADER ================= */
 
@@ -62,41 +70,45 @@
     }
 
     .nav {
-        min-height: 74px;
+        min-height: 70px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 30px;
+        gap: 24px;
     }
 
     .logo {
         text-decoration: none;
         font-size: 1.15rem;
+        white-space: nowrap;
     }
 
     nav.links {
         display: flex;
-        gap: 32px;
+        gap: 28px;
+        align-items: center;
     }
 
     nav.links a {
         text-decoration: none;
-        font-size: 0.92rem;
+        font-size: 0.9rem;
         color: var(--navy);
         border-bottom: 1px solid transparent;
         padding-bottom: 3px;
+        white-space: nowrap;
     }
 
     nav.links a:hover {
-        border-bottom: 1px solid var(--gold);
+        border-bottom-color: var(--gold);
     }
+
 
     /* ================= HERO ================= */
 
     .hero {
         background: var(--navy);
         color: var(--cream);
-        padding: 90px 0 80px;
+        padding: 78px 0 68px;
     }
 
     .hero-inner {
@@ -105,13 +117,13 @@
 
     h1 {
         color: var(--white);
-        margin: 0 0 26px;
+        margin: 0 0 24px;
         font-size: clamp(2rem, 4.4vw, 3rem);
-        line-height: 1.3;
+        line-height: 1.28;
     }
 
     .hero p {
-        font-size: 1.08rem;
+        font-size: 1.06rem;
         color: #cdd6e2;
         margin: 0;
         max-width: 720px;
@@ -120,8 +132,8 @@
     .credential {
         border-left: 2px solid var(--gold);
         padding-left: 18px;
-        margin-top: 30px !important;
-        font-size: 0.98rem !important;
+        margin-top: 28px !important;
+        font-size: 0.96rem !important;
         color: var(--cream) !important;
     }
 
@@ -129,10 +141,11 @@
         color: var(--gold);
     }
 
+
     /* ================= CONTENT ================= */
 
     .content-section {
-        padding: 76px 0;
+        padding: 68px 0;
     }
 
     .content {
@@ -141,29 +154,29 @@
     }
 
     .content h2 {
-        font-size: 1.9rem;
+        font-size: 1.85rem;
         line-height: 1.3;
-        margin: 0 0 22px;
-        padding-top: 10px;
+        margin: 0 0 20px;
+        padding-top: 8px;
     }
 
     .content h3 {
-        font-size: 1.3rem;
+        font-size: 1.28rem;
         line-height: 1.4;
-        margin: 40px 0 14px;
+        margin: 38px 0 13px;
     }
 
     .content p {
-        margin: 0 0 18px;
+        margin: 0 0 17px;
     }
 
     .content ul {
-        margin: 10px 0 24px;
+        margin: 10px 0 23px;
         padding-left: 24px;
     }
 
     .content li {
-        margin-bottom: 8px;
+        margin-bottom: 7px;
     }
 
     .content strong {
@@ -173,23 +186,24 @@
     .section-divider {
         border: 0;
         border-top: 1px solid var(--line);
-        margin: 58px 0;
+        margin: 55px 0;
     }
+
 
     /* ================= SOMMAIRE ================= */
 
     .toc {
         background: var(--cream);
         border: 1px solid var(--line);
-        padding: 24px 26px;
-        margin-bottom: 58px;
+        padding: 22px 25px;
+        margin-bottom: 52px;
     }
 
     .toc-title {
         font-family: Georgia, "Times New Roman", serif;
         color: var(--navy);
         font-size: 1.25rem;
-        margin-bottom: 14px;
+        margin-bottom: 12px;
     }
 
     .toc ol {
@@ -198,7 +212,7 @@
     }
 
     .toc li {
-        margin-bottom: 8px;
+        margin-bottom: 7px;
     }
 
     .toc li:last-child {
@@ -208,27 +222,26 @@
     .toc a {
         color: var(--navy);
         text-decoration: none;
-        border-bottom: 1px solid transparent;
     }
 
     .toc a:hover {
         color: var(--gold);
-        border-bottom-color: var(--gold);
     }
+
 
     /* ================= TIMING ================= */
 
     .timing {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-        margin: 35px 0 42px;
+        gap: 16px;
+        margin: 32px 0 40px;
     }
 
     .timing-box {
         border-top: 2px solid var(--gold);
         background: var(--cream);
-        padding: 22px;
+        padding: 21px;
     }
 
     .timing-number {
@@ -241,21 +254,22 @@
     .timing-title {
         font-weight: bold;
         color: var(--navy);
-        margin-bottom: 8px;
+        margin-bottom: 7px;
     }
 
     .timing-text {
-        font-size: 0.92rem;
+        font-size: 0.91rem;
         color: var(--muted);
     }
+
 
     /* ================= EXAMPLES ================= */
 
     .example {
         background: var(--cream);
         border-left: 3px solid var(--gold);
-        padding: 22px 25px;
-        margin: 20px 0 28px;
+        padding: 21px 24px;
+        margin: 19px 0 27px;
     }
 
     .example-title {
@@ -273,13 +287,14 @@
         background: #f5f5f5;
     }
 
+
     /* ================= KEY POINT ================= */
 
     .key-point {
         background: var(--navy);
         color: var(--cream);
-        padding: 30px 34px;
-        margin: 45px 0;
+        padding: 28px 32px;
+        margin: 42px 0;
     }
 
     .key-point p {
@@ -291,13 +306,14 @@
         color: var(--white);
     }
 
+
     /* ================= CTA ================= */
 
     .cta-section {
         background: var(--cream);
         border-top: 1px solid var(--line);
         border-bottom: 1px solid var(--line);
-        padding: 65px 0;
+        padding: 60px 0;
     }
 
     .cta {
@@ -307,12 +323,12 @@
     }
 
     .cta h2 {
-        margin-bottom: 18px;
+        margin-bottom: 17px;
     }
 
     .cta p {
         color: var(--muted);
-        margin-bottom: 28px;
+        margin-bottom: 26px;
     }
 
     .btn-gold {
@@ -329,62 +345,269 @@
         background: #c49f3c;
     }
 
+
     /* ================= FOOTER ================= */
 
     footer {
-        padding: 34px 0;
+        padding: 32px 0;
         border-top: 1px solid var(--line);
         color: var(--muted);
         font-size: 0.88rem;
     }
 
-    /* ================= MOBILE ================= */
+
+    /* =========================================================
+       SMARTPHONE
+       ========================================================= */
 
     @media (max-width: 800px) {
 
+        html {
+            scroll-padding-top: 65px;
+        }
+
+        .container {
+            width: 92%;
+        }
+
+
+        /* ---------- HEADER ---------- */
+
+        .nav {
+            min-height: 60px;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            padding: 9px 0 8px;
+        }
+
+        .logo {
+            font-size: 0.98rem;
+        }
+
         nav.links {
-            gap: 16px;
+            width: 100%;
+            justify-content: center;
+            gap: 14px;
         }
 
         nav.links a {
-            font-size: 0.82rem;
+            font-size: 0.74rem;
+            padding-bottom: 2px;
         }
+
+
+        /* ---------- HERO ---------- */
 
         .hero {
-            padding: 64px 0;
+            padding: 48px 0 44px;
         }
+
+        h1 {
+            font-size: 1.95rem;
+            line-height: 1.25;
+            margin-bottom: 19px;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            line-height: 1.55;
+        }
+
+        .credential {
+            margin-top: 23px !important;
+            padding-left: 14px;
+            font-size: 0.9rem !important;
+        }
+
+
+        /* ---------- CONTENT ---------- */
 
         .content-section {
-            padding: 56px 0;
+            padding: 42px 0;
         }
 
-        .timing {
-            grid-template-columns: 1fr;
+        .content {
+            max-width: none;
+        }
+
+        .content p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
         }
 
         .content h2 {
-            font-size: 1.65rem;
+            font-size: 1.55rem;
+            line-height: 1.3;
+            margin-bottom: 18px;
+            padding-top: 5px;
         }
 
         .content h3 {
-            font-size: 1.2rem;
+            font-size: 1.16rem;
+            line-height: 1.4;
+            margin: 31px 0 11px;
         }
 
+        .content ul {
+            padding-left: 22px;
+        }
+
+
+        /* ---------- SOMMAIRE ---------- */
+
         .toc {
-            padding: 20px 22px;
-            margin-bottom: 45px;
+            padding: 18px 20px;
+            margin-bottom: 42px;
+        }
+
+        .toc-title {
+            font-size: 1.15rem;
+            margin-bottom: 9px;
+        }
+
+        .toc ol {
+            padding-left: 22px;
         }
 
         .toc li {
-            margin-bottom: 10px;
+            margin-bottom: 7px;
         }
+
+        .toc a {
+            font-size: 0.98rem;
+        }
+
+
+        /* ---------- TIMING ---------- */
+
+        .timing {
+            grid-template-columns: 1fr;
+            gap: 11px;
+            margin: 27px 0 34px;
+        }
+
+        .timing-box {
+            padding: 17px 19px;
+        }
+
+        .timing-number {
+            font-size: 1.4rem;
+        }
+
+
+        /* ---------- EXAMPLES ---------- */
+
+        .example {
+            padding: 18px 19px;
+            margin: 17px 0 23px;
+        }
+
+        .example-title {
+            line-height: 1.4;
+        }
+
+
+        /* ---------- KEY POINT ---------- */
+
+        .key-point {
+            padding: 23px 21px;
+            margin: 35px 0;
+        }
+
+
+        /* ---------- SEPARATORS ---------- */
+
+        .section-divider {
+            margin: 40px 0;
+        }
+
+
+        /* ---------- CTA ---------- */
+
+        .cta-section {
+            padding: 47px 0;
+        }
+
+        .cta h2 {
+            font-size: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 0.98rem;
+        }
+
+        .btn-gold {
+            padding: 13px 22px;
+        }
+
+
+        /* ---------- FOOTER ---------- */
+
+        footer {
+            padding: 27px 0;
+        }
+
     }
+
+
+    /* =========================================================
+       TRÈS PETITS SMARTPHONES
+       ========================================================= */
+
+    @media (max-width: 430px) {
+
+        .container {
+            width: 91%;
+        }
+
+        .logo {
+            font-size: 0.94rem;
+        }
+
+        nav.links {
+            gap: 10px;
+        }
+
+        nav.links a {
+            font-size: 0.69rem;
+        }
+
+        .hero {
+            padding: 42px 0 39px;
+        }
+
+        h1 {
+            font-size: 1.78rem;
+        }
+
+        .content h2 {
+            font-size: 1.48rem;
+        }
+
+        .content h3 {
+            font-size: 1.12rem;
+        }
+
+        .toc {
+            padding: 17px 18px;
+        }
+
+        .toc a {
+            font-size: 0.95rem;
+        }
+
+    }
+
 </style>
 </head>
+
 
 <body>
 
 <header>
+
     <div class="container nav">
 
         <a href="index.html" class="logo">
@@ -393,21 +616,25 @@
 
         <nav class="links">
             <a href="index.html">Accueil</a>
-            <a href="preparer-grand-oral.html">Aide au Grand Oral</a>
+            <a href="preparer-grand-oral.html">Grand Oral</a>
             <a href="livre.html">Le livre</a>
             <a href="index.html#auteur">L'auteur</a>
         </nav>
 
     </div>
+
 </header>
 
 
 <main>
 
+
 <!-- ================= HERO ================= -->
 
 <section class="hero">
+
     <div class="container">
+
         <div class="hero-inner">
 
             <h1>
@@ -428,7 +655,9 @@
             </p>
 
         </div>
+
     </div>
+
 </section>
 
 
@@ -445,14 +674,42 @@
 
 <nav class="toc" aria-label="Sommaire">
 
-    <div class="toc-title">Sommaire</div>
+    <div class="toc-title">
+        Sommaire
+    </div>
 
     <ol>
-        <li><a href="#grand-oral">Le Grand Oral</a></li>
-        <li><a href="#construire">Construire son Grand Oral</a></li>
-        <li><a href="#problematique">Problématiques et exemples</a></li>
-        <li><a href="#plan">Construire un plan : exemple</a></li>
-        <li><a href="#aller-plus-loin">Aller plus loin</a></li>
+
+        <li>
+            <a href="#grand-oral">
+                Le Grand Oral
+            </a>
+        </li>
+
+        <li>
+            <a href="#construire">
+                Construire son Grand Oral
+            </a>
+        </li>
+
+        <li>
+            <a href="#problematique">
+                Problématiques et exemples
+            </a>
+        </li>
+
+        <li>
+            <a href="#plan">
+                Construire un plan : exemple
+            </a>
+        </li>
+
+        <li>
+            <a href="#aller-plus-loin">
+                Aller plus loin
+            </a>
+        </li>
+
     </ol>
 
 </nav>
@@ -460,7 +717,9 @@
 
 <!-- ================= PARTIE 1 ================= -->
 
-<h2 id="grand-oral">1. Le Grand Oral</h2>
+<h2 id="grand-oral">
+    1. Le Grand Oral
+</h2>
 
 <p>
 Le Grand Oral est une épreuve qui demande beaucoup plus que la simple
@@ -478,33 +737,61 @@ Cette préparation doit donc être organisée en plusieurs étapes.
 <div class="timing">
 
     <div class="timing-box">
-        <div class="timing-number">20 min</div>
-        <div class="timing-title">Préparation</div>
+
+        <div class="timing-number">
+            20 min
+        </div>
+
+        <div class="timing-title">
+            Préparation
+        </div>
+
         <div class="timing-text">
             Organiser sa prestation et préparer ses supports éventuels.
         </div>
+
     </div>
 
+
     <div class="timing-box">
-        <div class="timing-number">10 min</div>
-        <div class="timing-title">Présentation</div>
+
+        <div class="timing-number">
+            10 min
+        </div>
+
+        <div class="timing-title">
+            Présentation
+        </div>
+
         <div class="timing-text">
             Présenter sa problématique et construire sa réponse.
         </div>
+
     </div>
 
+
     <div class="timing-box">
-        <div class="timing-number">10 min</div>
-        <div class="timing-title">Échange</div>
+
+        <div class="timing-number">
+            10 min
+        </div>
+
+        <div class="timing-title">
+            Échange
+        </div>
+
         <div class="timing-text">
             Répondre aux questions et approfondir certains éléments.
         </div>
+
     </div>
 
 </div>
 
 
-<h3>1. Les 20 minutes de préparation</h3>
+<h3>
+    1. Les 20 minutes de préparation
+</h3>
 
 <p>
 Pendant les 20 minutes de préparation, vous devez organiser votre
@@ -522,7 +809,9 @@ schémas, formules ou éléments utiles à votre prestation.
 </p>
 
 
-<h3>2. La présentation — 10 minutes</h3>
+<h3>
+    2. La présentation — 10 minutes
+</h3>
 
 <p>
 La présentation dure <strong>10 minutes</strong>.
@@ -551,7 +840,9 @@ n'est pas nécessairement spécialiste de votre sujet.
 </p>
 
 
-<h3>3. L'échange avec le jury — 10 minutes</h3>
+<h3>
+    3. L'échange avec le jury — 10 minutes
+</h3>
 
 <p>
 Après votre présentation, les dix minutes suivantes sont consacrées à
@@ -577,12 +868,15 @@ Le jury peut ainsi vous demander de préciser ou d'approfondir certains
 éléments de votre présentation.
 </p>
 
+
 <div class="key-point">
+
     <p>
         <strong>La présentation et l'échange sont deux exercices
         différents.</strong> Il faut préparer non seulement son exposé,
         mais également sa capacité à répondre aux questions du jury.
     </p>
+
 </div>
 
 
@@ -591,7 +885,9 @@ Le jury peut ainsi vous demander de préciser ou d'approfondir certains
 
 <!-- ================= PARTIE 2 ================= -->
 
-<h2 id="construire">2. Construire son Grand Oral</h2>
+<h2 id="construire">
+    2. Construire son Grand Oral
+</h2>
 
 <p>
 Le Grand Oral doit être envisagé comme un travail structuré en plusieurs
@@ -599,7 +895,9 @@ Le Grand Oral doit être envisagé comme un travail structuré en plusieurs
 </p>
 
 
-<h3>Étape 1 : choisir un thème</h3>
+<h3>
+    Étape 1 : choisir un thème
+</h3>
 
 <p>
 Commencez par identifier un domaine de physique-chimie qui vous intéresse
@@ -607,7 +905,9 @@ réellement.
 </p>
 
 
-<h3>Étape 2 : construire une problématique</h3>
+<h3>
+    Étape 2 : construire une problématique
+</h3>
 
 <p>
 Transformez ce thème en une question précise, intéressante et
@@ -615,7 +915,9 @@ suffisamment riche pour permettre une véritable réflexion scientifique.
 </p>
 
 
-<h3>Étape 3 : construire un plan solide</h3>
+<h3>
+    Étape 3 : construire un plan solide
+</h3>
 
 <p>
 Organisez les différentes étapes de votre raisonnement afin de répondre
@@ -623,7 +925,9 @@ progressivement à la problématique.
 </p>
 
 
-<h3>Étape 4 : construire le contenu</h3>
+<h3>
+    Étape 4 : construire le contenu
+</h3>
 
 <p>
 Sélectionnez les connaissances, exemples, expériences, calculs et
@@ -631,7 +935,9 @@ raisonnements scientifiques nécessaires pour répondre à votre question.
 </p>
 
 
-<h3>Étape 5 : préparer la prestation orale</h3>
+<h3>
+    Étape 5 : préparer la prestation orale
+</h3>
 
 <p>
 Travaillez enfin la présentation elle-même : structure, transitions,
@@ -645,7 +951,9 @@ questions du jury.
 
 <!-- ================= PARTIE 3 ================= -->
 
-<h2 id="problematique">3. Problématiques et exemples</h2>
+<h2 id="problematique">
+    3. Problématiques et exemples
+</h2>
 
 <p>
 Une bonne problématique est essentielle car elle va déterminer tout le
@@ -662,7 +970,9 @@ Elle doit également donner envie au jury d'écouter la réponse.
 </p>
 
 
-<h2>Des problématiques parfois trop fragiles</h2>
+<h2>
+    Des problématiques parfois trop fragiles
+</h2>
 
 <p>
 Prenons quelques exemples.
@@ -732,7 +1042,9 @@ Prenons quelques exemples.
 <hr class="section-divider">
 
 
-<h2>Comment améliorer ces problématiques ?</h2>
+<h2>
+    Comment améliorer ces problématiques ?
+</h2>
 
 <p>
 Une problématique plus ambitieuse peut permettre de construire un travail
@@ -847,7 +1159,9 @@ de commencer le travail.
 
 <!-- ================= PARTIE 4 ================= -->
 
-<h2 id="plan">4. Construire un plan : exemple</h2>
+<h2 id="plan">
+    4. Construire un plan : exemple
+</h2>
 
 <p>
 Une bonne présentation doit avoir une structure facilement identifiable.
@@ -858,7 +1172,9 @@ On peut retenir une organisation simple :
 </p>
 
 
-<h3>Introduction</h3>
+<h3>
+    Introduction
+</h3>
 
 <p>
 L'introduction doit permettre de présenter le sujet, d'expliquer son
@@ -866,7 +1182,9 @@ intérêt et d'amener progressivement la problématique.
 </p>
 
 
-<h3>Développement</h3>
+<h3>
+    Développement
+</h3>
 
 <p>
 Le développement constitue le cœur de la présentation.
@@ -883,7 +1201,9 @@ Dans beaucoup de sujets de physique-chimie, <strong>trois grandes
 </p>
 
 
-<h3>Conclusion</h3>
+<h3>
+    Conclusion
+</h3>
 
 <p>
 La conclusion doit répondre explicitement à la problématique.
@@ -898,11 +1218,14 @@ ou une ouverture pertinente.
 <hr class="section-divider">
 
 
-<h2>Exemple de construction d'un plan</h2>
+<h2>
+    Exemple de construction d'un plan
+</h2>
 
 <p>
 Prenons la problématique :
 </p>
+
 
 <div class="example">
 
@@ -916,7 +1239,9 @@ Prenons la problématique :
 </div>
 
 
-<h3>Introduction</h3>
+<h3>
+    Introduction
+</h3>
 
 <p>
 Présentation de l'énergie solaire et de l'intérêt croissant pour la
@@ -933,7 +1258,9 @@ Puis formulation de la problématique.
 </p>
 
 
-<h3>Partie 1 — Le fonctionnement d'une cellule photovoltaïque</h3>
+<h3>
+    Partie 1 — Le fonctionnement d'une cellule photovoltaïque
+</h3>
 
 <p>
 Présentation du principe général de conversion de l'énergie lumineuse en
@@ -947,8 +1274,8 @@ semi-conducteurs.
 
 
 <h3>
-Partie 2 — Pourquoi une cellule photovoltaïque ne récupère-t-elle pas
-toute l'énergie lumineuse ?
+    Partie 2 — Pourquoi une cellule photovoltaïque ne récupère-t-elle pas
+    toute l'énergie lumineuse ?
 </h3>
 
 <p>
@@ -966,7 +1293,9 @@ Des calculs simples peuvent être utilisés pour illustrer le raisonnement.
 </p>
 
 
-<h3>Partie 3 — Le principe des cellules photovoltaïques tandem</h3>
+<h3>
+    Partie 3 — Le principe des cellules photovoltaïques tandem
+</h3>
 
 <p>
 Présentation du principe consistant à associer plusieurs matériaux
@@ -980,7 +1309,9 @@ photovoltaïques.
 </p>
 
 
-<h3>Conclusion</h3>
+<h3>
+    Conclusion
+</h3>
 
 <p>
 Réponse à la problématique.
@@ -997,9 +1328,13 @@ progrès possibles des cellules photovoltaïques.
 
 <!-- ================= PARTIE 5 ================= -->
 
-<h2 id="aller-plus-loin">5. Aller plus loin</h2>
+<h2 id="aller-plus-loin">
+    5. Aller plus loin
+</h2>
 
-<h2>Le point essentiel à retenir</h2>
+<h2>
+    Le point essentiel à retenir
+</h2>
 
 <p>
 Un bon Grand Oral ne commence donc pas par la rédaction d'un texte de
@@ -1015,6 +1350,7 @@ Cette question doit ensuite permettre de construire un raisonnement
 scientifique cohérent, puis une présentation orale claire.
 </p>
 
+
 <div class="key-point">
 
     <p>
@@ -1025,6 +1361,7 @@ scientifique cohérent, puis une présentation orale claire.
     </p>
 
 </div>
+
 
 <p>
 C'est cette progression qui permet de construire un Grand Oral solide.
@@ -1046,7 +1383,9 @@ C'est cette progression qui permet de construire un Grand Oral solide.
 
         <div class="cta">
 
-            <h2>Aller plus loin dans la préparation</h2>
+            <h2>
+                Aller plus loin dans la préparation
+            </h2>
 
             <p>
                 Trouver une bonne problématique, construire un plan et
@@ -1082,7 +1421,9 @@ C'est cette progression qui permet de construire un Grand Oral solide.
 
     <div class="container">
 
-        <div>Physique-Chimie au lycée</div>
+        <div>
+            Physique-Chimie au lycée
+        </div>
 
         <div style="margin-top:6px;">
             Ressources, méthodes et conseils pour les élèves du lycée.
@@ -1092,5 +1433,7 @@ C'est cette progression qui permet de construire un Grand Oral solide.
 
 </footer>
 
+
 </body>
 </html>
+```
