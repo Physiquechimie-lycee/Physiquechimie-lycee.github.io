@@ -5,443 +5,419 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lentille mince — animation interactive</title>
+<title>Lentille mince — construction de l'image</title>
 
 <style>
-:root {
-    --navy: #14273d;
-    --navy-light: #1f3552;
-    --gold: #b08d2b;
-    --gold-light: #d0b35a;
-    --cream: #faf9f5;
-    --white: #ffffff;
-    --ink: #232a35;
-    --muted: #6b7280;
-    --line: #e3ddd0;
-    --soft: #f3f1eb;
-    --red-ray: #c62828;
-    --green: #39724a;
-    --red: #9b2c2c;
-    --shadow: 0 12px 30px rgba(20,39,61,0.10);
+:root{
+    --navy:#14273d;
+    --navy-light:#1f3552;
+    --gold:#b08d2b;
+    --gold-light:#d0b35a;
+    --cream:#faf9f5;
+    --white:#ffffff;
+    --ink:#232a35;
+    --muted:#6b7280;
+    --line:#ddd8cc;
+    --soft:#f3f1eb;
+    --red:#c62828;
+    --green:#287a52;
 }
 
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-    padding: 20px 12px 35px;
+body{
+    margin:0;
     background:
-        radial-gradient(circle at top right,
-            rgba(176,141,43,0.10),
-            transparent 30%),
+        radial-gradient(circle at top left, rgba(176,141,43,.08), transparent 30%),
         var(--cream);
-    color: var(--ink);
-    font-family: Arial, Helvetica, sans-serif;
+    color:var(--ink);
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-.container {
-    width: min(1100px, 100%);
-    margin: auto;
+.container{
+    width:min(1120px,94%);
+    margin:auto;
 }
 
-h1 {
-    margin: 0 0 7px;
-    color: var(--navy);
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.9rem;
-    text-align: center;
+/* HEADER */
+
+header{
+    background:rgba(250,249,245,.97);
+    border-bottom:1px solid var(--line);
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(8px);
 }
 
-.intro {
-    max-width: 760px;
-    margin: 0 auto 20px;
-    color: var(--muted);
-    text-align: center;
-    line-height: 1.5;
+.nav{
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:28px;
 }
 
-/* =========================
-   CONTROLES
-   ========================= */
-
-.controls {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 14px;
+.logo{
+    text-decoration:none;
+    color:var(--navy);
+    font-size:1.12rem;
+    font-weight:700;
+    white-space:nowrap;
 }
 
-.panel {
-    padding: 15px 17px;
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    box-shadow: var(--shadow);
+.logo span{
+    color:var(--gold);
 }
 
-.panel h2 {
-    margin: 0 0 12px;
-    color: var(--navy);
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.05rem;
+nav.links{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    scrollbar-width:none;
 }
 
-.control-row {
-    display: grid;
-    grid-template-columns: 105px 1fr 70px;
-    align-items: center;
-    gap: 9px;
-    margin-bottom: 10px;
+nav.links::-webkit-scrollbar{
+    display:none;
 }
 
-.control-row:last-child {
-    margin-bottom: 0;
+nav.links a{
+    text-decoration:none;
+    font-size:.9rem;
+    color:var(--navy);
+    white-space:nowrap;
+    padding:9px 13px;
+    border-radius:8px;
 }
 
-.control-row label {
-    color: var(--navy);
-    font-size: 0.88rem;
-    font-weight: 700;
+nav.links a:hover,
+nav.links a.active{
+    background:rgba(20,39,61,.07);
 }
 
-input[type="range"] {
-    width: 100%;
-    accent-color: var(--gold);
+/* PAGE */
+
+main{
+    padding:42px 0 60px;
 }
 
-.value {
-    padding: 5px 6px;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: var(--soft);
-    color: var(--navy);
-    font-size: 0.82rem;
-    text-align: center;
-    font-weight: 700;
+.hero{
+    max-width:850px;
+    margin:0 auto 28px;
+    text-align:center;
 }
 
-.lens-type {
-    display: flex;
-    gap: 7px;
+.eyebrow{
+    display:inline-block;
+    color:var(--gold);
+    font-size:.78rem;
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    margin-bottom:8px;
 }
 
-.type-btn {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid var(--line);
-    border-radius: 7px;
-    background: var(--soft);
-    color: var(--navy);
-    cursor: pointer;
-    font-weight: 700;
+h1{
+    margin:0;
+    color:var(--navy);
+    font-family:Georgia,serif;
+    font-size:clamp(1.8rem,4vw,2.5rem);
 }
 
-.type-btn.active {
-    border-color: var(--gold);
-    background: var(--navy);
-    color: var(--white);
+.intro{
+    max-width:700px;
+    margin:12px auto 0;
+    color:var(--muted);
+    line-height:1.6;
 }
 
-/* =========================
-   BOUTONS
-   ========================= */
+/* SIMULATION */
 
-.actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    margin-top: 12px;
+.simulation{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-top:4px solid var(--gold);
+    border-radius:16px;
+    box-shadow:0 12px 30px rgba(20,39,61,.10);
+    overflow:hidden;
 }
 
-button {
-    font-family: inherit;
+.sim-header{
+    padding:18px 22px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
 }
 
-.action-btn {
-    padding: 8px 11px;
-    border: 1px solid var(--line);
-    border-radius: 7px;
-    background: var(--soft);
-    color: var(--navy);
-    cursor: pointer;
-    font-size: 0.83rem;
-    font-weight: 700;
+.sim-header h2{
+    margin:0;
+    color:var(--navy);
+    font-family:Georgia,serif;
+    font-size:1.2rem;
 }
 
-.action-btn:hover {
-    border-color: var(--gold);
-    background: #f8f4e9;
+.badge{
+    background:var(--soft);
+    border:1px solid var(--line);
+    color:var(--navy);
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:.78rem;
+    font-weight:700;
 }
 
-.action-btn.primary {
-    border-color: var(--gold);
-    background: var(--gold);
+/* SVG */
+
+.graph-wrap{
+    padding:12px 14px 0;
+    background:#fff;
 }
 
-/* =========================
-   SIMULATION
-   ========================= */
-
-.simulation {
-    position: relative;
-    overflow: hidden;
-    margin-top: 14px;
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-top: 5px solid var(--gold);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
+svg{
+    display:block;
+    width:100%;
+    height:auto;
+    overflow:visible;
+    touch-action:none;
 }
 
-.sim-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 15px;
-    border-bottom: 1px solid var(--line);
+/* CONTROLS */
+
+.controls{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    padding:20px;
+    border-top:1px solid var(--line);
+    background:#fcfbf8;
 }
 
-.sim-header strong {
-    color: var(--navy);
+.control{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:13px 15px;
 }
 
-.sim-header span {
-    color: var(--muted);
-    font-size: 0.78rem;
+.control label{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    color:var(--navy);
+    font-size:.88rem;
+    font-weight:700;
+    margin-bottom:9px;
 }
 
-.svg-wrap {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 2 / 1;
-    min-height: 390px;
+.value{
+    color:var(--gold);
 }
 
-svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    touch-action: none;
-    user-select: none;
+input[type="range"]{
+    width:100%;
+    accent-color:var(--gold);
 }
 
-/* =========================
-   ELEMENTS SVG
-   ========================= */
-
-.axis {
-    stroke: #7b8490;
-    stroke-width: 1.3;
+.switch-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
 }
 
-.grid-line {
-    stroke: #e8e5de;
-    stroke-width: 1;
+button{
+    border:1px solid var(--line);
+    background:var(--white);
+    color:var(--navy);
+    padding:9px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:700;
+    font-size:.82rem;
 }
 
-/* Lentille : symbole optique */
-.lens-axis {
-    stroke: var(--navy);
-    stroke-width: 3;
+button:hover{
+    border-color:var(--gold);
 }
 
-.lens-arrow {
-    stroke: var(--navy);
-    stroke-width: 3;
-    fill: none;
+button.active{
+    background:var(--navy);
+    color:white;
+    border-color:var(--navy);
 }
 
-.lens-handle {
-    fill: var(--gold);
-    stroke: var(--white);
-    stroke-width: 2;
-    cursor: ew-resize;
+button.primary{
+    background:var(--gold);
+    color:white;
+    border-color:var(--gold);
 }
 
-/* Foyers */
-.focus {
-    fill: var(--gold);
+/* DATA */
+
+.data{
+    padding:20px;
+    border-top:1px solid var(--line);
 }
 
-.label {
-    fill: var(--navy);
-    font-size: 13px;
-    font-weight: 700;
+.data h3{
+    margin:0 0 14px;
+    color:var(--navy);
+    font-family:Georgia,serif;
+    font-size:1.05rem;
 }
 
-.small-label {
-    fill: var(--muted);
-    font-size: 11px;
+.data-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:9px;
 }
 
-/* Rayons : rouge uniquement */
-.ray {
-    fill: none;
-    stroke: var(--red-ray);
-    stroke-width: 2.4;
-    stroke-linecap: round;
+.data-item{
+    background:var(--soft);
+    border-radius:9px;
+    padding:11px;
 }
 
-.ray-arrow {
-    fill: var(--red-ray);
+.data-item span{
+    display:block;
+    color:var(--muted);
+    font-size:.73rem;
+    margin-bottom:4px;
 }
 
-/* Objet et image */
-.object,
-.image {
-    fill: none;
-    stroke-width: 4;
-    stroke-linecap: round;
+.data-item strong{
+    color:var(--navy);
+    font-size:.95rem;
 }
 
-.object {
-    stroke: var(--navy);
-    cursor: grab;
+.formula{
+    margin-top:14px;
+    padding:13px 15px;
+    border-left:3px solid var(--gold);
+    background:#fbfaf6;
+    color:var(--navy);
+    font-family:Georgia,serif;
+    text-align:center;
+    line-height:1.7;
 }
 
-.image {
-    stroke: var(--gold);
+/* LEGEND */
+
+.legend{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:18px;
+    padding:15px 20px 20px;
+    color:var(--muted);
+    font-size:.78rem;
 }
 
-.object-arrow {
-    fill: var(--navy);
+.legend-item{
+    display:flex;
+    align-items:center;
+    gap:6px;
 }
 
-.image-arrow {
-    fill: var(--gold);
+.legend-line{
+    width:25px;
+    height:3px;
+    display:inline-block;
 }
 
-.drag-point {
-    fill: var(--gold);
-    stroke: var(--white);
-    stroke-width: 2;
-    cursor: grab;
+.legend-line.red{
+    background:var(--red);
 }
 
-/* =========================
-   INFORMATIONS
-   ========================= */
-
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-top: 14px;
+.legend-line.axis{
+    background:#8a929d;
 }
 
-.info-card {
-    padding: 11px 9px;
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: 9px;
-    text-align: center;
+.legend-arrow{
+    color:var(--navy);
+    font-size:17px;
 }
 
-.info-card .label-info {
-    display: block;
-    margin-bottom: 4px;
-    color: var(--muted);
-    font-size: 0.72rem;
-}
+/* MOBILE */
 
-.info-card .number {
-    color: var(--navy);
-    font-size: 1rem;
-    font-weight: 700;
-}
+@media(max-width:800px){
 
-/* =========================
-   FORMULES
-   ========================= */
-
-.formulas {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 14px;
-}
-
-.formula {
-    padding: 13px;
-    background: var(--soft);
-    border-left: 3px solid var(--gold);
-    border-radius: 7px;
-}
-
-.formula strong {
-    display: block;
-    margin-bottom: 4px;
-    color: var(--navy);
-}
-
-.formula span {
-    font-family: Georgia, serif;
-}
-
-/* =========================
-   MOBILE
-   ========================= */
-
-@media (max-width: 750px) {
-
-    body {
-        padding: 12px 8px 25px;
+    .nav{
+        min-height:auto;
+        padding:10px 0 7px;
+        display:block;
     }
 
-    h1 {
-        font-size: 1.55rem;
+    .logo{
+        display:block;
+        font-size:1.06rem;
+        margin-bottom:8px;
     }
 
-    .controls {
-        grid-template-columns: 1fr;
+    nav.links{
+        width:100%;
+        gap:4px;
+        padding-bottom:3px;
     }
 
-    .svg-wrap {
-        aspect-ratio: 1.35 / 1;
-        min-height: 350px;
+    nav.links a{
+        flex:0 0 auto;
+        font-size:.82rem;
+        padding:7px 9px;
     }
 
-    .info-grid {
-        grid-template-columns: repeat(2, 1fr);
+    main{
+        padding-top:28px;
     }
 
-    .formulas {
-        grid-template-columns: 1fr;
+    .controls{
+        grid-template-columns:1fr;
+    }
+
+    .data-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 }
 
-@media (max-width: 430px) {
+@media(max-width:430px){
 
-    .panel {
-        padding: 13px;
+    .container{
+        width:95%;
     }
 
-    .control-row {
-        grid-template-columns: 88px 1fr 62px;
-        gap: 6px;
+    .logo{
+        font-size:1rem;
     }
 
-    .control-row label {
-        font-size: 0.78rem;
+    nav.links a{
+        font-size:.78rem;
+        padding:6px 8px;
     }
 
-    .value {
-        font-size: 0.76rem;
+    .sim-header{
+        padding:15px;
     }
 
-    .svg-wrap {
-        min-height: 320px;
+    .graph-wrap{
+        padding:6px 4px 0;
     }
 
-    .sim-header {
-        font-size: 0.82rem;
+    .controls,
+    .data{
+        padding:14px;
     }
 
-    .label {
-        font-size: 12px;
+    .data-grid{
+        gap:7px;
+    }
+
+    .data-item{
+        padding:9px;
     }
 }
 </style>
@@ -450,534 +426,406 @@ svg {
 
 <body>
 
-<div class="container">
+<header>
+    <div class="container nav">
 
 ```
-<h1>Lentille mince</h1>
+    <a href="index.html" class="logo">
+        Physique-Chimie au lycée
+    </a>
+
+    <nav class="links">
+        <a href="index.html">Accueil</a>
+        <a href="aide_conversions.html">Seconde</a>
+        <a href="premiere.html">Première</a>
+        <a href="terminale.html">Terminale</a>
+        <a href="animations.html" class="active">Animations</a>
+        <a href="preparer-grand-oral.html">Grand Oral</a>
+        <a href="experimentation.html">Expérimentation</a>
+    </nav>
+
+</div>
+```
+
+</header>
+
+<main>
+
+<div class="container">
+
+<section class="hero">
+
+```
+<div class="eyebrow">Optique géométrique</div>
+
+<h1>Construction de l'image par une lentille mince</h1>
 
 <p class="intro">
-    Déplace l'objet, modifie la lentille et observe la formation de l'image.
+    Déplace l'objet, modifie la distance focale et observe
+    la position et la taille de l'image.
 </p>
+```
 
+</section>
 
-<!-- =========================
-     CONTROLES
-     ========================= -->
+<section class="simulation">
+
+<div class="sim-header">
+    <h2>Simulation interactive</h2>
+    <div class="badge" id="typeBadge">Lentille convergente</div>
+</div>
+
+<div class="graph-wrap">
+
+<svg id="optique"
+  viewBox="0 0 1100 500"
+  aria-label="Construction géométrique avec une lentille mince">
+
+<defs>
+
+```
+<!-- petites pointes pour les rayons -->
+<marker id="rayArrow"
+        markerWidth="8"
+        markerHeight="8"
+        refX="7"
+        refY="4"
+        orient="auto"
+        markerUnits="strokeWidth">
+    <path d="M0,0 L8,4 L0,8 Z"
+          fill="#c62828"/>
+</marker>
+
+<!-- flèche objet -->
+<marker id="objectArrow"
+        markerWidth="12"
+        markerHeight="12"
+        refX="9"
+        refY="6"
+        orient="auto">
+    <path d="M0,0 L12,6 L0,12 Z"
+          fill="#14273d"/>
+</marker>
+
+<!-- flèche image -->
+<marker id="imageArrow"
+        markerWidth="12"
+        markerHeight="12"
+        refX="9"
+        refY="6"
+        orient="auto">
+    <path d="M0,0 L12,6 L0,12 Z"
+          fill="#b08d2b"/>
+</marker>
+
+<!-- flèche du sens de propagation -->
+<marker id="lightArrow"
+        markerWidth="9"
+        markerHeight="9"
+        refX="8"
+        refY="4.5"
+        orient="auto">
+    <path d="M0,0 L9,4.5 L0,9 Z"
+          fill="#c62828"/>
+</marker>
+```
+
+</defs>
+
+<!-- zone de construction -->
+
+<g id="grid"></g>
+
+<!-- axe optique -->
+
+<line x1="25" y1="250"
+   x2="1075" y2="250"
+   stroke="#89919b"
+   stroke-width="1.4"/>
+
+<!-- graduations -->
+
+<g id="graduations"></g>
+
+<!-- lentille -->
+
+<g id="lens">
+
+```
+<line id="lensLine"
+      x1="550" y1="105"
+      x2="550" y2="395"
+      stroke="#14273d"
+      stroke-width="2.2"/>
+
+<!-- symbole convergent/divergent -->
+<g id="lensArrows"
+   stroke="#14273d"
+   stroke-width="2.2"
+   fill="none"
+   stroke-linecap="round"
+   stroke-linejoin="round">
+</g>
+```
+
+</g>
+
+<!-- points focaux -->
+
+<g id="focusPoints">
+
+```
+<circle id="Fpoint"
+        r="5"
+        fill="#b08d2b"/>
+
+<circle id="FpPoint"
+        r="5"
+        fill="#b08d2b"/>
+```
+
+</g>
+
+<!-- rayons -->
+
+<g id="rays"
+fill="none"
+stroke="#c62828"
+stroke-width="2.1"
+stroke-linecap="round"
+stroke-linejoin="round">
+
+</g>
+
+<!-- objet -->
+
+<g id="objectGroup">
+
+```
+<line id="object"
+      stroke="#14273d"
+      stroke-width="3"
+      stroke-linecap="round"
+      marker-end="url(#objectArrow)"/>
+```
+
+</g>
+
+<!-- image -->
+
+<g id="imageGroup">
+
+```
+<line id="image"
+      stroke="#b08d2b"
+      stroke-width="3"
+      stroke-linecap="round"
+      marker-end="url(#imageArrow)"/>
+```
+
+</g>
+
+<!-- textes -->
+
+<g id="labels"
+font-family="Arial, Helvetica, sans-serif">
+
+```
+<text id="Flabel"
+      fill="#14273d"
+      font-size="16"
+      font-weight="700"
+      text-anchor="middle">F</text>
+
+<text id="Fplabel"
+      fill="#14273d"
+      font-size="16"
+      font-weight="700"
+      text-anchor="middle">F'</text>
+
+<text id="Olabel"
+      fill="#14273d"
+      font-size="16"
+      font-weight="700"
+      text-anchor="middle">O</text>
+
+<text id="twoFlabel"
+      fill="#6b7280"
+      font-size="13"
+      text-anchor="middle">2F</text>
+
+<text id="twoFplabel"
+      fill="#6b7280"
+      font-size="13"
+      text-anchor="middle">2F'</text>
+
+<text id="ABlabel"
+      fill="#14273d"
+      font-size="15"
+      font-weight="700">AB</text>
+
+<text id="Aplabel"
+      fill="#b08d2b"
+      font-size="15"
+      font-weight="700">A'B'</text>
+```
+
+</g>
+
+<!-- indication lumière -->
+
+<g id="lightDirection">
+
+```
+<line x1="875"
+      y1="70"
+      x2="1015"
+      y2="70"
+      stroke="#c62828"
+      stroke-width="1.8"
+      marker-end="url(#lightArrow)"/>
+
+<text x="945"
+      y="57"
+      text-anchor="middle"
+      font-size="12"
+      fill="#c62828">
+    sens de propagation de la lumière
+</text>
+```
+
+</g>
+
+</svg>
+
+</div>
+
+<!-- CONTROLES -->
 
 <div class="controls">
 
-    <div class="panel">
+```
+<div class="control">
 
-        <h2>Paramètres de la lentille</h2>
+    <label>
+        <span>Type de lentille</span>
+    </label>
 
-        <div class="control-row">
+    <div class="switch-row">
 
-            <label for="focal">
-                Distance focale
-            </label>
+        <button id="convBtn"
+                class="active"
+                onclick="setLens('conv')">
+            Convergente
+        </button>
 
-            <input
-                type="range"
-                id="focal"
-                min="5"
-                max="40"
-                step="1"
-                value="15"
-            >
-
-            <div class="value" id="focalValue">
-                +15 cm
-            </div>
-
-        </div>
-
-        <div class="lens-type">
-
-            <button
-                class="type-btn active"
-                id="convBtn">
-                Convergente
-            </button>
-
-            <button
-                class="type-btn"
-                id="divBtn">
-                Divergente
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div class="panel">
-
-        <h2>Position et taille de l'objet</h2>
-
-        <div class="control-row">
-
-            <label for="objectPos">
-                Position A
-            </label>
-
-            <input
-                type="range"
-                id="objectPos"
-                min="-60"
-                max="-5"
-                step="1"
-                value="-30"
-            >
-
-            <div class="value" id="objectPosValue">
-                -30 cm
-            </div>
-
-        </div>
-
-
-        <div class="control-row">
-
-            <label for="objectHeight">
-                Hauteur AB
-            </label>
-
-            <input
-                type="range"
-                id="objectHeight"
-                min="3"
-                max="20"
-                step="1"
-                value="10"
-            >
-
-            <div class="value" id="objectHeightValue">
-                10 cm
-            </div>
-
-        </div>
+        <button id="divBtn"
+                onclick="setLens('div')">
+            Divergente
+        </button>
 
     </div>
 
 </div>
 
 
-<!-- =========================
-     ACTIONS
-     ========================= -->
+<div class="control">
 
-<div class="actions">
+    <label>
+        <span>Distance focale f'</span>
+        <span class="value" id="focalValue">10,0 cm</span>
+    </label>
 
-    <button
-        class="action-btn primary"
-        id="infinityBtn">
-        Objet à l'infini
-    </button>
-
-    <button
-        class="action-btn"
-        id="gridBtn">
-        Grille
-    </button>
-
-    <button
-        class="action-btn"
-        id="raysBtn">
-        Rayons
-    </button>
-
-    <button
-        class="action-btn"
-        id="valuesBtn">
-        Valeurs
-    </button>
-
-    <button
-        class="action-btn"
-        id="resetBtn">
-        Réinitialiser
-    </button>
+    <input id="focalSlider"
+           type="range"
+           min="5"
+           max="20"
+           step=".5"
+           value="10">
 
 </div>
 
 
-<!-- =========================
-     ANIMATION
-     ========================= -->
+<div class="control">
 
-<div class="simulation">
+    <label>
+        <span>Position de l'objet OA</span>
+        <span class="value" id="objectValue">−25,0 cm</span>
+    </label>
 
-    <div class="sim-header">
+    <input id="objectSlider"
+           type="range"
+           min="-40"
+           max="-6"
+           step=".5"
+           value="-25">
 
-        <strong>
-            Construction de l'image
-        </strong>
-
-        <span>
-            Déplace les éléments
-        </span>
-
-    </div>
+</div>
 
 
-    <div class="svg-wrap">
+<div class="control">
 
-        <svg
-            id="scene"
-            viewBox="0 0 1000 500"
-            preserveAspectRatio="xMidYMid meet">
+    <label>
+        <span>Hauteur AB</span>
+        <span class="value" id="heightValue">6,0 cm</span>
+    </label>
 
-            <defs>
+    <input id="heightSlider"
+           type="range"
+           min="3"
+           max="10"
+           step=".5"
+           value="6">
 
-                <!-- Flèche de lumière -->
-                <marker
-                    id="arrowRay"
-                    viewBox="0 0 10 10"
-                    refX="8"
-                    refY="5"
-                    markerWidth="7"
-                    markerHeight="7"
-                    orient="auto-start-reverse">
-
-                    <path
-                        d="M 0 0 L 10 5 L 0 10 z"
-                        fill="#c62828">
-                    </path>
-
-                </marker>
+</div>
 
 
-                <!-- Flèche objet -->
-                <marker
-                    id="arrowObject"
-                    viewBox="0 0 10 10"
-                    refX="8"
-                    refY="5"
-                    markerWidth="8"
-                    markerHeight="8"
-                    orient="auto">
+<div class="control">
 
-                    <path
-                        d="M 0 0 L 10 5 L 0 10 z"
-                        fill="#14273d">
-                    </path>
+    <label>
+        <span>Affichage</span>
+    </label>
 
-                </marker>
+    <div class="switch-row">
 
+        <button id="gridBtn"
+                onclick="toggleGrid()">
+            Quadrillage
+        </button>
 
-                <!-- Flèche image -->
-                <marker
-                    id="arrowImage"
-                    viewBox="0 0 10 10"
-                    refX="8"
-                    refY="5"
-                    markerWidth="8"
-                    markerHeight="8"
-                    orient="auto">
+        <button id="raysBtn"
+                class="active"
+                onclick="toggleRays()">
+            Rayons
+        </button>
 
-                    <path
-                        d="M 0 0 L 10 5 L 0 10 z"
-                        fill="#b08d2b">
-                    </path>
-
-                </marker>
-
-            </defs>
-
-
-            <!-- grille -->
-            <g id="grid"></g>
-
-
-            <!-- axe optique -->
-            <line
-                x1="20"
-                y1="250"
-                x2="980"
-                y2="250"
-                class="axis"
-            />
-
-
-            <!-- ======================
-                 LENTILLE
-                 ====================== -->
-
-            <g id="lensGroup">
-
-                <!-- segment vertical -->
-                <line
-                    id="lensAxis"
-                    class="lens-axis"
-                    x1="500"
-                    y1="145"
-                    x2="500"
-                    y2="355"
-                />
-
-                <!-- flèche supérieure -->
-                <path
-                    id="lensArrowTop"
-                    class="lens-arrow"
-                    d=""
-                />
-
-                <!-- flèche inférieure -->
-                <path
-                    id="lensArrowBottom"
-                    class="lens-arrow"
-                    d=""
-                />
-
-                <!-- poignée -->
-                <circle
-                    id="lensHandle"
-                    class="lens-handle"
-                    cx="500"
-                    cy="250"
-                    r="7"
-                />
-
-            </g>
-
-
-            <!-- foyers -->
-
-            <circle
-                id="F"
-                class="focus"
-                r="6"
-            />
-
-            <circle
-                id="Fp"
-                class="focus"
-                r="6"
-            />
-
-
-            <text
-                id="FLabel"
-                class="label">
-                F
-            </text>
-
-            <text
-                id="FpLabel"
-                class="label">
-                F'
-            </text>
-
-
-            <!-- rayons -->
-            <g id="rays"></g>
-
-
-            <!-- ======================
-                 OBJET
-                 ====================== -->
-
-            <line
-                id="object"
-                class="object"
-                marker-end="url(#arrowObject)"
-            />
-
-            <text
-                id="objectLabel"
-                class="label">
-                AB
-            </text>
-
-
-            <!-- ======================
-                 IMAGE
-                 ====================== -->
-
-            <line
-                id="image"
-                class="image"
-                marker-end="url(#arrowImage)"
-            />
-
-            <text
-                id="imageLabel"
-                class="label">
-                A'B'
-            </text>
-
-
-            <!-- label lentille -->
-            <text
-                id="lensLabel"
-                class="label">
-                O
-            </text>
-
-
-            <!-- valeurs -->
-            <g id="sceneValues"></g>
-
-        </svg>
+        <button id="valuesBtn"
+                class="active"
+                onclick="toggleValues()">
+            Valeurs
+        </button>
 
     </div>
 
 </div>
 
 
-<!-- =========================
-     GRANDEURS OPTIQUES
-     ========================= -->
+<div class="control">
 
-<div class="info-grid">
+    <label>
+        <span>Situation particulière</span>
+    </label>
 
-    <div class="info-card">
-        <span class="label-info">
-            Distance focale f'
-        </span>
+    <div class="switch-row">
 
-        <span
-            class="number"
-            id="infoF">
-            +15 cm
-        </span>
-    </div>
+        <button onclick="objectInfinity()">
+            Objet à l'infini
+        </button>
 
-
-    <div class="info-card">
-        <span class="label-info">
-            Vergence C
-        </span>
-
-        <span
-            class="number"
-            id="infoC">
-            +6,67 δ
-        </span>
-    </div>
-
-
-    <div class="info-card">
-        <span class="label-info">
-            OA
-        </span>
-
-        <span
-            class="number"
-            id="infoOA">
-            -30 cm
-        </span>
-    </div>
-
-
-    <div class="info-card">
-        <span class="label-info">
-            OA'
-        </span>
-
-        <span
-            class="number"
-            id="infoOAp">
-            +30 cm
-        </span>
-    </div>
-
-
-    <div class="info-card">
-        <span class="label-info">
-            AB
-        </span>
-
-        <span
-            class="number"
-            id="infoAB">
-            10 cm
-        </span>
-    </div>
-
-
-    <div class="info-card">
-        <span class="label-info">
-            A'B'
-        </span>
-
-        <span
-            class="number"
-            id="infoABp">
-            -10 cm
-        </span>
-    </div>
-
-
-    <div class="info-card">
-        <span class="label-info">
-            Grandissement γ
-        </span>
-
-        <span
-            class="number"
-            id="infoGamma">
-            -1
-        </span>
-    </div>
-
-
-    <div class="info-card">
-        <span class="label-info">
-            Nature de l'image
-        </span>
-
-        <span
-            class="number"
-            id="infoNature">
-            Réelle
-        </span>
-    </div>
-
-</div>
-
-
-<!-- =========================
-     FORMULES
-     ========================= -->
-
-<div class="formulas">
-
-    <div class="formula">
-
-        <strong>
-            Relation de conjugaison
-        </strong>
-
-        <span>
-            1/OA' − 1/OA = 1/f'
-        </span>
-
-    </div>
-
-
-    <div class="formula">
-
-        <strong>
-            Grandissement
-        </strong>
-
-        <span>
-            γ = A'B' / AB = OA' / OA
-        </span>
-
-    </div>
-
-
-    <div class="formula">
-
-        <strong>
-            Vergence
-        </strong>
-
-        <span>
-            C = 1/f' avec f' en m
-        </span>
+        <button class="primary"
+                onclick="resetSimulation()">
+            Réinitialiser
+        </button>
 
     </div>
 
@@ -985,216 +833,252 @@ svg {
 ```
 
 </div>
+
+<!-- DONNEES -->
+
+<div class="data">
+
+```
+<h3>Grandeurs optiques</h3>
+
+<div class="data-grid">
+
+    <div class="data-item">
+        <span>Distance focale</span>
+        <strong id="dF">+10,0 cm</strong>
+    </div>
+
+    <div class="data-item">
+        <span>Vergence C</span>
+        <strong id="vergence">+10,0 δ</strong>
+    </div>
+
+    <div class="data-item">
+        <span>OA</span>
+        <strong id="OA">−25,0 cm</strong>
+    </div>
+
+    <div class="data-item">
+        <span>OA'</span>
+        <strong id="OAp">+16,7 cm</strong>
+    </div>
+
+    <div class="data-item">
+        <span>AB</span>
+        <strong id="AB">+6,0 cm</strong>
+    </div>
+
+    <div class="data-item">
+        <span>A'B'</span>
+        <strong id="ApBp">−4,0 cm</strong>
+    </div>
+
+    <div class="data-item">
+        <span>Grandissement γ</span>
+        <strong id="gamma">−0,67</strong>
+    </div>
+
+    <div class="data-item">
+        <span>Nature de l'image</span>
+        <strong id="nature">réelle, renversée</strong>
+    </div>
+
+</div>
+
+<div class="formula">
+    1/OA' − 1/OA = 1/f'
+    &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
+    γ = A'B'/AB = OA'/OA
+    &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
+    C = 1/f'
+</div>
+```
+
+</div>
+
+<div class="legend">
+
+```
+<div class="legend-item">
+    <span class="legend-line red"></span>
+    Rayons lumineux
+</div>
+
+<div class="legend-item">
+    <span class="legend-arrow">↑</span>
+    Objet
+</div>
+
+<div class="legend-item">
+    <span class="legend-arrow">↓</span>
+    Image
+</div>
+
+<div class="legend-item">
+    <span class="legend-line axis"></span>
+    Axe optique
+</div>
+```
+
+</div>
+
+</section>
+
+</div>
+
+</main>
 
 <script>
 
 /* =========================================================
-   ELEMENTS
-   ========================================================= */
+   PARAMETRES
+========================================================= */
 
-const focalSlider =
-    document.getElementById("focal");
+const svg = document.getElementById("optique");
 
-const objectPosSlider =
-    document.getElementById("objectPos");
+const lensX = 550;
+const axisY = 250;
 
-const objectHeightSlider =
-    document.getElementById("objectHeight");
-
-const focalValue =
-    document.getElementById("focalValue");
-
-const objectPosValue =
-    document.getElementById("objectPosValue");
-
-const objectHeightValue =
-    document.getElementById("objectHeightValue");
-
-const lensAxis =
-    document.getElementById("lensAxis");
-
-const lensArrowTop =
-    document.getElementById("lensArrowTop");
-
-const lensArrowBottom =
-    document.getElementById("lensArrowBottom");
-
-const lensHandle =
-    document.getElementById("lensHandle");
-
-const object =
-    document.getElementById("object");
-
-const image =
-    document.getElementById("image");
-
-const F =
-    document.getElementById("F");
-
-const Fp =
-    document.getElementById("Fp");
-
-const FLabel =
-    document.getElementById("FLabel");
-
-const FpLabel =
-    document.getElementById("FpLabel");
-
-const objectLabel =
-    document.getElementById("objectLabel");
-
-const imageLabel =
-    document.getElementById("imageLabel");
-
-const lensLabel =
-    document.getElementById("lensLabel");
-
-const rays =
-    document.getElementById("rays");
-
-const grid =
-    document.getElementById("grid");
-
-const sceneValues =
-    document.getElementById("sceneValues");
-
-
-/* =========================================================
-   ETAT
-   ========================================================= */
-
-let converging = true;
-
+let lensType = "conv";
 let showGrid = false;
 let showRays = true;
 let showValues = true;
 
-let infinityMode = false;
-
-let lensX = 500;
-
-
-/*
- * Echelle graphique
- */
-
-const SCALE = 6;
+let focal = 10;
+let objectOA = -25;
+let objectHeight = 6;
 
 
 /* =========================================================
-   UTILITAIRES
-   ========================================================= */
+   OUTILS SVG
+========================================================= */
 
-function fmt(value, decimals = 1) {
-
-    if (!Number.isFinite(value)) {
-        return "∞";
-    }
-
-    return value
-        .toFixed(decimals)
-        .replace(".", ",");
+function el(id){
+    return document.getElementById(id);
 }
 
+function setAttr(id, attrs){
 
-function signed(value, decimals = 1) {
+    const e = el(id);
 
-    if (!Number.isFinite(value)) {
-        return "∞";
+    for(const key in attrs){
+        e.setAttribute(key, attrs[key]);
     }
+}
 
-    const sign =
-        value >= 0 ? "+" : "";
+function cmToPx(cm){
 
-    return sign + fmt(value, decimals);
+    /*
+       1 cm optique ≈ 9 px
+       échelle volontairement fixe pour conserver
+       une construction lisible.
+    */
+
+    return cm * 9;
+}
+
+function formatNumber(x, digits=1){
+
+    return x.toFixed(digits)
+        .replace(".",",")
+        .replace("-", "−");
+}
+
+function signed(x,digits=1){
+
+    return (x >= 0 ? "+" : "−") +
+           Math.abs(x).toFixed(digits).replace(".",",");
 }
 
 
 /* =========================================================
-   CALCUL OPTIQUE
-   ========================================================= */
+   CALCULS
+========================================================= */
 
-function calculate() {
+function calculate(){
 
     const f =
-        Number(focalSlider.value) *
-        (converging ? 1 : -1);
+        lensType === "conv"
+        ? focal
+        : -focal;
 
+    const oa = objectOA;
 
-    const OA =
-        infinityMode
-            ? -Infinity
-            : Number(objectPosSlider.value);
+    let oap;
 
+    if(Math.abs(oa) > 1000){
 
-    const AB =
-        Number(objectHeightSlider.value);
+        oap = f;
 
+    }else{
 
-    let OAp;
+        /*
+           Relation de conjugaison :
+           1/OA' - 1/OA = 1/f'
+        */
 
+        const denominator =
+            (1 / f) + (1 / oa);
 
-    if (infinityMode) {
-
-        OAp = f;
-
-    } else {
-
-        OAp =
-            f * OA /
-            (OA + f);
-
+        oap =
+            Math.abs(denominator) < 0.00001
+            ? Infinity
+            : 1 / denominator;
     }
 
+    const gamma =
+        isFinite(oap)
+        ? oap / oa
+        : 0;
 
-    let gamma;
-
-
-    if (infinityMode) {
-
-        gamma = 0;
-
-    } else {
-
-        gamma = OAp / OA;
-
-    }
-
-
-    const ABp =
-        gamma * AB;
-
+    const imageHeight =
+        gamma * objectHeight;
 
     return {
         f,
-        OA,
-        OAp,
-        AB,
-        ABp,
-        gamma
+        oa,
+        oap,
+        gamma,
+        imageHeight
     };
-
 }
 
 
 /* =========================================================
-   GRILLE
-   ========================================================= */
+   GRADUATIONS
+========================================================= */
 
-function drawGrid() {
+function drawGraduations(){
 
-    grid.innerHTML = "";
+    const g = el("graduations");
+    g.innerHTML = "";
 
-    if (!showGrid) {
-        return;
-    }
+    const data = calculate();
 
+    const fPx = cmToPx(focal);
 
-    for (
-        let x = 20;
-        x <= 980;
-        x += 30
-    ) {
+    const positions = [
+        {
+            x:lensX-fPx*2,
+            label:"2F"
+        },
+        {
+            x:lensX-fPx,
+            label:"F"
+        },
+        {
+            x:lensX+fPx,
+            label:"F'"
+        },
+        {
+            x:lensX+fPx*2,
+            label:"2F'"
+        }
+    ];
+
+    positions.forEach(p=>{
+
+        if(p.x < 30 || p.x > 1070) return;
 
         const line =
             document.createElementNS(
@@ -1202,146 +1086,73 @@ function drawGrid() {
                 "line"
             );
 
-        line.setAttribute("x1", x);
-        line.setAttribute("x2", x);
-        line.setAttribute("y1", 80);
-        line.setAttribute("y2", 430);
-        line.setAttribute(
-            "class",
-            "grid-line"
-        );
+        line.setAttribute("x1",p.x);
+        line.setAttribute("x2",p.x);
+        line.setAttribute("y1",244);
+        line.setAttribute("y2",256);
+        line.setAttribute("stroke","#9ca3af");
+        line.setAttribute("stroke-width","1");
 
-        grid.appendChild(line);
+        g.appendChild(line);
 
-    }
-
-
-    for (
-        let y = 100;
-        y <= 400;
-        y += 30
-    ) {
-
-        const line =
+        const text =
             document.createElementNS(
                 "http://www.w3.org/2000/svg",
-                "line"
+                "text"
             );
 
-        line.setAttribute("x1", 20);
-        line.setAttribute("x2", 980);
-        line.setAttribute("y1", y);
-        line.setAttribute("y2", y);
-        line.setAttribute(
-            "class",
-            "grid-line"
-        );
+        text.setAttribute("x",p.x);
+        text.setAttribute("y",280);
+        text.setAttribute("text-anchor","middle");
+        text.setAttribute("font-size","13");
+        text.setAttribute("fill","#6b7280");
+        text.textContent=p.label;
 
-        grid.appendChild(line);
-
-    }
-
+        g.appendChild(text);
+    });
 }
 
 
 /* =========================================================
-   SYMBOLE DE LA LENTILLE
-   ========================================================= */
+   LENTILLE
+========================================================= */
 
-function drawLens() {
+function drawLens(){
 
-    /*
-     * Segment vertical
-     */
-
-    lensAxis.setAttribute(
-        "x1",
-        lensX
-    );
-
-    lensAxis.setAttribute(
-        "x2",
-        lensX
-    );
-
+    const arrows = el("lensArrows");
+    arrows.innerHTML = "";
 
     /*
-     * Convergente :
-     *
-     *       >
-     *       |
-     *       <
-     *
-     * Les flèches pointent vers l'extérieur.
-     *
-     * Divergente :
-     *
-     *       <
-     *       |
-     *       >
-     *
-     * Les flèches pointent vers l'intérieur.
-     */
+       Les deux petits chevrons constituent
+       le symbole optique de la lentille.
+    */
 
-    if (converging) {
+    if(lensType === "conv"){
 
-        lensArrowTop.setAttribute(
-            "d",
-            `M ${lensX - 15} 145
-             L ${lensX + 15} 160`
-        );
+        // flèches dirigées vers l'extérieur
+        arrows.innerHTML = `
+            <path d="M550 105 L535 121 M550 105 L565 121"/>
+            <path d="M550 395 L535 379 M550 395 L565 379"/>
+        `;
 
-        lensArrowBottom.setAttribute(
-            "d",
-            `M ${lensX - 15} 355
-             L ${lensX + 15} 340`
-        );
+    }else{
 
-    } else {
-
-        lensArrowTop.setAttribute(
-            "d",
-            `M ${lensX + 15} 145
-             L ${lensX - 15} 160`
-        );
-
-        lensArrowBottom.setAttribute(
-            "d",
-            `M ${lensX + 15} 355
-             L ${lensX - 15} 340`
-        );
-
+        // flèches dirigées vers l'intérieur
+        arrows.innerHTML = `
+            <path d="M535 105 L550 121 M565 105 L550 121"/>
+            <path d="M535 395 L550 379 M565 395 L550 379"/>
+        `;
     }
-
-
-    lensHandle.setAttribute(
-        "cx",
-        lensX
-    );
-
-
-    lensLabel.setAttribute(
-        "x",
-        lensX + 13
-    );
-
-    lensLabel.setAttribute(
-        "y",
-        268
-    );
-
 }
 
 
 /* =========================================================
-   FOYERS
-   ========================================================= */
+   POINTS FOCAL
+========================================================= */
 
-function drawFoci(f) {
+function drawFocus(){
 
-    const fPx =
-        Math.abs(f) * SCALE;
-
+    const fPx = cmToPx(focal);
 
     const xF =
         lensX - fPx;
@@ -1349,971 +1160,589 @@ function drawFoci(f) {
     const xFp =
         lensX + fPx;
 
+    setAttr("Fpoint",{
+        cx:xF,
+        cy:axisY
+    });
 
-    F.setAttribute("cx", xF);
-    F.setAttribute("cy", 250);
+    setAttr("FpPoint",{
+        cx:xFp,
+        cy:axisY
+    });
 
-    Fp.setAttribute("cx", xFp);
-    Fp.setAttribute("cy", 250);
+    setAttr("Flabel",{
+        x:xF,
+        y:300
+    });
 
+    setAttr("Fplabel",{
+        x:xFp,
+        y:300
+    });
 
-    FLabel.setAttribute(
-        "x",
-        xF - 5
-    );
-
-    FLabel.setAttribute(
-        "y",
-        275
-    );
-
-
-    FpLabel.setAttribute(
-        "x",
-        xFp - 5
-    );
-
-    FpLabel.setAttribute(
-        "y",
-        275
-    );
+    setAttr("Olabel",{
+        x:lensX,
+        y:300
+    });
 
 }
 
 
 /* =========================================================
-   OBJET ET IMAGE
-   ========================================================= */
+   OBJET / IMAGE
+========================================================= */
 
-function drawObjects(data) {
+function drawObjects(data){
 
-    const objectX =
-        infinityMode
-            ? 55
-            : lensX + data.OA * SCALE;
+    /*
+       échelle verticale :
+       1 cm ≈ 12 px
+    */
 
+    const yObject =
+        axisY - objectHeight * 12;
 
-    const objectTop =
-        250 - data.AB * 5;
+    const xObject =
+        lensX + cmToPx(objectOA);
+
+    setAttr("object",{
+        x1:xObject,
+        x2:xObject,
+        y1:axisY,
+        y2:yObject
+    });
+
+    setAttr("ABlabel",{
+        x:xObject,
+        y:yObject-12,
+        "text-anchor":"middle"
+    });
 
 
     /*
-     * Objet
-     */
+       image
+    */
 
-    object.setAttribute(
-        "x1",
-        objectX
-    );
+    const imageGroup = el("imageGroup");
 
-    object.setAttribute(
-        "y1",
-        250
-    );
+    if(!isFinite(data.oap)){
 
-    object.setAttribute(
-        "x2",
-        objectX
-    );
+        imageGroup.style.display="none";
 
-    object.setAttribute(
-        "y2",
-        objectTop
-    );
+    }else{
 
+        imageGroup.style.display="block";
 
-    objectLabel.setAttribute(
-        "x",
-        objectX - 13
-    );
-
-    objectLabel.setAttribute(
-        "y",
-        objectTop - 12
-    );
-
-
-    /*
-     * Image
-     */
-
-    let imageX;
-
-
-    if (Number.isFinite(data.OAp)) {
-
-        imageX =
-            lensX +
-            data.OAp * SCALE;
-
-    } else {
-
-        imageX =
-            lensX + 250;
-
-    }
-
-
-    let imageTop =
-        250 -
-        data.ABp * 5;
-
-
-    /*
-     * Limites graphiques
-     */
-
-    imageTop =
-        Math.max(
-            70,
-            Math.min(
-                430,
-                imageTop
-            )
-        );
-
-
-    image.setAttribute(
-        "x1",
-        imageX
-    );
-
-    image.setAttribute(
-        "y1",
-        250
-    );
-
-    image.setAttribute(
-        "x2",
-        imageX
-    );
-
-    image.setAttribute(
-        "y2",
-        imageTop
-    );
-
-
-    imageLabel.setAttribute(
-        "x",
-        imageX + 10
-    );
-
-    imageLabel.setAttribute(
-        "y",
-        imageTop - 10
-    );
-
-}
-
-
-/* =========================================================
-   RAYONS ROUGES
-   ========================================================= */
-
-function drawRays(data) {
-
-    rays.innerHTML = "";
-
-    if (!showRays) {
-        return;
-    }
-
-
-    const objectX =
-        infinityMode
-            ? 55
-            : lensX + data.OA * SCALE;
-
-
-    const objectY =
-        250 - data.AB * 5;
-
-
-    const imageX =
-        lensX +
-        (
-            Number.isFinite(data.OAp)
-                ? data.OAp * SCALE
-                : 250
-        );
-
-
-    const imageY =
-        250 -
-        data.ABp * 5;
-
-
-    /*
-     * Rayon parallèle à l'axe.
-     *
-     * Pour une convergente :
-     * il passe ensuite par F'.
-     */
-
-    addRay(
-        objectX,
-        objectY,
-        lensX,
-        objectY,
-        true
-    );
-
-
-    if (converging) {
-
-        addRay(
-            lensX,
-            objectY,
-            imageX,
-            imageY,
-            true
-        );
-
-    } else {
+        let xImage =
+            lensX + cmToPx(data.oap);
 
         /*
-         * Lentille divergente :
-         * prolongement apparent vers F.
-         */
+           Si l'image est extrêmement éloignée,
+           on la limite à la zone visible.
+        */
 
-        const fX =
-            lensX -
-            Math.abs(data.f) * SCALE;
+        xImage =
+            Math.max(35,Math.min(1065,xImage));
 
+        const yImage =
+            axisY - data.imageHeight * 12;
 
-        const slope =
-            (objectY - 250) /
-            (lensX - fX);
+        setAttr("image",{
+            x1:xImage,
+            x2:xImage,
+            y1:axisY,
+            y2:yImage
+        });
 
-
-        const endX = 950;
-
-        const endY =
-            objectY +
-            slope *
-            (endX - lensX);
-
-
-        addRay(
-            lensX,
-            objectY,
-            endX,
-            endY,
-            true
-        );
-
+        setAttr("Aplabel",{
+            x:xImage + (data.imageHeight < 0 ? 12 : 12),
+            y:yImage + (data.imageHeight < 0 ? 18 : -12),
+            "text-anchor":"start"
+        });
     }
-
-
-    /*
-     * Rayon passant par O.
-     *
-     * Il n'est pas dévié.
-     */
-
-    addRay(
-        objectX,
-        objectY,
-        imageX,
-        imageY,
-        true
-    );
-
-
-    /*
-     * Rayon passant par F pour une
-     * lentille convergente.
-     */
-
-    if (converging) {
-
-        const fX =
-            lensX -
-            Math.abs(data.f) * SCALE;
-
-
-        addRay(
-            objectX,
-            objectY,
-            fX,
-            250,
-            true
-        );
-
-
-        addRay(
-            lensX,
-            250,
-            950,
-            250,
-            true
-        );
-
-    }
-
 }
 
 
 /* =========================================================
-   AJOUT D'UN RAYON
-   ========================================================= */
+   RAYONS
+========================================================= */
 
-function addRay(
-    x1,
-    y1,
-    x2,
-    y2,
-    withArrow
-) {
+function drawRays(data){
 
-    const line =
+    const g = el("rays");
+    g.innerHTML = "";
+
+    if(!showRays) return;
+
+    const xA =
+        lensX + cmToPx(objectOA);
+
+    const yA =
+        axisY - objectHeight * 12;
+
+    const fPx =
+        cmToPx(focal);
+
+    const xF =
+        lensX - fPx;
+
+    const xFp =
+        lensX + fPx;
+
+    /*
+       Pour les constructions, on utilise trois rayons :
+
+       1. parallèle à l'axe puis passant par F'
+       2. passant par O, non dévié
+       3. passant par F puis parallèle à l'axe
+    */
+
+
+    /* -----------------------------------------------------
+       RAYON 1 : parallèle
+    ----------------------------------------------------- */
+
+    const ray1a =
         document.createElementNS(
             "http://www.w3.org/2000/svg",
             "line"
         );
 
+    ray1a.setAttribute("x1",xA);
+    ray1a.setAttribute("y1",yA);
+    ray1a.setAttribute("x2",lensX);
+    ray1a.setAttribute("y2",yA);
 
-    line.setAttribute(
-        "x1",
-        x1
-    );
+    ray1a.setAttribute("marker-end","url(#rayArrow)");
 
-    line.setAttribute(
-        "y1",
-        y1
-    );
-
-    line.setAttribute(
-        "x2",
-        x2
-    );
-
-    line.setAttribute(
-        "y2",
-        y2
-    );
+    g.appendChild(ray1a);
 
 
-    line.setAttribute(
-        "class",
-        "ray"
-    );
+    /*
+       après la lentille :
+       convergente → F'
+       divergente → prolongement depuis F'
+    */
 
-
-    if (withArrow) {
-
-        line.setAttribute(
-            "marker-end",
-            "url(#arrowRay)"
+    const ray1b =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "line"
         );
 
+    ray1b.setAttribute("x1",lensX);
+    ray1b.setAttribute("y1",yA);
+
+    if(lensType === "conv"){
+
+        ray1b.setAttribute("x2",lensX + cmToPx(data.oap));
+        ray1b.setAttribute(
+            "y2",
+            axisY - data.imageHeight * 12
+        );
+
+    }else{
+
+        /*
+           rayon divergent :
+           après la lentille il diverge.
+           On calcule sa direction comme si le rayon
+           venait du foyer image virtuel.
+        */
+
+        const slope =
+            (yA-axisY)/(lensX-xFp);
+
+        const xEnd=1070;
+
+        const yEnd =
+            yA + slope*(xEnd-lensX);
+
+        ray1b.setAttribute("x2",xEnd);
+        ray1b.setAttribute("y2",yEnd);
     }
 
+    ray1b.setAttribute("marker-end","url(#rayArrow)");
+    g.appendChild(ray1b);
 
-    rays.appendChild(line);
 
+    /* -----------------------------------------------------
+       RAYON 2 : centre optique
+    ----------------------------------------------------- */
+
+    const ray2 =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "line"
+        );
+
+    ray2.setAttribute("x1",xA);
+    ray2.setAttribute("y1",yA);
+
+    if(isFinite(data.oap)){
+
+        const xI =
+            lensX + cmToPx(data.oap);
+
+        const yI =
+            axisY - data.imageHeight * 12;
+
+        ray2.setAttribute("x2",xI);
+        ray2.setAttribute("y2",yI);
+
+    }else{
+
+        ray2.setAttribute("x2",1070);
+
+        /*
+           rayon passant par O :
+           prolongement rectiligne
+        */
+
+        const slope =
+            (axisY-yA)/(lensX-xA);
+
+        ray2.setAttribute(
+            "y2",
+            axisY + slope*(1070-lensX)
+        );
+    }
+
+    ray2.setAttribute("marker-end","url(#rayArrow)");
+    g.appendChild(ray2);
+
+
+    /* -----------------------------------------------------
+       RAYON 3 : passant par le foyer objet
+    ----------------------------------------------------- */
+
+    const ray3 =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "polyline"
+        );
+
+    let points;
+
+    if(lensType === "conv"){
+
+        points =
+            `${xA},${yA} ` +
+            `${xF},${axisY} ` +
+            `${lensX},${axisY} ` +
+            `${1070},${axisY}`;
+
+    }else{
+
+        /*
+           Pour une lentille divergente :
+           rayon dirigé vers le foyer image virtuel.
+        */
+
+        points =
+            `${xA},${yA} ` +
+            `${lensX},${axisY - objectHeight*12}`;
+
+    }
+
+    ray3.setAttribute("points",points);
+
+    ray3.setAttribute("marker-end","url(#rayArrow)");
+
+    /*
+       Sur une lentille divergente, ce troisième rayon
+       est moins utile graphiquement : on le masque.
+    */
+
+    if(lensType === "conv"){
+        g.appendChild(ray3);
+    }
 }
 
 
 /* =========================================================
-   INFORMATIONS
-   ========================================================= */
+   QUADRILLAGE
+========================================================= */
 
-function updateInfo(data) {
+function drawGrid(){
 
-    focalValue.textContent =
-        signed(data.f) + " cm";
+    const g=el("grid");
+    g.innerHTML="";
 
+    if(!showGrid) return;
 
-    objectPosValue.textContent =
-        infinityMode
-            ? "∞"
-            : signed(data.OA) + " cm";
+    for(let x=25;x<=1075;x+=45){
 
+        const line =
+            document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "line"
+            );
 
-    objectHeightValue.textContent =
-        fmt(data.AB) + " cm";
+        line.setAttribute("x1",x);
+        line.setAttribute("x2",x);
+        line.setAttribute("y1",70);
+        line.setAttribute("y2",430);
+        line.setAttribute("stroke","#ece8df");
+        line.setAttribute("stroke-width",".7");
 
-
-    document.getElementById(
-        "infoF"
-    ).textContent =
-        signed(data.f) + " cm";
-
-
-    const vergence =
-        1 / (data.f / 100);
-
-
-    document.getElementById(
-        "infoC"
-    ).textContent =
-        signed(vergence, 2) + " δ";
-
-
-    document.getElementById(
-        "infoOA"
-    ).textContent =
-        infinityMode
-            ? "−∞"
-            : signed(data.OA) + " cm";
-
-
-    document.getElementById(
-        "infoOAp"
-    ).textContent =
-        signed(data.OAp) + " cm";
-
-
-    document.getElementById(
-        "infoAB"
-    ).textContent =
-        signed(data.AB) + " cm";
-
-
-    document.getElementById(
-        "infoABp"
-    ).textContent =
-        signed(data.ABp) + " cm";
-
-
-    document.getElementById(
-        "infoGamma"
-    ).textContent =
-        Number.isFinite(data.gamma)
-            ? signed(data.gamma, 2)
-            : "0";
-
-
-    let nature;
-
-
-    if (data.gamma === 0) {
-
-        nature = "À l'infini";
-
-    }
-    else if (data.OAp > 0) {
-
-        nature =
-            data.gamma < 0
-                ? "Réelle, renversée"
-                : "Réelle, droite";
-
-    }
-    else {
-
-        nature =
-            data.gamma < 0
-                ? "Virtuelle, renversée"
-                : "Virtuelle, droite";
-
+        g.appendChild(line);
     }
 
+    for(let y=70;y<=430;y+=45){
 
-    document.getElementById(
-        "infoNature"
-    ).textContent =
-        nature;
+        const line =
+            document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "line"
+            );
 
+        line.setAttribute("x1",25);
+        line.setAttribute("x2",1075);
+        line.setAttribute("y1",y);
+        line.setAttribute("y2",y);
+        line.setAttribute("stroke","#ece8df");
+        line.setAttribute("stroke-width",".7");
+
+        g.appendChild(line);
+    }
 }
 
 
 /* =========================================================
-   VALEURS DANS L'ANIMATION
-   ========================================================= */
+   DONNEES
+========================================================= */
 
-function drawSceneValues(data) {
+function updateData(data){
 
-    sceneValues.innerHTML = "";
+    el("focalValue").textContent =
+        formatNumber(focal)+" cm";
 
-    if (!showValues) {
-        return;
-    }
+    el("objectValue").textContent =
+        signed(objectOA)+" cm";
 
+    el("heightValue").textContent =
+        formatNumber(objectHeight)+" cm";
 
-    const values = [
+    el("dF").textContent =
+        signed(data.f)+" cm";
 
-        `f' = ${signed(data.f)} cm`,
+    el("vergence").textContent =
+        signed(100/data.f)+" δ";
 
-        `C = ${signed(
-            1 / (data.f / 100),
-            2
-        )} δ`,
+    el("OA").textContent =
+        signed(data.oa)+" cm";
 
-        `OA = ${
-            infinityMode
-                ? "−∞"
-                : signed(data.OA)
-        } cm`,
+    if(isFinite(data.oap)){
 
-        `OA' = ${signed(data.OAp)} cm`,
+        el("OAp").textContent =
+            signed(data.oap)+" cm";
 
-        `γ = ${signed(
-            data.gamma,
-            2
-        )}`
+        el("ApBp").textContent =
+            signed(data.imageHeight)+" cm";
 
-    ];
+        el("gamma").textContent =
+            signed(data.gamma,2);
 
+        if(data.oap > 0){
 
-    values.forEach(
-        (text, index) => {
+            el("nature").textContent =
+                data.gamma < 0
+                ? "réelle, renversée"
+                : "réelle, droite";
 
-            const t =
-                document.createElementNS(
-                    "http://www.w3.org/2000/svg",
-                    "text"
-                );
+        }else{
 
-
-            t.setAttribute(
-                "x",
-                35
-            );
-
-            t.setAttribute(
-                "y",
-                35 + index * 19
-            );
-
-            t.setAttribute(
-                "class",
-                "small-label"
-            );
-
-
-            t.textContent =
-                text;
-
-
-            sceneValues.appendChild(t);
-
+            el("nature").textContent =
+                data.gamma < 0
+                ? "virtuelle, renversée"
+                : "virtuelle, droite";
         }
-    );
 
+    }else{
+
+        el("OAp").textContent="∞";
+        el("ApBp").textContent="∞";
+        el("gamma").textContent="0";
+        el("nature").textContent="image à l'infini";
+    }
+
+    el("typeBadge").textContent =
+        lensType === "conv"
+        ? "Lentille convergente"
+        : "Lentille divergente";
+
+    el("valuesBtn").classList.toggle(
+        "active",
+        showValues
+    );
 }
 
 
 /* =========================================================
-   MISE A JOUR
-   ========================================================= */
+   AFFICHAGE GLOBAL
+========================================================= */
 
-function update() {
+function update(){
 
-    const data =
-        calculate();
-
+    const data=calculate();
 
     drawGrid();
-
+    drawGraduations();
     drawLens();
-
-    drawFoci(data.f);
-
+    drawFocus();
     drawObjects(data);
-
     drawRays(data);
+    updateData(data);
 
-    drawSceneValues(data);
+    el("convBtn").classList.toggle(
+        "active",
+        lensType==="conv"
+    );
 
-    updateInfo(data);
+    el("divBtn").classList.toggle(
+        "active",
+        lensType==="div"
+    );
 
+    el("raysBtn").classList.toggle(
+        "active",
+        showRays
+    );
+
+    /*
+       Le bouton "valeurs" agit sur le panneau
+       de données sans modifier le schéma.
+    */
+
+    el("dF").parentElement.parentElement.style.display =
+        showValues ? "grid" : "none";
 }
 
 
 /* =========================================================
    CONTROLES
-   ========================================================= */
+========================================================= */
 
-focalSlider.addEventListener(
+el("focalSlider").addEventListener(
     "input",
-    update
+    e=>{
+        focal=parseFloat(e.target.value);
+        update();
+    }
 );
 
-
-objectPosSlider.addEventListener(
+el("objectSlider").addEventListener(
     "input",
-    () => {
-
-        infinityMode = false;
-
+    e=>{
+        objectOA=parseFloat(e.target.value);
         update();
-
     }
 );
 
-
-objectHeightSlider.addEventListener(
+el("heightSlider").addEventListener(
     "input",
-    update
-);
-
-
-/* =========================
-   TYPE DE LENTILLE
-   ========================= */
-
-document.getElementById(
-    "convBtn"
-).addEventListener(
-    "click",
-    () => {
-
-        converging = true;
-
-        document.getElementById(
-            "convBtn"
-        ).classList.add("active");
-
-        document.getElementById(
-            "divBtn"
-        ).classList.remove("active");
-
+    e=>{
+        objectHeight=parseFloat(e.target.value);
         update();
-
     }
 );
 
 
-document.getElementById(
-    "divBtn"
-).addEventListener(
-    "click",
-    () => {
+function setLens(type){
 
-        converging = false;
+    lensType=type;
 
-        document.getElementById(
-            "divBtn"
-        ).classList.add("active");
-
-        document.getElementById(
-            "convBtn"
-        ).classList.remove("active");
-
-        update();
-
-    }
-);
+    update();
+}
 
 
-/* =========================
-   OBJET A L'INFINI
-   ========================= */
+function toggleGrid(){
 
-document.getElementById(
-    "infinityBtn"
-).addEventListener(
-    "click",
-    () => {
+    showGrid=!showGrid;
 
-        infinityMode =
-            !infinityMode;
+    el("gridBtn").classList.toggle(
+        "active",
+        showGrid
+    );
 
-
-        document.getElementById(
-            "infinityBtn"
-        ).textContent =
-            infinityMode
-                ? "Faire revenir l'objet"
-                : "Objet à l'infini";
+    update();
+}
 
 
-        update();
+function toggleRays(){
 
-    }
-);
+    showRays=!showRays;
 
-
-/* =========================
-   GRILLE
-   ========================= */
-
-document.getElementById(
-    "gridBtn"
-).addEventListener(
-    "click",
-    () => {
-
-        showGrid =
-            !showGrid;
-
-        update();
-
-    }
-);
+    update();
+}
 
 
-/* =========================
-   RAYONS
-   ========================= */
+function toggleValues(){
 
-document.getElementById(
-    "raysBtn"
-).addEventListener(
-    "click",
-    () => {
+    showValues=!showValues;
 
-        showRays =
-            !showRays;
+    el("data").style.display =
+        showValues ? "block" : "none";
 
-        update();
-
-    }
-);
+    el("valuesBtn").classList.toggle(
+        "active",
+        showValues
+    );
+}
 
 
-/* =========================
-   VALEURS
-   ========================= */
+function objectInfinity(){
 
-document.getElementById(
-    "valuesBtn"
-).addEventListener(
-    "click",
-    () => {
+    /*
+       approximation pratique :
+       OA très grand devant f'
+    */
 
-        showValues =
-            !showValues;
+    objectOA=-100;
 
-        update();
+    el("objectSlider").value=-40;
 
-    }
-);
+    update();
 
+    /*
+       Le slider reste dans sa plage pédagogique.
+       On replace donc l'objet à la limite gauche visible.
+    */
 
-/* =========================
-   RESET
-   ========================= */
-
-document.getElementById(
-    "resetBtn"
-).addEventListener(
-    "click",
-    () => {
-
-        focalSlider.value = 15;
-
-        objectPosSlider.value = -30;
-
-        objectHeightSlider.value = 10;
-
-        converging = true;
-
-        infinityMode = false;
-
-        showGrid = false;
-
-        showRays = true;
-
-        showValues = true;
-
-        lensX = 500;
+    objectOA=-40;
+    update();
+}
 
 
-        document.getElementById(
-            "convBtn"
-        ).classList.add("active");
+function resetSimulation(){
 
-        document.getElementById(
-            "divBtn"
-        ).classList.remove("active");
+    lensType="conv";
+    focal=10;
+    objectOA=-25;
+    objectHeight=6;
 
+    showGrid=false;
+    showRays=true;
+    showValues=true;
 
-        document.getElementById(
-            "infinityBtn"
-        ).textContent =
-            "Objet à l'infini";
+    el("focalSlider").value=10;
+    el("objectSlider").value=-25;
+    el("heightSlider").value=6;
 
+    el("gridBtn").classList.remove("active");
+    el("raysBtn").classList.add("active");
+    el("valuesBtn").classList.add("active");
 
-        update();
+    el("data").style.display="block";
 
-    }
-);
+    update();
+}
 
 
 /* =========================================================
-   DEPLACEMENT DE L'OBJET
-   ========================================================= */
-
-let draggingObject = false;
-
-
-object.addEventListener(
-    "pointerdown",
-    event => {
-
-        draggingObject = true;
-
-        object.setPointerCapture(
-            event.pointerId
-        );
-
-        infinityMode = false;
-
-    }
-);
-
-
-object.addEventListener(
-    "pointermove",
-    event => {
-
-        if (!draggingObject) {
-            return;
-        }
-
-
-        const svg =
-            document.getElementById(
-                "scene"
-            );
-
-        const rect =
-            svg.getBoundingClientRect();
-
-
-        const x =
-            (
-                event.clientX -
-                rect.left
-            )
-            / rect.width
-            * 1000;
-
-
-        let OA =
-            (x - lensX) / SCALE;
-
-
-        OA =
-            Math.max(
-                -60,
-                Math.min(
-                    -5,
-                    OA
-                )
-            );
-
-
-        objectPosSlider.value =
-            Math.round(OA);
-
-
-        update();
-
-    }
-);
-
-
-object.addEventListener(
-    "pointerup",
-    () => {
-
-        draggingObject = false;
-
-    }
-);
-
-
-/* =========================================================
-   DEPLACEMENT VERTICAL DE L'OBJET
-   ========================================================= */
-
-object.addEventListener(
-    "pointermove",
-    event => {
-
-        if (
-            event.buttons === 0 ||
-            !draggingObject
-        ) {
-            return;
-        }
-
-    }
-);
-
-
-/* =========================================================
-   DEPLACEMENT DE LA LENTILLE
-   ========================================================= */
-
-let draggingLens = false;
-
-
-lensHandle.addEventListener(
-    "pointerdown",
-    event => {
-
-        draggingLens = true;
-
-        lensHandle.setPointerCapture(
-            event.pointerId
-        );
-
-    }
-);
-
-
-lensHandle.addEventListener(
-    "pointermove",
-    event => {
-
-        if (!draggingLens) {
-            return;
-        }
-
-
-        const svg =
-            document.getElementById(
-                "scene"
-            );
-
-        const rect =
-            svg.getBoundingClientRect();
-
-
-        const x =
-            (
-                event.clientX -
-                rect.left
-            )
-            / rect.width
-            * 1000;
-
-
-        lensX =
-            Math.max(
-                300,
-                Math.min(
-                    700,
-                    x
-                )
-            );
-
-
-        update();
-
-    }
-);
-
-
-lensHandle.addEventListener(
-    "pointerup",
-    () => {
-
-        draggingLens = false;
-
-    }
-);
-
-
-/* =========================================================
-   INITIALISATION
-   ========================================================= */
+   PREMIER AFFICHAGE
+========================================================= */
 
 update();
 
