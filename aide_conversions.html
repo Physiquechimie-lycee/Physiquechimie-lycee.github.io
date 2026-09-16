@@ -12,10 +12,6 @@ content="Conversions d'unités, puissances de 10, notation scientifique et ordre
 
 <style>
 
-/* =========================================================
-   CHARTE GRAPHIQUE
-   ========================================================= */
-
 :root {
     --navy: #14273d;
     --navy-light: #1f3552;
@@ -36,14 +32,16 @@ content="Conversions d'unités, puissances de 10, notation scientifique et ordre
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 78px;
 }
 
 body {
     margin: 0;
-    background: var(--cream);
+    background: var(--white);
     color: var(--ink);
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.7;
+    -webkit-text-size-adjust: 100%;
 }
 
 a {
@@ -51,7 +49,7 @@ a {
 }
 
 .container {
-    width: min(1100px, calc(100% - 36px));
+    width: min(1080px, 92%);
     margin: auto;
 }
 
@@ -61,32 +59,33 @@ a {
    ========================================================= */
 
 header {
+    background: rgba(250,249,245,0.97);
+    border-bottom: 1px solid var(--line);
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(20, 39, 61, 0.97);
-    box-shadow: 0 3px 18px rgba(0,0,0,0.12);
+    backdrop-filter: blur(8px);
 }
 
 .navbar {
-    min-height: 64px;
+    min-height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 25px;
+    gap: 28px;
 }
 
 .logo {
-    color: white;
+    color: var(--navy);
     text-decoration: none;
-    font-family: Georgia, serif;
-    font-size: 1.15rem;
-    font-weight: bold;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.12rem;
+    font-weight: normal;
     white-space: nowrap;
 }
 
 .logo span {
-    color: var(--gold-light);
+    color: var(--gold);
 }
 
 .nav {
@@ -94,6 +93,7 @@ header {
     align-items: center;
     gap: 7px;
     overflow-x: auto;
+    flex-wrap: nowrap;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
 }
@@ -103,19 +103,20 @@ header {
 }
 
 .nav a {
-    color: rgba(255,255,255,0.88);
+    color: var(--navy);
     text-decoration: none;
+    position: relative;
+    white-space: nowrap;
     padding: 9px 13px;
     border-radius: 8px;
     font-size: 0.9rem;
-    white-space: nowrap;
-    transition: 0.2s;
+    transition: background .2s ease, color .2s ease;
 }
 
 .nav a:hover,
 .nav a.active {
-    background: rgba(255,255,255,0.10);
-    color: white;
+    background: rgba(20,39,61,0.07);
+    color: var(--navy);
 }
 
 
@@ -479,13 +480,15 @@ footer a {
 @media (max-width: 800px) {
 
     .navbar {
-        display: block;
+        min-height: auto;
         padding: 10px 0 7px;
+        display: block;
     }
 
     .logo {
         display: block;
         margin-bottom: 8px;
+        font-size: 1.06rem;
     }
 
     .nav {
@@ -493,10 +496,13 @@ footer a {
         padding-bottom: 3px;
         gap: 4px;
         overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
     }
 
     .nav a {
+        flex: 0 0 auto;
         font-size: 0.82rem;
         padding: 7px 9px;
     }
@@ -526,7 +532,24 @@ footer a {
 @media (max-width: 430px) {
 
     .container {
-        width: min(100% - 26px, 1100px);
+        width: 91%;
+    }
+
+    .navbar {
+        padding-top: 9px;
+    }
+
+    .logo {
+        font-size: 1rem;
+    }
+
+    .nav {
+        gap: 4px;
+    }
+
+    .nav a {
+        font-size: 0.78rem;
+        padding: 6px 8px;
     }
 
     .hero {
@@ -580,21 +603,44 @@ footer a {
 <body>
 
 <header>
-    <div class="container navbar">
 
 ```
+<div class="container navbar">
+
     <a class="logo" href="index.html">
         Physique-Chimie <span>au lycée</span>
     </a>
 
     <nav class="nav">
-        <a href="index.html">Accueil</a>
-        <a href="seconde.html" class="active">Seconde</a>
-        <a href="premiere.html">Première</a>
-        <a href="terminale.html">Terminale</a>
-        <a href="animations.html">Animations</a>
-        <a href="grand-oral.html">Grand Oral</a>
-        <a href="experimentation.html">Expérimentation</a>
+
+        <a href="index.html">
+            Accueil
+        </a>
+
+        <a href="aide_conversions.html" class="active">
+            Seconde
+        </a>
+
+        <a href="premiere.html">
+            Première
+        </a>
+
+        <a href="terminale.html">
+            Terminale
+        </a>
+
+        <a href="animations.html">
+            Animations
+        </a>
+
+        <a href="preparer-grand-oral.html">
+            Grand Oral
+        </a>
+
+        <a href="experimentation.html">
+            Expérimentation
+        </a>
+
     </nav>
 
 </div>
@@ -1055,11 +1101,6 @@ footer a {
                 <td>4,0 × 10<sup>-1</sup></td>
             </tr>
 
-            <tr>
-                <td>Etc…</td>
-                <td>Etc…</td>
-            </tr>
-
         </tbody>
 
     </table>
@@ -1370,6 +1411,7 @@ footer a {
 </div>
 
 </div>
+
 </main>
 
 <footer>
