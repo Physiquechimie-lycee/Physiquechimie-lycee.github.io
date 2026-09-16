@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -7,7 +8,7 @@
 <title>Préparer son Grand Oral de Physique-Chimie : méthode et conseils</title>
 
 <meta name="description"
-      content="Comment préparer son Grand Oral de Physique-Chimie ? Méthode, choix de la problématique, construction du plan, préparation de l'oral et exemples de sujets. Conseils d'un professeur agrégé.">
+   content="Comment préparer son Grand Oral de Physique-Chimie ? Méthode, choix de la problématique, construction du plan, préparation de l'oral et exemples de sujets. Conseils d'un professeur agrégé.">
 
 <meta name="robots" content="noindex, nofollow">
 
@@ -96,7 +97,7 @@ header {
 
 nav.links {
     display: flex;
-    gap: 28px;
+    gap: 18px;
     align-items: center;
 }
 
@@ -110,7 +111,8 @@ nav.links a {
     transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-nav.links a:hover {
+nav.links a:hover,
+nav.links a.active {
     color: var(--gold);
     border-bottom-color: var(--gold);
 }
@@ -513,6 +515,7 @@ footer {
         overflow-y: hidden;
         padding: 2px 2px 4px;
         scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
     }
 
     nav.links::-webkit-scrollbar {
@@ -756,33 +759,36 @@ footer {
 }
 
 </style>
-</head>
 
+</head>
 
 <body>
 
 <header>
 
-    <div class="container nav">
+```
+<div class="container nav">
 
-        <a href="index.html" class="logo">
-            Physique-Chimie au lycée
-        </a>
+    <a href="index.html" class="logo">
+        Physique-Chimie au lycée
+    </a>
 
-        <nav class="links">
-            <a href="index.html">Accueil</a>
-            <a href="preparer-grand-oral.html">Grand Oral</a>
-            <a href="livre.html">Le livre</a>
-            <a href="index.html#auteur">L'auteur</a>
-        </nav>
+    <nav class="links">
+        <a href="index.html">Accueil</a>
+        <a href="aide_conversions.html">Seconde</a>
+        <a href="premiere.html">Première</a>
+        <a href="terminale.html">Terminale</a>
+        <a href="animations.html">Animations</a>
+        <a href="grand-oral.html" class="active">Grand Oral</a>
+        <a href="experimentation.html">Expérimentation</a>
+    </nav>
 
-    </div>
+</div>
+```
 
 </header>
 
-
 <main>
-
 
 <!-- =====================================================
      HERO
@@ -790,37 +796,38 @@ footer {
 
 <section class="hero">
 
-    <div class="container">
+```
+<div class="container">
 
-        <div class="hero-inner">
+    <div class="hero-inner">
 
-            <div class="hero-label">
-                Grand Oral
-            </div>
-
-            <h1>
-                Préparer son Grand Oral de Physique-Chimie :
-                méthode et conseils
-            </h1>
-
-            <p>
-                Comment choisir une problématique, construire un plan
-                solide et préparer une présentation scientifique claire ?
-                Cette méthode propose les principales étapes pour préparer
-                efficacement son Grand Oral de Physique-Chimie.
-            </p>
-
-            <p class="credential">
-                Conseils de <strong>Mathieu Tomah</strong>,
-                professeur agrégé de physique-chimie, en poste en lycée.
-            </p>
-
+        <div class="hero-label">
+            Grand Oral
         </div>
+
+        <h1>
+            Préparer son Grand Oral de Physique-Chimie :
+            méthode et conseils
+        </h1>
+
+        <p>
+            Comment choisir une problématique, construire un plan
+            solide et préparer une présentation scientifique claire ?
+            Cette méthode propose les principales étapes pour préparer
+            efficacement son Grand Oral de Physique-Chimie.
+        </p>
+
+        <p class="credential">
+            Conseils de <strong>Mathieu Tomah</strong>,
+            professeur agrégé de physique-chimie, en poste en lycée.
+        </p>
 
     </div>
 
-</section>
+</div>
+```
 
+</section>
 
 <!-- =====================================================
      CONTENU
@@ -832,53 +839,53 @@ footer {
 
 <article class="content">
 
-
 <!-- =====================================================
      SOMMAIRE
      ===================================================== -->
 
 <nav class="toc" aria-label="Sommaire">
 
-    <div class="toc-title">
-        Sommaire
-    </div>
+```
+<div class="toc-title">
+    Sommaire
+</div>
 
-    <ol>
+<ol>
 
-        <li>
-            <a href="#grand-oral">
-                Le Grand Oral
-            </a>
-        </li>
+    <li>
+        <a href="#grand-oral">
+            Le Grand Oral
+        </a>
+    </li>
 
-        <li>
-            <a href="#construire">
-                Construire son Grand Oral
-            </a>
-        </li>
+    <li>
+        <a href="#construire">
+            Construire son Grand Oral
+        </a>
+    </li>
 
-        <li>
-            <a href="#problematique">
-                Problématiques et exemples
-            </a>
-        </li>
+    <li>
+        <a href="#problematique">
+            Problématiques et exemples
+        </a>
+    </li>
 
-        <li>
-            <a href="#plan">
-                Construire un plan : exemple
-            </a>
-        </li>
+    <li>
+        <a href="#plan">
+            Construire un plan : exemple
+        </a>
+    </li>
 
-        <li>
-            <a href="#aller-plus-loin">
-                Aller plus loin
-            </a>
-        </li>
+    <li>
+        <a href="#aller-plus-loin">
+            Aller plus loin
+        </a>
+    </li>
 
-    </ol>
+</ol>
+```
 
 </nav>
-
 
 <!-- =====================================================
      PARTIE 1
@@ -900,61 +907,61 @@ raisonnement clairement à l'oral.
 Cette préparation doit donc être organisée en plusieurs étapes.
 </p>
 
-
 <div class="timing">
 
-    <div class="timing-box">
+```
+<div class="timing-box">
 
-        <div class="timing-number">
-            20 min
-        </div>
-
-        <div class="timing-title">
-            Préparation
-        </div>
-
-        <div class="timing-text">
-            Organiser sa prestation et préparer ses supports éventuels.
-        </div>
-
+    <div class="timing-number">
+        20 min
     </div>
 
-
-    <div class="timing-box">
-
-        <div class="timing-number">
-            10 min
-        </div>
-
-        <div class="timing-title">
-            Présentation
-        </div>
-
-        <div class="timing-text">
-            Présenter sa problématique et construire sa réponse.
-        </div>
-
+    <div class="timing-title">
+        Préparation
     </div>
 
-
-    <div class="timing-box">
-
-        <div class="timing-number">
-            10 min
-        </div>
-
-        <div class="timing-title">
-            Échange
-        </div>
-
-        <div class="timing-text">
-            Répondre aux questions et approfondir certains éléments.
-        </div>
-
+    <div class="timing-text">
+        Organiser sa prestation et préparer ses supports éventuels.
     </div>
 
 </div>
 
+
+<div class="timing-box">
+
+    <div class="timing-number">
+        10 min
+    </div>
+
+    <div class="timing-title">
+        Présentation
+    </div>
+
+    <div class="timing-text">
+        Présenter sa problématique et construire sa réponse.
+    </div>
+
+</div>
+
+
+<div class="timing-box">
+
+    <div class="timing-number">
+        10 min
+    </div>
+
+    <div class="timing-title">
+        Échange
+    </div>
+
+    <div class="timing-text">
+        Répondre aux questions et approfondir certains éléments.
+    </div>
+
+</div>
+```
+
+</div>
 
 <h3>
     1. Les 20 minutes de préparation
@@ -974,7 +981,6 @@ L'objectif est notamment de structurer votre présentation, de retrouver
 les principaux éléments de votre raisonnement et de préparer les éventuels
 schémas, formules ou éléments utiles à votre prestation.
 </p>
-
 
 <h3>
     2. La présentation — 10 minutes
@@ -1006,7 +1012,6 @@ manière précise, mais également compréhensible par un interlocuteur qui
 n'est pas nécessairement spécialiste de votre sujet.
 </p>
 
-
 <h3>
     3. L'échange avec le jury — 10 minutes
 </h3>
@@ -1035,20 +1040,19 @@ Le jury peut ainsi vous demander de préciser ou d'approfondir certains
 éléments de votre présentation.
 </p>
 
-
 <div class="key-point">
 
-    <p>
-        <strong>La présentation et l'échange sont deux exercices
-        différents.</strong> Il faut préparer non seulement son exposé,
-        mais également sa capacité à répondre aux questions du jury.
-    </p>
+```
+<p>
+    <strong>La présentation et l'échange sont deux exercices
+    différents.</strong> Il faut préparer non seulement son exposé,
+    mais également sa capacité à répondre aux questions du jury.
+</p>
+```
 
 </div>
 
-
 <hr class="section-divider">
-
 
 <!-- =====================================================
      PARTIE 2
@@ -1063,7 +1067,6 @@ Le Grand Oral doit être envisagé comme un travail structuré en plusieurs
 étapes.
 </p>
 
-
 <h3>
     Étape 1 : choisir un thème
 </h3>
@@ -1072,7 +1075,6 @@ Le Grand Oral doit être envisagé comme un travail structuré en plusieurs
 Commencez par identifier un domaine de physique-chimie qui vous intéresse
 réellement.
 </p>
-
 
 <h3>
     Étape 2 : construire une problématique
@@ -1083,7 +1085,6 @@ Transformez ce thème en une question précise, intéressante et
 suffisamment riche pour permettre une véritable réflexion scientifique.
 </p>
 
-
 <h3>
     Étape 3 : construire un plan solide
 </h3>
@@ -1093,7 +1094,6 @@ Organisez les différentes étapes de votre raisonnement afin de répondre
 progressivement à la problématique.
 </p>
 
-
 <h3>
     Étape 4 : construire le contenu
 </h3>
@@ -1102,7 +1102,6 @@ progressivement à la problématique.
 Sélectionnez les connaissances, exemples, expériences, calculs et
 raisonnements scientifiques nécessaires pour répondre à votre question.
 </p>
-
 
 <h3>
     Étape 5 : préparer la prestation orale
@@ -1114,9 +1113,7 @@ rythme, durée, précision scientifique et capacité à répondre aux
 questions du jury.
 </p>
 
-
 <hr class="section-divider">
-
 
 <!-- =====================================================
      PARTIE 3
@@ -1140,7 +1137,6 @@ mais suffisamment ouverte pour permettre une véritable réflexion.
 Elle doit également donner envie au jury d'écouter la réponse.
 </p>
 
-
 <h2>
     Des problématiques parfois trop fragiles
 </h2>
@@ -1149,69 +1145,71 @@ Elle doit également donner envie au jury d'écouter la réponse.
 Prenons quelques exemples.
 </p>
 
-
 <div class="example weak">
 
-    <div class="example-title">
-        1. « Comment fonctionne un panneau solaire ? »
-    </div>
+```
+<div class="example-title">
+    1. « Comment fonctionne un panneau solaire ? »
+</div>
 
-    <p>
-        Le principal problème est que cette question risque de conduire à
-        un exposé essentiellement descriptif.
-    </p>
+<p>
+    Le principal problème est que cette question risque de conduire à
+    un exposé essentiellement descriptif.
+</p>
+```
 
 </div>
 
-
 <div class="example weak">
 
-    <div class="example-title">
-        2. « La chimie verte peut-elle sauver la planète ? »
-    </div>
+```
+<div class="example-title">
+    2. « La chimie verte peut-elle sauver la planète ? »
+</div>
 
-    <p>
-        La question est beaucoup trop vaste. La « chimie verte » recouvre
-        de très nombreux domaines et « sauver la planète » est une
-        formulation extrêmement générale.
-    </p>
+<p>
+    La question est beaucoup trop vaste. La « chimie verte » recouvre
+    de très nombreux domaines et « sauver la planète » est une
+    formulation extrêmement générale.
+</p>
+```
 
 </div>
 
-
 <div class="example weak">
 
-    <div class="example-title">
-        3. « Comment l'effet Doppler permet-il de mesurer la vitesse
-        d'une voiture ? »
-    </div>
+```
+<div class="example-title">
+    3. « Comment l'effet Doppler permet-il de mesurer la vitesse
+    d'une voiture ? »
+</div>
 
-    <p>
-        Cette question est intéressante mais risque également de conduire
-        principalement à une description du phénomène et à l'application
-        d'une formule.
-    </p>
+<p>
+    Cette question est intéressante mais risque également de conduire
+    principalement à une description du phénomène et à l'application
+    d'une formule.
+</p>
+```
 
 </div>
 
-
 <div class="example weak">
 
-    <div class="example-title">
-        4. « Les batteries au lithium sont-elles polluantes ? »
-    </div>
-
-    <p>
-        Cette formulation appelle facilement une réponse très générale de
-        type « oui » ou « non ». Il faut donc la préciser et construire
-        une véritable problématique scientifique.
-    </p>
-
+```
+<div class="example-title">
+    4. « Les batteries au lithium sont-elles polluantes ? »
 </div>
 
+<p>
+    Cette formulation appelle facilement une réponse très générale de
+    type « oui » ou « non ». Il faut donc la préciser et construire
+    une véritable problématique scientifique.
+</p>
+```
+
+</div>
 
 <hr class="section-divider">
-
 
 <h2>
     Comment améliorer ces problématiques ?
@@ -1222,93 +1220,96 @@ Une problématique plus ambitieuse peut permettre de construire un travail
 beaucoup plus riche.
 </p>
 
-
 <div class="example">
 
-    <div class="example-title">
-        1. Panneaux photovoltaïques
-    </div>
+```
+<div class="example-title">
+    1. Panneaux photovoltaïques
+</div>
 
-    <p>
-        <strong>
-        Comment exploiter une plus grande partie du spectre de la lumière
-        pour améliorer le rendement photovoltaïque ?
-        </strong>
-    </p>
+<p>
+    <strong>
+    Comment exploiter une plus grande partie du spectre de la lumière
+    pour améliorer le rendement photovoltaïque ?
+    </strong>
+</p>
 
-    <p style="margin-top:12px;">
-        Cette question permet notamment d'aborder l'interaction entre
-        lumière et matière, l'énergie des photons, les limites des cellules
-        photovoltaïques classiques et le principe des cellules tandem.
-    </p>
+<p style="margin-top:12px;">
+    Cette question permet notamment d'aborder l'interaction entre
+    lumière et matière, l'énergie des photons, les limites des cellules
+    photovoltaïques classiques et le principe des cellules tandem.
+</p>
+```
 
 </div>
 
-
 <div class="example">
 
-    <div class="example-title">
-        2. Catalyse
-    </div>
+```
+<div class="example-title">
+    2. Catalyse
+</div>
 
-    <p>
-        <strong>
-        Comment la catalyse peut-elle contribuer à réduire certains
-        polluants présents dans l'air de nos villes ?
-        </strong>
-    </p>
+<p>
+    <strong>
+    Comment la catalyse peut-elle contribuer à réduire certains
+    polluants présents dans l'air de nos villes ?
+    </strong>
+</p>
 
-    <p style="margin-top:12px;">
-        Cette formulation permet de partir d'un problème concret tout en
-        mobilisant des notions de chimie étudiées au lycée.
-    </p>
+<p style="margin-top:12px;">
+    Cette formulation permet de partir d'un problème concret tout en
+    mobilisant des notions de chimie étudiées au lycée.
+</p>
+```
 
 </div>
 
-
 <div class="example">
 
-    <div class="example-title">
-        3. Effet Doppler
-    </div>
+```
+<div class="example-title">
+    3. Effet Doppler
+</div>
 
-    <p>
-        <strong>
-        Comment l'effet Doppler permet-il de mesurer des vitesses, des
-        mouvements et même d'observer certains phénomènes invisibles ?
-        </strong>
-    </p>
+<p>
+    <strong>
+    Comment l'effet Doppler permet-il de mesurer des vitesses, des
+    mouvements et même d'observer certains phénomènes invisibles ?
+    </strong>
+</p>
 
-    <p style="margin-top:12px;">
-        Cette problématique ouvre la possibilité de dépasser le simple
-        exemple de la mesure de la vitesse d'une voiture et de montrer
-        différentes applications du phénomène.
-    </p>
+<p style="margin-top:12px;">
+    Cette problématique ouvre la possibilité de dépasser le simple
+    exemple de la mesure de la vitesse d'une voiture et de montrer
+    différentes applications du phénomène.
+</p>
+```
 
 </div>
 
-
 <div class="example">
 
-    <div class="example-title">
-        4. Accumulateurs lithium-ion
-    </div>
-
-    <p>
-        <strong>
-        Jusqu'où la chimie des accumulateurs lithium-ion peut-elle repousser
-        les limites du stockage de l'énergie ?
-        </strong>
-    </p>
-
-    <p style="margin-top:12px;">
-        Cette question permet de relier électrochimie, énergie,
-        fonctionnement des accumulateurs et enjeux liés au développement
-        des véhicules électriques et du stockage de l'énergie.
-    </p>
-
+```
+<div class="example-title">
+    4. Accumulateurs lithium-ion
 </div>
 
+<p>
+    <strong>
+    Jusqu'où la chimie des accumulateurs lithium-ion peut-elle repousser
+    les limites du stockage de l'énergie ?
+    </strong>
+</p>
+
+<p style="margin-top:12px;">
+    Cette question permet de relier électrochimie, énergie,
+    fonctionnement des accumulateurs et enjeux liés au développement
+    des véhicules électriques et du stockage de l'énergie.
+</p>
+```
+
+</div>
 
 <p>
 Ces formulations ne sont pas des modèles parfaits qu'il faudrait
@@ -1324,9 +1325,7 @@ de commencer le travail.
 </strong>
 </p>
 
-
 <hr class="section-divider">
-
 
 <!-- =====================================================
      PARTIE 4
@@ -1344,7 +1343,6 @@ Une bonne présentation doit avoir une structure facilement identifiable.
 On peut retenir une organisation simple :
 </p>
 
-
 <h3>
     Introduction
 </h3>
@@ -1353,7 +1351,6 @@ On peut retenir une organisation simple :
 L'introduction doit permettre de présenter le sujet, d'expliquer son
 intérêt et d'amener progressivement la problématique.
 </p>
-
 
 <h3>
     Développement
@@ -1373,7 +1370,6 @@ Dans beaucoup de sujets de physique-chimie, <strong>trois grandes
 étapes</strong> peuvent constituer une structure efficace.
 </p>
 
-
 <h3>
     Conclusion
 </h3>
@@ -1387,9 +1383,7 @@ Elle peut également permettre de présenter une limite, une perspective
 ou une ouverture pertinente.
 </p>
 
-
 <hr class="section-divider">
-
 
 <h2>
     Exemple de construction d'un plan
@@ -1399,18 +1393,18 @@ ou une ouverture pertinente.
 Prenons la problématique :
 </p>
 
-
 <div class="example">
 
-    <p>
-        <strong>
-        Comment exploiter une plus grande partie du spectre de la lumière
-        pour améliorer le rendement photovoltaïque ?
-        </strong>
-    </p>
+```
+<p>
+    <strong>
+    Comment exploiter une plus grande partie du spectre de la lumière
+    pour améliorer le rendement photovoltaïque ?
+    </strong>
+</p>
+```
 
 </div>
-
 
 <h3>
     Introduction
@@ -1430,7 +1424,6 @@ photovoltaïque.
 Puis formulation de la problématique.
 </p>
 
-
 <h3>
     Partie 1 — Le fonctionnement d'une cellule photovoltaïque
 </h3>
@@ -1444,7 +1437,6 @@ Présentation du principe général de conversion de l'énergie lumineuse en
 On peut notamment expliquer le rôle de la lumière et des matériaux
 semi-conducteurs.
 </p>
-
 
 <h3>
     Partie 2 — Pourquoi une cellule photovoltaïque ne récupère-t-elle pas
@@ -1465,7 +1457,6 @@ convertie efficacement en électricité.
 Des calculs simples peuvent être utilisés pour illustrer le raisonnement.
 </p>
 
-
 <h3>
     Partie 3 — Le principe des cellules photovoltaïques tandem
 </h3>
@@ -1481,7 +1472,6 @@ constituent une piste importante pour augmenter les rendements
 photovoltaïques.
 </p>
 
-
 <h3>
     Conclusion
 </h3>
@@ -1495,9 +1485,7 @@ Présentation des principales limites actuelles puis ouverture sur les
 progrès possibles des cellules photovoltaïques.
 </p>
 
-
 <hr class="section-divider">
-
 
 <!-- =====================================================
      PARTIE 5
@@ -1506,7 +1494,6 @@ progrès possibles des cellules photovoltaïques.
 <h2 id="aller-plus-loin">
     5. Aller plus loin
 </h2>
-
 
 <h2>
     Le point essentiel à retenir
@@ -1526,23 +1513,22 @@ Cette question doit ensuite permettre de construire un raisonnement
 scientifique cohérent, puis une présentation orale claire.
 </p>
 
-
 <div class="key-point">
 
-    <p>
-        <strong>
-        Thème → problématique → plan → connaissances scientifiques
-        → argumentation → prestation orale
-        </strong>
-    </p>
+```
+<p>
+    <strong>
+    Thème → problématique → plan → connaissances scientifiques
+    → argumentation → prestation orale
+    </strong>
+</p>
+```
 
 </div>
-
 
 <p>
 C'est cette progression qui permet de construire un Grand Oral solide.
 </p>
-
 
 </article>
 
@@ -1550,48 +1536,47 @@ C'est cette progression qui permet de construire un Grand Oral solide.
 
 </section>
 
-
 <!-- =====================================================
      CTA LIVRE
      ===================================================== -->
 
 <section class="cta-section">
 
-    <div class="container">
+```
+<div class="container">
 
-        <div class="cta">
+    <div class="cta">
 
-            <h2>
-                Aller plus loin dans la préparation
-            </h2>
+        <h2>
+            Aller plus loin dans la préparation
+        </h2>
 
-            <p>
-                Trouver une bonne problématique, construire un plan et
-                sélectionner les connaissances pertinentes sont souvent
-                les étapes les plus difficiles.
-            </p>
+        <p>
+            Trouver une bonne problématique, construire un plan et
+            sélectionner les connaissances pertinentes sont souvent
+            les étapes les plus difficiles.
+        </p>
 
-            <p>
-                Le guide <strong>Réussir son Grand Oral de
-                Physique-Chimie</strong> propose notamment des
-                problématiques commentées, des exemples de plans détaillés
-                et une méthode complète pour construire et préparer son
-                oral.
-            </p>
+        <p>
+            Le guide <strong>Réussir son Grand Oral de
+            Physique-Chimie</strong> propose notamment des
+            problématiques commentées, des exemples de plans détaillés
+            et une méthode complète pour construire et préparer son
+            oral.
+        </p>
 
-            <a class="btn-gold" href="livre.html">
-                Découvrir le guide
-            </a>
-
-        </div>
+        <a class="btn-gold" href="livre.html">
+            Découvrir le guide
+        </a>
 
     </div>
 
+</div>
+```
+
 </section>
 
-
 </main>
-
 
 <!-- =====================================================
      FOOTER
@@ -1599,20 +1584,21 @@ C'est cette progression qui permet de construire un Grand Oral solide.
 
 <footer>
 
-    <div class="container">
+```
+<div class="container">
 
-        <div>
-            Physique-Chimie au lycée
-        </div>
-
-        <div style="margin-top:6px;">
-            Ressources, méthodes et conseils pour les élèves du lycée.
-        </div>
-
+    <div>
+        Physique-Chimie au lycée
     </div>
 
-</footer>
+    <div style="margin-top:6px;">
+        Ressources, méthodes et conseils pour les élèves du lycée.
+    </div>
 
+</div>
+```
+
+</footer>
 
 </body>
 </html>
