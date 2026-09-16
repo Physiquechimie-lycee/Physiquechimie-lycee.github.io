@@ -8,11 +8,12 @@
 <title>Physique-Chimie au lycée | Cours, méthode et conseils par un professeur agrégé</title>
 
 <meta name="description"
-   content="Aide en physique-chimie pour les élèves de lycée : Seconde, Première Spé, Terminale Spé, Grand Oral, ECE. Par un professeur agrégé en poste.">
+content="Aide en physique-chimie pour les élèves de lycée : Seconde, Première Spé, Terminale Spé, Grand Oral, ECE. Par un professeur agrégé en poste.">
 
 <meta name="robots" content="noindex, nofollow">
 
 <style>
+
 :root {
     --navy: #14273d;
     --navy-light: #1f3552;
@@ -85,34 +86,42 @@ header {
     white-space: nowrap;
 }
 
+.logo span {
+    color: var(--gold);
+}
+
+
+/* ================= MENU ================= */
+
 nav.links {
     display: flex;
-    gap: 26px;
     align-items: center;
+    gap: 7px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+nav.links::-webkit-scrollbar {
+    display: none;
 }
 
 nav.links a {
     text-decoration: none;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     color: var(--navy);
     position: relative;
     white-space: nowrap;
-    padding: 8px 0;
+    padding: 9px 13px;
+    border-radius: 8px;
+    transition: background .2s ease, color .2s ease;
 }
 
-nav.links a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 2px;
-    width: 0;
-    height: 2px;
-    background: var(--gold);
-    transition: width .2s ease;
-}
-
-nav.links a:hover::after {
-    width: 100%;
+nav.links a:hover,
+nav.links a.active {
+    background: rgba(20,39,61,0.07);
+    color: var(--navy);
 }
 
 
@@ -410,33 +419,30 @@ footer .container {
 
     .nav {
         min-height: auto;
-        padding: 12px 0 10px;
+        padding: 10px 0 7px;
         display: block;
     }
 
     .logo {
         display: block;
         font-size: 1.06rem;
-        margin-bottom: 9px;
+        margin-bottom: 8px;
     }
 
     nav.links {
-        display: flex;
-        gap: 7px;
+        width: 100%;
+        gap: 4px;
+        padding-bottom: 3px;
         overflow-x: auto;
         flex-wrap: nowrap;
-        padding-bottom: 2px;
         scrollbar-width: none;
-    }
-
-    nav.links::-webkit-scrollbar {
-        display: none;
+        -webkit-overflow-scrolling: touch;
     }
 
     nav.links a {
         flex: 0 0 auto;
         font-size: 0.82rem;
-        padding: 5px 0;
+        padding: 7px 9px;
     }
 
 
@@ -572,7 +578,7 @@ footer .container {
     }
 
     .nav {
-        padding-top: 11px;
+        padding-top: 9px;
     }
 
     .logo {
@@ -580,11 +586,12 @@ footer .container {
     }
 
     nav.links {
-        gap: 0 16px;
+        gap: 4px;
     }
 
     nav.links a {
         font-size: 0.78rem;
+        padding: 6px 8px;
     }
 
 
@@ -680,7 +687,9 @@ footer .container {
     .author-section p {
         font-size: 0.91rem;
     }
+
 }
+
 </style>
 
 </head>
@@ -688,207 +697,245 @@ footer .container {
 <body>
 
 <header>
-    <div class="container nav">
+
+```
+<div class="container nav">
 
     <a href="index.html" class="logo">
         Physique-Chimie au lycée
     </a>
 
     <nav class="links">
-        <a href="index.html">Accueil</a>
-        <a href="preparer-grand-oral.html">Grand Oral</a>
-        <a href="livre.html">Le livre</a>
-        <a href="#auteur">L'auteur</a>
+
+        <a href="index.html">
+            Accueil
+        </a>
+
+        <a href="aide_conversions.html">
+            Seconde
+        </a>
+
+        <a href="premiere.html">
+            Première
+        </a>
+
+        <a href="terminale.html">
+            Terminale
+        </a>
+
+        <a href="animations.html">
+            Animations
+        </a>
+
+        <a href="grand-oral.html">
+            Grand Oral
+        </a>
+
+        <a href="experimentation.html">
+            Expérimentation
+        </a>
+
     </nav>
 
 </div>
-
+```
 
 </header>
 
 <main>
 
-
 <!-- HERO -->
 
 <section class="hero">
 
-    <div class="container">
+```
+<div class="container">
 
-        <div class="hero-inner">
+    <div class="hero-inner">
 
-            <div class="hero-label">
-                Physique-chimie au lycée
-            </div>
-
-            <h1>
-                Physique-chimie au lycée :
-                cours, méthode et conseils
-            </h1>
-
-            <p>
-                Des ressources pour les élèves de Seconde,
-                Première Spé, Terminale Spé, ainsi que pour
-                la préparation du Grand Oral et des ECE.
-            </p>
-
-            <p class="credential">
-                Par <strong>Mathieu Tomah</strong>, professeur agrégé
-                de physique-chimie, en poste en lycée.
-            </p>
-
-            <a class="btn-gold" href="preparer-grand-oral.html">
-                Voir l'aide au Grand Oral
-            </a>
-
+        <div class="hero-label">
+            Physique-chimie au lycée
         </div>
+
+        <h1>
+            Physique-chimie au lycée :
+            cours, méthode et conseils
+        </h1>
+
+        <p>
+            Des ressources pour les élèves de Seconde,
+            Première Spé, Terminale Spé, ainsi que pour
+            la préparation du Grand Oral et des ECE.
+        </p>
+
+        <p class="credential">
+            Par <strong>Mathieu Tomah</strong>, professeur agrégé
+            de physique-chimie, en poste en lycée.
+        </p>
+
+        <a class="btn-gold" href="preparer-grand-oral.html">
+            Voir l'aide au Grand Oral
+        </a>
 
     </div>
 
-</section>
+</div>
+```
 
+</section>
 
 <!-- AIDE PAR NIVEAU -->
 
 <section class="section-cream">
 
-    <div class="container">
+```
+<div class="container">
 
-        <div class="section-title">
+    <div class="section-title">
 
-            <div class="section-kicker">
-                Ressources
-            </div>
-
-            <h2>De l'aide à chaque niveau</h2>
-
-            <p>
-                Une page dédiée par niveau, avec des explications,
-                des méthodes et des conseils. La collection
-                s'étoffera progressivement.
-            </p>
-
+        <div class="section-kicker">
+            Ressources
         </div>
 
+        <h2>
+            De l'aide à chaque niveau
+        </h2>
 
-        <div class="levels">
-
-            <div class="level-row available">
-
-                <div class="level-name">
-                    Grand Oral
-                </div>
-
-                <div class="level-desc">
-                    Choisir sa problématique, construire son plan,
-                    préparer l'oral et les questions du jury.
-                </div>
-
-                <div class="status">
-                    <a href="preparer-grand-oral.html">
-                        Voir l'aide
-                    </a>
-                </div>
-
-            </div>
-
-
-            <div class="level-row">
-
-                <div class="level-name">
-                    Seconde
-                </div>
-
-                <div class="level-desc">
-                    Méthodes et pièges à éviter en physique-chimie — Seconde
-                </div>
-
-                <div class="status soon">
-                    Bientôt
-                </div>
-
-            </div>
-
-
-            <div class="level-row">
-
-                <div class="level-name">
-                    Première Spé SPC
-                </div>
-
-                <div class="level-desc">
-                    Méthodes et pièges à éviter en physique-chimie — Première
-                </div>
-
-                <div class="status soon">
-                    Bientôt
-                </div>
-
-            </div>
-
-
-            <div class="level-row">
-
-                <div class="level-name">
-                    Terminale Spé SPC
-                </div>
-
-                <div class="level-desc">
-                    Fiches de cours et démonstrations en physique-chimie — Terminale
-                </div>
-
-                <div class="status soon">
-                    Bientôt
-                </div>
-
-            </div>
-
-
-            <div class="level-row">
-
-                <div class="level-name">
-                    Travaux pratiques
-                </div>
-
-                <div class="level-desc">
-                    Techniques expérimentales au lycée — De la Seconde à la Terminale, réussir son ECE
-                </div>
-
-                <div class="status soon">
-                    Bientôt
-                </div>
-
-            </div>
-
-        </div>
+        <p>
+            Une page dédiée par niveau, avec des explications,
+            des méthodes et des conseils. La collection
+            s'étoffera progressivement.
+        </p>
 
     </div>
 
-</section>
 
+    <div class="levels">
+
+
+        <div class="level-row available">
+
+            <div class="level-name">
+                Grand Oral
+            </div>
+
+            <div class="level-desc">
+                Choisir sa problématique, construire son plan,
+                préparer l'oral et les questions du jury.
+            </div>
+
+            <div class="status">
+
+                <a href="preparer-grand-oral.html">
+                    Voir l'aide
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="level-row">
+
+            <div class="level-name">
+                Seconde
+            </div>
+
+            <div class="level-desc">
+                Méthodes et pièges à éviter en physique-chimie — Seconde
+            </div>
+
+            <div class="status soon">
+                Bientôt
+            </div>
+
+        </div>
+
+
+        <div class="level-row">
+
+            <div class="level-name">
+                Première Spé SPC
+            </div>
+
+            <div class="level-desc">
+                Méthodes et pièges à éviter en physique-chimie — Première
+            </div>
+
+            <div class="status soon">
+                Bientôt
+            </div>
+
+        </div>
+
+
+        <div class="level-row">
+
+            <div class="level-name">
+                Terminale Spé SPC
+            </div>
+
+            <div class="level-desc">
+                Fiches de cours et démonstrations en physique-chimie — Terminale
+            </div>
+
+            <div class="status soon">
+                Bientôt
+            </div>
+
+        </div>
+
+
+        <div class="level-row">
+
+            <div class="level-name">
+                Travaux pratiques
+            </div>
+
+            <div class="level-desc">
+                Techniques expérimentales au lycée — De la Seconde à la Terminale, réussir son ECE
+            </div>
+
+            <div class="status soon">
+                Bientôt
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+```
+
+</section>
 
 <!-- AUTEUR -->
 
 <section class="author-section" id="auteur">
 
-    <div class="container author-grid">
+```
+<div class="container author-grid">
 
-        <h2>L'auteur</h2>
+    <h2>
+        L'auteur
+    </h2>
 
-        <p>
-            Mathieu Tomah est professeur agrégé de physique-chimie,
-            en poste en lycée. Il enseigne au quotidien à des élèves
-            de Seconde, Première et Terminale, et accompagne chaque
-            année des candidats au Grand Oral.
-        </p>
+    <p>
+        Mathieu Tomah est professeur agrégé de physique-chimie,
+        en poste en lycée. Il enseigne au quotidien à des élèves
+        de Seconde, Première et Terminale, et accompagne chaque
+        année des candidats au Grand Oral.
+    </p>
 
-        <p>
-            Ce site rassemble les ressources et conseils nés de cette
-            expérience de terrain : ce qui fonctionne réellement pour
-            préparer les épreuves, du cours aux examens.
-        </p>
+    <p>
+        Ce site rassemble les ressources et conseils nés de cette
+        expérience de terrain : ce qui fonctionne réellement pour
+        préparer les épreuves, du cours aux examens.
+    </p>
 
-    </div>
+</div>
+```
 
 </section>
 
@@ -898,13 +945,15 @@ footer .container {
 
 <div class="container">
 
-    <div>
-        Physique-Chimie au lycée
-    </div>
+```
+<div>
+    Physique-Chimie au lycée
+</div>
 
-    <div style="margin-top:6px;">
-        Ressources, méthodes et conseils pour les élèves du lycée.
-    </div>
+<div style="margin-top:6px;">
+    Ressources, méthodes et conseils pour les élèves du lycée.
+</div>
+```
 
 </div>
 
