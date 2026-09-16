@@ -19,6 +19,7 @@
     --muted: #6b7280;
     --line: #e3ddd0;
     --soft: #f3f1eb;
+    --red-ray: #c62828;
     --green: #39724a;
     --red: #9b2c2c;
     --shadow: 0 12px 30px rgba(20,39,61,0.10);
@@ -180,7 +181,7 @@ button {
 }
 
 /* =========================
-   ZONE D'ANIMATION
+   SIMULATION
    ========================= */
 
 .simulation {
@@ -241,37 +242,28 @@ svg {
     stroke-width: 1;
 }
 
-.lens {
+/* Lentille : symbole optique */
+.lens-axis {
     stroke: var(--navy);
-    stroke-width: 4;
-    fill: rgba(176,141,43,0.12);
+    stroke-width: 3;
 }
 
+.lens-arrow {
+    stroke: var(--navy);
+    stroke-width: 3;
+    fill: none;
+}
+
+.lens-handle {
+    fill: var(--gold);
+    stroke: var(--white);
+    stroke-width: 2;
+    cursor: ew-resize;
+}
+
+/* Foyers */
 .focus {
     fill: var(--gold);
-}
-
-.object {
-    stroke: var(--navy);
-    stroke-width: 4;
-    cursor: grab;
-}
-
-.image {
-    stroke: var(--gold);
-    stroke-width: 4;
-    cursor: default;
-}
-
-.ray {
-    fill: none;
-    stroke: #c58b21;
-    stroke-width: 2.2;
-}
-
-.ray.secondary {
-    stroke: #8c9aaa;
-    stroke-width: 1.8;
 }
 
 .label {
@@ -285,16 +277,48 @@ svg {
     font-size: 11px;
 }
 
+/* Rayons : rouge uniquement */
+.ray {
+    fill: none;
+    stroke: var(--red-ray);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+}
+
+.ray-arrow {
+    fill: var(--red-ray);
+}
+
+/* Objet et image */
+.object,
+.image {
+    fill: none;
+    stroke-width: 4;
+    stroke-linecap: round;
+}
+
+.object {
+    stroke: var(--navy);
+    cursor: grab;
+}
+
+.image {
+    stroke: var(--gold);
+}
+
+.object-arrow {
+    fill: var(--navy);
+}
+
+.image-arrow {
+    fill: var(--gold);
+}
+
 .drag-point {
     fill: var(--gold);
     stroke: var(--white);
     stroke-width: 2;
     cursor: grab;
-}
-
-.lens-handle {
-    fill: var(--navy);
-    cursor: ew-resize;
 }
 
 /* =========================
@@ -330,7 +354,7 @@ svg {
 }
 
 /* =========================
-   EXPLICATION
+   FORMULES
    ========================= */
 
 .formulas {
@@ -415,6 +439,10 @@ svg {
     .sim-header {
         font-size: 0.82rem;
     }
+
+    .label {
+        font-size: 12px;
+    }
 }
 </style>
 
@@ -428,8 +456,7 @@ svg {
 <h1>Lentille mince</h1>
 
 <p class="intro">
-    Déplace l'objet ou la lentille, modifie la distance focale
-    et observe directement la formation de l'image.
+    Déplace l'objet, modifie la lentille et observe la formation de l'image.
 </p>
 
 
@@ -463,7 +490,6 @@ svg {
             </div>
 
         </div>
-
 
         <div class="lens-type">
 
@@ -576,7 +602,7 @@ svg {
 
 
 <!-- =========================
-     SIMULATION
+     ANIMATION
      ========================= -->
 
 <div class="simulation">
@@ -588,7 +614,7 @@ svg {
         </strong>
 
         <span>
-            Fais glisser les points jaunes
+            Déplace les éléments
         </span>
 
     </div>
@@ -601,8 +627,67 @@ svg {
             viewBox="0 0 1000 500"
             preserveAspectRatio="xMidYMid meet">
 
+            <defs>
+
+                <!-- Flèche de lumière -->
+                <marker
+                    id="arrowRay"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="7"
+                    markerHeight="7"
+                    orient="auto-start-reverse">
+
+                    <path
+                        d="M 0 0 L 10 5 L 0 10 z"
+                        fill="#c62828">
+                    </path>
+
+                </marker>
+
+
+                <!-- Flèche objet -->
+                <marker
+                    id="arrowObject"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="8"
+                    markerHeight="8"
+                    orient="auto">
+
+                    <path
+                        d="M 0 0 L 10 5 L 0 10 z"
+                        fill="#14273d">
+                    </path>
+
+                </marker>
+
+
+                <!-- Flèche image -->
+                <marker
+                    id="arrowImage"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="8"
+                    markerHeight="8"
+                    orient="auto">
+
+                    <path
+                        d="M 0 0 L 10 5 L 0 10 z"
+                        fill="#b08d2b">
+                    </path>
+
+                </marker>
+
+            </defs>
+
+
             <!-- grille -->
             <g id="grid"></g>
+
 
             <!-- axe optique -->
             <line
@@ -613,14 +698,51 @@ svg {
                 class="axis"
             />
 
-            <!-- lentille -->
-            <path
-                id="lens"
-                class="lens"
-                d=""
-            />
+
+            <!-- ======================
+                 LENTILLE
+                 ====================== -->
+
+            <g id="lensGroup">
+
+                <!-- segment vertical -->
+                <line
+                    id="lensAxis"
+                    class="lens-axis"
+                    x1="500"
+                    y1="145"
+                    x2="500"
+                    y2="355"
+                />
+
+                <!-- flèche supérieure -->
+                <path
+                    id="lensArrowTop"
+                    class="lens-arrow"
+                    d=""
+                />
+
+                <!-- flèche inférieure -->
+                <path
+                    id="lensArrowBottom"
+                    class="lens-arrow"
+                    d=""
+                />
+
+                <!-- poignée -->
+                <circle
+                    id="lensHandle"
+                    class="lens-handle"
+                    cx="500"
+                    cy="250"
+                    r="7"
+                />
+
+            </g>
+
 
             <!-- foyers -->
+
             <circle
                 id="F"
                 class="focus"
@@ -633,7 +755,7 @@ svg {
                 r="6"
             />
 
-            <!-- labels foyers -->
+
             <text
                 id="FLabel"
                 class="label">
@@ -646,19 +768,19 @@ svg {
                 F'
             </text>
 
+
             <!-- rayons -->
             <g id="rays"></g>
 
-            <!-- objet -->
+
+            <!-- ======================
+                 OBJET
+                 ====================== -->
+
             <line
                 id="object"
                 class="object"
-            />
-
-            <circle
-                id="objectHandle"
-                class="drag-point"
-                r="7"
+                marker-end="url(#arrowObject)"
             />
 
             <text
@@ -667,10 +789,15 @@ svg {
                 AB
             </text>
 
-            <!-- image -->
+
+            <!-- ======================
+                 IMAGE
+                 ====================== -->
+
             <line
                 id="image"
                 class="image"
+                marker-end="url(#arrowImage)"
             />
 
             <text
@@ -679,14 +806,16 @@ svg {
                 A'B'
             </text>
 
-            <!-- lentille -->
+
+            <!-- label lentille -->
             <text
                 id="lensLabel"
                 class="label">
                 O
             </text>
 
-            <!-- informations -->
+
+            <!-- valeurs -->
             <g id="sceneValues"></g>
 
         </svg>
@@ -704,8 +833,9 @@ svg {
 
     <div class="info-card">
         <span class="label-info">
-            Distance focale
+            Distance focale f'
         </span>
+
         <span
             class="number"
             id="infoF">
@@ -713,10 +843,12 @@ svg {
         </span>
     </div>
 
+
     <div class="info-card">
         <span class="label-info">
-            Vergence
+            Vergence C
         </span>
+
         <span
             class="number"
             id="infoC">
@@ -724,10 +856,12 @@ svg {
         </span>
     </div>
 
+
     <div class="info-card">
         <span class="label-info">
             OA
         </span>
+
         <span
             class="number"
             id="infoOA">
@@ -735,10 +869,12 @@ svg {
         </span>
     </div>
 
+
     <div class="info-card">
         <span class="label-info">
             OA'
         </span>
+
         <span
             class="number"
             id="infoOAp">
@@ -746,10 +882,12 @@ svg {
         </span>
     </div>
 
+
     <div class="info-card">
         <span class="label-info">
             AB
         </span>
+
         <span
             class="number"
             id="infoAB">
@@ -757,10 +895,12 @@ svg {
         </span>
     </div>
 
+
     <div class="info-card">
         <span class="label-info">
             A'B'
         </span>
+
         <span
             class="number"
             id="infoABp">
@@ -768,10 +908,12 @@ svg {
         </span>
     </div>
 
+
     <div class="info-card">
         <span class="label-info">
             Grandissement γ
         </span>
+
         <span
             class="number"
             id="infoGamma">
@@ -779,10 +921,12 @@ svg {
         </span>
     </div>
 
+
     <div class="info-card">
         <span class="label-info">
             Nature de l'image
         </span>
+
         <span
             class="number"
             id="infoNature">
@@ -800,24 +944,41 @@ svg {
 <div class="formulas">
 
     <div class="formula">
-        <strong>Relation de conjugaison</strong>
+
+        <strong>
+            Relation de conjugaison
+        </strong>
+
         <span>
             1/OA' − 1/OA = 1/f'
         </span>
+
     </div>
 
+
     <div class="formula">
-        <strong>Grandissement</strong>
+
+        <strong>
+            Grandissement
+        </strong>
+
         <span>
             γ = A'B' / AB = OA' / OA
         </span>
+
     </div>
 
+
     <div class="formula">
-        <strong>Vergence</strong>
+
+        <strong>
+            Vergence
+        </strong>
+
         <span>
-            C = 1/f' &nbsp; avec f' en m
+            C = 1/f' avec f' en m
         </span>
+
     </div>
 
 </div>
@@ -849,17 +1010,23 @@ const objectPosValue =
 const objectHeightValue =
     document.getElementById("objectHeightValue");
 
-const lens =
-    document.getElementById("lens");
+const lensAxis =
+    document.getElementById("lensAxis");
+
+const lensArrowTop =
+    document.getElementById("lensArrowTop");
+
+const lensArrowBottom =
+    document.getElementById("lensArrowBottom");
+
+const lensHandle =
+    document.getElementById("lensHandle");
 
 const object =
     document.getElementById("object");
 
 const image =
     document.getElementById("image");
-
-const objectHandle =
-    document.getElementById("objectHandle");
 
 const F =
     document.getElementById("F");
@@ -908,8 +1075,7 @@ let lensX = 500;
 
 
 /*
- * Echelle graphique :
- * 1 cm = 6 px
+ * Echelle graphique
  */
 
 const SCALE = 6;
@@ -937,7 +1103,8 @@ function signed(value, decimals = 1) {
         return "∞";
     }
 
-    const sign = value >= 0 ? "+" : "";
+    const sign =
+        value >= 0 ? "+" : "";
 
     return sign + fmt(value, decimals);
 }
@@ -964,17 +1131,8 @@ function calculate() {
         Number(objectHeightSlider.value);
 
 
-    /*
-     * Relation de conjugaison :
-     *
-     * 1/OA' - 1/OA = 1/f'
-     *
-     * donc
-     *
-     * OA' = f' × OA / (OA + f')
-     */
-
     let OAp;
+
 
     if (infinityMode) {
 
@@ -989,11 +1147,8 @@ function calculate() {
     }
 
 
-    /*
-     * Grandissement
-     */
-
     let gamma;
+
 
     if (infinityMode) {
 
@@ -1023,7 +1178,7 @@ function calculate() {
 
 
 /* =========================================================
-   DESSIN DE LA GRILLE
+   GRILLE
    ========================================================= */
 
 function drawGrid() {
@@ -1034,7 +1189,12 @@ function drawGrid() {
         return;
     }
 
-    for (let x = 20; x <= 980; x += 30) {
+
+    for (
+        let x = 20;
+        x <= 980;
+        x += 30
+    ) {
 
         const line =
             document.createElementNS(
@@ -1046,14 +1206,21 @@ function drawGrid() {
         line.setAttribute("x2", x);
         line.setAttribute("y1", 80);
         line.setAttribute("y2", 430);
-
-        line.setAttribute("class", "grid-line");
+        line.setAttribute(
+            "class",
+            "grid-line"
+        );
 
         grid.appendChild(line);
+
     }
 
 
-    for (let y = 100; y <= 400; y += 30) {
+    for (
+        let y = 100;
+        y <= 400;
+        y += 30
+    ) {
 
         const line =
             document.createElementNS(
@@ -1065,54 +1232,97 @@ function drawGrid() {
         line.setAttribute("x2", 980);
         line.setAttribute("y1", y);
         line.setAttribute("y2", y);
-
-        line.setAttribute("class", "grid-line");
+        line.setAttribute(
+            "class",
+            "grid-line"
+        );
 
         grid.appendChild(line);
+
     }
 
 }
 
 
 /* =========================================================
-   DESSIN DE LA LENTILLE
+   SYMBOLE DE LA LENTILLE
    ========================================================= */
 
-function drawLens(f) {
+function drawLens() {
 
     /*
-     * Lentille convergente :
-     * forme biconvexe stylisée.
-     *
-     * Divergente :
-     * forme biconcave stylisée.
+     * Segment vertical
      */
 
-    let path;
+    lensAxis.setAttribute(
+        "x1",
+        lensX
+    );
+
+    lensAxis.setAttribute(
+        "x2",
+        lensX
+    );
+
+
+    /*
+     * Convergente :
+     *
+     *       >
+     *       |
+     *       <
+     *
+     * Les flèches pointent vers l'extérieur.
+     *
+     * Divergente :
+     *
+     *       <
+     *       |
+     *       >
+     *
+     * Les flèches pointent vers l'intérieur.
+     */
 
     if (converging) {
 
-        path =
-            `M ${lensX - 9} 105
-             Q ${lensX - 27} 250 ${lensX - 9} 395
-             L ${lensX + 9} 395
-             Q ${lensX + 27} 250 ${lensX + 9} 105 Z`;
+        lensArrowTop.setAttribute(
+            "d",
+            `M ${lensX - 15} 145
+             L ${lensX + 15} 160`
+        );
+
+        lensArrowBottom.setAttribute(
+            "d",
+            `M ${lensX - 15} 355
+             L ${lensX + 15} 340`
+        );
 
     } else {
 
-        path =
-            `M ${lensX - 9} 105
-             Q ${lensX + 8} 250 ${lensX - 9} 395
-             L ${lensX + 9} 395
-             Q ${lensX - 8} 250 ${lensX + 9} 105 Z`;
+        lensArrowTop.setAttribute(
+            "d",
+            `M ${lensX + 15} 145
+             L ${lensX - 15} 160`
+        );
+
+        lensArrowBottom.setAttribute(
+            "d",
+            `M ${lensX + 15} 355
+             L ${lensX - 15} 340`
+        );
 
     }
 
-    lens.setAttribute("d", path);
+
+    lensHandle.setAttribute(
+        "cx",
+        lensX
+    );
+
 
     lensLabel.setAttribute(
         "x",
-        lensX + 12
+        lensX + 13
     );
 
     lensLabel.setAttribute(
@@ -1124,7 +1334,7 @@ function drawLens(f) {
 
 
 /* =========================================================
-   DESSIN DES FOYERS
+   FOYERS
    ========================================================= */
 
 function drawFoci(f) {
@@ -1147,17 +1357,32 @@ function drawFoci(f) {
     Fp.setAttribute("cy", 250);
 
 
-    FLabel.setAttribute("x", xF - 5);
-    FLabel.setAttribute("y", 275);
+    FLabel.setAttribute(
+        "x",
+        xF - 5
+    );
 
-    FpLabel.setAttribute("x", xFp - 5);
-    FpLabel.setAttribute("y", 275);
+    FLabel.setAttribute(
+        "y",
+        275
+    );
+
+
+    FpLabel.setAttribute(
+        "x",
+        xFp - 5
+    );
+
+    FpLabel.setAttribute(
+        "y",
+        275
+    );
 
 }
 
 
 /* =========================================================
-   DESSIN OBJET + IMAGE
+   OBJET ET IMAGE
    ========================================================= */
 
 function drawObjects(data) {
@@ -1172,32 +1397,39 @@ function drawObjects(data) {
         250 - data.AB * 5;
 
 
-    object.setAttribute("x1", objectX);
-    object.setAttribute("y1", 250);
+    /*
+     * Objet
+     */
 
-    object.setAttribute("x2", objectX);
-    object.setAttribute("y2", objectTop);
-
-
-    objectHandle.setAttribute(
-        "cx",
+    object.setAttribute(
+        "x1",
         objectX
     );
 
-    objectHandle.setAttribute(
-        "cy",
+    object.setAttribute(
+        "y1",
+        250
+    );
+
+    object.setAttribute(
+        "x2",
+        objectX
+    );
+
+    object.setAttribute(
+        "y2",
         objectTop
     );
 
 
     objectLabel.setAttribute(
         "x",
-        objectX - 12
+        objectX - 13
     );
 
     objectLabel.setAttribute(
         "y",
-        objectTop - 10
+        objectTop - 12
     );
 
 
@@ -1206,6 +1438,7 @@ function drawObjects(data) {
      */
 
     let imageX;
+
 
     if (Number.isFinite(data.OAp)) {
 
@@ -1222,42 +1455,60 @@ function drawObjects(data) {
 
 
     let imageTop =
-        250 - data.ABp * 5;
+        250 -
+        data.ABp * 5;
 
 
     /*
-     * Limite graphique
+     * Limites graphiques
      */
 
     imageTop =
         Math.max(
             70,
-            Math.min(430, imageTop)
+            Math.min(
+                430,
+                imageTop
+            )
         );
 
 
-    image.setAttribute("x1", imageX);
-    image.setAttribute("y1", 250);
+    image.setAttribute(
+        "x1",
+        imageX
+    );
 
-    image.setAttribute("x2", imageX);
-    image.setAttribute("y2", imageTop);
+    image.setAttribute(
+        "y1",
+        250
+    );
+
+    image.setAttribute(
+        "x2",
+        imageX
+    );
+
+    image.setAttribute(
+        "y2",
+        imageTop
+    );
 
 
     imageLabel.setAttribute(
         "x",
-        imageX + 8
+        imageX + 10
     );
 
     imageLabel.setAttribute(
         "y",
-        imageTop - 8
+        imageTop - 10
     );
 
 }
 
 
 /* =========================================================
-   RAYONS PRINCIPAUX
+   RAYONS ROUGES
    ========================================================= */
 
 function drawRays(data) {
@@ -1274,15 +1525,18 @@ function drawRays(data) {
             ? 55
             : lensX + data.OA * SCALE;
 
+
     const objectY =
         250 - data.AB * 5;
 
 
     const imageX =
         lensX +
-        (Number.isFinite(data.OAp)
-            ? data.OAp * SCALE
-            : 250);
+        (
+            Number.isFinite(data.OAp)
+                ? data.OAp * SCALE
+                : 250
+        );
 
 
     const imageY =
@@ -1291,91 +1545,85 @@ function drawRays(data) {
 
 
     /*
-     * Rayon parallèle à l'axe :
+     * Rayon parallèle à l'axe.
      *
-     * après la lentille, il passe par F'
+     * Pour une convergente :
+     * il passe ensuite par F'.
      */
 
-    addLine(
+    addRay(
         objectX,
         objectY,
         lensX,
         objectY,
-        "ray"
+        true
     );
 
 
     if (converging) {
 
-        addLine(
+        addRay(
             lensX,
             objectY,
             imageX,
             imageY,
-            "ray"
+            true
         );
 
     } else {
 
         /*
-         * Pour une divergente :
-         * le rayon sort en divergeant
-         * comme s'il provenait de F.
+         * Lentille divergente :
+         * prolongement apparent vers F.
          */
 
         const fX =
             lensX -
             Math.abs(data.f) * SCALE;
 
+
         const slope =
             (objectY - 250) /
             (lensX - fX);
 
-        const endX =
-            950;
+
+        const endX = 950;
 
         const endY =
             objectY +
             slope *
             (endX - lensX);
 
-        addLine(
+
+        addRay(
             lensX,
             objectY,
             endX,
             endY,
-            "ray"
+            true
         );
 
     }
 
 
     /*
-     * Rayon passant par O
+     * Rayon passant par O.
+     *
+     * Il n'est pas dévié.
      */
 
-    addLine(
+    addRay(
         objectX,
         objectY,
-        lensX,
-        250 + (objectY - 250) *
-        ((lensX - objectX) /
-        (lensX - objectX)),
-        "ray secondary"
-    );
-
-    addLine(
-        lensX,
-        250,
         imageX,
         imageY,
-        "ray secondary"
+        true
     );
 
 
     /*
-     * Rayon passant par F :
-     * parallèle après la lentille
+     * Rayon passant par F pour une
+     * lentille convergente.
      */
 
     if (converging) {
@@ -1384,20 +1632,22 @@ function drawRays(data) {
             lensX -
             Math.abs(data.f) * SCALE;
 
-        addLine(
+
+        addRay(
             objectX,
             objectY,
             fX,
             250,
-            "ray secondary"
+            true
         );
 
-        addLine(
+
+        addRay(
             lensX,
             250,
             950,
             250,
-            "ray secondary"
+            true
         );
 
     }
@@ -1406,15 +1656,15 @@ function drawRays(data) {
 
 
 /* =========================================================
-   AJOUT LIGNE SVG
+   AJOUT D'UN RAYON
    ========================================================= */
 
-function addLine(
+function addRay(
     x1,
     y1,
     x2,
     y2,
-    className
+    withArrow
 ) {
 
     const line =
@@ -1423,16 +1673,43 @@ function addLine(
             "line"
         );
 
-    line.setAttribute("x1", x1);
-    line.setAttribute("y1", y1);
 
-    line.setAttribute("x2", x2);
-    line.setAttribute("y2", y2);
+    line.setAttribute(
+        "x1",
+        x1
+    );
+
+    line.setAttribute(
+        "y1",
+        y1
+    );
+
+    line.setAttribute(
+        "x2",
+        x2
+    );
+
+    line.setAttribute(
+        "y2",
+        y2
+    );
+
 
     line.setAttribute(
         "class",
-        className
+        "ray"
     );
+
+
+    if (withArrow) {
+
+        line.setAttribute(
+            "marker-end",
+            "url(#arrowRay)"
+        );
+
+    }
+
 
     rays.appendChild(line);
 
@@ -1459,8 +1736,9 @@ function updateInfo(data) {
         fmt(data.AB) + " cm";
 
 
-    document.getElementById("infoF")
-        .textContent =
+    document.getElementById(
+        "infoF"
+    ).textContent =
         signed(data.f) + " cm";
 
 
@@ -1468,35 +1746,41 @@ function updateInfo(data) {
         1 / (data.f / 100);
 
 
-    document.getElementById("infoC")
-        .textContent =
+    document.getElementById(
+        "infoC"
+    ).textContent =
         signed(vergence, 2) + " δ";
 
 
-    document.getElementById("infoOA")
-        .textContent =
+    document.getElementById(
+        "infoOA"
+    ).textContent =
         infinityMode
             ? "−∞"
             : signed(data.OA) + " cm";
 
 
-    document.getElementById("infoOAp")
-        .textContent =
+    document.getElementById(
+        "infoOAp"
+    ).textContent =
         signed(data.OAp) + " cm";
 
 
-    document.getElementById("infoAB")
-        .textContent =
+    document.getElementById(
+        "infoAB"
+    ).textContent =
         signed(data.AB) + " cm";
 
 
-    document.getElementById("infoABp")
-        .textContent =
+    document.getElementById(
+        "infoABp"
+    ).textContent =
         signed(data.ABp) + " cm";
 
 
-    document.getElementById("infoGamma")
-        .textContent =
+    document.getElementById(
+        "infoGamma"
+    ).textContent =
         Number.isFinite(data.gamma)
             ? signed(data.gamma, 2)
             : "0";
@@ -1509,30 +1793,35 @@ function updateInfo(data) {
 
         nature = "À l'infini";
 
-    } else if (data.OAp > 0) {
+    }
+    else if (data.OAp > 0) {
 
-        nature = data.gamma < 0
-            ? "Réelle, renversée"
-            : "Réelle, droite";
+        nature =
+            data.gamma < 0
+                ? "Réelle, renversée"
+                : "Réelle, droite";
 
-    } else {
+    }
+    else {
 
-        nature = data.gamma < 0
-            ? "Virtuelle, renversée"
-            : "Virtuelle, droite";
+        nature =
+            data.gamma < 0
+                ? "Virtuelle, renversée"
+                : "Virtuelle, droite";
 
     }
 
 
-    document.getElementById("infoNature")
-        .textContent =
+    document.getElementById(
+        "infoNature"
+    ).textContent =
         nature;
 
 }
 
 
 /* =========================================================
-   AFFICHAGE DES VALEURS DANS LE DESSIN
+   VALEURS DANS L'ANIMATION
    ========================================================= */
 
 function drawSceneValues(data) {
@@ -1561,7 +1850,10 @@ function drawSceneValues(data) {
 
         `OA' = ${signed(data.OAp)} cm`,
 
-        `γ = ${signed(data.gamma, 2)}`
+        `γ = ${signed(
+            data.gamma,
+            2
+        )}`
 
     ];
 
@@ -1574,6 +1866,7 @@ function drawSceneValues(data) {
                     "http://www.w3.org/2000/svg",
                     "text"
                 );
+
 
             t.setAttribute(
                 "x",
@@ -1590,7 +1883,10 @@ function drawSceneValues(data) {
                 "small-label"
             );
 
-            t.textContent = text;
+
+            t.textContent =
+                text;
+
 
             sceneValues.appendChild(t);
 
@@ -1601,7 +1897,7 @@ function drawSceneValues(data) {
 
 
 /* =========================================================
-   MISE A JOUR COMPLETE
+   MISE A JOUR
    ========================================================= */
 
 function update() {
@@ -1612,7 +1908,7 @@ function update() {
 
     drawGrid();
 
-    drawLens(data.f);
+    drawLens();
 
     drawFoci(data.f);
 
@@ -1655,187 +1951,203 @@ objectHeightSlider.addEventListener(
 );
 
 
-/*
- * Type de lentille
- */
+/* =========================
+   TYPE DE LENTILLE
+   ========================= */
 
-document.getElementById("convBtn")
-    .addEventListener(
-        "click",
-        () => {
+document.getElementById(
+    "convBtn"
+).addEventListener(
+    "click",
+    () => {
 
-            converging = true;
+        converging = true;
 
-            document
-                .getElementById("convBtn")
-                .classList.add("active");
+        document.getElementById(
+            "convBtn"
+        ).classList.add("active");
 
-            document
-                .getElementById("divBtn")
-                .classList.remove("active");
+        document.getElementById(
+            "divBtn"
+        ).classList.remove("active");
 
-            update();
+        update();
 
-        }
-    );
-
-
-document.getElementById("divBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            converging = false;
-
-            document
-                .getElementById("divBtn")
-                .classList.add("active");
-
-            document
-                .getElementById("convBtn")
-                .classList.remove("active");
-
-            update();
-
-        }
-    );
+    }
+);
 
 
-/*
- * Objet à l'infini
- */
+document.getElementById(
+    "divBtn"
+).addEventListener(
+    "click",
+    () => {
 
-document.getElementById("infinityBtn")
-    .addEventListener(
-        "click",
-        () => {
+        converging = false;
 
-            infinityMode = !infinityMode;
+        document.getElementById(
+            "divBtn"
+        ).classList.add("active");
 
-            document.getElementById(
-                "infinityBtn"
-            ).textContent =
-                infinityMode
-                    ? "Faire revenir l'objet"
-                    : "Objet à l'infini";
+        document.getElementById(
+            "convBtn"
+        ).classList.remove("active");
 
-            update();
+        update();
 
-        }
-    );
+    }
+);
 
 
-/*
- * Grille
- */
+/* =========================
+   OBJET A L'INFINI
+   ========================= */
 
-document.getElementById("gridBtn")
-    .addEventListener(
-        "click",
-        () => {
+document.getElementById(
+    "infinityBtn"
+).addEventListener(
+    "click",
+    () => {
 
-            showGrid = !showGrid;
-
-            update();
-
-        }
-    );
+        infinityMode =
+            !infinityMode;
 
 
-/*
- * Rayons
- */
-
-document.getElementById("raysBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            showRays = !showRays;
-
-            update();
-
-        }
-    );
+        document.getElementById(
+            "infinityBtn"
+        ).textContent =
+            infinityMode
+                ? "Faire revenir l'objet"
+                : "Objet à l'infini";
 
 
-/*
- * Valeurs
- */
+        update();
 
-document.getElementById("valuesBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            showValues = !showValues;
-
-            update();
-
-        }
-    );
+    }
+);
 
 
-/*
- * Réinitialisation
- */
+/* =========================
+   GRILLE
+   ========================= */
 
-document.getElementById("resetBtn")
-    .addEventListener(
-        "click",
-        () => {
+document.getElementById(
+    "gridBtn"
+).addEventListener(
+    "click",
+    () => {
 
-            focalSlider.value = 15;
+        showGrid =
+            !showGrid;
 
-            objectPosSlider.value = -30;
+        update();
 
-            objectHeightSlider.value = 10;
-
-            converging = true;
-
-            infinityMode = false;
-
-            showGrid = false;
-
-            showRays = true;
-
-            showValues = true;
+    }
+);
 
 
-            document
-                .getElementById("convBtn")
-                .classList.add("active");
+/* =========================
+   RAYONS
+   ========================= */
 
-            document
-                .getElementById("divBtn")
-                .classList.remove("active");
+document.getElementById(
+    "raysBtn"
+).addEventListener(
+    "click",
+    () => {
+
+        showRays =
+            !showRays;
+
+        update();
+
+    }
+);
 
 
-            document.getElementById(
-                "infinityBtn"
-            ).textContent =
-                "Objet à l'infini";
+/* =========================
+   VALEURS
+   ========================= */
+
+document.getElementById(
+    "valuesBtn"
+).addEventListener(
+    "click",
+    () => {
+
+        showValues =
+            !showValues;
+
+        update();
+
+    }
+);
 
 
-            update();
+/* =========================
+   RESET
+   ========================= */
 
-        }
-    );
+document.getElementById(
+    "resetBtn"
+).addEventListener(
+    "click",
+    () => {
+
+        focalSlider.value = 15;
+
+        objectPosSlider.value = -30;
+
+        objectHeightSlider.value = 10;
+
+        converging = true;
+
+        infinityMode = false;
+
+        showGrid = false;
+
+        showRays = true;
+
+        showValues = true;
+
+        lensX = 500;
+
+
+        document.getElementById(
+            "convBtn"
+        ).classList.add("active");
+
+        document.getElementById(
+            "divBtn"
+        ).classList.remove("active");
+
+
+        document.getElementById(
+            "infinityBtn"
+        ).textContent =
+            "Objet à l'infini";
+
+
+        update();
+
+    }
+);
 
 
 /* =========================================================
-   GLISSER-DEPLACER L'OBJET
+   DEPLACEMENT DE L'OBJET
    ========================================================= */
 
 let draggingObject = false;
 
-objectHandle.addEventListener(
+
+object.addEventListener(
     "pointerdown",
     event => {
 
         draggingObject = true;
 
-        objectHandle.setPointerCapture(
+        object.setPointerCapture(
             event.pointerId
         );
 
@@ -1845,7 +2157,7 @@ objectHandle.addEventListener(
 );
 
 
-objectHandle.addEventListener(
+object.addEventListener(
     "pointermove",
     event => {
 
@@ -1855,15 +2167,21 @@ objectHandle.addEventListener(
 
 
         const svg =
-            document.getElementById("scene");
+            document.getElementById(
+                "scene"
+            );
 
         const rect =
             svg.getBoundingClientRect();
 
 
         const x =
-            (event.clientX - rect.left)
-            / rect.width * 1000;
+            (
+                event.clientX -
+                rect.left
+            )
+            / rect.width
+            * 1000;
 
 
         let OA =
@@ -1873,7 +2191,10 @@ objectHandle.addEventListener(
         OA =
             Math.max(
                 -60,
-                Math.min(-5, OA)
+                Math.min(
+                    -5,
+                    OA
+                )
             );
 
 
@@ -1887,7 +2208,7 @@ objectHandle.addEventListener(
 );
 
 
-objectHandle.addEventListener(
+object.addEventListener(
     "pointerup",
     () => {
 
@@ -1898,74 +2219,38 @@ objectHandle.addEventListener(
 
 
 /* =========================================================
-   GLISSER-DEPLACER LE SOMMET DE L'OBJET
+   DEPLACEMENT VERTICAL DE L'OBJET
    ========================================================= */
-
-object.addEventListener(
-    "pointerdown",
-    event => {
-
-        object.setPointerCapture(
-            event.pointerId
-        );
-
-    }
-);
-
 
 object.addEventListener(
     "pointermove",
     event => {
 
         if (
-            event.buttons === 0
+            event.buttons === 0 ||
+            !draggingObject
         ) {
             return;
         }
-
-
-        const svg =
-            document.getElementById("scene");
-
-        const rect =
-            svg.getBoundingClientRect();
-
-
-        const y =
-            (event.clientY - rect.top)
-            / rect.height * 500;
-
-
-        let height =
-            (250 - y) / 5;
-
-
-        height =
-            Math.max(
-                3,
-                Math.min(20, height)
-            );
-
-
-        objectHeightSlider.value =
-            Math.round(height);
-
-
-        update();
 
     }
 );
 
 
 /* =========================================================
-   GLISSER-DEPLACER LA LENTILLE
+   DEPLACEMENT DE LA LENTILLE
    ========================================================= */
 
-lens.addEventListener(
+let draggingLens = false;
+
+
+lensHandle.addEventListener(
     "pointerdown",
     event => {
 
-        lens.setPointerCapture(
+        draggingLens = true;
+
+        lensHandle.setPointerCapture(
             event.pointerId
         );
 
@@ -1973,35 +2258,54 @@ lens.addEventListener(
 );
 
 
-lens.addEventListener(
+lensHandle.addEventListener(
     "pointermove",
     event => {
 
-        if (event.buttons === 0) {
+        if (!draggingLens) {
             return;
         }
 
 
         const svg =
-            document.getElementById("scene");
+            document.getElementById(
+                "scene"
+            );
 
         const rect =
             svg.getBoundingClientRect();
 
 
         const x =
-            (event.clientX - rect.left)
-            / rect.width * 1000;
+            (
+                event.clientX -
+                rect.left
+            )
+            / rect.width
+            * 1000;
 
 
         lensX =
             Math.max(
                 300,
-                Math.min(700, x)
+                Math.min(
+                    700,
+                    x
+                )
             );
 
 
         update();
+
+    }
+);
+
+
+lensHandle.addEventListener(
+    "pointerup",
+    () => {
+
+        draggingLens = false;
 
     }
 );
