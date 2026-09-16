@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,594 +13,747 @@
 
 <style>
 
-    :root {
-        --navy: #14273d;
-        --navy-light: #1f3552;
-        --gold: #b08d2b;
-        --cream: #faf9f5;
-        --white: #ffffff;
-        --ink: #232a35;
-        --muted: #6b7280;
-        --line: #e3ddd0;
-    }
+/* =========================================================
+   IDENTITÉ VISUELLE
+   ========================================================= */
 
-    * {
-        box-sizing: border-box;
-    }
+:root {
+    --navy: #14273d;
+    --navy-light: #1f3552;
+    --gold: #b08d2b;
+    --gold-light: #d0b35a;
+    --cream: #faf9f5;
+    --white: #ffffff;
+    --ink: #232a35;
+    --muted: #6b7280;
+    --line: #e3ddd0;
+    --soft: #f3f1eb;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 82px;
+}
+
+body {
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    line-height: 1.65;
+    -webkit-text-size-adjust: 100%;
+}
+
+h1,
+h2,
+h3,
+.logo {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: normal;
+    color: var(--navy);
+}
+
+a {
+    color: inherit;
+}
+
+.container {
+    width: min(1080px, 90%);
+    margin: auto;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+header {
+    background: rgba(250, 249, 245, 0.97);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+}
+
+.nav {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.logo {
+    text-decoration: none;
+    font-size: 1.15rem;
+    white-space: nowrap;
+}
+
+nav.links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+
+nav.links a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: var(--navy);
+    border-bottom: 2px solid transparent;
+    padding-bottom: 3px;
+    white-space: nowrap;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+nav.links a:hover {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 85% 20%, rgba(176,141,43,0.18), transparent 30%),
+        radial-gradient(circle at 10% 90%, rgba(31,53,82,0.9), transparent 40%),
+        linear-gradient(135deg, var(--navy), #102238);
+    color: var(--cream);
+    padding: 82px 0 74px;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 340px;
+    height: 340px;
+    right: -170px;
+    bottom: -200px;
+    border: 1px solid rgba(208,179,90,0.18);
+    border-radius: 50%;
+}
+
+.hero-inner {
+    max-width: 820px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 22px;
+    padding: 7px 13px;
+    border: 1px solid rgba(208,179,90,0.55);
+    background: rgba(176,141,43,0.12);
+    color: var(--gold-light);
+    font-size: 0.76rem;
+    font-weight: bold;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.hero-label::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    background: var(--gold-light);
+    border-radius: 50%;
+}
+
+h1 {
+    color: var(--white);
+    margin: 0 0 25px;
+    font-size: clamp(2.15rem, 4.5vw, 3.25rem);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+}
+
+.hero p {
+    font-size: 1.08rem;
+    color: #d4dce6;
+    margin: 0;
+    max-width: 760px;
+}
+
+.credential {
+    border-left: 2px solid var(--gold);
+    padding-left: 18px;
+    margin-top: 29px !important;
+    font-size: 0.96rem !important;
+    color: var(--cream) !important;
+}
+
+.credential strong {
+    color: var(--gold-light);
+}
+
+
+/* =========================================================
+   CONTENU
+   ========================================================= */
+
+.content-section {
+    padding: 72px 0;
+}
+
+.content {
+    max-width: 790px;
+    margin: auto;
+}
+
+.content h2 {
+    font-size: 1.95rem;
+    line-height: 1.28;
+    margin: 0 0 23px;
+    padding: 15px 18px;
+    background: var(--cream);
+    border-left: 4px solid var(--gold);
+    box-shadow: 0 5px 18px rgba(20,39,61,0.045);
+}
+
+.content h3 {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    margin: 42px 0 13px;
+    color: var(--navy);
+}
+
+.content p {
+    margin: 0 0 18px;
+}
+
+.content ul {
+    margin: 11px 0 25px;
+    padding-left: 25px;
+}
+
+.content li {
+    margin-bottom: 8px;
+}
+
+.content strong {
+    color: var(--navy);
+}
+
+.section-divider {
+    border: 0;
+    border-top: 1px solid var(--line);
+    margin: 58px 0;
+}
+
+
+/* =========================================================
+   SOMMAIRE
+   ========================================================= */
+
+.toc {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    padding: 25px 28px;
+    margin-bottom: 55px;
+    box-shadow: 0 8px 24px rgba(20,39,61,0.05);
+}
+
+.toc-title {
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--navy);
+    font-size: 1.35rem;
+    margin-bottom: 15px;
+}
+
+.toc ol {
+    margin: 0;
+    padding-left: 25px;
+}
+
+.toc li {
+    margin-bottom: 8px;
+}
+
+.toc li:last-child {
+    margin-bottom: 0;
+}
+
+.toc a {
+    color: var(--navy);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.toc a:hover {
+    color: var(--gold);
+}
+
+
+/* =========================================================
+   TIMING
+   ========================================================= */
+
+.timing {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+    margin: 34px 0 43px;
+}
+
+.timing-box {
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--gold);
+    padding: 23px;
+    box-shadow: 0 6px 20px rgba(20,39,61,0.045);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.timing-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(20,39,61,0.08);
+}
+
+.timing-number {
+    font-family: Georgia, serif;
+    color: var(--navy);
+    font-size: 1.65rem;
+    line-height: 1;
+    margin-bottom: 9px;
+}
+
+.timing-title {
+    font-weight: bold;
+    color: var(--navy);
+    margin-bottom: 8px;
+}
+
+.timing-text {
+    font-size: 0.91rem;
+    color: var(--muted);
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   EXEMPLES
+   ========================================================= */
+
+.example {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--gold);
+    padding: 23px 26px;
+    margin: 20px 0 28px;
+    box-shadow: 0 5px 18px rgba(20,39,61,0.04);
+}
+
+.example-title {
+    font-family: Georgia, serif;
+    color: var(--navy);
+    font-size: 1.05rem;
+    margin-bottom: 9px;
+}
+
+.example p {
+    margin: 0;
+}
+
+.weak {
+    border-left-color: #aaa;
+    background: #f4f4f3;
+    box-shadow: none;
+}
+
+.weak .example-title {
+    color: #454b54;
+}
+
+
+/* =========================================================
+   POINT ESSENTIEL
+   ========================================================= */
+
+.key-point {
+    position: relative;
+    background:
+        radial-gradient(circle at 90% 10%, rgba(176,141,43,0.13), transparent 35%),
+        var(--navy);
+    color: var(--cream);
+    padding: 31px 34px;
+    margin: 45px 0;
+    border-left: 4px solid var(--gold);
+    box-shadow: 0 12px 30px rgba(20,39,61,0.13);
+}
+
+.key-point p {
+    color: #d9e0e8;
+    margin: 0;
+}
+
+.key-point strong {
+    color: var(--white);
+}
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.cta-section {
+    background:
+        linear-gradient(rgba(250,249,245,0.96), rgba(250,249,245,0.96)),
+        radial-gradient(circle at 50% 0%, rgba(176,141,43,0.16), transparent 55%);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 67px 0;
+}
+
+.cta {
+    max-width: 790px;
+    margin: auto;
+    text-align: center;
+}
+
+.cta h2 {
+    margin-bottom: 18px;
+}
+
+.cta p {
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+.btn-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    padding: 14px 25px;
+    background: var(--gold);
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.96rem;
+    box-shadow: 0 7px 18px rgba(176,141,43,0.2);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.btn-gold::after {
+    content: "→";
+    font-size: 1.15rem;
+    transition: transform 0.2s ease;
+}
+
+.btn-gold:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+}
+
+.btn-gold:hover::after {
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    padding: 34px 0;
+    background: var(--white);
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.88rem;
+}
+
+
+/* =========================================================
+   TABLETTES / SMARTPHONES
+   ========================================================= */
+
+@media (max-width: 800px) {
 
     html {
-        scroll-behavior: smooth;
-        scroll-padding-top: 82px;
-    }
-
-    body {
-        margin: 0;
-        font-family: Helvetica, Arial, sans-serif;
-        color: var(--ink);
-        background: var(--white);
-        line-height: 1.65;
-        -webkit-text-size-adjust: 100%;
-    }
-
-    h1, h2, h3, .logo {
-        font-family: Georgia, "Times New Roman", serif;
-        font-weight: normal;
-        color: var(--navy);
-    }
-
-    a {
-        color: inherit;
+        scroll-padding-top: 68px;
     }
 
     .container {
-        width: min(1040px, 90%);
-        margin: auto;
+        width: 92%;
     }
 
-
-    /* ================= HEADER ================= */
-
-    header {
-        background: var(--cream);
-        border-bottom: 1px solid var(--line);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
+    /* ---------- HEADER ---------- */
 
     .nav {
-        min-height: 70px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 24px;
+        min-height: 61px;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        padding: 9px 0 8px;
     }
 
     .logo {
-        text-decoration: none;
-        font-size: 1.15rem;
-        white-space: nowrap;
+        font-size: 0.98rem;
     }
 
     nav.links {
-        display: flex;
-        gap: 28px;
-        align-items: center;
+        width: 100%;
+        justify-content: flex-start;
+        gap: 18px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 2px 2px 4px;
+        scrollbar-width: none;
+    }
+
+    nav.links::-webkit-scrollbar {
+        display: none;
     }
 
     nav.links a {
-        text-decoration: none;
-        font-size: 0.9rem;
-        color: var(--navy);
-        border-bottom: 1px solid transparent;
-        padding-bottom: 3px;
-        white-space: nowrap;
-    }
-
-    nav.links a:hover {
-        border-bottom-color: var(--gold);
+        flex: 0 0 auto;
+        font-size: 0.76rem;
+        padding-bottom: 2px;
     }
 
 
-    /* ================= HERO ================= */
+    /* ---------- HERO ---------- */
 
     .hero {
-        background: var(--navy);
-        color: var(--cream);
-        padding: 78px 0 68px;
+        padding: 52px 0 48px;
     }
 
-    .hero-inner {
-        max-width: 780px;
+    .hero-label {
+        margin-bottom: 19px;
+        font-size: 0.69rem;
+        padding: 6px 11px;
     }
 
     h1 {
-        color: var(--white);
-        margin: 0 0 24px;
-        font-size: clamp(2rem, 4.4vw, 3rem);
-        line-height: 1.28;
+        font-size: 2rem;
+        line-height: 1.2;
+        margin-bottom: 20px;
     }
 
     .hero p {
-        font-size: 1.06rem;
-        color: #cdd6e2;
-        margin: 0;
-        max-width: 720px;
+        font-size: 1rem;
+        line-height: 1.58;
     }
 
     .credential {
-        border-left: 2px solid var(--gold);
-        padding-left: 18px;
-        margin-top: 28px !important;
-        font-size: 0.96rem !important;
-        color: var(--cream) !important;
-    }
-
-    .credential strong {
-        color: var(--gold);
+        margin-top: 24px !important;
+        padding-left: 14px;
+        font-size: 0.9rem !important;
     }
 
 
-    /* ================= CONTENT ================= */
+    /* ---------- CONTENT ---------- */
 
     .content-section {
-        padding: 68px 0;
+        padding: 45px 0;
     }
 
     .content {
-        max-width: 760px;
-        margin: auto;
-    }
-
-    .content h2 {
-    font-size: 1.85rem;
-    line-height: 1.3;
-    margin: 0 0 20px;
-    padding: 13px 17px;
-    background: var(--cream);
-    border-left: 3px solid var(--gold);
-}
-    .content h3 {
-        font-size: 1.28rem;
-        line-height: 1.4;
-        margin: 38px 0 13px;
+        max-width: none;
     }
 
     .content p {
-        margin: 0 0 17px;
+        font-size: 1rem;
+        line-height: 1.62;
+        margin-bottom: 16px;
+    }
+
+    .content h2 {
+        font-size: 1.55rem;
+        line-height: 1.28;
+        margin-bottom: 19px;
+        padding: 12px 14px;
+    }
+
+    .content h3 {
+        font-size: 1.18rem;
+        line-height: 1.4;
+        margin: 33px 0 11px;
     }
 
     .content ul {
-        margin: 10px 0 23px;
-        padding-left: 24px;
-    }
-
-    .content li {
-        margin-bottom: 7px;
-    }
-
-    .content strong {
-        color: var(--navy);
-    }
-
-    .section-divider {
-        border: 0;
-        border-top: 1px solid var(--line);
-        margin: 55px 0;
+        padding-left: 22px;
     }
 
 
-    /* ================= SOMMAIRE ================= */
+    /* ---------- SOMMAIRE ---------- */
 
     .toc {
-        background: var(--cream);
-        border: 1px solid var(--line);
-        padding: 22px 25px;
-        margin-bottom: 52px;
+        padding: 20px 21px;
+        margin-bottom: 43px;
     }
 
     .toc-title {
-        font-family: Georgia, "Times New Roman", serif;
-        color: var(--navy);
-        font-size: 1.25rem;
-        margin-bottom: 12px;
+        font-size: 1.18rem;
+        margin-bottom: 11px;
     }
 
     .toc ol {
-        margin: 0;
-        padding-left: 24px;
+        padding-left: 22px;
     }
 
     .toc li {
-        margin-bottom: 7px;
-    }
-
-    .toc li:last-child {
-        margin-bottom: 0;
-    }
-
-    .toc a {
-        color: var(--navy);
-        text-decoration: none;
-    }
-
-    .toc a:hover {
-        color: var(--gold);
-    }
-
-
-    /* ================= TIMING ================= */
-
-    .timing {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-        margin: 32px 0 40px;
-    }
-
-    .timing-box {
-        border-top: 2px solid var(--gold);
-        background: var(--cream);
-        padding: 21px;
-    }
-
-    .timing-number {
-        font-family: Georgia, serif;
-        color: var(--navy);
-        font-size: 1.5rem;
-        margin-bottom: 5px;
-    }
-
-    .timing-title {
-        font-weight: bold;
-        color: var(--navy);
-        margin-bottom: 7px;
-    }
-
-    .timing-text {
-        font-size: 0.91rem;
-        color: var(--muted);
-    }
-
-
-    /* ================= EXAMPLES ================= */
-
-    .example {
-        background: var(--cream);
-        border-left: 3px solid var(--gold);
-        padding: 21px 24px;
-        margin: 19px 0 27px;
-    }
-
-    .example-title {
-        font-family: Georgia, serif;
-        color: var(--navy);
         margin-bottom: 8px;
     }
 
-    .example p {
-        margin: 0;
-    }
-
-    .weak {
-        border-left-color: #b8b8b8;
-        background: #f5f5f5;
+    .toc a {
+        font-size: 0.98rem;
     }
 
 
-    /* ================= KEY POINT ================= */
+    /* ---------- TIMING ---------- */
+
+    .timing {
+        grid-template-columns: 1fr;
+        gap: 11px;
+        margin: 28px 0 36px;
+    }
+
+    .timing-box {
+        padding: 18px 20px;
+    }
+
+    .timing-number {
+        font-size: 1.45rem;
+    }
+
+
+    /* ---------- EXEMPLES ---------- */
+
+    .example {
+        padding: 19px 20px;
+        margin: 18px 0 24px;
+    }
+
+    .example-title {
+        line-height: 1.4;
+    }
+
+
+    /* ---------- KEY POINT ---------- */
 
     .key-point {
-        background: var(--navy);
-        color: var(--cream);
-        padding: 28px 32px;
+        padding: 24px 21px;
+        margin: 37px 0;
+    }
+
+
+    /* ---------- SEPARATORS ---------- */
+
+    .section-divider {
         margin: 42px 0;
     }
 
-    .key-point p {
-        color: #d9e0e8;
-        margin: 0;
-    }
 
-    .key-point strong {
-        color: var(--white);
-    }
-
-
-    /* ================= CTA ================= */
+    /* ---------- CTA ---------- */
 
     .cta-section {
-        background: var(--cream);
-        border-top: 1px solid var(--line);
-        border-bottom: 1px solid var(--line);
-        padding: 60px 0;
-    }
-
-    .cta {
-        max-width: 760px;
-        margin: auto;
-        text-align: center;
+        padding: 50px 0;
     }
 
     .cta h2 {
-        margin-bottom: 17px;
+        font-size: 1.55rem;
     }
 
     .cta p {
-        color: var(--muted);
-        margin-bottom: 26px;
+        font-size: 0.98rem;
     }
 
     .btn-gold {
-        display: inline-block;
-        padding: 13px 24px;
-        background: var(--gold);
-        color: var(--navy);
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 0.95rem;
-    }
-
-    .btn-gold:hover {
-        background: #c49f3c;
+        padding: 14px 22px;
     }
 
 
-    /* ================= FOOTER ================= */
+    /* ---------- FOOTER ---------- */
 
     footer {
-        padding: 32px 0;
-        border-top: 1px solid var(--line);
-        color: var(--muted);
-        font-size: 0.88rem;
+        padding: 28px 0;
     }
-
-
-    /* =========================================================
-       SMARTPHONE
-       ========================================================= */
-
-    @media (max-width: 800px) {
-
-        html {
-            scroll-padding-top: 65px;
-        }
-
-        .container {
-            width: 92%;
-        }
-
-
-        /* ---------- HEADER ---------- */
-
-        .nav {
-            min-height: 60px;
-            flex-direction: column;
-            justify-content: center;
-            gap: 5px;
-            padding: 9px 0 8px;
-        }
-
-        .logo {
-            font-size: 0.98rem;
-        }
-
-        nav.links {
-            width: 100%;
-            justify-content: center;
-            gap: 14px;
-        }
-
-        nav.links a {
-            font-size: 0.74rem;
-            padding-bottom: 2px;
-        }
-
-
-        /* ---------- HERO ---------- */
-
-        .hero {
-            padding: 48px 0 44px;
-        }
-
-        h1 {
-            font-size: 1.95rem;
-            line-height: 1.25;
-            margin-bottom: 19px;
-        }
-
-        .hero p {
-            font-size: 1rem;
-            line-height: 1.55;
-        }
-
-        .credential {
-            margin-top: 23px !important;
-            padding-left: 14px;
-            font-size: 0.9rem !important;
-        }
-
-
-        /* ---------- CONTENT ---------- */
-
-        .content-section {
-            padding: 42px 0;
-        }
-
-        .content {
-            max-width: none;
-        }
-
-        .content p {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .content h2 {
-    font-size: 1.5rem;
-    line-height: 1.3;
-    margin-bottom: 18px;
-    padding: 11px 14px;
-    background: var(--cream);
-    border-left: 3px solid var(--gold);
 }
 
-        .content h3 {
-            font-size: 1.16rem;
-            line-height: 1.4;
-            margin: 31px 0 11px;
-        }
 
-        .content ul {
-            padding-left: 22px;
-        }
+/* =========================================================
+   TRÈS PETITS SMARTPHONES
+   ========================================================= */
 
+@media (max-width: 430px) {
 
-        /* ---------- SOMMAIRE ---------- */
-
-        .toc {
-            padding: 18px 20px;
-            margin-bottom: 42px;
-        }
-
-        .toc-title {
-            font-size: 1.15rem;
-            margin-bottom: 9px;
-        }
-
-        .toc ol {
-            padding-left: 22px;
-        }
-
-        .toc li {
-            margin-bottom: 7px;
-        }
-
-        .toc a {
-            font-size: 0.98rem;
-        }
-
-
-        /* ---------- TIMING ---------- */
-
-        .timing {
-            grid-template-columns: 1fr;
-            gap: 11px;
-            margin: 27px 0 34px;
-        }
-
-        .timing-box {
-            padding: 17px 19px;
-        }
-
-        .timing-number {
-            font-size: 1.4rem;
-        }
-
-
-        /* ---------- EXAMPLES ---------- */
-
-        .example {
-            padding: 18px 19px;
-            margin: 17px 0 23px;
-        }
-
-        .example-title {
-            line-height: 1.4;
-        }
-
-
-        /* ---------- KEY POINT ---------- */
-
-        .key-point {
-            padding: 23px 21px;
-            margin: 35px 0;
-        }
-
-
-        /* ---------- SEPARATORS ---------- */
-
-        .section-divider {
-            margin: 40px 0;
-        }
-
-
-        /* ---------- CTA ---------- */
-
-        .cta-section {
-            padding: 47px 0;
-        }
-
-        .cta h2 {
-            font-size: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 0.98rem;
-        }
-
-        .btn-gold {
-            padding: 13px 22px;
-        }
-
-
-        /* ---------- FOOTER ---------- */
-
-        footer {
-            padding: 27px 0;
-        }
-
+    .container {
+        width: 91%;
     }
 
-
-    /* =========================================================
-       TRÈS PETITS SMARTPHONES
-       ========================================================= */
-
-    @media (max-width: 430px) {
-
-        .container {
-            width: 91%;
-        }
-
-        .logo {
-            font-size: 0.94rem;
-        }
-
-        nav.links {
-            gap: 10px;
-        }
-
-        nav.links a {
-            font-size: 0.69rem;
-        }
-
-        .hero {
-            padding: 42px 0 39px;
-        }
-
-        h1 {
-            font-size: 1.78rem;
-        }
-
-        .content h2 {
-            font-size: 1.48rem;
-        }
-
-        .content h3 {
-            font-size: 1.12rem;
-        }
-
-        .toc {
-            padding: 17px 18px;
-        }
-
-        .toc a {
-            font-size: 0.95rem;
-        }
-
+    .logo {
+        font-size: 0.94rem;
     }
+
+    nav.links {
+        gap: 15px;
+    }
+
+    nav.links a {
+        font-size: 0.69rem;
+    }
+
+    .hero {
+        padding: 44px 0 41px;
+    }
+
+    .hero-label {
+        font-size: 0.65rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        line-height: 1.21;
+    }
+
+    .hero p {
+        font-size: 0.97rem;
+    }
+
+    .content h2 {
+        font-size: 1.48rem;
+    }
+
+    .content h3 {
+        font-size: 1.12rem;
+    }
+
+    .toc {
+        padding: 18px 18px;
+    }
+
+    .toc a {
+        font-size: 0.94rem;
+    }
+
+    .example {
+        padding: 18px;
+    }
+
+    .key-point {
+        padding: 22px 19px;
+    }
+
+    .btn-gold {
+        width: 100%;
+        justify-content: center;
+    }
+}
 
 </style>
 </head>
@@ -632,13 +784,19 @@
 <main>
 
 
-<!-- ================= HERO ================= -->
+<!-- =====================================================
+     HERO
+     ===================================================== -->
 
 <section class="hero">
 
     <div class="container">
 
         <div class="hero-inner">
+
+            <div class="hero-label">
+                Grand Oral
+            </div>
 
             <h1>
                 Préparer son Grand Oral de Physique-Chimie :
@@ -664,7 +822,9 @@
 </section>
 
 
-<!-- ================= CONTENU ================= -->
+<!-- =====================================================
+     CONTENU
+     ===================================================== -->
 
 <section class="content-section">
 
@@ -673,7 +833,9 @@
 <article class="content">
 
 
-<!-- ================= SOMMAIRE ================= -->
+<!-- =====================================================
+     SOMMAIRE
+     ===================================================== -->
 
 <nav class="toc" aria-label="Sommaire">
 
@@ -718,7 +880,9 @@
 </nav>
 
 
-<!-- ================= PARTIE 1 ================= -->
+<!-- =====================================================
+     PARTIE 1
+     ===================================================== -->
 
 <h2 id="grand-oral">
     1. Le Grand Oral
@@ -886,7 +1050,9 @@ Le jury peut ainsi vous demander de préciser ou d'approfondir certains
 <hr class="section-divider">
 
 
-<!-- ================= PARTIE 2 ================= -->
+<!-- =====================================================
+     PARTIE 2
+     ===================================================== -->
 
 <h2 id="construire">
     2. Construire son Grand Oral
@@ -952,7 +1118,9 @@ questions du jury.
 <hr class="section-divider">
 
 
-<!-- ================= PARTIE 3 ================= -->
+<!-- =====================================================
+     PARTIE 3
+     ===================================================== -->
 
 <h2 id="problematique">
     3. Problématiques et exemples
@@ -1160,7 +1328,9 @@ de commencer le travail.
 <hr class="section-divider">
 
 
-<!-- ================= PARTIE 4 ================= -->
+<!-- =====================================================
+     PARTIE 4
+     ===================================================== -->
 
 <h2 id="plan">
     4. Construire un plan : exemple
@@ -1329,11 +1499,14 @@ progrès possibles des cellules photovoltaïques.
 <hr class="section-divider">
 
 
-<!-- ================= PARTIE 5 ================= -->
+<!-- =====================================================
+     PARTIE 5
+     ===================================================== -->
 
 <h2 id="aller-plus-loin">
     5. Aller plus loin
 </h2>
+
 
 <h2>
     Le point essentiel à retenir
@@ -1378,7 +1551,9 @@ C'est cette progression qui permet de construire un Grand Oral solide.
 </section>
 
 
-<!-- ================= CTA LIVRE ================= -->
+<!-- =====================================================
+     CTA LIVRE
+     ===================================================== -->
 
 <section class="cta-section">
 
@@ -1418,7 +1593,9 @@ C'est cette progression qui permet de construire un Grand Oral solide.
 </main>
 
 
-<!-- ================= FOOTER ================= -->
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
 
 <footer>
 
@@ -1439,4 +1616,3 @@ C'est cette progression qui permet de construire un Grand Oral solide.
 
 </body>
 </html>
-```
