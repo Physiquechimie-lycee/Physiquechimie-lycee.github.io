@@ -2,509 +2,348 @@
 
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Entraînement aux conversions d'unités | Physique-Chimie au lycée</title>
+<title>Entraînement aux conversions d'unités</title>
 
-  <style>
+<style>
+:root {
+    --navy: #14273d;
+    --navy-light: #1f3552;
+    --gold: #b08d2b;
+    --gold-light: #d0b35a;
+    --cream: #faf9f5;
+    --white: #ffffff;
+    --ink: #232a35;
+    --muted: #6b7280;
+    --line: #e3ddd0;
+    --soft: #f3f1eb;
+    --shadow: 0 12px 30px rgba(20,39,61,0.10);
+}
 
-    /* =========================================================
-       IDENTITÉ VISUELLE
-       ========================================================= */
+* {
+    box-sizing: border-box;
+}
 
-    :root {
-      --navy: #14273d;
-      --navy-light: #1f3552;
-      --gold: #b08d2b;
-      --gold-light: #d0b35a;
-      --cream: #faf9f5;
-      --white: #ffffff;
-      --ink: #232a35;
-      --muted: #6b7280;
-      --line: #e3ddd0;
-      --soft: #f3f1eb;
-
-      --shadow: 0 12px 30px rgba(20,39,61,0.10);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 24px 16px;
-
-      font-family: Helvetica, Arial, sans-serif;
-      color: var(--ink);
-      background:
-        radial-gradient(
-          circle at 50% 0%,
-          rgba(176,141,43,0.08),
-          transparent 35%
-        ),
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 24px 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at top right, rgba(176,141,43,0.10), transparent 30%),
         var(--cream);
+}
 
-      line-height: 1.6;
-      -webkit-text-size-adjust: 100%;
+.card {
+    width: min(500px, 100%);
+    margin: 0 auto;
+    padding: 28px 24px 25px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-top: 5px solid var(--gold);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+h1 {
+    margin: 0 0 8px;
+    text-align: center;
+    color: var(--navy);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.65rem;
+}
+
+.subtitle {
+    margin: 0 0 18px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* =========================
+   NIVEAUX
+   ========================= */
+
+.level-title {
+    margin: 0 0 8px;
+    text-align: center;
+    color: var(--navy);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.levels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+    margin-bottom: 18px;
+}
+
+.level-btn {
+    padding: 9px 5px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--soft);
+    color: var(--navy);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.level-btn:hover {
+    border-color: var(--gold);
+    background: #f8f4e9;
+}
+
+.level-btn.active {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+}
+
+.level-description {
+    min-height: 32px;
+    margin: -8px 0 16px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.4;
+}
+
+/* =========================
+   SCORE
+   ========================= */
+
+.streak {
+    margin-bottom: 15px;
+    text-align: center;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+/* =========================
+   QUESTION
+   ========================= */
+
+.question {
+    margin-bottom: 18px;
+    padding: 18px 15px;
+    background: var(--cream);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    color: var(--navy);
+    text-align: center;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.input-group input {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    outline: none;
+    color: var(--ink);
+    font-size: 1.05rem;
+    text-align: center;
+}
+
+.input-group input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(176,141,43,0.12);
+}
+
+.target-unit {
+    min-width: 55px;
+    color: var(--navy);
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.btn-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+button {
+    font-family: inherit;
+}
+
+.main-btn,
+.help-btn {
+    padding: 11px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: .2s ease;
+}
+
+.main-btn {
+    border: 1px solid var(--gold);
+    background: var(--gold);
+    color: var(--navy);
+}
+
+.main-btn:hover {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+}
+
+.help-btn {
+    border: 1px solid var(--line);
+    background: var(--soft);
+    color: var(--navy);
+}
+
+.help-btn:hover {
+    border-color: var(--gold);
+    background: #f8f4e9;
+}
+
+.feedback {
+    min-height: 24px;
+    margin-top: 14px;
+    text-align: center;
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+/* =========================
+   MODALES
+   ========================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    padding: 20px;
+    background: rgba(20,39,61,0.72);
+}
+
+.modal-content {
+    width: min(500px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: 8vh auto 0;
+    padding: 24px;
+    background: var(--white);
+    border-top: 5px solid var(--gold);
+    border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: var(--navy);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.modal-content p {
+    line-height: 1.55;
+}
+
+.close-btn {
+    display: block;
+    width: 100%;
+    margin-top: 18px;
+    padding: 10px;
+    border: 1px solid var(--navy);
+    border-radius: 8px;
+    background: var(--navy);
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+/* =========================
+   TABLE DES PREFIXES
+   ========================= */
+
+.prefix-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+
+.prefix-table th,
+.prefix-table td {
+    padding: 8px;
+    border: 1px solid var(--line);
+    text-align: center;
+}
+
+.prefix-table th {
+    background: var(--navy);
+    color: var(--white);
+}
+
+.prefix-table tr:nth-child(even) {
+    background: var(--cream);
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 600px) {
+    body {
+        padding: 14px 10px;
     }
-
-    h1,
-    h2 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: normal;
-      color: var(--navy);
-    }
-
-
-    /* =========================================================
-       CARTE PRINCIPALE
-       ========================================================= */
 
     .card {
-      width: 100%;
-      max-width: 500px;
-
-      background: var(--white);
-
-      padding: 30px 30px 28px;
-
-      border: 1px solid var(--line);
-      border-top: 4px solid var(--gold);
-
-      box-shadow: var(--shadow);
-
-      text-align: center;
+        padding: 23px 17px 20px;
+        border-radius: 13px;
     }
 
     h1 {
-      font-size: 1.65rem;
-      line-height: 1.25;
-      margin: 0 0 8px;
+        font-size: 1.45rem;
     }
-
-
-    /* =========================================================
-       SÉRIE
-       ========================================================= */
-
-    .streak {
-      font-weight: bold;
-      color: var(--gold);
-      margin-bottom: 25px;
-      font-size: 1rem;
-    }
-
-    .streak span {
-      color: var(--navy);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.2rem;
-    }
-
-
-    /* =========================================================
-       QUESTION
-       ========================================================= */
 
     .question {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.55rem;
-      font-weight: normal;
+        font-size: 1.2rem;
+        padding: 16px 10px;
+    }
+}
 
-      color: var(--navy);
-
-      background:
-        radial-gradient(
-          circle at 90% 10%,
-          rgba(176,141,43,0.10),
-          transparent 40%
-        ),
-        var(--cream);
-
-      border: 1px solid var(--line);
-      border-left: 4px solid var(--gold);
-
-      padding: 18px 16px;
-
-      margin-bottom: 23px;
-
-      box-shadow: 0 5px 18px rgba(20,39,61,0.045);
+@media (max-width: 380px) {
+    .levels {
+        gap: 5px;
     }
 
-
-    /* =========================================================
-       SAISIE
-       ========================================================= */
-
-    .input-group {
-      display: flex;
-      gap: 10px;
-
-      align-items: center;
-      justify-content: center;
-
-      margin-bottom: 22px;
-
-      flex-wrap: wrap;
+    .level-btn {
+        font-size: 0.78rem;
+        padding: 8px 3px;
     }
 
-    input[type="text"] {
-      font-family: Helvetica, Arial, sans-serif;
-
-      font-size: 1.2rem;
-
-      padding: 12px 13px;
-
-      width: 150px;
-
-      text-align: right;
-
-      color: var(--ink);
-      background: var(--white);
-
-      border: 2px solid var(--line);
-
-      border-radius: 6px;
-
-      outline: none;
-
-      transition:
-        border-color .2s ease,
-        box-shadow .2s ease;
+    .level-description {
+        font-size: 0.74rem;
     }
-
-    input[type="text"]:focus {
-      border-color: var(--gold);
-
-      box-shadow:
-        0 0 0 3px rgba(176,141,43,0.12);
-    }
-
-    .unit {
-      font-family: Georgia, "Times New Roman", serif;
-
-      font-size: 1.25rem;
-      font-weight: normal;
-
-      color: var(--navy);
-    }
-
-
-    /* =========================================================
-       BOUTONS
-       ========================================================= */
 
     .btn-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+        grid-template-columns: 1fr;
     }
-
-    button {
-      width: 100%;
-
-      padding: 13px 16px;
-
-      font-family: Helvetica, Arial, sans-serif;
-
-      font-size: 1rem;
-      font-weight: bold;
-
-      color: var(--navy);
-      background: var(--gold);
-
-      border: 1px solid var(--gold);
-
-      border-radius: 5px;
-
-      cursor: pointer;
-
-      transition:
-        background .2s ease,
-        transform .15s ease,
-        box-shadow .2s ease;
-    }
-
-    button:hover {
-      background: var(--gold-light);
-      border-color: var(--gold-light);
-
-      transform: translateY(-1px);
-
-      box-shadow: 0 5px 14px rgba(176,141,43,0.18);
-    }
-
-    button:active {
-      transform: translateY(0);
-      box-shadow: none;
-    }
-
-    button.btn-help {
-      color: var(--navy);
-
-      background: var(--cream);
-
-      border: 1px solid var(--line);
-
-      font-size: 0.9rem;
-
-      padding: 10px 14px;
-    }
-
-    button.btn-help:hover {
-      background: var(--soft);
-      border-color: var(--gold);
-      box-shadow: none;
-    }
-
-
-    /* =========================================================
-       FEEDBACK
-       ========================================================= */
-
-    .feedback {
-      margin-top: 17px;
-
-      font-weight: bold;
-
-      min-height: 26px;
-
-      font-size: 0.96rem;
-    }
-
-    .correct {
-      color: #26734d;
-    }
-
-    .incorrect {
-      color: #a33a3a;
-    }
-
-
-    /* =========================================================
-       POPUPS MODALES
-       ========================================================= */
-
-    .modal {
-      display: none;
-
-      position: fixed;
-
-      top: 0;
-      left: 0;
-
-      width: 100%;
-      height: 100%;
-
-      background: rgba(20,39,61,0.62);
-
-      justify-content: center;
-      align-items: center;
-
-      padding: 16px;
-
-      z-index: 1000;
-    }
-
-    .modal-content {
-      position: relative;
-
-      background: var(--white);
-
-      padding: 28px 26px 24px;
-
-      border-top: 4px solid var(--gold);
-
-      border: 1px solid var(--line);
-      border-top-width: 4px;
-
-      box-shadow: 0 18px 45px rgba(20,39,61,0.20);
-
-      text-align: center;
-
-      max-width: 430px;
-
-      width: 100%;
-
-      max-height: 90vh;
-
-      overflow-y: auto;
-    }
-
-    .modal-content h2 {
-      margin-top: 0;
-      margin-bottom: 10px;
-
-      font-size: 1.45rem;
-
-      line-height: 1.3;
-    }
-
-    .modal-content p {
-      color: var(--muted);
-      margin-bottom: 5px;
-    }
-
-    .modal-content button {
-      margin-top: 17px;
-    }
-
-
-    /* =========================================================
-       TABLEAU DES PRÉFIXES
-       ========================================================= */
-
-    .prefix-table {
-      width: 100%;
-
-      border-collapse: collapse;
-
-      margin-top: 15px;
-
-      font-size: 0.92rem;
-
-      border: 1px solid var(--line);
-    }
-
-    .prefix-table th,
-    .prefix-table td {
-      padding: 8px 6px;
-
-      border-bottom: 1px solid var(--line);
-
-      text-align: center;
-    }
-
-    .prefix-table th {
-      background: var(--navy);
-
-      color: var(--white);
-
-      font-weight: bold;
-    }
-
-    .prefix-table tr:nth-child(even) {
-      background: var(--cream);
-    }
-
-    .prefix-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .prefix-table strong {
-      color: var(--navy);
-    }
-
-
-    /* =========================================================
-       SMARTPHONES
-       ========================================================= */
-
-    @media (max-width: 600px) {
-
-      body {
-        padding: 14px 10px;
-        align-items: center;
-      }
-
-      .card {
-        padding: 25px 20px 23px;
-
-        border-top-width: 4px;
-      }
-
-      h1 {
-        font-size: 1.48rem;
-      }
-
-      .streak {
-        margin-bottom: 21px;
-        font-size: 0.94rem;
-      }
-
-      .question {
-        font-size: 1.38rem;
-
-        padding: 17px 13px;
-
-        margin-bottom: 21px;
-      }
-
-      .input-group {
-        gap: 8px;
-      }
-
-      input[type="text"] {
-        width: 145px;
-        font-size: 1.12rem;
-        padding: 11px 12px;
-      }
-
-      .unit {
-        font-size: 1.18rem;
-      }
-
-      button {
-        padding: 13px;
-      }
-
-      .modal-content {
-        padding: 24px 18px 20px;
-      }
-
-      .prefix-table {
-        font-size: 0.86rem;
-      }
-
-      .prefix-table th,
-      .prefix-table td {
-        padding: 7px 4px;
-      }
-    }
-
-
-    /* =========================================================
-       TRÈS PETITS SMARTPHONES
-       ========================================================= */
-
-    @media (max-width: 380px) {
-
-      body {
-        padding: 10px 7px;
-      }
-
-      .card {
-        padding: 22px 16px 20px;
-      }
-
-      h1 {
-        font-size: 1.4rem;
-      }
-
-      .question {
-        font-size: 1.28rem;
-      }
-
-      input[type="text"] {
-        width: 135px;
-      }
-
-      .prefix-table {
-        font-size: 0.8rem;
-      }
-    }
-
-  </style>
+}
+</style>
 
 </head>
 
@@ -512,258 +351,358 @@
 
 <div class="card">
 
-  <h1>Conversions d'unités</h1>
-
-  <div class="streak">
-    Série de réussites :
-    <span id="streak">0</span> / 10
-  </div>
-
-  <div class="question" id="question">
-    Chargement...
-  </div>
-
-  <div class="input-group">
-
  
-<input
-  type="text"
-  id="answer"
-  placeholder="ex : 1.5e3"
-  inputmode="decimal"
-  autocomplete="off"
->
+<h1>Conversions d'unités</h1>
 
-<span class="unit" id="target-unit">
-  g
-</span>
- 
-
-  </div>
-
-  <div class="btn-group">
-
- 
-<button
-  id="btn-submit"
-  onclick="checkAnswer()">
-  Valider
-</button>
-
-<button
-  class="btn-help"
-  onclick="openHelp()">
-  Voir le tableau des préfixes
-</button>
- 
-
-  </div>
-
-  <div
-    class="feedback"
-    id="feedback">
-  </div>
-
-</div>
-
-<!-- =========================================================
-     MODAL RÉCOMPENSE
-     ========================================================= -->
-
-<div class="modal" id="modal-reward">
-
-  <div class="modal-content">
-
- 
-<h2 id="modal-title">
-  Bravo !
-</h2>
-
-<p id="modal-msg">
-  Excellente progression !
+<p class="subtitle">
+    Choisis ton niveau puis entraîne-toi.
 </p>
 
-<button onclick="closeModal('modal-reward')">
-  Continuer
-</button>
- 
+<div class="level-title">Niveau</div>
 
-  </div>
+<div class="levels">
+    <button class="level-btn active" data-level="easy">
+        Facile
+    </button>
+
+    <button class="level-btn" data-level="medium">
+        Intermédiaire
+    </button>
+
+    <button class="level-btn" data-level="hard">
+        Difficile
+    </button>
+</div>
+
+<div class="level-description" id="level-description">
+    k, h, da, unité, d, c et m — sans puissance de 10
+</div>
+
+<div class="streak">
+    Série : <span id="streak">0</span>
+</div>
+
+<div class="question" id="question">
+    ...
+</div>
+
+<div class="input-group">
+    <input
+        type="text"
+        id="answer"
+        placeholder="ex : 1,5 ou 1.5e3"
+        autocomplete="off"
+        inputmode="decimal"
+    >
+
+    <span class="target-unit" id="target-unit">...</span>
+</div>
+
+<div class="btn-group">
+    <button class="main-btn" onclick="checkAnswer()">
+        Valider
+    </button>
+
+    <button class="help-btn" onclick="openHelp()">
+        Aide
+    </button>
+</div>
+
+<div class="feedback" id="feedback"></div>
+ 
 
 </div>
 
-<!-- =========================================================
-     MODAL AIDE
-     ========================================================= -->
+<!-- =========================
+     MODALE DE RÉCOMPENSE
+     ========================= -->
+
+<div class="modal" id="modal-reward">
+    <div class="modal-content">
+
+ 
+    <h2 id="reward-title"></h2>
+
+    <p id="reward-message"></p>
+
+    <button
+        class="close-btn"
+        onclick="closeModal('modal-reward')">
+        Continuer
+    </button>
+
+</div>
+ 
+
+</div>
+
+<!-- =========================
+     MODALE D'AIDE
+     ========================= -->
 
 <div class="modal" id="modal-help">
-
-  <div class="modal-content">
+    <div class="modal-content">
 
  
-<h2>
-  Tableau des préfixes
-</h2>
+    <h2>Les préfixes</h2>
 
-<table class="prefix-table">
+    <p>
+        Chaque préfixe correspond à une puissance de 10.
+    </p>
 
-  <thead>
+    <table class="prefix-table">
+        <thead>
+            <tr>
+                <th>Préfixe</th>
+                <th>Symbole</th>
+                <th>Puissance</th>
+            </tr>
+        </thead>
 
-    <tr>
-      <th>Préfixe</th>
-      <th>Symbole</th>
-      <th>Puissance</th>
-    </tr>
+        <tbody>
+            <tr>
+                <td>giga</td>
+                <td>G</td>
+                <td>10⁹</td>
+            </tr>
+            <tr>
+                <td>méga</td>
+                <td>M</td>
+                <td>10⁶</td>
+            </tr>
+            <tr>
+                <td>kilo</td>
+                <td>k</td>
+                <td>10³</td>
+            </tr>
+            <tr>
+                <td>hecto</td>
+                <td>h</td>
+                <td>10²</td>
+            </tr>
+            <tr>
+                <td>déca</td>
+                <td>da</td>
+                <td>10¹</td>
+            </tr>
+            <tr>
+                <td>unité</td>
+                <td>—</td>
+                <td>10⁰</td>
+            </tr>
+            <tr>
+                <td>déci</td>
+                <td>d</td>
+                <td>10⁻¹</td>
+            </tr>
+            <tr>
+                <td>centi</td>
+                <td>c</td>
+                <td>10⁻²</td>
+            </tr>
+            <tr>
+                <td>milli</td>
+                <td>m</td>
+                <td>10⁻³</td>
+            </tr>
+            <tr>
+                <td>micro</td>
+                <td>µ</td>
+                <td>10⁻⁶</td>
+            </tr>
+            <tr>
+                <td>nano</td>
+                <td>n</td>
+                <td>10⁻⁹</td>
+            </tr>
+        </tbody>
+    </table>
 
-  </thead>
+    <button
+        class="close-btn"
+        onclick="closeModal('modal-help')">
+        Fermer
+    </button>
 
-  <tbody>
-
-    <tr>
-      <td>Giga</td>
-      <td><strong>G</strong></td>
-      <td>10<sup>9</sup></td>
-    </tr>
-
-    <tr>
-      <td>Méga</td>
-      <td><strong>M</strong></td>
-      <td>10<sup>6</sup></td>
-    </tr>
-
-    <tr>
-      <td>kilo</td>
-      <td><strong>k</strong></td>
-      <td>10<sup>3</sup></td>
-    </tr>
-
-    <tr>
-      <td>hecto</td>
-      <td><strong>h</strong></td>
-      <td>10<sup>2</sup></td>
-    </tr>
-
-    <tr>
-      <td>déca</td>
-      <td><strong>da</strong></td>
-      <td>10<sup>1</sup></td>
-    </tr>
-
-    <tr>
-      <td>(unité)</td>
-      <td>—</td>
-      <td>10<sup>0</sup> = 1</td>
-    </tr>
-
-    <tr>
-      <td>déci</td>
-      <td><strong>d</strong></td>
-      <td>10<sup>-1</sup></td>
-    </tr>
-
-    <tr>
-      <td>centi</td>
-      <td><strong>c</strong></td>
-      <td>10<sup>-2</sup></td>
-    </tr>
-
-    <tr>
-      <td>milli</td>
-      <td><strong>m</strong></td>
-      <td>10<sup>-3</sup></td>
-    </tr>
-
-    <tr>
-      <td>micro</td>
-      <td><strong>µ</strong></td>
-      <td>10<sup>-6</sup></td>
-    </tr>
-
-    <tr>
-      <td>nano</td>
-      <td><strong>n</strong></td>
-      <td>10<sup>-9</sup></td>
-    </tr>
-
-  </tbody>
-
-</table>
-
-<button onclick="closeModal('modal-help')">
-  Fermer
-</button>
+</div>
  
-
-  </div>
 
 </div>
 
 <script>
 
-  const units = ['g', 'm', 'L', 'V', 'A', 'N'];
-
-  const prefixes = [
-    { symbol: 'n', exp: -9 },
-    { symbol: 'µ', exp: -6 },
-    { symbol: 'm', exp: -3 },
-    { symbol: 'c', exp: -2 },
-    { symbol: 'd', exp: -1 },
-    { symbol: '',  exp: 0 },
-    { symbol: 'da', exp: 1 },
-    { symbol: 'h', exp: 2 },
-    { symbol: 'k', exp: 3 },
-    { symbol: 'M', exp: 6 },
-    { symbol: 'G', exp: 9 }
-  ];
-
-  let streak = 0;
-  let currentTargetValue = 0;
+const units = ['g', 'm', 'L', 'V', 'A', 'N'];
 
 
-  function getRandom(min, max) {
-    return Math.floor(
-      Math.random() * (max - min + 1)
-    ) + min;
-  }
+/*
+ * Tous les préfixes disponibles
+ */
+
+const prefixes = [
+    { symbol: 'n',  exp: -9 },
+    { symbol: 'µ',  exp: -6 },
+    { symbol: 'm',  exp: -3 },
+    { symbol: 'c',  exp: -2 },
+    { symbol: 'd',  exp: -1 },
+    { symbol: '',   exp:  0 },
+    { symbol: 'da', exp:  1 },
+    { symbol: 'h',  exp:  2 },
+    { symbol: 'k',  exp:  3 },
+    { symbol: 'M',  exp:  6 },
+    { symbol: 'G',  exp:  9 }
+];
 
 
-  function generateQuestion() {
+/*
+ * Préfixes utilisés selon le niveau
+ */
 
-    const unit =
-      units[getRandom(0, units.length - 1)];
+const levels = {
 
-    let srcIndex =
-      getRandom(0, prefixes.length - 1);
+    easy: {
+        description:
+            'k, h, da, unité, d, c et m — sans puissance de 10',
 
-    let targetIndex =
-      getRandom(0, prefixes.length - 1);
+        prefixes: [
+            { symbol: 'm',  exp: -3 },
+            { symbol: 'c',  exp: -2 },
+            { symbol: 'd',  exp: -1 },
+            { symbol: '',   exp:  0 },
+            { symbol: 'da', exp:  1 },
+            { symbol: 'h',  exp:  2 },
+            { symbol: 'k',  exp:  3 }
+        ]
+    },
 
-    while (targetIndex === srcIndex) {
+    medium: {
+        description:
+            'De méga à micro — la notation scientifique peut être utile',
 
-      targetIndex =
-        getRandom(0, prefixes.length - 1);
+        prefixes: [
+            { symbol: 'µ', exp: -6 },
+            { symbol: 'm', exp: -3 },
+            { symbol: 'c', exp: -2 },
+            { symbol: 'd', exp: -1 },
+            { symbol: '',  exp:  0 },
+            { symbol: 'da', exp: 1 },
+            { symbol: 'h', exp:  2 },
+            { symbol: 'k', exp:  3 },
+            { symbol: 'M', exp:  6 }
+        ]
+    },
+
+    hard: {
+        description:
+            'Tous les préfixes, de giga à nano',
+
+        prefixes: prefixes
     }
 
-    const srcPrefix = prefixes[srcIndex];
-    const targetPrefix = prefixes[targetIndex];
+};
 
-    const baseValue =
-      getRandom(10, 999) / 10;
+
+let currentLevel = 'easy';
+let streak = 0;
+let currentTargetValue = 0;
+
+
+/*
+ * Nombre aléatoire entier
+ */
+
+function getRandom(min, max) {
+    return Math.floor(
+        Math.random() * (max - min + 1)
+    ) + min;
+}
+
+
+/*
+ * Choisit un élément aléatoire dans un tableau
+ */
+
+function randomItem(array) {
+    return array[
+        Math.floor(Math.random() * array.length)
+    ];
+}
+
+
+/*
+ * Génération d'une question
+ */
+
+function generateQuestion() {
+
+    const levelPrefixes =
+        levels[currentLevel].prefixes;
+
+    const unit =
+        randomItem(units);
+
+    let srcIndex =
+        getRandom(0, levelPrefixes.length - 1);
+
+    let targetIndex =
+        getRandom(0, levelPrefixes.length - 1);
+
+    while (targetIndex === srcIndex) {
+        targetIndex =
+            getRandom(0, levelPrefixes.length - 1);
+    }
+
+    const srcPrefix =
+        levelPrefixes[srcIndex];
+
+    const targetPrefix =
+        levelPrefixes[targetIndex];
+
+
+    /*
+     * Niveau facile :
+     *
+     * On génère volontairement des valeurs
+     * donnant des résultats simples à lire.
+     */
+
+    let baseValue;
+
+    if (currentLevel === 'easy') {
+
+        baseValue = getRandom(1, 999);
+
+        /*
+         * Pour le niveau facile, on choisit
+         * principalement des valeurs entières.
+         * La conversion reste limitée à la gamme
+         * kilo → milli.
+         */
+
+    } else {
+
+        baseValue =
+            getRandom(10, 999) / 10;
+
+    }
+
 
     const expDiff =
-      srcPrefix.exp - targetPrefix.exp;
+        srcPrefix.exp - targetPrefix.exp;
 
     currentTargetValue =
-      baseValue * Math.pow(10, expDiff);
+        baseValue * Math.pow(10, expDiff);
+
 
     document.getElementById('question').innerText =
-      `${baseValue} ${srcPrefix.symbol}${unit} = ?`;
+        `${baseValue} ${srcPrefix.symbol}${unit} = ?`;
+
 
     document.getElementById('target-unit').innerText =
-      `${targetPrefix.symbol}${unit}`;
+        `${targetPrefix.symbol}${unit}`;
+
 
     const input =
-      document.getElementById('answer');
+        document.getElementById('answer');
 
     input.value = '';
 
@@ -771,173 +710,247 @@
 
     document.getElementById('feedback').innerText = '';
 
-  }
+}
 
 
-  function parseInput(val) {
+/*
+ * Lecture de la réponse
+ */
+
+function parseInput(val) {
 
     if (!val) return NaN;
 
     let clean =
-      val
-        .trim()
-        .replace(',', '.')
-        .replace(/10\^/i, 'e')
-        .replace(/\*10\^/i, 'e');
+        val.trim()
+           .replace(',', '.')
+           .replace(/10\^/i, 'e')
+           .replace(/\*10\^/i, 'e');
 
     return parseFloat(clean);
-  }
+}
 
 
-  function checkAnswer() {
+/*
+ * Vérification
+ */
+
+function checkAnswer() {
 
     const inputVal =
-      document.getElementById('answer').value;
+        document.getElementById('answer').value;
 
     const userVal =
-      parseInput(inputVal);
+        parseInput(inputVal);
+
 
     if (isNaN(userVal)) {
 
-      document.getElementById('feedback').innerText =
-        "Saisie invalide (ex : 1.5e3 ou 1500)";
+        document.getElementById('feedback').innerText =
+            'Entre une valeur numérique.';
 
-      document.getElementById('feedback').className =
-        "feedback incorrect";
+        document.getElementById('feedback').style.color =
+            '#9b2c2c';
 
-      return;
+        return;
     }
 
 
     const relativeError =
-      Math.abs(
-        (userVal - currentTargetValue) /
-        currentTargetValue
-      );
+        Math.abs(
+            (userVal - currentTargetValue)
+            / currentTargetValue
+        );
 
 
     if (relativeError < 0.001) {
 
-      streak++;
+        streak++;
 
-      document.getElementById('streak').innerText =
-        streak;
+        document.getElementById('streak').innerText =
+            streak;
 
-      document.getElementById('feedback').innerText =
-        "Bonne réponse !";
+        document.getElementById('feedback').innerText =
+            'Correct.';
 
-      document.getElementById('feedback').className =
-        "feedback correct";
+        document.getElementById('feedback').style.color =
+            '#39724a';
 
 
-      if (streak === 5) {
+        if (streak === 5) {
 
-        showModal(
-          "modal-reward",
-          "Super cap !",
-          "Tu as aligné 5 bonnes réponses d'affilée ! Plus que 5 pour la victoire."
-        );
+            showModal(
+                'modal-reward',
+                '5 conversions réussies',
+                'Tu maîtrises bien cette série. Continue.'
+            );
 
-      }
+        } else if (streak === 10) {
 
-      else if (streak === 10) {
+            showModal(
+                'modal-reward',
+                '10 conversions réussies',
+                'Série de 10 réussites. Le niveau suivant peut être tenté.'
+            );
 
-        showModal(
-          "modal-reward",
-          "Victoire !",
-          "Parfait ! 10 bonnes réponses consécutives. Tu maîtrises les conversions !"
-        );
+            streak = 0;
+
+            document.getElementById('streak').innerText =
+                streak;
+
+        } else {
+
+            setTimeout(
+                generateQuestion,
+                1000
+            );
+
+        }
+
+    } else {
 
         streak = 0;
 
         document.getElementById('streak').innerText =
-          streak;
+            streak;
 
-      }
+        document.getElementById('feedback').innerText =
+            'Incorrect. Essaie encore.';
 
-      else {
+        document.getElementById('feedback').style.color =
+            '#9b2c2c';
 
         setTimeout(
-          generateQuestion,
-          1000
+            generateQuestion,
+            2500
         );
 
-      }
-
     }
 
-    else {
-
-      streak = 0;
-
-      document.getElementById('streak').innerText =
-        streak;
-
-      document.getElementById('feedback').innerText =
-        `Dommage ! La réponse était ${currentTargetValue.toPrecision(4)}`;
-
-      document.getElementById('feedback').className =
-        "feedback incorrect";
-
-      setTimeout(
-        generateQuestion,
-        2500
-      );
-
-    }
-
-  }
+}
 
 
-  function showModal(id, title, msg) {
+/*
+ * Gestion des niveaux
+ */
 
-    if (title) {
-      document.getElementById('modal-title').innerText =
+document.querySelectorAll('.level-btn')
+    .forEach(button => {
+
+        button.addEventListener('click', () => {
+
+            currentLevel =
+                button.dataset.level;
+
+
+            /*
+             * Apparence du bouton actif
+             */
+
+            document.querySelectorAll('.level-btn')
+                .forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+            button.classList.add('active');
+
+
+            /*
+             * Description du niveau
+             */
+
+            document.getElementById(
+                'level-description'
+            ).innerText =
+                levels[currentLevel].description;
+
+
+            /*
+             * Nouvelle série
+             */
+
+            streak = 0;
+
+            document.getElementById('streak').innerText =
+                streak;
+
+            generateQuestion();
+
+        });
+
+    });
+
+
+/*
+ * Affichage d'une modale
+ */
+
+function showModal(id, title, msg) {
+
+    document.getElementById('reward-title').innerText =
         title;
-    }
 
-    if (msg) {
-      document.getElementById('modal-msg').innerText =
+    document.getElementById('reward-message').innerText =
         msg;
-    }
 
     document.getElementById(id).style.display =
-      'flex';
-  }
+        'block';
+
+}
 
 
-  function openHelp() {
-    showModal('modal-help');
-  }
+/*
+ * Ouverture de l'aide
+ */
+
+function openHelp() {
+
+    document.getElementById('modal-help')
+        .style.display = 'block';
+
+}
 
 
-  function closeModal(id) {
+/*
+ * Fermeture des modales
+ */
 
-    document.getElementById(id).style.display =
-      'none';
+function closeModal(id) {
+
+    document.getElementById(id)
+        .style.display = 'none';
+
 
     if (id === 'modal-reward') {
-      generateQuestion();
+
+        generateQuestion();
+
     }
 
-  }
+}
 
 
-  document
-    .getElementById('answer')
-    .addEventListener(
-      'keypress',
-      function(e) {
+/*
+ * Validation avec Entrée
+ */
+
+document.getElementById('answer')
+    .addEventListener('keypress', function(e) {
 
         if (e.key === 'Enter') {
-          checkAnswer();
+
+            checkAnswer();
+
         }
 
-      }
-    );
+    });
 
 
-  generateQuestion();
+/*
+ * Première question
+ */
+
+generateQuestion();
 
 </script>
 
