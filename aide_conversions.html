@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Conversions, puissances de 10 et notation scientifique | Physique-Chimie au lycée</title>
+
+<meta name="description"
+   content="Conversions d'unités, puissances de 10, notation scientifique et ordre de grandeur : méthodes et exemples pour réussir en physique-chimie au lycée.">
+
+<style>
+
+/* =========================================================
+   CHARTE GRAPHIQUE
+   ========================================================= */
+
+:root {
+    --navy: #14273d;
+    --navy-light: #1f3552;
+    --gold: #b08d2b;
+    --gold-light: #d0b35a;
+    --cream: #faf9f5;
+    --white: #ffffff;
+    --ink: #232a35;
+    --muted: #6b7280;
+    --line: #e3ddd0;
+    --soft-gold: #f4efe2;
+    --soft-blue: #eef3f8;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.7;
+}
+
+a {
+    color: inherit;
+}
+
+.container {
+    width: min(1100px, calc(100% - 36px));
+    margin: auto;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(20, 39, 61, 0.97);
+    box-shadow: 0 3px 18px rgba(0,0,0,0.12);
+}
+
+.navbar {
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-family: Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--gold-light);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.nav::-webkit-scrollbar {
+    display: none;
+}
+
+.nav a {
+    color: rgba(255,255,255,0.88);
+    text-decoration: none;
+    padding: 9px 13px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    transition: 0.2s;
+}
+
+.nav a:hover,
+.nav a.active {
+    background: rgba(255,255,255,0.10);
+    color: white;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    background:
+        radial-gradient(circle at 85% 15%, rgba(208,179,90,0.22), transparent 28%),
+        radial-gradient(circle at 10% 80%, rgba(255,255,255,0.07), transparent 30%),
+        linear-gradient(135deg, var(--navy), var(--navy-light));
+
+    color: white;
+    padding: 78px 0 72px;
+}
+
+.hero-inner {
+    max-width: 900px;
+}
+
+.hero-label {
+    display: inline-block;
+    padding: 7px 13px;
+    border: 1px solid rgba(208,179,90,0.55);
+    border-radius: 999px;
+    color: var(--gold-light);
+    font-size: 0.78rem;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    margin: 0 0 20px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+}
+
+.hero p {
+    max-width: 760px;
+    margin: 0;
+    color: rgba(255,255,255,0.86);
+    font-size: 1.1rem;
+}
+
+.hero-line {
+    width: 70px;
+    height: 4px;
+    background: var(--gold-light);
+    border-radius: 5px;
+    margin-top: 28px;
+}
+
+
+/* =========================================================
+   CONTENU
+   ========================================================= */
+
+main {
+    padding: 55px 0 80px;
+}
+
+.section {
+    margin-bottom: 60px;
+}
+
+.section h2 {
+    color: var(--navy);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.7rem, 3vw, 2.35rem);
+    line-height: 1.2;
+    margin: 0 0 22px;
+}
+
+.section h3 {
+    color: var(--navy);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.35rem;
+    margin: 35px 0 15px;
+}
+
+.section h4 {
+    color: var(--navy);
+    font-size: 1.08rem;
+    margin: 25px 0 10px;
+}
+
+p {
+    margin: 0 0 17px;
+}
+
+
+/* =========================================================
+   SOMMAIRE
+   ========================================================= */
+
+.toc {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-left: 5px solid var(--gold);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 20px rgba(20,39,61,0.05);
+}
+
+.toc-title {
+    font-family: Georgia, serif;
+    font-weight: bold;
+    color: var(--navy);
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+}
+
+.toc ol {
+    margin: 0;
+    padding-left: 22px;
+}
+
+.toc li {
+    margin: 5px 0;
+}
+
+.toc a {
+    color: var(--navy);
+    text-decoration: none;
+}
+
+.toc a:hover {
+    color: var(--gold);
+}
+
+
+/* =========================================================
+   CARTES
+   ========================================================= */
+
+.card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px;
+    margin: 25px 0;
+    box-shadow: 0 6px 24px rgba(20,39,61,0.05);
+}
+
+.card-gold {
+    border-top: 4px solid var(--gold);
+}
+
+.card-blue {
+    border-top: 4px solid var(--navy);
+}
+
+
+/* =========================================================
+   ENCADRÉS
+   ========================================================= */
+
+.key-point {
+    background: var(--navy);
+    color: white;
+    border-radius: 14px;
+    padding: 28px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(20,39,61,0.15);
+}
+
+.key-point strong {
+    color: var(--gold-light);
+}
+
+.info {
+    background: var(--soft-blue);
+    border-left: 5px solid var(--navy);
+    border-radius: 10px;
+    padding: 20px 23px;
+    margin: 25px 0;
+}
+
+.warning {
+    background: var(--soft-gold);
+    border-left: 5px solid var(--gold);
+    border-radius: 10px;
+    padding: 20px 23px;
+    margin: 25px 0;
+}
+
+
+/* =========================================================
+   FORMULES
+   ========================================================= */
+
+.formula {
+    background: #f5f6f7;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px;
+    margin: 18px 0;
+    text-align: center;
+    font-size: 1.18rem;
+    font-family: Georgia, "Times New Roman", serif;
+    overflow-x: auto;
+}
+
+.math {
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+
+/* =========================================================
+   TABLEAUX
+   ========================================================= */
+
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    margin: 25px 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(20,39,61,0.06);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    min-width: 560px;
+}
+
+th {
+    background: var(--navy);
+    color: white;
+    padding: 13px 14px;
+    text-align: center;
+    font-weight: bold;
+}
+
+td {
+    border: 1px solid var(--line);
+    padding: 12px 14px;
+    text-align: center;
+}
+
+tbody tr:nth-child(even) {
+    background: #faf9f5;
+}
+
+.prefix-table td:first-child,
+.prefix-table td:nth-child(2) {
+    font-weight: bold;
+}
+
+.prefix-symbol {
+    color: var(--gold);
+    font-size: 1.15rem;
+}
+
+
+/* =========================================================
+   EXEMPLES
+   ========================================================= */
+
+.example {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 25px;
+    margin: 20px 0;
+}
+
+.example-title {
+    color: var(--gold);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+}
+
+.steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 10px 10px 10px 48px;
+    margin: 7px 0;
+}
+
+.steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 31px;
+    height: 31px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   LIEN EXERCICES
+   ========================================================= */
+
+.exercise-link {
+    background: var(--soft-gold);
+    border-left: 5px solid var(--gold);
+    border-radius: 10px;
+    padding: 18px 23px;
+    margin-bottom: 55px;
+}
+
+.exercise-link strong {
+    color: var(--navy);
+}
+
+.exercise-link a {
+    color: var(--navy);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.exercise-link a:hover {
+    color: var(--gold);
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.72);
+    padding: 35px 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: var(--gold-light);
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .navbar {
+        display: block;
+        padding: 10px 0 7px;
+    }
+
+    .logo {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .nav {
+        width: 100%;
+        padding-bottom: 2px;
+    }
+
+    .nav a {
+        font-size: 0.84rem;
+        padding: 7px 11px;
+    }
+
+    .hero {
+        padding: 55px 0 50px;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    main {
+        padding-top: 40px;
+    }
+
+    .card,
+    .toc {
+        padding: 21px;
+    }
+
+    .section {
+        margin-bottom: 45px;
+    }
+}
+
+@media (max-width: 430px) {
+
+    .container {
+        width: min(100% - 26px, 1100px);
+    }
+
+    .hero {
+        padding: 43px 0 42px;
+    }
+
+    .hero-label {
+        font-size: 0.7rem;
+    }
+
+    .hero h1 {
+        font-size: 2.05rem;
+    }
+
+    .hero p {
+        font-size: 0.96rem;
+        line-height: 1.6;
+    }
+
+    .section h2 {
+        font-size: 1.65rem;
+    }
+
+    .section h3 {
+        font-size: 1.25rem;
+    }
+
+    .card,
+    .toc,
+    .key-point,
+    .info,
+    .warning,
+    .example {
+        padding: 18px;
+    }
+
+    .formula {
+        font-size: 1.05rem;
+    }
+
+    .exercise-link {
+        padding: 17px 18px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <div class="container navbar">
+
+```
+    <a class="logo" href="index.html">
+        Physique-Chimie <span>au lycée</span>
+    </a>
+
+    <nav class="nav">
+        <a href="index.html">Accueil</a>
+        <a href="seconde.html" class="active">Seconde</a>
+        <a href="premiere.html">Première</a>
+        <a href="terminale.html">Terminale</a>
+        <a href="grand-oral.html">Grand Oral</a>
+        <a href="experimentation.html">Expérimentation</a>
+    </nav>
+
+</div>
+```
+
+</header>
+
+<section class="hero">
+    <div class="container hero-inner">
+
+```
+    <div class="hero-label">Seconde · Méthodes essentielles</div>
+
+    <h1>
+        Conversion, puissance de 10 et notation scientifique
+    </h1>
+
+    <p>
+        Les méthodes indispensables pour manipuler les unités,
+        les puissances de 10 et les nombres en physique-chimie.
+    </p>
+
+    <div class="hero-line"></div>
+
+</div>
+```
+
+</section>
+
+<main>
+<div class="container">
+
+```
+<!-- =====================================================
+     SOMMAIRE
+     ===================================================== -->
+
+<div class="toc">
+
+    <div class="toc-title">Dans cette page</div>
+
+    <ol>
+        <li><a href="#conversions">Les conversions</a></li>
+        <li><a href="#puissances">Puissances de 10 et notation scientifique</a></li>
+        <li><a href="#notation">Notation scientifique</a></li>
+        <li><a href="#multiples">Tableau des multiples et sous-multiples</a></li>
+        <li><a href="#ordre">L’ordre de grandeur</a></li>
+    </ol>
+
+</div>
+
+
+<!-- =====================================================
+     LIEN EXERCICES
+     ===================================================== -->
+
+<div class="exercise-link">
+
+    <strong>Pour s'entraîner :</strong>
+
+    <a href="conversions-exercices.html">
+        Exercices de conversions →
+    </a>
+
+</div>
+
+
+<!-- =====================================================
+     1. CONVERSIONS
+     ===================================================== -->
+
+<section class="section" id="conversions">
+
+    <h2>1. Les conversions</h2>
+
+    <p>
+        Les conversions d’unités se font à partir du tableau suivant.
+    </p>
+
+    <h3>Exemple du mètre</h3>
+
+    <div class="table-wrap">
+
+        <table class="prefix-table">
+
+            <thead>
+                <tr>
+                    <th>Préfixe</th>
+                    <th>Symbole</th>
+                    <th>Puissance de 10</th>
+                    <th>Unité</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>Giga</td>
+                    <td class="prefix-symbol">Gm</td>
+                    <td>10<sup>9</sup></td>
+                    <td>1 000 000 000 m</td>
+                </tr>
+
+                <tr>
+                    <td>Méga</td>
+                    <td class="prefix-symbol">Mm</td>
+                    <td>10<sup>6</sup></td>
+                    <td>1 000 000 m</td>
+                </tr>
+
+                <tr>
+                    <td>Kilo</td>
+                    <td class="prefix-symbol">km</td>
+                    <td>10<sup>3</sup></td>
+                    <td>1 000 m</td>
+                </tr>
+
+                <tr>
+                    <td>hecto</td>
+                    <td class="prefix-symbol">hm</td>
+                    <td>10<sup>2</sup></td>
+                    <td>100 m</td>
+                </tr>
+
+                <tr>
+                    <td>déca</td>
+                    <td class="prefix-symbol">dam</td>
+                    <td>10<sup>1</sup></td>
+                    <td>10 m</td>
+                </tr>
+
+                <tr>
+                    <td>—</td>
+                    <td class="prefix-symbol">m</td>
+                    <td>10<sup>0</sup></td>
+                    <td>1 m</td>
+                </tr>
+
+                <tr>
+                    <td>déci</td>
+                    <td class="prefix-symbol">dm</td>
+                    <td>10<sup>-1</sup></td>
+                    <td>0,1 m</td>
+                </tr>
+
+                <tr>
+                    <td>centi</td>
+                    <td class="prefix-symbol">cm</td>
+                    <td>10<sup>-2</sup></td>
+                    <td>0,01 m</td>
+                </tr>
+
+                <tr>
+                    <td>milli</td>
+                    <td class="prefix-symbol">mm</td>
+                    <td>10<sup>-3</sup></td>
+                    <td>0,001 m</td>
+                </tr>
+
+                <tr>
+                    <td>micro</td>
+                    <td class="prefix-symbol">µm</td>
+                    <td>10<sup>-6</sup></td>
+                    <td>0,000001 m</td>
+                </tr>
+
+                <tr>
+                    <td>nano</td>
+                    <td class="prefix-symbol">nm</td>
+                    <td>10<sup>-9</sup></td>
+                    <td>0,000000001 m</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <div class="info">
+
+        <strong>À retenir :</strong>
+
+        <p>
+            Ce tableau s’utilise avec toutes les unités.
+            Il suffit de remplacer le <strong>m</strong> de mètre
+            par la lettre correspondant à une autre unité.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     2. PUISSANCES DE 10
+     ===================================================== -->
+
+<section class="section" id="puissances">
+
+    <h2>2. Utilisation des puissances de 10 et notation scientifique</h2>
+
+    <h3>Règles de calculs</h3>
+
+    <div class="card card-blue">
+
+        <div class="formula">
+            10<sup>a</sup> × 10<sup>b</sup>
+            =
+            10<sup>(a+b)</sup>
+        </div>
+
+        <div class="formula">
+            <span class="math">
+                10<sup>a</sup> / 10<sup>b</sup>
+                =
+                10<sup>(a−b)</sup>
+            </span>
+        </div>
+
+        <p>
+            Pas de règles spécifiques concernant les additions
+            et soustractions.
+        </p>
+
+    </div>
+
+
+    <h3>Exemple de puissances de 10 et d’écriture de nombres les utilisant</h3>
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Puissance de 10</th>
+                    <th>Valeur</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>10<sup>7</sup></td>
+                    <td>10 000 000</td>
+                </tr>
+
+                <tr>
+                    <td>10<sup>5</sup></td>
+                    <td>100 000</td>
+                </tr>
+
+                <tr>
+                    <td>10<sup>2</sup></td>
+                    <td>100</td>
+                </tr>
+
+                <tr>
+                    <td>10<sup>-1</sup></td>
+                    <td>0,1</td>
+                </tr>
+
+                <tr>
+                    <td>10<sup>-4</sup></td>
+                    <td>0,0001</td>
+                </tr>
+
+                <tr>
+                    <td>10<sup>-9</sup></td>
+                    <td>0,000000001</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <div class="example">
+
+        <div class="example-title">Exemple</div>
+
+        <div class="formula">
+            2000
+            =
+            200,0 × 10<sup>1</sup>
+            =
+            20,00 × 10<sup>2</sup>
+            =
+            2,000 × 10<sup>3</sup>
+            =
+            0,2000 × 10<sup>4</sup>
+        </div>
+
+    </div>
+
+
+    <div class="example">
+
+        <div class="example-title">Autre exemple</div>
+
+        <div class="formula">
+            0,0650
+            =
+            0,650 × 10<sup>-1</sup>
+            =
+            6,50 × 10<sup>-2</sup>
+            =
+            65,0 × 10<sup>-3</sup>
+            =
+            650 × 10<sup>-4</sup>
+        </div>
+
+    </div>
+
+
+    <div class="info">
+
+        <strong>Explications :</strong>
+
+        <p>
+            <strong>20,00 × 10<sup>2</sup> = 20,00 × 100 = 2000</strong>
+            <br>
+            On peut appliquer ce raisonnement à tous les exemples.
+        </p>
+
+        <p>
+            <strong>65,0 × 10<sup>-3</sup> = 65,0 × 0,001 = 0,065</strong>
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     NOTATION SCIENTIFIQUE
+     ===================================================== -->
+
+<section class="section" id="notation">
+
+    <h2>Notation scientifique</h2>
+
+    <div class="key-point">
+
+        La notation scientifique est
+        <strong>incontournable</strong> en sciences physiques.
+
+        Elle consiste à ne laisser qu’un seul chiffre avant la virgule.
+        Celui-ci doit être différent de zéro.
+
+    </div>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Notation scientifique</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>2546</td>
+                    <td>2,546 × 10<sup>3</sup></td>
+                </tr>
+
+                <tr>
+                    <td>0,00672</td>
+                    <td>6,72 × 10<sup>-3</sup></td>
+                </tr>
+
+                <tr>
+                    <td>201</td>
+                    <td>2,01 × 10<sup>2</sup></td>
+                </tr>
+
+                <tr>
+                    <td>0,40</td>
+                    <td>4,0 × 10<sup>-1</sup></td>
+                </tr>
+
+                <tr>
+                    <td>Etc…</td>
+                    <td>Etc…</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MULTIPLES
+     ===================================================== -->
+
+<section class="section" id="multiples">
+
+    <h2>Tableau de multiples et sous-multiples</h2>
+
+    <div class="table-wrap">
+
+        <table class="prefix-table">
+
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Puissance de 10</th>
+                    <th>Préfixe</th>
+                    <th>Symbole</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>1 000 000 000</td>
+                    <td>10<sup>9</sup></td>
+                    <td>Giga</td>
+                    <td class="prefix-symbol">G</td>
+                </tr>
+
+                <tr>
+                    <td>1 000 000</td>
+                    <td>10<sup>6</sup></td>
+                    <td>Méga</td>
+                    <td class="prefix-symbol">M</td>
+                </tr>
+
+                <tr>
+                    <td>1 000</td>
+                    <td>10<sup>3</sup></td>
+                    <td>Kilo</td>
+                    <td class="prefix-symbol">k</td>
+                </tr>
+
+                <tr>
+                    <td>100</td>
+                    <td>10<sup>2</sup></td>
+                    <td>Hecto</td>
+                    <td class="prefix-symbol">h</td>
+                </tr>
+
+                <tr>
+                    <td>10</td>
+                    <td>10<sup>1</sup></td>
+                    <td>Déca</td>
+                    <td class="prefix-symbol">da</td>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td>10<sup>0</sup></td>
+                    <td>—</td>
+                    <td>—</td>
+                </tr>
+
+                <tr>
+                    <td>0,1</td>
+                    <td>10<sup>-1</sup></td>
+                    <td>Déci</td>
+                    <td class="prefix-symbol">d</td>
+                </tr>
+
+                <tr>
+                    <td>0,01</td>
+                    <td>10<sup>-2</sup></td>
+                    <td>Centi</td>
+                    <td class="prefix-symbol">c</td>
+                </tr>
+
+                <tr>
+                    <td>0,001</td>
+                    <td>10<sup>-3</sup></td>
+                    <td>Milli</td>
+                    <td class="prefix-symbol">m</td>
+                </tr>
+
+                <tr>
+                    <td>0,000001</td>
+                    <td>10<sup>-6</sup></td>
+                    <td>Micro</td>
+                    <td class="prefix-symbol">µ</td>
+                </tr>
+
+                <tr>
+                    <td>0,000000001</td>
+                    <td>10<sup>-9</sup></td>
+                    <td>Nano</td>
+                    <td class="prefix-symbol">n</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <p>
+        Il est très simple en utilisant ce tableau de convertir des unités.
+        Par exemple :
+    </p>
+
+
+    <div class="example">
+
+        <div class="example-title">Exemple : 0,15 nm en mètre</div>
+
+        <p>
+            « Nano » veut dire
+            <strong>10<sup>-9</sup></strong>.
+        </p>
+
+        <p>
+            On peut donc directement remplacer le « n » par
+            <strong>10<sup>-9</sup></strong>.
+        </p>
+
+        <div class="formula">
+            0,15 nm
+            =
+            0,15 × 10<sup>-9</sup> m
+            =
+            1,5 × 10<sup>-10</sup> m
+        </div>
+
+        <p>
+            Le résultat est donné en notation scientifique.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ORDRE DE GRANDEUR
+     ===================================================== -->
+
+<section class="section" id="ordre">
+
+    <h2>L’ordre de grandeur</h2>
+
+    <p>
+        L’ordre de grandeur d’un nombre est la puissance de 10
+        la plus proche de celui-ci.
+    </p>
+
+    <p>
+        On le détermine de la manière suivante :
+    </p>
+
+
+    <ol class="steps">
+
+        <li>
+            On écrit le nombre en notation scientifique.
+        </li>
+
+        <li>
+            Si le nombre avant la puissance de 10 est inférieur à 5,
+            l’ordre de grandeur est égal à la puissance de 10.
+        </li>
+
+        <li>
+            Si le nombre avant la puissance de 10 est supérieur ou égal à 5,
+            l’ordre de grandeur est égal à la puissance de 10 augmentée de 1.
+        </li>
+
+    </ol>
+
+
+    <h3>Exemple</h3>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Nombre</th>
+                    <th>Écriture scientifique</th>
+                    <th>Ordre de grandeur</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>2751</td>
+
+                    <td>
+                        2,751 × 10<sup>3</sup>
+                    </td>
+
+                    <td>
+                        2,751 &lt; 5
+                        donc
+                        <strong>10<sup>3</sup></strong>
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>0,055</td>
+
+                    <td>
+                        5,5 × 10<sup>-2</sup>
+                    </td>
+
+                    <td>
+                        5,5 &gt; 5
+                        donc
+                        10<sup>-2+1</sup>
+                        donc
+                        <strong>10<sup>-1</sup></strong>
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <div class="key-point">
+
+        <strong>À retenir :</strong>
+
+        <p>
+            Pour déterminer rapidement l’ordre de grandeur,
+            il faut d’abord écrire le nombre en notation scientifique,
+            puis regarder le nombre placé devant la puissance de 10.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LIVRE DE SECONDE
+     ===================================================== -->
+
+<div class="card card-gold">
+
+    <h3 style="margin-top: 0;">Pour aller plus loin</h3>
+
+    <p>
+        Retrouve ces méthodes et de nombreux conseils dans mon
+        <strong>guide de Physique-Chimie pour la Seconde</strong>.
+    </p>
+
+    <p style="margin-bottom: 0;">
+        <a href="ouvrages.html"
+           style="color: var(--navy); font-weight: bold;">
+            Découvrir les ouvrages →
+        </a>
+    </p>
+
+</div>
+```
+
+</div>
+</main>
+
+<footer>
+
+```
+<div class="container">
+
+    <div>
+        Physique-Chimie au lycée
+    </div>
+
+    <div>
+        Cours, méthodes et conseils pour le lycée
+    </div>
+
+</div>
+```
+
+</footer>
+
+</body>
+</html>
