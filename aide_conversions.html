@@ -8,7 +8,7 @@
 <title>Conversions, puissances de 10 et notation scientifique | Physique-Chimie au lycée</title>
 
 <meta name="description"
-   content="Conversions d'unités, puissances de 10, notation scientifique et ordre de grandeur : méthodes et exemples pour réussir en physique-chimie au lycée.">
+content="Conversions d'unités, puissances de 10, notation scientifique et ordre de grandeur : méthodes et exemples pour réussir en physique-chimie au lycée.">
 
 <style>
 
@@ -95,6 +95,7 @@ header {
     gap: 7px;
     overflow-x: auto;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
 }
 
 .nav::-webkit-scrollbar {
@@ -489,12 +490,15 @@ footer a {
 
     .nav {
         width: 100%;
-        padding-bottom: 2px;
+        padding-bottom: 3px;
+        gap: 4px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .nav a {
-        font-size: 0.84rem;
-        padding: 7px 11px;
+        font-size: 0.82rem;
+        padding: 7px 9px;
     }
 
     .hero {
@@ -578,6 +582,7 @@ footer a {
 <header>
     <div class="container navbar">
 
+```
     <a class="logo" href="index.html">
         Physique-Chimie <span>au lycée</span>
     </a>
@@ -587,18 +592,24 @@ footer a {
         <a href="seconde.html" class="active">Seconde</a>
         <a href="premiere.html">Première</a>
         <a href="terminale.html">Terminale</a>
+        <a href="animations.html">Animations</a>
         <a href="grand-oral.html">Grand Oral</a>
         <a href="experimentation.html">Expérimentation</a>
     </nav>
 
 </div>
+```
 
 </header>
 
 <section class="hero">
-    <div class="container hero-inner">
 
-    <div class="hero-label">Seconde · Méthodes essentielles</div>
+```
+<div class="container hero-inner">
+
+    <div class="hero-label">
+        Seconde · Méthodes essentielles
+    </div>
 
     <h1>
         Conversion, puissance de 10 et notation scientifique
@@ -612,10 +623,12 @@ footer a {
     <div class="hero-line"></div>
 
 </div>
+```
 
 </section>
 
 <main>
+
 <div class="container">
 
 <!-- =====================================================
@@ -624,18 +637,47 @@ footer a {
 
 <div class="toc">
 
-    <div class="toc-title">Dans cette page</div>
-
-    <ol>
-        <li><a href="#conversions">Les conversions</a></li>
-        <li><a href="#puissances">Puissances de 10 et notation scientifique</a></li>
-        <li><a href="#notation">Notation scientifique</a></li>
-        <li><a href="#multiples">Tableau des multiples et sous-multiples</a></li>
-        <li><a href="#ordre">L’ordre de grandeur</a></li>
-    </ol>
-
+```
+<div class="toc-title">
+    Dans cette page
 </div>
 
+<ol>
+
+    <li>
+        <a href="#conversions">
+            Les conversions
+        </a>
+    </li>
+
+    <li>
+        <a href="#puissances">
+            Puissances de 10 et notation scientifique
+        </a>
+    </li>
+
+    <li>
+        <a href="#notation">
+            Notation scientifique
+        </a>
+    </li>
+
+    <li>
+        <a href="#multiples">
+            Tableau des multiples et sous-multiples
+        </a>
+    </li>
+
+    <li>
+        <a href="#ordre">
+            L’ordre de grandeur
+        </a>
+    </li>
+
+</ol>
+```
+
+</div>
 
 <!-- =====================================================
      LIEN EXERCICES
@@ -643,14 +685,15 @@ footer a {
 
 <div class="exercise-link">
 
-    <strong>Pour s'entraîner :</strong>
+```
+<strong>Pour s'entraîner :</strong>
 
-    <a href="conversions-exercices.html">
-        Exercices de conversions →
-    </a>
+<a href="conversions-exercices.html">
+    Exercices de conversions →
+</a>
+```
 
 </div>
-
 
 <!-- =====================================================
      1. CONVERSIONS
@@ -658,127 +701,134 @@ footer a {
 
 <section class="section" id="conversions">
 
-    <h2>1. Les conversions</h2>
+```
+<h2>
+    1. Les conversions
+</h2>
+
+<p>
+    Les conversions d’unités se font à partir du tableau suivant.
+</p>
+
+<h3>
+    Exemple du mètre
+</h3>
+
+<div class="table-wrap">
+
+    <table class="prefix-table">
+
+        <thead>
+
+            <tr>
+                <th>Préfixe</th>
+                <th>Symbole</th>
+                <th>Puissance de 10</th>
+                <th>Unité</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>Giga</td>
+                <td class="prefix-symbol">Gm</td>
+                <td>10<sup>9</sup></td>
+                <td>1 000 000 000 m</td>
+            </tr>
+
+            <tr>
+                <td>Méga</td>
+                <td class="prefix-symbol">Mm</td>
+                <td>10<sup>6</sup></td>
+                <td>1 000 000 m</td>
+            </tr>
+
+            <tr>
+                <td>Kilo</td>
+                <td class="prefix-symbol">km</td>
+                <td>10<sup>3</sup></td>
+                <td>1 000 m</td>
+            </tr>
+
+            <tr>
+                <td>hecto</td>
+                <td class="prefix-symbol">hm</td>
+                <td>10<sup>2</sup></td>
+                <td>100 m</td>
+            </tr>
+
+            <tr>
+                <td>déca</td>
+                <td class="prefix-symbol">dam</td>
+                <td>10<sup>1</sup></td>
+                <td>10 m</td>
+            </tr>
+
+            <tr>
+                <td>—</td>
+                <td class="prefix-symbol">m</td>
+                <td>10<sup>0</sup></td>
+                <td>1 m</td>
+            </tr>
+
+            <tr>
+                <td>déci</td>
+                <td class="prefix-symbol">dm</td>
+                <td>10<sup>-1</sup></td>
+                <td>0,1 m</td>
+            </tr>
+
+            <tr>
+                <td>centi</td>
+                <td class="prefix-symbol">cm</td>
+                <td>10<sup>-2</sup></td>
+                <td>0,01 m</td>
+            </tr>
+
+            <tr>
+                <td>milli</td>
+                <td class="prefix-symbol">mm</td>
+                <td>10<sup>-3</sup></td>
+                <td>0,001 m</td>
+            </tr>
+
+            <tr>
+                <td>micro</td>
+                <td class="prefix-symbol">µm</td>
+                <td>10<sup>-6</sup></td>
+                <td>0,000001 m</td>
+            </tr>
+
+            <tr>
+                <td>nano</td>
+                <td class="prefix-symbol">nm</td>
+                <td>10<sup>-9</sup></td>
+                <td>0,000000001 m</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<div class="info">
+
+    <strong>À retenir :</strong>
 
     <p>
-        Les conversions d’unités se font à partir du tableau suivant.
+        Ce tableau s’utilise avec toutes les unités.
+        Il suffit de remplacer le <strong>m</strong> de mètre
+        par la lettre correspondant à une autre unité.
     </p>
 
-    <h3>Exemple du mètre</h3>
-
-    <div class="table-wrap">
-
-        <table class="prefix-table">
-
-            <thead>
-                <tr>
-                    <th>Préfixe</th>
-                    <th>Symbole</th>
-                    <th>Puissance de 10</th>
-                    <th>Unité</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                <tr>
-                    <td>Giga</td>
-                    <td class="prefix-symbol">Gm</td>
-                    <td>10<sup>9</sup></td>
-                    <td>1 000 000 000 m</td>
-                </tr>
-
-                <tr>
-                    <td>Méga</td>
-                    <td class="prefix-symbol">Mm</td>
-                    <td>10<sup>6</sup></td>
-                    <td>1 000 000 m</td>
-                </tr>
-
-                <tr>
-                    <td>Kilo</td>
-                    <td class="prefix-symbol">km</td>
-                    <td>10<sup>3</sup></td>
-                    <td>1 000 m</td>
-                </tr>
-
-                <tr>
-                    <td>hecto</td>
-                    <td class="prefix-symbol">hm</td>
-                    <td>10<sup>2</sup></td>
-                    <td>100 m</td>
-                </tr>
-
-                <tr>
-                    <td>déca</td>
-                    <td class="prefix-symbol">dam</td>
-                    <td>10<sup>1</sup></td>
-                    <td>10 m</td>
-                </tr>
-
-                <tr>
-                    <td>—</td>
-                    <td class="prefix-symbol">m</td>
-                    <td>10<sup>0</sup></td>
-                    <td>1 m</td>
-                </tr>
-
-                <tr>
-                    <td>déci</td>
-                    <td class="prefix-symbol">dm</td>
-                    <td>10<sup>-1</sup></td>
-                    <td>0,1 m</td>
-                </tr>
-
-                <tr>
-                    <td>centi</td>
-                    <td class="prefix-symbol">cm</td>
-                    <td>10<sup>-2</sup></td>
-                    <td>0,01 m</td>
-                </tr>
-
-                <tr>
-                    <td>milli</td>
-                    <td class="prefix-symbol">mm</td>
-                    <td>10<sup>-3</sup></td>
-                    <td>0,001 m</td>
-                </tr>
-
-                <tr>
-                    <td>micro</td>
-                    <td class="prefix-symbol">µm</td>
-                    <td>10<sup>-6</sup></td>
-                    <td>0,000001 m</td>
-                </tr>
-
-                <tr>
-                    <td>nano</td>
-                    <td class="prefix-symbol">nm</td>
-                    <td>10<sup>-9</sup></td>
-                    <td>0,000000001 m</td>
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-
-    <div class="info">
-
-        <strong>À retenir :</strong>
-
-        <p>
-            Ce tableau s’utilise avec toutes les unités.
-            Il suffit de remplacer le <strong>m</strong> de mètre
-            par la lettre correspondant à une autre unité.
-        </p>
-
-    </div>
+</div>
+```
 
 </section>
-
 
 <!-- =====================================================
      2. PUISSANCES DE 10
@@ -786,142 +836,167 @@ footer a {
 
 <section class="section" id="puissances">
 
-    <h2>2. Utilisation des puissances de 10 et notation scientifique</h2>
+```
+<h2>
+    2. Utilisation des puissances de 10 et notation scientifique
+</h2>
 
-    <h3>Règles de calculs</h3>
+<h3>
+    Règles de calculs
+</h3>
 
-    <div class="card card-blue">
+<div class="card card-blue">
 
-        <div class="formula">
-            10<sup>a</sup> × 10<sup>b</sup>
+    <div class="formula">
+        10<sup>a</sup> × 10<sup>b</sup>
+        =
+        10<sup>(a+b)</sup>
+    </div>
+
+    <div class="formula">
+
+        <span class="math">
+            10<sup>a</sup> / 10<sup>b</sup>
             =
-            10<sup>(a+b)</sup>
-        </div>
-
-        <div class="formula">
-            <span class="math">
-                10<sup>a</sup> / 10<sup>b</sup>
-                =
-                10<sup>(a−b)</sup>
-            </span>
-        </div>
-
-        <p>
-            Pas de règles spécifiques concernant les additions
-            et soustractions.
-        </p>
+            10<sup>(a−b)</sup>
+        </span>
 
     </div>
 
+    <p>
+        Pas de règles spécifiques concernant les additions
+        et soustractions.
+    </p>
 
-    <h3>Exemple de puissances de 10 et d’écriture de nombres les utilisant</h3>
+</div>
 
-    <div class="table-wrap">
 
-        <table>
+<h3>
+    Exemple de puissances de 10 et d’écriture de nombres les utilisant
+</h3>
 
-            <thead>
-                <tr>
-                    <th>Puissance de 10</th>
-                    <th>Valeur</th>
-                </tr>
-            </thead>
+<div class="table-wrap">
 
-            <tbody>
+    <table>
 
-                <tr>
-                    <td>10<sup>7</sup></td>
-                    <td>10 000 000</td>
-                </tr>
+        <thead>
 
-                <tr>
-                    <td>10<sup>5</sup></td>
-                    <td>100 000</td>
-                </tr>
+            <tr>
+                <th>Puissance de 10</th>
+                <th>Valeur</th>
+            </tr>
 
-                <tr>
-                    <td>10<sup>2</sup></td>
-                    <td>100</td>
-                </tr>
+        </thead>
 
-                <tr>
-                    <td>10<sup>-1</sup></td>
-                    <td>0,1</td>
-                </tr>
+        <tbody>
 
-                <tr>
-                    <td>10<sup>-4</sup></td>
-                    <td>0,0001</td>
-                </tr>
+            <tr>
+                <td>10<sup>7</sup></td>
+                <td>10 000 000</td>
+            </tr>
 
-                <tr>
-                    <td>10<sup>-9</sup></td>
-                    <td>0,000000001</td>
-                </tr>
+            <tr>
+                <td>10<sup>5</sup></td>
+                <td>100 000</td>
+            </tr>
 
-            </tbody>
+            <tr>
+                <td>10<sup>2</sup></td>
+                <td>100</td>
+            </tr>
 
-        </table>
+            <tr>
+                <td>10<sup>-1</sup></td>
+                <td>0,1</td>
+            </tr>
+
+            <tr>
+                <td>10<sup>-4</sup></td>
+                <td>0,0001</td>
+            </tr>
+
+            <tr>
+                <td>10<sup>-9</sup></td>
+                <td>0,000000001</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<div class="example">
+
+    <div class="example-title">
+        Exemple
+    </div>
+
+    <div class="formula">
+
+        2000
+        =
+        200,0 × 10<sup>1</sup>
+        =
+        20,00 × 10<sup>2</sup>
+        =
+        2,000 × 10<sup>3</sup>
+        =
+        0,2000 × 10<sup>4</sup>
 
     </div>
 
+</div>
 
-    <div class="example">
 
-        <div class="example-title">Exemple</div>
+<div class="example">
 
-        <div class="formula">
-            2000
-            =
-            200,0 × 10<sup>1</sup>
-            =
-            20,00 × 10<sup>2</sup>
-            =
-            2,000 × 10<sup>3</sup>
-            =
-            0,2000 × 10<sup>4</sup>
-        </div>
+    <div class="example-title">
+        Autre exemple
+    </div>
+
+    <div class="formula">
+
+        0,0650
+        =
+        0,650 × 10<sup>-1</sup>
+        =
+        6,50 × 10<sup>-2</sup>
+        =
+        65,0 × 10<sup>-3</sup>
+        =
+        650 × 10<sup>-4</sup>
 
     </div>
 
-
-    <div class="example">
-
-        <div class="example-title">Autre exemple</div>
-
-        <div class="formula">
-            0,0650
-            =
-            0,650 × 10<sup>-1</sup>
-            =
-            6,50 × 10<sup>-2</sup>
-            =
-            65,0 × 10<sup>-3</sup>
-            =
-            650 × 10<sup>-4</sup>
-        </div>
-
-    </div>
+</div>
 
 
-    <div class="info">
+<div class="info">
 
-        <strong>Explications :</strong>
+    <strong>Explications :</strong>
 
-        <p>
-            <strong>20,00 × 10<sup>2</sup> = 20,00 × 100 = 2000</strong>
-            <br>
-            On peut appliquer ce raisonnement à tous les exemples.
-        </p>
+    <p>
+        <strong>
+            20,00 × 10<sup>2</sup> = 20,00 × 100 = 2000
+        </strong>
 
-        <p>
-            <strong>65,0 × 10<sup>-3</sup> = 65,0 × 0,001 = 0,065</strong>
-        </p>
+        <br>
 
-    </div>
+        On peut appliquer ce raisonnement à tous les exemples.
+    </p>
+
+    <p>
+        <strong>
+            65,0 × 10<sup>-3</sup> = 65,0 × 0,001 = 0,065
+        </strong>
+    </p>
+
+</div>
+```
 
 </section>
-
 
 <!-- =====================================================
      NOTATION SCIENTIFIQUE
@@ -929,65 +1004,70 @@ footer a {
 
 <section class="section" id="notation">
 
-    <h2>Notation scientifique</h2>
+```
+<h2>
+    Notation scientifique
+</h2>
 
-    <div class="key-point">
+<div class="key-point">
 
-        La notation scientifique est
-        <strong>incontournable</strong> en sciences physiques.
+    La notation scientifique est
+    <strong>incontournable</strong> en sciences physiques.
 
-        Elle consiste à ne laisser qu’un seul chiffre avant la virgule.
-        Celui-ci doit être différent de zéro.
+    Elle consiste à ne laisser qu’un seul chiffre avant la virgule.
+    Celui-ci doit être différent de zéro.
 
-    </div>
+</div>
 
 
-    <div class="table-wrap">
+<div class="table-wrap">
 
-        <table>
+    <table>
 
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Notation scientifique</th>
-                </tr>
-            </thead>
+        <thead>
 
-            <tbody>
+            <tr>
+                <th>Nombre</th>
+                <th>Notation scientifique</th>
+            </tr>
 
-                <tr>
-                    <td>2546</td>
-                    <td>2,546 × 10<sup>3</sup></td>
-                </tr>
+        </thead>
 
-                <tr>
-                    <td>0,00672</td>
-                    <td>6,72 × 10<sup>-3</sup></td>
-                </tr>
+        <tbody>
 
-                <tr>
-                    <td>201</td>
-                    <td>2,01 × 10<sup>2</sup></td>
-                </tr>
+            <tr>
+                <td>2546</td>
+                <td>2,546 × 10<sup>3</sup></td>
+            </tr>
 
-                <tr>
-                    <td>0,40</td>
-                    <td>4,0 × 10<sup>-1</sup></td>
-                </tr>
+            <tr>
+                <td>0,00672</td>
+                <td>6,72 × 10<sup>-3</sup></td>
+            </tr>
 
-                <tr>
-                    <td>Etc…</td>
-                    <td>Etc…</td>
-                </tr>
+            <tr>
+                <td>201</td>
+                <td>2,01 × 10<sup>2</sup></td>
+            </tr>
 
-            </tbody>
+            <tr>
+                <td>0,40</td>
+                <td>4,0 × 10<sup>-1</sup></td>
+            </tr>
 
-        </table>
+            <tr>
+                <td>Etc…</td>
+                <td>Etc…</td>
+            </tr>
 
-    </div>
+        </tbody>
+
+    </table>
+
+</div>
+```
 
 </section>
-
 
 <!-- =====================================================
      MULTIPLES
@@ -995,143 +1075,152 @@ footer a {
 
 <section class="section" id="multiples">
 
-    <h2>Tableau de multiples et sous-multiples</h2>
+```
+<h2>
+    Tableau de multiples et sous-multiples
+</h2>
 
-    <div class="table-wrap">
+<div class="table-wrap">
 
-        <table class="prefix-table">
+    <table class="prefix-table">
 
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Puissance de 10</th>
-                    <th>Préfixe</th>
-                    <th>Symbole</th>
-                </tr>
-            </thead>
+        <thead>
 
-            <tbody>
+            <tr>
+                <th>Nombre</th>
+                <th>Puissance de 10</th>
+                <th>Préfixe</th>
+                <th>Symbole</th>
+            </tr>
 
-                <tr>
-                    <td>1 000 000 000</td>
-                    <td>10<sup>9</sup></td>
-                    <td>Giga</td>
-                    <td class="prefix-symbol">G</td>
-                </tr>
+        </thead>
 
-                <tr>
-                    <td>1 000 000</td>
-                    <td>10<sup>6</sup></td>
-                    <td>Méga</td>
-                    <td class="prefix-symbol">M</td>
-                </tr>
+        <tbody>
 
-                <tr>
-                    <td>1 000</td>
-                    <td>10<sup>3</sup></td>
-                    <td>Kilo</td>
-                    <td class="prefix-symbol">k</td>
-                </tr>
+            <tr>
+                <td>1 000 000 000</td>
+                <td>10<sup>9</sup></td>
+                <td>Giga</td>
+                <td class="prefix-symbol">G</td>
+            </tr>
 
-                <tr>
-                    <td>100</td>
-                    <td>10<sup>2</sup></td>
-                    <td>Hecto</td>
-                    <td class="prefix-symbol">h</td>
-                </tr>
+            <tr>
+                <td>1 000 000</td>
+                <td>10<sup>6</sup></td>
+                <td>Méga</td>
+                <td class="prefix-symbol">M</td>
+            </tr>
 
-                <tr>
-                    <td>10</td>
-                    <td>10<sup>1</sup></td>
-                    <td>Déca</td>
-                    <td class="prefix-symbol">da</td>
-                </tr>
+            <tr>
+                <td>1 000</td>
+                <td>10<sup>3</sup></td>
+                <td>Kilo</td>
+                <td class="prefix-symbol">k</td>
+            </tr>
 
-                <tr>
-                    <td>1</td>
-                    <td>10<sup>0</sup></td>
-                    <td>—</td>
-                    <td>—</td>
-                </tr>
+            <tr>
+                <td>100</td>
+                <td>10<sup>2</sup></td>
+                <td>Hecto</td>
+                <td class="prefix-symbol">h</td>
+            </tr>
 
-                <tr>
-                    <td>0,1</td>
-                    <td>10<sup>-1</sup></td>
-                    <td>Déci</td>
-                    <td class="prefix-symbol">d</td>
-                </tr>
+            <tr>
+                <td>10</td>
+                <td>10<sup>1</sup></td>
+                <td>Déca</td>
+                <td class="prefix-symbol">da</td>
+            </tr>
 
-                <tr>
-                    <td>0,01</td>
-                    <td>10<sup>-2</sup></td>
-                    <td>Centi</td>
-                    <td class="prefix-symbol">c</td>
-                </tr>
+            <tr>
+                <td>1</td>
+                <td>10<sup>0</sup></td>
+                <td>—</td>
+                <td>—</td>
+            </tr>
 
-                <tr>
-                    <td>0,001</td>
-                    <td>10<sup>-3</sup></td>
-                    <td>Milli</td>
-                    <td class="prefix-symbol">m</td>
-                </tr>
+            <tr>
+                <td>0,1</td>
+                <td>10<sup>-1</sup></td>
+                <td>Déci</td>
+                <td class="prefix-symbol">d</td>
+            </tr>
 
-                <tr>
-                    <td>0,000001</td>
-                    <td>10<sup>-6</sup></td>
-                    <td>Micro</td>
-                    <td class="prefix-symbol">µ</td>
-                </tr>
+            <tr>
+                <td>0,01</td>
+                <td>10<sup>-2</sup></td>
+                <td>Centi</td>
+                <td class="prefix-symbol">c</td>
+            </tr>
 
-                <tr>
-                    <td>0,000000001</td>
-                    <td>10<sup>-9</sup></td>
-                    <td>Nano</td>
-                    <td class="prefix-symbol">n</td>
-                </tr>
+            <tr>
+                <td>0,001</td>
+                <td>10<sup>-3</sup></td>
+                <td>Milli</td>
+                <td class="prefix-symbol">m</td>
+            </tr>
 
-            </tbody>
+            <tr>
+                <td>0,000001</td>
+                <td>10<sup>-6</sup></td>
+                <td>Micro</td>
+                <td class="prefix-symbol">µ</td>
+            </tr>
 
-        </table>
+            <tr>
+                <td>0,000000001</td>
+                <td>10<sup>-9</sup></td>
+                <td>Nano</td>
+                <td class="prefix-symbol">n</td>
+            </tr>
 
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<p>
+    Il est très simple en utilisant ce tableau de convertir des unités.
+    Par exemple :
+</p>
+
+
+<div class="example">
+
+    <div class="example-title">
+        Exemple : 0,15 nm en mètre
     </div>
-
 
     <p>
-        Il est très simple en utilisant ce tableau de convertir des unités.
-        Par exemple :
+        « Nano » veut dire
+        <strong>10<sup>-9</sup></strong>.
     </p>
 
+    <p>
+        On peut donc directement remplacer le « n » par
+        <strong>10<sup>-9</sup></strong>.
+    </p>
 
-    <div class="example">
+    <div class="formula">
 
-        <div class="example-title">Exemple : 0,15 nm en mètre</div>
-
-        <p>
-            « Nano » veut dire
-            <strong>10<sup>-9</sup></strong>.
-        </p>
-
-        <p>
-            On peut donc directement remplacer le « n » par
-            <strong>10<sup>-9</sup></strong>.
-        </p>
-
-        <div class="formula">
-            0,15 nm
-            =
-            0,15 × 10<sup>-9</sup> m
-            =
-            1,5 × 10<sup>-10</sup> m
-        </div>
-
-        <p>
-            Le résultat est donné en notation scientifique.
-        </p>
+        0,15 nm
+        =
+        0,15 × 10<sup>-9</sup> m
+        =
+        1,5 × 10<sup>-10</sup> m
 
     </div>
 
-</section>
+    <p>
+        Le résultat est donné en notation scientifique.
+    </p>
 
+</div>
+```
+
+</section>
 
 <!-- =====================================================
      ORDRE DE GRANDEUR
@@ -1139,111 +1228,116 @@ footer a {
 
 <section class="section" id="ordre">
 
-    <h2>L’ordre de grandeur</h2>
+```
+<h2>
+    L’ordre de grandeur
+</h2>
+
+<p>
+    L’ordre de grandeur d’un nombre est la puissance de 10
+    la plus proche de celui-ci.
+</p>
+
+<p>
+    On le détermine de la manière suivante :
+</p>
+
+
+<ol class="steps">
+
+    <li>
+        On écrit le nombre en notation scientifique.
+    </li>
+
+    <li>
+        Si le nombre avant la puissance de 10 est inférieur à 5,
+        l’ordre de grandeur est égal à la puissance de 10.
+    </li>
+
+    <li>
+        Si le nombre avant la puissance de 10 est supérieur ou égal à 5,
+        l’ordre de grandeur est égal à la puissance de 10 augmentée de 1.
+    </li>
+
+</ol>
+
+
+<h3>
+    Exemple
+</h3>
+
+
+<div class="table-wrap">
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>Nombre</th>
+                <th>Écriture scientifique</th>
+                <th>Ordre de grandeur</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>2751</td>
+
+                <td>
+                    2,751 × 10<sup>3</sup>
+                </td>
+
+                <td>
+                    2,751 &lt; 5
+                    donc
+                    <strong>10<sup>3</sup></strong>
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>0,055</td>
+
+                <td>
+                    5,5 × 10<sup>-2</sup>
+                </td>
+
+                <td>
+                    5,5 &gt; 5
+                    donc
+                    10<sup>-2+1</sup>
+                    donc
+                    <strong>10<sup>-1</sup></strong>
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<div class="key-point">
+
+    <strong>À retenir :</strong>
 
     <p>
-        L’ordre de grandeur d’un nombre est la puissance de 10
-        la plus proche de celui-ci.
+        Pour déterminer rapidement l’ordre de grandeur,
+        il faut d’abord écrire le nombre en notation scientifique,
+        puis regarder le nombre placé devant la puissance de 10.
     </p>
 
-    <p>
-        On le détermine de la manière suivante :
-    </p>
-
-
-    <ol class="steps">
-
-        <li>
-            On écrit le nombre en notation scientifique.
-        </li>
-
-        <li>
-            Si le nombre avant la puissance de 10 est inférieur à 5,
-            l’ordre de grandeur est égal à la puissance de 10.
-        </li>
-
-        <li>
-            Si le nombre avant la puissance de 10 est supérieur ou égal à 5,
-            l’ordre de grandeur est égal à la puissance de 10 augmentée de 1.
-        </li>
-
-    </ol>
-
-
-    <h3>Exemple</h3>
-
-
-    <div class="table-wrap">
-
-        <table>
-
-            <thead>
-
-                <tr>
-                    <th>Nombre</th>
-                    <th>Écriture scientifique</th>
-                    <th>Ordre de grandeur</th>
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                <tr>
-
-                    <td>2751</td>
-
-                    <td>
-                        2,751 × 10<sup>3</sup>
-                    </td>
-
-                    <td>
-                        2,751 &lt; 5
-                        donc
-                        <strong>10<sup>3</sup></strong>
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <td>0,055</td>
-
-                    <td>
-                        5,5 × 10<sup>-2</sup>
-                    </td>
-
-                    <td>
-                        5,5 &gt; 5
-                        donc
-                        10<sup>-2+1</sup>
-                        donc
-                        <strong>10<sup>-1</sup></strong>
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-
-    <div class="key-point">
-
-        <strong>À retenir :</strong>
-
-        <p>
-            Pour déterminer rapidement l’ordre de grandeur,
-            il faut d’abord écrire le nombre en notation scientifique,
-            puis regarder le nombre placé devant la puissance de 10.
-        </p>
-
-    </div>
+</div>
+```
 
 </section>
-
 
 <!-- =====================================================
      LIVRE DE SECONDE
@@ -1251,19 +1345,27 @@ footer a {
 
 <div class="card card-gold">
 
-    <h3 style="margin-top: 0;">Pour aller plus loin</h3>
+```
+<h3 style="margin-top: 0;">
+    Pour aller plus loin
+</h3>
 
-    <p>
-        Retrouve ces méthodes et de nombreux conseils dans mon
-        <strong>guide de Physique-Chimie pour la Seconde</strong>.
-    </p>
+<p>
+    Retrouve ces méthodes et de nombreux conseils dans mon
+    <strong>guide de Physique-Chimie pour la Seconde</strong>.
+</p>
 
-    <p style="margin-bottom: 0;">
-        <a href="ouvrages.html"
-           style="color: var(--navy); font-weight: bold;">
-            Découvrir les ouvrages →
-        </a>
-    </p>
+<p style="margin-bottom: 0;">
+
+    <a href="ouvrages.html"
+       style="color: var(--navy); font-weight: bold;">
+
+        Découvrir les ouvrages →
+
+    </a>
+
+</p>
+```
 
 </div>
 
@@ -1274,13 +1376,15 @@ footer a {
 
 <div class="container">
 
-    <div>
-        Physique-Chimie au lycée
-    </div>
+```
+<div>
+    Physique-Chimie au lycée
+</div>
 
-    <div>
-        Cours, méthodes et conseils pour le lycée
-    </div>
+<div>
+    Cours, méthodes et conseils pour le lycée
+</div>
+```
 
 </div>
 
