@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -8,7 +7,7 @@
 <title>Physique-Chimie au lycée | Cours, méthode et conseils par un professeur agrégé</title>
 
 <meta name="description"
-content="Aide en physique-chimie pour les élèves de lycée : Seconde, Première Spé, Terminale Spé, Grand Oral, ECE. Par un professeur agrégé en poste.">
+content="Aide en physique-chimie au lycée : méthodes, exercices, animations interactives et préparation du Grand Oral. Par un professeur agrégé de physique-chimie.">
 
 <meta name="robots" content="noindex, nofollow">
 
@@ -45,7 +44,7 @@ body {
     -webkit-text-size-adjust: 100%;
 }
 
-h1, h2, h3, .logo, .level-name {
+h1, h2, h3, .logo, .resource-name {
     font-family: Georgia, "Times New Roman", serif;
     font-weight: normal;
     color: var(--navy);
@@ -206,32 +205,6 @@ h1 {
     color: var(--gold-light);
 }
 
-.btn-gold {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 14px 22px;
-    background: var(--gold);
-    color: var(--navy);
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.96rem;
-    border-radius: 5px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.16);
-    transition: transform .18s ease, background .18s ease;
-}
-
-.btn-gold::after {
-    content: "→";
-    font-size: 1.15rem;
-}
-
-.btn-gold:hover {
-    background: var(--gold-light);
-    transform: translateY(-2px);
-}
-
 
 /* ================= SECTIONS ================= */
 
@@ -271,87 +244,84 @@ h2 {
 }
 
 
-/* ================= AIDE PAR NIVEAU ================= */
+/* ================= RESSOURCES ================= */
 
-.levels {
+.resources {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
 }
 
-.level-row {
+.resource-card {
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-areas:
-        "name status"
-        "desc status";
+        "name action"
+        "desc action";
     gap: 9px 18px;
     align-items: center;
-    padding: 24px;
+    padding: 25px;
     background: var(--white);
     border: 1px solid var(--line);
     border-radius: 8px;
     box-shadow: 0 4px 14px rgba(20,39,61,0.035);
-    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    text-decoration: none;
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
 }
 
-.level-row:hover {
+.resource-card:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow);
     border-color: rgba(176,141,43,0.45);
 }
 
-.level-row.available {
+.resource-card.featured {
     grid-column: 1 / -1;
     background:
-        linear-gradient(105deg, rgba(176,141,43,0.11), rgba(176,141,43,0.025) 55%),
+        linear-gradient(
+            105deg,
+            rgba(176,141,43,0.11),
+            rgba(176,141,43,0.025) 55%
+        ),
         var(--white);
     border-color: rgba(176,141,43,0.42);
 }
 
-.level-name {
+.resource-name {
     grid-area: name;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     color: var(--navy);
 }
 
-.level-desc {
+.resource-desc {
     grid-area: desc;
     color: var(--muted);
     font-size: 0.94rem;
     line-height: 1.5;
 }
 
-.status {
-    grid-area: status;
-    text-align: right;
-    font-size: 0.86rem;
-    white-space: nowrap;
-}
-
-.status a {
+.resource-action {
+    grid-area: action;
     display: inline-flex;
     align-items: center;
     gap: 7px;
     text-decoration: none;
     color: var(--navy);
+    font-size: 0.86rem;
     font-weight: bold;
     padding: 8px 11px;
     border: 1px solid rgba(176,141,43,0.65);
     border-radius: 4px;
     background: rgba(176,141,43,0.06);
+    white-space: nowrap;
 }
 
-.status a::after {
+.resource-action::after {
     content: "→";
     color: var(--gold);
-}
-
-.status.soon {
-    color: #999;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: .06em;
 }
 
 
@@ -359,7 +329,11 @@ h2 {
 
 .author-section {
     background:
-        radial-gradient(circle at 90% 50%, rgba(176,141,43,0.10), transparent 30%),
+        radial-gradient(
+            circle at 90% 50%,
+            rgba(176,141,43,0.10),
+            transparent 30%
+        ),
         var(--navy);
     color: var(--cream);
 }
@@ -502,43 +476,30 @@ footer .container {
     }
 
 
-    /* NIVEAUX */
+    /* RESSOURCES */
 
-    .levels {
+    .resources {
         grid-template-columns: 1fr;
         gap: 12px;
     }
 
-    .level-row,
-    .level-row.available {
+    .resource-card,
+    .resource-card.featured {
         grid-column: auto;
-        display: grid;
-        grid-template-columns: 1fr auto;
-        grid-template-areas:
-            "name status"
-            "desc desc";
         padding: 20px;
-        gap: 8px 12px;
     }
 
-    .level-row.available {
-        padding: 21px;
-    }
-
-    .level-name {
+    .resource-name {
         font-size: 1.16rem;
     }
 
-    .level-desc {
+    .resource-desc {
         font-size: 0.91rem;
         line-height: 1.5;
     }
 
-    .status {
+    .resource-action {
         font-size: 0.78rem;
-    }
-
-    .status a {
         padding: 6px 8px;
     }
 
@@ -632,43 +593,31 @@ footer .container {
     }
 
 
-    /* CARDS */
+    /* CARTES */
 
-    .level-row,
-    .level-row.available {
+    .resource-card,
+    .resource-card.featured {
         grid-template-columns: 1fr;
         grid-template-areas:
             "name"
             "desc"
-            "status";
+            "action";
         gap: 7px;
         padding: 18px;
     }
 
-    .level-row.available {
-        padding: 19px;
-    }
-
-    .level-name {
+    .resource-name {
         font-size: 1.1rem;
     }
 
-    .level-desc {
+    .resource-desc {
         font-size: 0.9rem;
     }
 
-    .status {
-        text-align: left;
-        margin-top: 3px;
-    }
-
-    .status a {
+    .resource-action {
         width: 100%;
         justify-content: center;
-    }
-
-    .status.soon {
-        margin-top: 4px;
+        margin-top: 3px;
     }
 
 
@@ -696,47 +645,31 @@ footer .container {
 
     <nav class="links">
 
-        <a href="index.html">
+        <a href="index.html" class="active">
             Accueil
-        </a>
-
-        <a href="aide_conversions.html">
-            Seconde
-        </a>
-
-        <a href="premiere.html">
-            Première
-        </a>
-
-        <a href="terminale.html">
-            Terminale
         </a>
 
         <a href="animations.html">
             Animations
         </a>
 
-        <a href="preparer-grand-oral.html">
-            Grand Oral
-        </a>
-
-        <a href="experimentation.html">
-            Expérimentation
+        <a href="Ouvrages.html">
+            Ouvrages
         </a>
 
     </nav>
 
 </div>
 
-
 </header>
+
 
 <main>
 
-<!-- HERO -->
+
+<!-- ================= HERO ================= -->
 
 <section class="hero">
-
 
 <div class="container">
 
@@ -752,9 +685,10 @@ footer .container {
         </h1>
 
         <p>
-            Des ressources pour les élèves de Seconde,
-            Première Spé, Terminale Spé, ainsi que pour
-            la préparation du Grand Oral et des ECE.
+            Des ressources de physique-chimie conçues pour
+            accompagner les élèves du lycée : méthodes,
+            exercices, animations interactives et préparation
+            du Grand Oral.
         </p>
 
         <p class="credential">
@@ -766,13 +700,12 @@ footer .container {
 
 </div>
 
-
 </section>
 
-<!-- AIDE PAR NIVEAU -->
+
+<!-- ================= RESSOURCES ================= -->
 
 <section class="section-cream">
-
 
 <div class="container">
 
@@ -783,122 +716,94 @@ footer .container {
         </div>
 
         <h2>
-            De l'aide à chaque niveau
+            Des outils pour progresser
         </h2>
 
         <p>
-            Une page dédiée par niveau, avec des explications,
-            des méthodes et des conseils. La collection
-            s'étoffera progressivement.
+            Des ressources directement utilisables pour
+            travailler les méthodes essentielles de
+            physique-chimie.
         </p>
 
     </div>
 
 
-    <div class="levels">
+    <div class="resources">
 
 
-        <div class="level-row available">
+        <!-- GRAND ORAL -->
 
-            <div class="level-name">
+        <a href="preparer-grand-oral.html"
+           class="resource-card featured">
+
+            <div class="resource-name">
                 Grand Oral
             </div>
 
-            <div class="level-desc">
-                Choisir sa problématique, construire son plan,
-                préparer l'oral et les questions du jury.
+            <div class="resource-desc">
+                Conseils, méthode et exemples pour construire
+                et préparer son Grand Oral de physique-chimie.
             </div>
 
-            <div class="status">
-
-                <a href="preparer-grand-oral.html">
-                    Voir l'aide
-                </a>
-
+            <div class="resource-action">
+                Voir l'aide
             </div>
 
-        </div>
+        </a>
 
 
-        <div class="level-row">
+        <!-- CONVERSIONS -->
 
-            <div class="level-name">
-                Seconde
+        <a href="aide_conversions.html"
+           class="resource-card">
+
+            <div class="resource-name">
+                Apprendre à convertir
             </div>
 
-            <div class="level-desc">
-                Méthodes et pièges à éviter en physique-chimie — Seconde
+            <div class="resource-desc">
+                Méthodes et exercices pour maîtriser les
+                conversions d'unités et les puissances de dix.
             </div>
 
-            <div class="status soon">
-                Bientôt
+            <div class="resource-action">
+                Méthodes et exercices
             </div>
 
-        </div>
+        </a>
 
 
-        <div class="level-row">
+        <!-- TABLEAU D'AVANCEMENT -->
 
-            <div class="level-name">
-                Première Spé SPC
+        <a href="tableau_avancement.html"
+           class="resource-card">
+
+            <div class="resource-name">
+                Tableau d'avancement
             </div>
 
-            <div class="level-desc">
-                Méthodes et pièges à éviter en physique-chimie — Première
+            <div class="resource-desc">
+                Méthode et animation pour comprendre et utiliser
+                efficacement le tableau d'avancement.
             </div>
 
-            <div class="status soon">
-                Bientôt
+            <div class="resource-action">
+                Méthode et animation
             </div>
 
-        </div>
-
-
-        <div class="level-row">
-
-            <div class="level-name">
-                Terminale Spé SPC
-            </div>
-
-            <div class="level-desc">
-                Fiches de cours et démonstrations en physique-chimie — Terminale
-            </div>
-
-            <div class="status soon">
-                Bientôt
-            </div>
-
-        </div>
-
-
-        <div class="level-row">
-
-            <div class="level-name">
-                Travaux pratiques
-            </div>
-
-            <div class="level-desc">
-                Techniques expérimentales au lycée — De la Seconde à la Terminale, réussir son ECE
-            </div>
-
-            <div class="status soon">
-                Bientôt
-            </div>
-
-        </div>
+        </a>
 
 
     </div>
 
 </div>
 
-
 </section>
 
-<!-- AUTEUR -->
+
+<!-- ================= AUTEUR ================= -->
 
 <section class="author-section" id="auteur">
-
 
 <div class="container author-grid">
 
@@ -914,20 +819,23 @@ footer .container {
     </p>
 
     <p>
-        Ce site rassemble les ressources et conseils nés de cette
-        expérience de terrain : ce qui fonctionne réellement pour
-        préparer les épreuves, du cours aux examens.
+        Ce site rassemble les ressources et conseils issus de
+        cette expérience de terrain : méthodes de travail,
+        outils interactifs et accompagnement des principales
+        étapes de la scolarité au lycée.
     </p>
 
 </div>
 
-
 </section>
+
 
 </main>
 
-<footer>
 
+<!-- ================= FOOTER ================= -->
+
+<footer>
 
 <div class="container">
 
@@ -941,8 +849,8 @@ footer .container {
 
 </div>
 
-
 </footer>
+
 
 </body>
 </html>
