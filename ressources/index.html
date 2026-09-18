@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,142 +14,598 @@
 
 <style>
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 30px 20px;
-    background: #faf9f5;
-    color: #14273d;
-    line-height: 1.6;
+/* ================= VARIABLES ================= */
+
+:root {
+    --navy: #14273d;
+    --navy-light: #1f3552;
+    --gold: #b08d2b;
+    --gold-light: #d0b35a;
+    --cream: #faf9f5;
+    --white: #ffffff;
+    --ink: #232a35;
+    --muted: #6b7280;
+    --line: #e3ddd0;
+    --shadow: 0 12px 30px rgba(20,39,61,0.10);
 }
 
-h1 {
-    margin-bottom: 10px;
-    font-size: 2em;
+
+/* ================= BASE ================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 78px;
+}
+
+body {
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+}
+
+h1, h2, .logo {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: normal;
+    color: var(--navy);
+}
+
+a {
+    color: inherit;
+}
+
+.container {
+    width: min(1080px, 92%);
+    margin: auto;
+}
+
+
+/* ================= HEADER ================= */
+
+header {
+    background: rgba(250,249,245,0.97);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+}
+
+.nav {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+}
+
+.logo {
+    text-decoration: none;
+    font-size: 1.12rem;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+
+/* ================= MENU ================= */
+
+nav.links {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+nav.links::-webkit-scrollbar {
+    display: none;
+}
+
+nav.links a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: var(--navy);
+    position: relative;
+    white-space: nowrap;
+    padding: 9px 13px;
+    border-radius: 8px;
+    transition: background .2s ease, color .2s ease;
+}
+
+nav.links a:hover,
+nav.links a.active {
+    background: rgba(20,39,61,0.07);
+    color: var(--navy);
+}
+
+
+/* ================= PAGE ================= */
+
+main {
+    min-height: 70vh;
+}
+
+.page-section {
+    padding: 76px 0;
+    background: var(--cream);
+}
+
+.page-inner {
+    max-width: 800px;
+    margin: auto;
+}
+
+.page-title {
+    margin: 0 0 12px;
+    font-size: 2.45rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
 }
 
 .intro {
-    margin-bottom: 30px;
-    color: #444;
+    margin: 0 0 36px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.65;
 }
 
+.intro strong {
+    color: var(--navy);
+}
+
+
+/* ================= RESSOURCES ================= */
+
 .ressource {
-    background: white;
-    padding: 20px;
+    background: var(--white);
+    padding: 25px;
     margin: 16px 0;
     border-radius: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--line);
+    box-shadow: 0 4px 14px rgba(20,39,61,0.035);
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
+}
+
+.ressource:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    border-color: rgba(176,141,43,0.45);
 }
 
 .ressource h2 {
-    margin-top: 0;
-    font-size: 1.15em;
+    margin: 0 0 9px;
+    font-size: 1.3rem;
+    line-height: 1.3;
 }
 
 .ressource p {
-    margin-bottom: 15px;
-    color: #555;
+    margin: 0 0 17px;
+    color: var(--muted);
+    font-size: 0.94rem;
+    line-height: 1.55;
 }
 
+
+/* ================= BOUTON ================= */
+
 .bouton {
-    display: inline-block;
-    padding: 10px 16px;
-    background: #14273d;
-    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 9px 13px;
+    background: rgba(176,141,43,0.06);
+    color: var(--navy);
     text-decoration: none;
-    border-radius: 5px;
+    border: 1px solid rgba(176,141,43,0.65);
+    border-radius: 4px;
+    font-size: 0.86rem;
     font-weight: bold;
+    transition:
+        background .2s ease,
+        border-color .2s ease;
+}
+
+.bouton::after {
+    content: "→";
+    color: var(--gold);
 }
 
 .bouton:hover {
-    opacity: 0.85;
+    background: rgba(176,141,43,0.12);
+    border-color: var(--gold);
 }
 
+
+/* ================= FOOTER ================= */
+
 footer {
-    margin-top: 40px;
-    font-size: 0.85em;
-    color: #777;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.86rem;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+
+/* ================= TABLETTE ================= */
+
+@media (max-width: 800px) {
+
+    html {
+        scroll-padding-top: 70px;
+    }
+
+    .container {
+        width: 92%;
+    }
+
+
+    /* HEADER */
+
+    .nav {
+        min-height: auto;
+        padding: 10px 0 7px;
+        display: block;
+    }
+
+    .logo {
+        display: block;
+        font-size: 1.06rem;
+        margin-bottom: 8px;
+    }
+
+    nav.links {
+        width: 100%;
+        gap: 4px;
+        padding-bottom: 3px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    nav.links a {
+        flex: 0 0 auto;
+        font-size: 0.82rem;
+        padding: 7px 9px;
+    }
+
+
+    /* PAGE */
+
+    .page-section {
+        padding: 56px 0;
+    }
+
+    .page-inner {
+        width: 100%;
+    }
+
+    .page-title {
+        font-size: 2rem;
+        line-height: 1.18;
+    }
+
+    .intro {
+        font-size: 0.95rem;
+        line-height: 1.58;
+        margin-bottom: 27px;
+    }
+
+
+    /* RESSOURCES */
+
+    .ressource {
+        padding: 20px;
+        margin: 12px 0;
+    }
+
+    .ressource h2 {
+        font-size: 1.16rem;
+    }
+
+    .ressource p {
+        font-size: 0.91rem;
+    }
+
+    .bouton {
+        font-size: 0.82rem;
+        padding: 8px 10px;
+    }
+
+
+    /* FOOTER */
+
+    footer {
+        padding: 26px 0;
+        font-size: 0.82rem;
+        line-height: 1.5;
+    }
+
+    footer .container {
+        display: block;
+    }
+}
+
+
+/* ================= PETITS SMARTPHONES ================= */
+
+@media (max-width: 430px) {
+
+    .container {
+        width: 91%;
+    }
+
+    .nav {
+        padding-top: 9px;
+    }
+
+    .logo {
+        font-size: 1rem;
+    }
+
+    nav.links {
+        gap: 4px;
+    }
+
+    nav.links a {
+        font-size: 0.78rem;
+        padding: 6px 8px;
+    }
+
+
+    /* PAGE */
+
+    .page-section {
+        padding: 48px 0;
+    }
+
+    .page-title {
+        font-size: 1.75rem;
+    }
+
+    .intro {
+        font-size: 0.91rem;
+    }
+
+
+    /* RESSOURCES */
+
+    .ressource {
+        padding: 18px;
+    }
+
+    .ressource h2 {
+        font-size: 1.1rem;
+    }
+
+    .ressource p {
+        font-size: 0.9rem;
+    }
+
+    .bouton {
+        width: 100%;
+        justify-content: center;
+    }
+
 }
 
 </style>
+
 </head>
+
 
 <body>
 
-<h1>Ressources complémentaires</h1>
 
-<p class="intro">
-Documents complémentaires associés au guide
-<strong>Réussir son Grand Oral de Physique-Chimie</strong>.
-Ces documents peuvent être consultés ou imprimés.
-</p>
+<!-- ================= HEADER ================= -->
 
-<div class="ressource">
-    <h2>Fiche récapitulative — Problématique</h2>
-    <p>
-        Une fiche pour organiser et synthétiser sa problématique
-        de Grand Oral.
-    </p>
-    <a class="bouton"
-       href="Fiche_recapitulative_problematique_A4.pdf"
-       target="_blank">
-        Ouvrir le PDF
+<header>
+
+<div class="container nav">
+
+    <a href="index.html" class="logo">
+        Physique-Chimie au lycée
     </a>
+
+    <nav class="links">
+
+        <a href="index.html">
+            Accueil
+        </a>
+
+        <a href="animations.html">
+            Animations
+        </a>
+
+        <a href="Ouvrages.html">
+            Ouvrages
+        </a>
+
+    </nav>
+
 </div>
 
-<div class="ressource">
-    <h2>Grille d'évaluation</h2>
-    <p>
-        Grille permettant de vérifier les différents éléments
-        de la préparation du Grand Oral.
+</header>
+
+
+<main>
+
+
+<!-- ================= CONTENU ================= -->
+
+<section class="page-section">
+
+<div class="container">
+
+<div class="page-inner">
+
+    <h1 class="page-title">
+        Ressources complémentaires
+    </h1>
+
+    <p class="intro">
+        Documents complémentaires associés au guide
+        <strong>Réussir son Grand Oral de Physique-Chimie</strong>.
+        Ces documents peuvent être consultés ou imprimés.
     </p>
-    <a class="bouton"
-       href="Grille%20%C3%A9valuation.pdf"
-       target="_blank">
-        Ouvrir le PDF
-    </a>
+
+
+    <!-- FICHE PROBLEMATIQUE -->
+
+    <div class="ressource">
+
+        <h2>
+            Fiche récapitulative — Problématique
+        </h2>
+
+        <p>
+            Une fiche pour organiser et synthétiser sa problématique
+            de Grand Oral.
+        </p>
+
+        <a class="bouton"
+           href="Fiche_recapitulative_problematique_A4.pdf"
+           target="_blank">
+            Ouvrir le PDF
+        </a>
+
+    </div>
+
+
+    <!-- GRILLE -->
+
+    <div class="ressource">
+
+        <h2>
+            Grille d'évaluation
+        </h2>
+
+        <p>
+            Grille permettant de vérifier les différents éléments
+            de la préparation du Grand Oral.
+        </p>
+
+        <a class="bouton"
+           href="Grille%20%C3%A9valuation.pdf"
+           target="_blank">
+            Ouvrir le PDF
+        </a>
+
+    </div>
+
+
+    <!-- PLANNING 1 -->
+
+    <div class="ressource">
+
+        <h2>
+            Planning élève — Période 1
+        </h2>
+
+        <p>
+            Planning de préparation du Grand Oral.
+        </p>
+
+        <a class="bouton"
+           href="Planning_Eleve_Periode1%20A4.pdf"
+           target="_blank">
+            Ouvrir le PDF
+        </a>
+
+    </div>
+
+
+    <!-- PLANNING 2 -->
+
+    <div class="ressource">
+
+        <h2>
+            Planning élève — Période 2
+        </h2>
+
+        <p>
+            Planning de préparation du Grand Oral.
+        </p>
+
+        <a class="bouton"
+           href="Planning_Eleve_Periode2%20A4.pdf"
+           target="_blank">
+            Ouvrir le PDF
+        </a>
+
+    </div>
+
+
+    <!-- PLANNING 3 -->
+
+    <div class="ressource">
+
+        <h2>
+            Planning élève — Période 3
+        </h2>
+
+        <p>
+            Planning de préparation du Grand Oral.
+        </p>
+
+        <a class="bouton"
+           href="Planning_Eleve_Periode3%20A4.pdf"
+           target="_blank">
+            Ouvrir le PDF
+        </a>
+
+    </div>
+
 </div>
 
-<div class="ressource">
-    <h2>Planning élève — Période 1</h2>
-    <p>
-        Planning de préparation du Grand Oral.
-    </p>
-    <a class="bouton"
-       href="Planning_Eleve_Periode1%20A4.pdf"
-       target="_blank">
-        Ouvrir le PDF
-    </a>
 </div>
 
-<div class="ressource">
-    <h2>Planning élève — Période 2</h2>
-    <p>
-        Planning de préparation du Grand Oral.
-    </p>
-    <a class="bouton"
-       href="Planning_Eleve_Periode2%20A4.pdf"
-       target="_blank">
-        Ouvrir le PDF
-    </a>
-</div>
+</section>
 
-<div class="ressource">
-    <h2>Planning élève — Période 3</h2>
-    <p>
-        Planning de préparation du Grand Oral.
-    </p>
-    <a class="bouton"
-       href="Planning_Eleve_Periode3%20A4.pdf"
-       target="_blank">
-        Ouvrir le PDF
-    </a>
-</div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
-    Physique-Chimie au lycée — Ressources complémentaires
+
+<div class="container">
+
+    <div>
+        Physique-Chimie au lycée
+    </div>
+
+    <div style="margin-top:6px;">
+        Ressources, méthodes et conseils pour les élèves du lycée.
+    </div>
+
+</div>
+
 </footer>
+
 
 </body>
 </html>
