@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+
+<title>Mentions Légales | Physique-Chimie au lycée</title>
+
+<style>
+
+:root {
+    --navy: #14273d;
+    --navy-light: #1f3552;
+    --gold: #b08d2b;
+    --gold-light: #d0b35a;
+    --cream: #faf9f5;
+    --white: #ffffff;
+    --ink: #232a35;
+    --muted: #6b7280;
+    --line: #e3ddd0;
+    --shadow: 0 12px 30px rgba(20,39,61,0.10);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 78px;
+}
+
+body {
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+}
+
+h1, h2, h3, .logo {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: normal;
+    color: var(--navy);
+}
+
+a {
+    color: inherit;
+}
+
+.container {
+    width: min(1080px, 92%);
+    margin: auto;
+}
+
+
+/* ================= HEADER ================= */
+
+header {
+    background: rgba(250,249,245,0.97);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+}
+
+.nav {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+}
+
+.logo {
+    text-decoration: none;
+    font-size: 1.12rem;
+    white-space: nowrap;
+}
+
+/* ================= MENU ================= */
+
+nav.links {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+nav.links::-webkit-scrollbar {
+    display: none;
+}
+
+nav.links a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: var(--navy);
+    position: relative;
+    white-space: nowrap;
+    padding: 9px 13px;
+    border-radius: 8px;
+    transition: background .2s ease, color .2s ease;
+}
+
+nav.links a:hover,
+nav.links a.active {
+    background: rgba(20,39,61,0.07);
+    color: var(--navy);
+}
+
+
+/* ================= MAIN CONTENT ================= */
+
+.content-section {
+    padding: 60px 0 80px;
+}
+
+.content-inner {
+    max-width: 760px;
+}
+
+h1 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--line);
+}
+
+section {
+    margin-bottom: 35px;
+}
+
+h2 {
+    font-size: 1.35rem;
+    margin: 0 0 12px;
+    color: var(--navy);
+}
+
+p {
+    margin: 0 0 12px;
+    color: var(--ink);
+    font-size: 0.98rem;
+}
+
+.dim {
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.content-inner a {
+    color: var(--navy);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+    text-decoration: none !important;
+    color: var(--gold) !important;
+}
+
+.back-link:hover {
+    text-decoration: underline !important;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.86rem;
+    background: var(--cream);
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.legal-link {
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.7;
+}
+
+.legal-link:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 800px) {
+
+    .nav {
+        min-height: auto;
+        padding: 10px 0 7px;
+        display: block;
+    }
+
+    .logo {
+        display: block;
+        font-size: 1.06rem;
+        margin-bottom: 8px;
+    }
+
+    nav.links {
+        width: 100%;
+        gap: 4px;
+        padding-bottom: 3px;
+    }
+
+    nav.links a {
+        font-size: 0.82rem;
+        padding: 7px 9px;
+    }
+
+    .content-section {
+        padding: 40px 0 60px;
+    }
+
+    footer .container {
+        display: block;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="container nav">
+
+    <a href="index.html" class="logo">
+        Physique-Chimie au lycée
+    </a>
+
+    <nav class="links">
+
+        <a href="index.html">
+            Accueil
+        </a>
+
+        <a href="animations.html">
+            Animations
+        </a>
+
+        <a href="Ouvrages.html">
+            Ouvrages
+        </a>
+
+    </nav>
+
+</div>
+
+</header>
+
+
+<main class="content-section">
+
+<div class="container">
+
+    <div class="content-inner">
+
+        <h1>Mentions Légales</h1>
+
+        <section>
+            <h2>Éditeur du site</h2>
+            <p>
+                <strong>Pseudonyme :</strong> Mathieu Tomah<br>
+                Ce site est édité à titre non professionnel par un particulier.
+            </p>
+            <p class="dim">
+                Conformément à l'article 6, III, 2° de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN), l'auteur a choisi de préserver son anonymat concernant son identité civile. Ses éléments d'identification personnelle ont été transmis de manière exacte à l'hébergeur.
+            </p>
+            <p>
+                <strong>Contact :</strong> <a href="mailto:grandoralspc@gmail.com">grandoralspc@gmail.com</a>
+            </p>
+        </section>
+
+        <section>
+            <h2>Hébergement</h2>
+            <p>Ce site est hébergé par :</p>
+            <p>
+                <strong>GitHub Inc.</strong><br>
+                88 Colin P. Kelly Jr. Street<br>
+                San Francisco, CA 94107, États-Unis<br>
+                Site web : <a href="https://pages.github.com" target="_blank" rel="noopener">pages.github.com</a>
+            </p>
+        </section>
+
+        <section>
+            <h2>Propriété intellectuelle</h2>
+            <p>
+                Sauf mention contraire, l'ensemble des contenus (textes, images, code) présents sur ce site est la propriété exclusive de l'auteur. Toute reproduction sans autorisation préalable est interdite.
+            </p>
+        </section>
+
+        <section>
+            <h2>Données personnelles et cookies</h2>
+            <p>
+                Ce site a un but strictement éducatif et ne collecte aucune donnée personnelle. Aucun cookie de traçage ou publicitaire n'est déposé par ce site.
+            </p>
+            <p class="dim">
+                Les liens redirigeant vers des plateformes tierces (notamment Amazon KDP pour la consultation d'ouvrages) sont soumis aux politiques de confidentialité et de gestion des cookies de ces sites externes.
+            </p>
+        </section>
+
+        <a href="index.html" class="back-link">&larr; Retour à l'accueil</a>
+
+    </div>
+
+</div>
+
+</main>
+
+
+<footer>
+
+<div class="container">
+
+    <div>
+        Physique-Chimie au lycée
+    </div>
+
+    <div>
+        © 2026 Mathieu Tomah — <a href="mentions-legales.html" class="legal-link">Mentions légales</a>
+    </div>
+
+</div>
+
+</footer>
+
+</body>
+</html>
