@@ -1,1147 +1,400 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Tableau d’avancement : méthode et exemple | Physique-Chimie au lycée</title>
-
-<meta name="description"
-content="Méthode pour construire et exploiter un tableau d’avancement en première spécialité physique-chimie. Exemple détaillé avec détermination du réactif limitant et de xmax.">
-
-<style>
-:root {
-    --navy: #14273d;
-    --navy-light: #1f3552;
-    --gold: #b08d2b;
-    --gold-light: #d0b35a;
-    --cream: #faf9f5;
-    --white: #ffffff;
-    --text: #26313d;
-    --muted: #65717e;
-    --border: #ddd8cc;
-    --soft: #f1eee6;
-    --green-soft: #edf5ef;
-    --green: #37684a;
-    --shadow: 0 4px 16px rgba(20,39,61,0.08);
-}
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    background: var(--cream);
-    color: var(--text);
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.65;
-}
-
-/* =========================
-   BANDEAU
-========================= */
-
-header {
-    background: var(--navy);
-    color: white;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
-}
-
-.navbar {
-    max-width: 1100px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.85rem 1.2rem;
-}
-
-.logo {
-    color: white;
-    text-decoration: none;
-    font-family: Georgia, serif;
-    font-size: 1.05rem;
-    font-weight: bold;
-}
-
-.nav-links {
-    display: flex;
-    gap: 0.45rem;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    padding: 0.5rem 0.8rem;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    transition: background 0.2s ease;
-}
-
-.nav-links a:hover {
-    background: var(--navy-light);
-}
-
-/* =========================
-   CONTENU
-========================= */
-
-.container {
-    max-width: 1000px;
-    margin: auto;
-    padding: 2rem 1.2rem 4rem;
-}
-
-.hero {
-    background: linear-gradient(135deg, var(--navy), var(--navy-light));
-    color: white;
-    border-radius: 14px;
-    padding: 2rem 1.6rem;
-    margin-bottom: 1.6rem;
-    box-shadow: var(--shadow);
-}
-
-.hero h1 {
-    font-family: Georgia, serif;
-    font-size: clamp(1.8rem, 5vw, 2.7rem);
-    line-height: 1.2;
-    margin: 0 0 0.7rem;
-}
-
-.hero p {
-    margin: 0;
-    max-width: 760px;
-    font-size: 1.05rem;
-    opacity: 0.94;
-}
-
-/* =========================
-   SOMMAIRE
-========================= */
-
-.toc {
-    background: white;
-    border: 1px solid var(--border);
-    border-left: 5px solid var(--gold);
-    border-radius: 10px;
-    padding: 1.2rem 1.4rem;
-    margin-bottom: 2rem;
-    box-shadow: var(--shadow);
-}
-
-.toc h2 {
-    font-family: Georgia, serif;
-    font-size: 1.25rem;
-    color: var(--navy);
-    margin: 0 0 0.7rem;
-}
-
-.toc ol {
-    margin: 0;
-    padding-left: 1.4rem;
-}
-
-.toc li {
-    margin: 0.25rem 0;
-}
-
-.toc a {
-    color: var(--navy);
-    text-decoration: none;
-}
-
-.toc a:hover {
-    color: var(--gold);
-}
-
-/* =========================
-   SECTIONS
-========================= */
-
-section {
-    scroll-margin-top: 80px;
-    margin-bottom: 2.3rem;
-}
-
-.card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 1.4rem;
-    box-shadow: var(--shadow);
-}
-
-h2 {
-    font-family: Georgia, serif;
-    color: var(--navy);
-    font-size: 1.65rem;
-    margin-top: 0;
-    border-bottom: 2px solid var(--gold-light);
-    padding-bottom: 0.45rem;
-}
-
-h3 {
-    color: var(--navy-light);
-    font-size: 1.2rem;
-    margin-top: 1.5rem;
-}
-
-strong {
-    color: var(--navy);
-}
-
-/* =========================
-   ENCARTS
-========================= */
-
-.info {
-    background: #f5f2e9;
-    border-left: 4px solid var(--gold);
-    padding: 1rem 1.1rem;
-    border-radius: 6px;
-    margin: 1.2rem 0;
-}
-
-.warning {
-    background: #f8f3e9;
-    border-left: 4px solid var(--gold);
-    padding: 1rem 1.1rem;
-    border-radius: 6px;
-    margin: 1.2rem 0;
-}
-
-.success {
-    background: var(--green-soft);
-    border-left: 4px solid var(--green);
-    padding: 1rem 1.1rem;
-    border-radius: 6px;
-    margin: 1.2rem 0;
-}
-
-.method {
-    background: var(--navy);
-    color: white;
-    border-radius: 10px;
-    padding: 1.2rem 1.3rem;
-    margin: 1.4rem 0;
-}
-
-.method strong {
-    color: white;
-}
-
-.method ol {
-    margin-bottom: 0;
-}
-
-/* =========================
-   EQUATIONS
-========================= */
-
-.equation {
-    background: var(--soft);
-    border-radius: 8px;
-    padding: 1rem;
-    margin: 1rem 0;
-    text-align: center;
-    font-size: 1.15rem;
-    font-family: Georgia, serif;
-    overflow-x: auto;
-}
-
-.formula {
-    display: inline-block;
-    background: #f3f0e8;
-    border-radius: 5px;
-    padding: 0.15rem 0.45rem;
-    font-family: Georgia, serif;
-}
-
-/* =========================
-   TABLEAUX
-========================= */
-
-.table-wrapper {
-    width: 100%;
-    overflow-x: auto;
-    margin: 1.3rem 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-}
-
-table {
-    width: 100%;
-    min-width: 680px;
-    border-collapse: collapse;
-    background: white;
-}
-
-th, td {
-    border: 1px solid #cfcac0;
-    padding: 0.65rem 0.55rem;
-    text-align: center;
-    vertical-align: middle;
-}
-
-th {
-    background: var(--navy);
-    color: white;
-    font-weight: bold;
-}
-
-td:first-child {
-    font-weight: bold;
-    background: #f2efe8;
-}
-
-.equation-row td {
-    background: #f7f5ef;
-    font-family: Georgia, serif;
-    font-size: 1.05rem;
-}
-
-.highlight {
-    background: #f4edcf !important;
-    font-weight: bold;
-}
-
-/* =========================
-   LISTES
-========================= */
-
-ul, ol {
-    padding-left: 1.4rem;
-}
-
-li {
-    margin-bottom: 0.45rem;
-}
-
-/* =========================
-   ÉTAPES
-========================= */
-
-.steps {
-    display: grid;
-    gap: 0.8rem;
-    margin: 1.3rem 0;
-}
-
-.step {
-    display: flex;
-    gap: 0.9rem;
-    align-items: flex-start;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.9rem;
-}
-
-.number {
-    flex: 0 0 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--gold);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-
-/* =========================
-   RETOUR SOMMAIRE
-========================= */
-
-.back-top {
-    text-align: right;
-    margin-top: 1rem;
-}
-
-.back-top a {
-    color: var(--navy);
-    font-size: 0.9rem;
-    text-decoration: none;
-}
-
-/* =========================
-   PIED DE PAGE
-========================= */
-
-footer {
-    background: var(--navy);
-    color: #e7ebef;
-    text-align: center;
-    padding: 1.5rem 1rem;
-    font-size: 0.85rem;
-}
-
-footer a {
-    color: white;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 650px) {
-
-    .navbar {
-        padding: 0.7rem 0.7rem;
-    }
-
-    .logo {
-        display: none;
-    }
-
-    .nav-links {
-        width: 100%;
-        justify-content: space-around;
-    }
-
-    .nav-links a {
-        font-size: 0.9rem;
-        padding: 0.45rem 0.55rem;
-    }
-
-    .container {
-        padding: 1.2rem 0.8rem 3rem;
-    }
-
-    .hero {
-        padding: 1.5rem 1.1rem;
-        border-radius: 10px;
-    }
-
-    .hero h1 {
-        font-size: 1.75rem;
-    }
-
-    .card {
-        padding: 1.1rem;
-        border-radius: 9px;
-    }
-
-    h2 {
-        font-size: 1.4rem;
-    }
-
-    body {
-        font-size: 0.97rem;
-    }
-
-    .equation {
-        font-size: 1rem;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Méthode - Tableau d'avancement</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --border: #e2e8f0;
+            --accent-bg: #eff6ff;
+            --success-bg: #f0fdf4;
+            --success-border: #bbf7d0;
+            --success-text: #166534;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .intro {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+            font-size: 1.4rem;
+        }
+
+        h3 {
+            margin: 16px 0 8px 0;
+            font-size: 1.1rem;
+        }
+
+        p, ul, ol {
+            margin-bottom: 12px;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 10px;
+        }
+
+        th {
+            background-color: var(--accent-bg);
+            color: var(--primary);
+        }
+
+        .equation {
+            background-color: var(--accent-bg);
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+            margin: 12px 0;
+        }
+
+        .success {
+            background-color: var(--success-bg);
+            border: 1px solid var(--success-border);
+            color: var(--success-text);
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 16px;
+        }
+
+        .btn-animation {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            background-color: var(--primary);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 16px;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-animation:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Sommaire styling */
+        .sommaire-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .sommaire-list li {
+            margin-bottom: 8px;
+        }
+
+        .sommaire-list a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .sommaire-list a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-    <nav class="navbar">
+<div class="container">
 
-        <a href="index.html" class="logo">
-            Physique-Chimie au lycée
-        </a>
-
-        <div class="nav-links">
-            <a href="index.html">Accueil</a>
-            <a href="animations.html">Animations</a>
-            <a href="Ouvrages.html">Ouvrages</a>
-        </div>
-
-    </nav>
-</header>
-
-
-<main class="container">
-
-    <div class="hero">
-
-        <h1>Tableau d’avancement</h1>
-
-        <p>
-            Méthode de résolution d’un exercice avec tableau d’avancement
-            en première spécialité physique-chimie.
-        </p>
-
-    </div>
-
+    <header>
+        <h1>Méthode : Le Tableau d'Avancement</h1>
+        <p class="intro">Comprendre et réussir pas à pas l'étude d'une réaction chimique</p>
+    </header>
 
     <!-- SOMMAIRE -->
-
-    <nav class="toc" aria-label="Sommaire">
-
-        <h2>Sommaire</h2>
-
-        <ol>
-            <li><a href="#principe">À quoi sert un tableau d’avancement ?</a></li>
-            <li><a href="#structure">Construire le tableau</a></li>
-            <li><a href="#lignes">Comprendre les différentes lignes</a></li>
-            <li><a href="#exemple">Exemple : réaction entre Zn²⁺ et Al</a></li>
-            <li><a href="#xmax">Déterminer xmax et le réactif limitant</a></li>
-            <li><a href="#bilan">Faire le bilan final</a></li>
-            <li><a href="#methode">La méthode à retenir</a></li>
-        </ol>
-
-    </nav>
-
-
-    <!-- 1 -->
-
-    <section id="principe">
-
+    <section id="sommaire">
         <div class="card">
-
-            <h2>1. À quoi sert un tableau d’avancement ?</h2>
-
-            <p>
-                Un tableau d’avancement permet de suivre l’évolution
-                des quantités de matière des différentes espèces chimiques
-                au cours d’une réaction.
-            </p>
-
-            <p>
-                En première spécialité, on étudie notamment des réactions
-                considérées comme <strong>totales</strong>. La réaction
-                s’arrête lorsqu’au moins l’un des réactifs a été totalement
-                consommé.
-            </p>
-
-            <div class="info">
-                Le réactif consommé en premier est appelé
-                <strong>réactif limitant</strong>.
-            </div>
-
-            <p>
-                Le tableau d’avancement permet donc de déterminer :
-            </p>
-
-            <ul>
-                <li>l’avancement maximal <strong>x<sub>max</sub></strong> ;</li>
-                <li>le réactif limitant ;</li>
-                <li>les quantités de matière présentes à la fin de la réaction.</li>
+            <h2>Sommaire</h2>
+            <ul class="sommaire-list">
+                <li><a href="#equation">1. Écrire l'équation chimique équilibrée</a></li>
+                <li><a href="#quantites-initiales">2. Calculer les quantités de matière initiales</a></li>
+                <li><a href="#construction-tableau">3. Construire le tableau d'avancement</a></li>
+                <li><a href="#recherche-xmax">4. Chercher l'avancement maximal (x<sub>max</sub>)</a></li>
+                <li><a href="#reactif-limitant">5. Identifier le réactif limitant</a></li>
+                <li><a href="#bilan">6. Faire le bilan final</a></li>
             </ul>
-
-            <div class="warning">
-                <strong>À connaître avant de commencer :</strong>
-                réaction chimique, réactif, produit, réactif limitant
-                et coefficient stœchiométrique.
-            </div>
-
+            <a href="animation_avancement.html" class="btn-animation">Voir l'animation de l'avancement</a>
         </div>
-
-        <div class="back-top">
-            <a href="#top">↑ Retour au sommaire</a>
-        </div>
-
     </section>
 
-
-    <!-- 2 -->
-
-    <section id="structure">
-
-        <div class="card">
-
-            <h2>2. Construire le tableau d’avancement</h2>
-
-            <p>
-                Considérons la réaction générale :
-            </p>
-
-            <div class="equation">
-                a A + b B → c C + d D
-            </div>
-
-            <p>
-                Les coefficients <strong>a</strong>, <strong>b</strong>,
-                <strong>c</strong> et <strong>d</strong> sont les
-                coefficients stœchiométriques.
-            </p>
-
-            <p>
-                On note <strong>x</strong> l’avancement de la réaction.
-                Lorsque la réaction commence, <strong>x = 0</strong>.
-                À la fin d’une réaction totale,
-                <strong>x = x<sub>max</sub></strong>.
-            </p>
-
-            <div class="table-wrapper">
-
-                <table>
-
-                    <tr>
-                        <th>État du système</th>
-                        <th>Avancement</th>
-                        <th>A</th>
-                        <th>B</th>
-                        <th>C</th>
-                        <th>D</th>
-                    </tr>
-
-                    <tr class="equation-row">
-                        <td>Équation</td>
-                        <td></td>
-                        <td colspan="2">a A + b B</td>
-                        <td colspan="2">→ c C + d D</td>
-                    </tr>
-
-                    <tr>
-                        <td>État initial</td>
-                        <td>x = 0</td>
-                        <td>n<sub>A,0</sub></td>
-                        <td>n<sub>B,0</sub></td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
-
-                    <tr>
-                        <td>En cours de transformation</td>
-                        <td>x</td>
-                        <td>n<sub>A,0</sub> − ax</td>
-                        <td>n<sub>B,0</sub> − bx</td>
-                        <td>cx</td>
-                        <td>dx</td>
-                    </tr>
-
-                    <tr>
-                        <td>État final</td>
-                        <td>x<sub>max</sub></td>
-                        <td>n<sub>A,0</sub> − ax<sub>max</sub></td>
-                        <td>n<sub>B,0</sub> − bx<sub>max</sub></td>
-                        <td>cx<sub>max</sub></td>
-                        <td>dx<sub>max</sub></td>
-                    </tr>
-
-                </table>
-
-            </div>
-
-            <div class="info">
-                <strong>Cette structure ne change pas.</strong>
-                Quelle que soit la réaction étudiée, on retrouve ces
-                quatre lignes.
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- 3 -->
-
-    <section id="lignes">
-
-        <div class="card">
-
-            <h2>3. Comprendre les différentes lignes</h2>
-
-            <div class="steps">
-
-                <div class="step">
-
-                    <div class="number">1</div>
-
-                    <div>
-                        <strong>L’équation chimique</strong>
-
-                        <p>
-                            Elle indique les proportions dans lesquelles
-                            les espèces chimiques réagissent.
-                            Par exemple, <strong>a moles de A</strong>
-                            réagissent avec <strong>b moles de B</strong>
-                            pour former <strong>c moles de C</strong>
-                            et <strong>d moles de D</strong>.
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="step">
-
-                    <div class="number">2</div>
-
-                    <div>
-                        <strong>L’état initial</strong>
-
-                        <p>
-                            C’est l’état du système avant le début de la
-                            réaction. Aucun produit n’a encore été formé.
-                            On a donc ici :
-                        </p>
-
-                        <div class="equation">
-                            x = 0
-                        </div>
-
-                        <p>
-                            Les quantités initiales des réactifs sont
-                            notées n<sub>A,0</sub> et n<sub>B,0</sub>.
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="step">
-
-                    <div class="number">3</div>
-
-                    <div>
-                        <strong>En cours de transformation</strong>
-
-                        <p>
-                            Le système est étudié à un avancement quelconque
-                            <strong>x</strong>.
-                        </p>
-
-                        <p>
-                            Les réactifs diminuent tandis que les produits
-                            apparaissent :
-                        </p>
-
-                        <div class="equation">
-                            n<sub>A</sub> = n<sub>A,0</sub> − ax
-                            &nbsp;&nbsp;&nbsp;
-                            n<sub>C</sub> = cx
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="step">
-
-                    <div class="number">4</div>
-
-                    <div>
-                        <strong>L’état final</strong>
-
-                        <p>
-                            Pour une réaction totale, l’avancement final
-                            est l’avancement maximal :
-                        </p>
-
-                        <div class="equation">
-                            x = x<sub>max</sub>
-                        </div>
-
-                        <p>
-                            Il faut alors déterminer quelle valeur de
-                            x<sub>max</sub> est physiquement possible.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- 4 -->
-
-    <section id="exemple">
-
-        <div class="card">
-
-            <h2>4. Exemple : réaction entre Zn²⁺ et Al</h2>
-
-            <p>
-                On introduit dans un bécher :
-            </p>
-
-            <ul>
-                <li>
-                    <strong>1,7 × 10<sup>−3</sup> mol</strong>
-                    d’ions Zn<sup>2+</sup> ;
-                </li>
-                <li>
-                    <strong>2,0 × 10<sup>−3</sup> mol</strong>
-                    d’aluminium Al.
-                </li>
-            </ul>
-
-            <p>
-                La réaction est :
-            </p>
-
-            <div class="equation">
-                3 Zn<sup>2+</sup>(aq) + 2 Al(s)
-                → 3 Zn(s) + 2 Al<sup>3+</sup>(aq)
-            </div>
-
-            <p>
-                On souhaite déterminer les quantités de matière présentes
-                dans le bécher à la fin de la réaction.
-            </p>
-
-
-            <h3>Construction du tableau</h3>
-
-            <div class="table-wrapper">
-
-                <table>
-
-                    <tr>
-                        <th>État du système</th>
-                        <th>Avancement</th>
-                        <th>Zn²⁺</th>
-                        <th>Al</th>
-                        <th>Zn</th>
-                        <th>Al³⁺</th>
-                    </tr>
-
-                    <tr class="equation-row">
-                        <td>Équation</td>
-                        <td></td>
-                        <td colspan="2">
-                            3 Zn<sup>2+</sup> + 2 Al
-                        </td>
-                        <td colspan="2">
-                            → 3 Zn + 2 Al<sup>3+</sup>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>État initial</td>
-                        <td>x = 0</td>
-                        <td><strong>1,7 × 10<sup>−3</sup></strong></td>
-                        <td><strong>2,0 × 10<sup>−3</sup></strong></td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
-
-                    <tr>
-                        <td>En cours</td>
-                        <td>x</td>
-                        <td>
-                            1,7 × 10<sup>−3</sup> − 3x
-                        </td>
-                        <td>
-                            2,0 × 10<sup>−3</sup> − 2x
-                        </td>
-                        <td>3x</td>
-                        <td>2x</td>
-                    </tr>
-
-                    <tr>
-                        <td>État final</td>
-                        <td>x<sub>max</sub></td>
-                        <td>
-                            1,7 × 10<sup>−3</sup>
-                            − 3x<sub>max</sub>
-                        </td>
-                        <td>
-                            2,0 × 10<sup>−3</sup>
-                            − 2x<sub>max</sub>
-                        </td>
-                        <td>3x<sub>max</sub></td>
-                        <td>2x<sub>max</sub></td>
-                    </tr>
-
-                </table>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- 5 -->
-
-    <section id="xmax">
-
-        <div class="card">
-
-            <h2>5. Déterminer x<sub>max</sub> et le réactif limitant</h2>
-
-            <p>
-                La réaction s’arrête lorsqu’un des deux réactifs
-                est totalement consommé.
-            </p>
-
-            <p>
-                Il faut donc envisager successivement les deux possibilités.
-            </p>
-
-
-            <h3>Hypothèse 1 : Zn²⁺ est le réactif limitant</h3>
-
-            <p>
-                Si les ions Zn<sup>2+</sup> sont totalement consommés,
-                leur quantité finale est nulle :
-            </p>
-
-            <div class="equation">
-                1,7 × 10<sup>−3</sup> − 3x<sub>max,1</sub> = 0
-            </div>
-
-            <p>
-                D’où :
-            </p>
-
-            <div class="equation">
-                x<sub>max,1</sub>
-                = 5,7 × 10<sup>−4</sup> mol
-            </div>
-
-
-            <h3>Hypothèse 2 : Al est le réactif limitant</h3>
-
-            <p>
-                Si l’aluminium est totalement consommé :
-            </p>
-
-            <div class="equation">
-                2,0 × 10<sup>−3</sup> − 2x<sub>max,2</sub> = 0
-            </div>
-
-            <p>
-                D’où :
-            </p>
-
-            <div class="equation">
-                x<sub>max,2</sub>
-                = 1,0 × 10<sup>−3</sup> mol
-            </div>
-
-
-            <div class="success">
-
-                <strong>On retient toujours la plus petite valeur.</strong>
-
-                <p>
-                    Ici :
-                </p>
-
-                <div class="equation">
-                    5,7 × 10<sup>−4</sup>
-                    &lt;
-                    1,0 × 10<sup>−3</sup>
-                </div>
-
-                <p>
-                    Donc :
-                    <strong>
-                        x<sub>max</sub> = 5,7 × 10<sup>−4</sup> mol
-                    </strong>
-                </p>
-
-                <p>
-                    Les ions Zn<sup>2+</sup> sont donc le
-                    <strong>réactif limitant</strong>.
-                </p>
-
-            </div>
-
-
-            <div class="warning">
-
-                <strong>Pourquoi la plus petite valeur ?</strong>
-
-                <p>
-                    Une quantité de matière ne peut pas devenir négative.
-                    Une valeur de x supérieure à 5,7 × 10<sup>−4</sup> mol
-                    conduirait à une quantité négative de Zn<sup>2+</sup>.
-                    Cette valeur de x n’est donc pas physiquement possible.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- 6 -->
-
-    <section id="bilan">
-
-        <div class="card">
-
-            <h2>6. Faire le bilan final</h2>
-
-            <p>
-                Une fois x<sub>max</sub> connu, il suffit de remplacer
-                <strong>x</strong> par sa valeur dans la dernière ligne
-                du tableau.
-            </p>
-
-            <p>
-                On utilise :
-            </p>
-
-            <div class="equation">
-                x<sub>max</sub>
-                = 5,7 × 10<sup>−4</sup> mol
-            </div>
-
-
-            <h3>Ion Zn²⁺</h3>
-
-            <div class="equation">
-                n(Zn<sup>2+</sup>)
-                = 1,7 × 10<sup>−3</sup>
-                − 3 × 5,7 × 10<sup>−4</sup>
-                ≈ 0 mol
-            </div>
-
-
-            <h3>Aluminium Al</h3>
-
-            <div class="equation">
-                n(Al)
-                = 2,0 × 10<sup>−3</sup>
-                − 2 × 5,7 × 10<sup>−4</sup>
-                ≈ 8,6 × 10<sup>−4</sup> mol
-            </div>
-
-
-            <h3>Zinc Zn</h3>
-
-            <div class="equation">
-                n(Zn)
-                = 3 × 5,7 × 10<sup>−4</sup>
-                ≈ 1,7 × 10<sup>−3</sup> mol
-            </div>
-
-
-            <h3>Ion Al³⁺</h3>
-
-            <div class="equation">
-                n(Al<sup>3+</sup>)
-                = 2 × 5,7 × 10<sup>−4</sup>
-                ≈ 1,1 × 10<sup>−3</sup> mol
-            </div>
-
-
-            <div class="success">
-
-                <strong>Bilan de matière final :</strong>
-
-                <ul>
-                    <li>
-                        n(Zn<sup>2+</sup>) ≈ 0 mol
-                    </li>
-
-                    <li>
-                        n(Al) ≈ 8,6 × 10<sup>−4</sup> mol
-                    </li>
-
-                    <li>
-                        n(Zn) ≈ 1,7 × 10<sup>−3</sup> mol
-                    </li>
-
-                    <li>
-                        n(Al<sup>3+</sup>) ≈ 1,1 × 10<sup>−3</sup> mol
-                    </li>
-                </ul>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- 7 -->
-
-    <section id="methode">
-
-        <div class="card">
-
-            <h2>7. La méthode à retenir</h2>
-
-            <div class="method">
-
-                <ol>
-
-                    <li>
-                        <strong>Écrire et équilibrer l’équation chimique.</strong>
-                    </li>
-
-                    <li>
-                        <strong>Construire les quatre lignes du tableau.</strong>
-                    </li>
-
-                    <li>
-                        <strong>Compléter la ligne « en cours »</strong>
-                        à partir des coefficients stœchiométriques.
-                    </li>
-
-                    <li>
-                        <strong>Exprimer les deux valeurs possibles de
-                        x<sub>max</sub></strong>, en supposant successivement
-                        chaque réactif limitant.
-                    </li>
-
-                    <li>
-                        <strong>Conserver la plus petite valeur.</strong>
-                    </li>
-
-                    <li>
-                        <strong>Identifier le réactif limitant.</strong>
-                    </li>
-
-                    <li>
-                        <strong>Calculer les quantités de matière finales</strong>
-                        en utilisant la dernière ligne du tableau.
-                    </li>
-
-                </ol>
-
-            </div>
-
-
-            <div class="info">
-
-                <strong>À retenir :</strong>
-
-                <p>
-                    Le réactif limitant est celui qui est totalement consommé
-                    lorsque la réaction atteint son avancement maximal.
-                </p>
-
-                <p>
-                    Pour déterminer x<sub>max</sub>, on calcule les valeurs
-                    obtenues en supposant successivement chaque réactif
-                    limitant, puis on conserve la <strong>plus petite</strong>.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <div class="back-top">
-        <a href="#top">↑ Retour au sommaire</a>
+    <!-- ENONCE EXEMPLE -->
+    <div class="card" style="background-color: var(--accent-bg);">
+        <h2>Énoncé exemple</h2>
+        <p>
+            On mélange <strong>m = 0,054 g d'aluminium (Al)</strong> solide avec
+            <strong>V = 50 mL</strong> d'une solution de sulfate de zinc contenant des ions
+            <strong>Zn<sup>2+</sup></strong> à la concentration <strong>C = 0,034 mol/L</strong>.
+        </p>
+        <p><em>Donnée : Masse molaire M(Al) = 27,0 g/mol</em></p>
     </div>
 
-</main>
+    <!-- 1 -->
+    <section id="equation">
+        <div class="card">
+            <h2>1. Écrire l'équation chimique équilibrée</h2>
+            <p>
+                Avant toute chose, il faut écrire l'équation de la réaction en veillant à respecter la conservation des éléments et des charges électriques.
+            </p>
+            <div class="equation">
+                2 Al (s) + 3 Zn<sup>2+</sup> (aq) → 2 Al<sup>3+</sup> (aq) + 3 Zn (s)
+            </div>
+            <p>
+                <strong>Vérification :</strong>
+            </p>
+            <ul>
+                <li>Aluminium : 2 à gauche, 2 à droite.</li>
+                <li>Zinc : 3 à gauche, 3 à droite.</li>
+                <li>Charges : 3 × (+2) = +6 à gauche ; 2 × (+3) = +6 à droite.</li>
+            </ul>
+        </div>
+    </section>
 
+    <!-- 2 -->
+    <section id="quantites-initiales">
+        <div class="card">
+            <h2>2. Calculer les quantités de matière initiales</h2>
 
-<footer>
-    Physique-Chimie au lycée
-</footer>
+            <h3>Pour l'aluminium Al (solide)</h3>
+            <p>On utilise la formule : <strong>n = m / M</strong></p>
+            <div class="equation">
+                n<sub>0</sub>(Al) = 0,054 / 27,0 = 2,0 × 10<sup>−3</sup> mol (soit 2,0 mmol)
+            </div>
+
+            <h3>Pour l'ion zinc Zn<sup>2+</sup> (en solution)</h3>
+            <p>On utilise la formule : <strong>n = C × V</strong> (avec V en litres !)</p>
+            <div class="equation">
+                n<sub>0</sub>(Zn<sup>2+</sup>) = 0,034 × 0,050 = 1,7 × 10<sup>−3</sup> mol (soit 1,7 mmol)
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 -->
+    <section id="construction-tableau">
+        <div class="card">
+            <h2>3. Construire le tableau d'avancement</h2>
+            <p>
+                Le tableau permet de suivre l'évolution des quantités de matière au cours du temps à l'aide d'une variable appelée <strong>avancement (x)</strong>.
+            </p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Équation</th>
+                            <th colspan="2">2 Al (s)</th>
+                            <th colspan="2">+ 3 Zn<sup>2+</sup> (aq)</th>
+                            <th>→</th>
+                            <th colspan="2">2 Al<sup>3+</sup> (aq)</th>
+                            <th colspan="2">+ 3 Zn (s)</th>
+                        </tr>
+                        <tr>
+                            <th>État</th>
+                            <th>Avancement (mol)</th>
+                            <th colspan="8">Quantités de matière (mol)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Initial</strong></td>
+                            <td>x = 0</td>
+                            <td colspan="2">2,0 × 10<sup>−3</sup></td>
+                            <td colspan="2">1,7 × 10<sup>−3</sup></td>
+                            <td></td>
+                            <td colspan="2">0</td>
+                            <td colspan="2">0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>En cours</strong></td>
+                            <td>x</td>
+                            <td colspan="2">2,0 × 10<sup>−3</sup> − 2x</td>
+                            <td colspan="2">1,7 × 10<sup>−3</sup> − 3x</td>
+                            <td></td>
+                            <td colspan="2">2x</td>
+                            <td colspan="2">3x</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Final</strong></td>
+                            <td>x<sub>max</sub></td>
+                            <td colspan="2">2,0 × 10<sup>−3</sup> − 2x<sub>max</sub></td>
+                            <td colspan="2">1,7 × 10<sup>−3</sup> − 3x<sub>max</sub></td>
+                            <td></td>
+                            <td colspan="2">2x<sub>max</sub></td>
+                            <td colspan="2">3x<sub>max</sub></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><em>Remarque : N'oubliez pas de multiplier x par les coefficients stœchiométriques dans les lignes "En cours" et "Final".</em></p>
+        </div>
+    </section>
+
+    <!-- 4 -->
+    <section id="recherche-xmax">
+        <div class="card">
+            <h2>4. Chercher l'avancement maximal (x<sub>max</sub>)</h2>
+            <p>
+                La réaction s'arrête dès qu'au moins un des réactifs est entièrement consommé. On émet donc deux hypothèses.
+            </p>
+
+            <h3>Hypothèse 1 : L'aluminium Al est le réactif limitant</h3>
+            <p>Si Al est totalement consommé à la fin, alors :</p>
+            <div class="equation">
+                2,0 × 10<sup>−3</sup> − 2 x<sub>max1</sub> = 0<br>
+                2 x<sub>max1</sub> = 2,0 × 10<sup>−3</sup><br>
+                x<sub>max1</sub> = 1,0 × 10<sup>−3</sup> mol
+            </div>
+
+            <h3>Hypothèse 2 : L'ion Zn<sup>2+</sup> est le réactif limitant</h3>
+            <p>Si Zn<sup>2+</sup> est totalement consommé à la fin, alors :</p>
+            <div class="equation">
+                1,7 × 10<sup>−3</sup> − 3 x<sub>max2</sub> = 0<br>
+                3 x<sub>max2</sub> = 1,7 × 10<sup>−3</sup><br>
+                x<sub>max2</sub> = (1,7 × 10<sup>−3</sup>) / 3 ≈ 5,7 × 10<sup>−4</sup> mol
+            </div>
+        </div>
+    </section>
+
+    <!-- 5 -->
+    <section id="reactif-limitant">
+        <div class="card">
+            <h2>5. Identifier le réactif limitant</h2>
+            <p>
+                L'avancement maximal possible est la <strong>plus petite des deux valeurs</strong> trouvées précédemment.
+            </p>
+            <p>On compare :</p>
+            <ul>
+                <li>x<sub>max1</sub> = 1,0 × 10<sup>−3</sup> mol = 10 × 10<sup>−4</sup> mol</li>
+                <li>x<sub>max2</sub> = 5,7 × 10<sup>−4</sup> mol</li>
+            </ul>
+            <div class="equation">
+                x<sub>max2</sub> < x<sub>max1</sub>
+            </div>
+            <p>
+                <strong>Conclusion :</strong> L'avancement maximal de la réaction est <strong>x<sub>max</sub> = 5,7 × 10<sup>−4</sup> mol</strong>.<br>
+                Le réactif limitant est l'ion <strong>Zn<sup>2+</sup></strong> (il sera entièrement consommé en premier).
+            </p>
+        </div>
+    </section>
+
+    <!-- 6 -->
+    <section id="bilan">
+        <div class="card">
+            <h2>6. Faire le bilan final</h2>
+            <p>
+                Une fois x<sub>max</sub> connu, il suffit de remplacer
+                <strong>x</strong> par sa valeur dans la dernière ligne du tableau.
+            </p>
+            <p>On utilise :</p>
+            <div class="equation">
+                x<sub>max</sub> = 5,7 × 10<sup>−4</sup> mol
+            </div>
+
+            <h3>Ion Zn²⁺ (réactif limitant)</h3>
+            <div class="equation">
+                n(Zn<sup>2+</sup>) = 1,7 × 10<sup>−3</sup> − 3 × 5,7 × 10<sup>−4</sup> ≈ 0 mol
+            </div>
+
+            <h3>Aluminium Al</h3>
+            <div class="equation">
+                n(Al) = 2,0 × 10<sup>−3</sup> − 2 × 5,7 × 10<sup>−4</sup> ≈ 8,6 × 10<sup>−4</sup> mol
+            </div>
+
+            <h3>Zinc Zn</h3>
+            <div class="equation">
+                n(Zn) = 3 × 5,7 × 10<sup>−4</sup> ≈ 1,7 × 10<sup>−3</sup> mol
+            </div>
+
+            <h3>Ion Al³⁺</h3>
+            <div class="equation">
+                n(Al<sup>3+</sup>) = 2 × 5,7 × 10<sup>−4</sup> ≈ 1,1 × 10<sup>−3</sup> mol
+            </div>
+
+            <div class="success">
+                <strong>Bilan de matière final :</strong>
+                <ul>
+                    <li>n(Zn<sup>2+</sup>) = 0 mol</li>
+                    <li>n(Al) ≈ 8,6 × 10<sup>−4</sup> mol</li>
+                    <li>n(Zn) ≈ 1,7 × 10<sup>−3</sup> mol</li>
+                    <li>n(Al<sup>3+</sup>) ≈ 1,1 × 10<sup>−3</sup> mol</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</div>
 
 </body>
 </html>
