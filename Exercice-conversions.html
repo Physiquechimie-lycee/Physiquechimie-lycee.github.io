@@ -29,7 +29,7 @@
 body {
     margin: 0;
     min-height: 100vh;
-    padding: 24px 14px;
+    padding: 16px 14px 24px;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--ink);
     background:
@@ -307,7 +307,7 @@ button {
 
 @media (max-width: 600px) {
     body {
-        padding: 14px 10px;
+        padding: 12px 10px 18px;
     }
 
     .card {
@@ -343,11 +343,95 @@ button {
         grid-template-columns: 1fr;
     }
 }
+
+/* =========================
+   BANDEAU DU SITE
+   ========================= */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    background: var(--navy);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.14);
+}
+
+.navbar {
+    width: min(1100px, 100%);
+    margin: 0 auto;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.site-logo {
+    color: #fff;
+    text-decoration: none;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    padding: 7px 11px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background .2s ease;
+}
+
+.nav-links a:hover {
+    background: var(--navy-light);
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        justify-content: center;
+        padding: 8px 6px;
+    }
+
+    .site-logo {
+        display: none;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .nav-links a {
+        font-size: 0.84rem;
+        padding: 7px 9px;
+    }
+}
+
 </style>
 
 </head>
 
 <body>
+
+
+<header class="site-header">
+    <nav class="navbar">
+        <a href="index.html" class="site-logo">Physique-Chimie au lycée</a>
+        <div class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="animations.html">Animations</a>
+            <a href="Ouvrages.html">Ouvrages</a>
+        </div>
+    </nav>
+</header>
+
 
 <div class="card">
 
