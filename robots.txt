@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://physiquechimie-lycee.github.io/sitemap.xml
