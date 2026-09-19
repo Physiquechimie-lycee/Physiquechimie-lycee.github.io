@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tableau d’avancement interactif | Physique-Chimie au lycée</title>
+
+<meta name="description"
+content="Animation interactive pour comprendre le tableau d’avancement : coefficients stœchiométriques, avancement, réactif limitant et xmax.">
+
+<style>
+:root{
+    --navy:#14273d;
+    --navy-light:#1f3552;
+    --gold:#b08d2b;
+    --gold-light:#d0b35a;
+    --cream:#faf9f5;
+    --white:#fff;
+    --text:#26313d;
+    --muted:#65717e;
+    --border:#ddd8cc;
+    --soft:#f1eee6;
+    --success-bg:#edf5ef;
+    --success:#37684a;
+    --shadow:0 4px 16px rgba(20,39,61,.08);
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+    margin:0;
+    background:var(--cream);
+    color:var(--text);
+    font-family:Arial,Helvetica,sans-serif;
+    line-height:1.55;
+}
+
+/* NAVIGATION */
+header{
+    background:var(--navy);
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 10px rgba(0,0,0,.12);
+}
+
+.navbar{
+    max-width:1100px;
+    margin:auto;
+    padding:.8rem 1.2rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    color:#fff;
+    text-decoration:none;
+    font-family:Georgia,serif;
+    font-weight:bold;
+    font-size:1.05rem;
+}
+
+.nav-links{
+    display:flex;
+    gap:.45rem;
+}
+
+.nav-links a{
+    color:#fff;
+    text-decoration:none;
+    padding:.5rem .8rem;
+    border-radius:6px;
+    font-size:.95rem;
+}
+
+.nav-links a:hover{
+    background:var(--navy-light);
+}
+
+/* PAGE */
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:1.4rem 1rem 3rem;
+}
+
+.hero{
+    background:linear-gradient(135deg,var(--navy),var(--navy-light));
+    color:#fff;
+    border-radius:14px;
+    padding:1.7rem 1.5rem;
+    margin-bottom:1rem;
+    box-shadow:var(--shadow);
+}
+
+.hero h1{
+    font-family:Georgia,serif;
+    font-size:clamp(1.65rem,5vw,2.35rem);
+    line-height:1.2;
+    margin:0 0 .5rem;
+}
+
+.hero p{
+    margin:0;
+    opacity:.94;
+}
+
+/* INTRO */
+.intro{
+    background:#fff;
+    border:1px solid var(--border);
+    border-left:5px solid var(--gold);
+    border-radius:10px;
+    padding:1rem 1.1rem;
+    margin-bottom:1rem;
+    box-shadow:var(--shadow);
+}
+
+.intro strong{color:var(--navy)}
+
+/* APP CARDS */
+.card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:1rem;
+    margin-bottom:1rem;
+    box-shadow:var(--shadow);
+}
+
+.card-title{
+    color:var(--navy);
+    font-family:Georgia,serif;
+    font-size:1.2rem;
+    font-weight:bold;
+    margin:0 0 .8rem;
+}
+
+/* EQUATION */
+.equation-card{
+    padding:1.15rem;
+}
+
+.equation-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:.38rem;
+    flex-wrap:wrap;
+    font-family:Georgia,serif;
+    font-size:1.15rem;
+    font-weight:bold;
+}
+
+.coeff-input{
+    width:42px;
+    height:38px;
+    text-align:center;
+    border:1px solid #c9c4b9;
+    border-radius:7px;
+    font-size:1rem;
+    font-weight:bold;
+    color:var(--navy);
+    background:#fff;
+}
+
+.coeff-input:focus,
+.number-input:focus{
+    outline:2px solid var(--gold-light);
+    border-color:var(--gold);
+}
+
+.species{
+    padding:.18rem .45rem;
+    border-radius:5px;
+    color:#fff;
+    font-family:Arial,sans-serif;
+    font-size:.95rem;
+}
+
+/* Deliberately muted, close to site identity rather than bright app colors */
+.spec-A{background:#8d4a46}
+.spec-B{background:#9a6a2b}
+.spec-C{background:#487052}
+.spec-D{background:#42627c}
+
+/* INITIAL AMOUNTS */
+.inputs-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:1rem;
+}
+
+.input-group{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.input-group label{
+    color:var(--muted);
+    font-size:.84rem;
+}
+
+.number-input{
+    width:100%;
+    padding:.62rem .7rem;
+    border:1px solid #c9c4b9;
+    border-radius:7px;
+    font-size:1rem;
+}
+
+/* SLIDER */
+.slider-card{
+    padding:1.1rem;
+}
+
+.slider-header{
+    display:flex;
+    justify-content:space-between;
+    gap:1rem;
+    align-items:center;
+    margin-bottom:.55rem;
+    color:var(--navy);
+    font-weight:bold;
+}
+
+#x-value{
+    color:var(--gold);
+    white-space:nowrap;
+}
+
+input[type=range]{
+    width:100%;
+    height:9px;
+    accent-color:var(--gold);
+    cursor:pointer;
+}
+
+.slider-scale{
+    display:flex;
+    justify-content:space-between;
+    color:var(--muted);
+    font-size:.76rem;
+    margin-top:.25rem;
+}
+
+.final-state{
+    display:none;
+    margin-top:.8rem;
+    padding:.75rem .9rem;
+    background:var(--success-bg);
+    border-left:4px solid var(--success);
+    border-radius:6px;
+    color:#2f553c;
+    font-size:.9rem;
+}
+
+.final-state.visible{display:block}
+
+/* TABLE */
+.table-card{padding:1rem}
+
+.table-scroll{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border-radius:8px;
+}
+
+table{
+    width:100%;
+    min-width:690px;
+    border-collapse:collapse;
+    text-align:center;
+    font-size:.84rem;
+}
+
+th,td{
+    border:1px solid #d7d2c8;
+    padding:.58rem .45rem;
+    vertical-align:middle;
+}
+
+th{
+    background:var(--navy);
+    color:#fff;
+    font-weight:bold;
+}
+
+tbody tr:nth-child(even){background:#faf9f5}
+
+.state-cell{
+    font-weight:bold;
+    color:var(--navy);
+    background:#f1eee6;
+}
+
+.current-row{
+    background:#f5efd8!important;
+    font-weight:bold;
+}
+
+.current-row .state-cell{
+    background:#eee4bd;
+}
+
+.expression{
+    color:#4f5963;
+    font-family:Georgia,serif;
+}
+
+/* GRAPH */
+.chart-card{padding:1rem}
+
+.chart-title{
+    color:var(--navy);
+    font-family:Georgia,serif;
+    font-size:1.15rem;
+    font-weight:bold;
+    margin-bottom:.5rem;
+}
+
+.chart-subtitle{
+    color:var(--muted);
+    font-size:.84rem;
+    margin-bottom:.8rem;
+}
+
+canvas{
+    width:100%;
+    height:240px;
+    display:block;
+    border-radius:8px;
+    background:#fff;
+}
+
+/* LIMITING INFO */
+.limiting-alert{
+    margin-top:.9rem;
+    padding:.8rem .9rem;
+    background:#f5f0df;
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    color:#604d18;
+    font-size:.88rem;
+    text-align:center;
+    font-weight:bold;
+}
+
+.limiting-alert strong{color:var(--navy)}
+
+/* HELP */
+.tip{
+    color:var(--muted);
+    font-size:.83rem;
+    margin-top:.7rem;
+}
+
+footer{
+    background:var(--navy);
+    color:#e7ebef;
+    text-align:center;
+    padding:1.4rem 1rem;
+    font-size:.84rem;
+}
+
+@media(max-width:650px){
+    .navbar{padding:.7rem .65rem}
+    .logo{display:none}
+    .nav-links{
+        width:100%;
+        justify-content:space-around;
+    }
+    .nav-links a{
+        font-size:.88rem;
+        padding:.45rem .55rem;
+    }
+    .container{padding:.9rem .65rem 2.5rem}
+    .hero{
+        border-radius:10px;
+        padding:1.35rem 1rem;
+    }
+    .hero h1{font-size:1.7rem}
+    .card{border-radius:9px;padding:.85rem}
+    .inputs-grid{gap:8px}
+    .equation-container{font-size:1rem}
+    .coeff-input{width:38px;height:36px}
+    canvas{height:210px}
+}
+
+@media(max-width:390px){
+    .nav-links a{font-size:.82rem}
+    .inputs-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+        <a href="index.html" class="logo">Physique-Chimie au lycée</a>
+
+        <div class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="animations.html">Animations</a>
+            <a href="Ouvrages.html">Ouvrages</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container">
+
+    <section class="hero">
+        <h1>Tableau d’avancement interactif</h1>
+        <p>
+            Fais varier l’avancement de la réaction et observe
+            l’évolution des quantités de matière.
+        </p>
+    </section>
+
+    <div class="intro">
+        <strong>Comment utiliser l’animation ?</strong>
+        Modifie si nécessaire les coefficients et les quantités initiales,
+        puis déplace le curseur <strong>x</strong>.
+        Observe simultanément le tableau et le graphique.
+    </div>
+
+    <!-- ÉQUATION -->
+    <section class="card equation-card">
+
+        <h2 class="card-title">1. Équation et état initial</h2>
+
+        <div class="equation-container">
+
+            <input type="number" id="coeff-a" class="coeff-input"
+                   value="2" min="1" step="1" aria-label="Coefficient de A">
+
+            <span class="species spec-A">A</span>
+
+            <span>+</span>
+
+            <input type="number" id="coeff-b" class="coeff-input"
+                   value="1" min="1" step="1" aria-label="Coefficient de B">
+
+            <span class="species spec-B">B</span>
+
+            <span>→</span>
+
+            <input type="number" id="coeff-c" class="coeff-input"
+                   value="1" min="1" step="1" aria-label="Coefficient de C">
+
+            <span class="species spec-C">C</span>
+
+            <span>+</span>
+
+            <input type="number" id="coeff-d" class="coeff-input"
+                   value="2" min="1" step="1" aria-label="Coefficient de D">
+
+            <span class="species spec-D">D</span>
+
+        </div>
+
+        <div class="inputs-grid">
+
+            <div class="input-group">
+                <label for="n-A">Quantité initiale n<sub>0</sub>(A) — mol</label>
+                <input type="number" id="n-A" class="number-input"
+                       value="5" min="0" step="0.5">
+            </div>
+
+            <div class="input-group">
+                <label for="n-B">Quantité initiale n<sub>0</sub>(B) — mol</label>
+                <input type="number" id="n-B" class="number-input"
+                       value="3" min="0" step="0.5">
+            </div>
+
+        </div>
+
+        <p class="tip">
+            Les coefficients stœchiométriques déterminent les variations
+            de quantité de matière lorsque l’avancement augmente.
+        </p>
+
+    </section>
+
+    <!-- AVANCEMENT -->
+    <section class="card slider-card">
+
+        <h2 class="card-title">2. Faire évoluer l’avancement</h2>
+
+        <div class="slider-header">
+            <span>Avancement x</span>
+            <span id="x-value">0,00 mol</span>
+        </div>
+
+        <input type="range" id="x-range"
+               min="0" max="2.5" step="0.05" value="0"
+               aria-label="Avancement de la réaction">
+
+        <div class="slider-scale">
+            <span>0</span>
+            <span id="x-max-scale">x<sub>max</sub></span>
+        </div>
+
+        <div id="limiting-info" class="limiting-alert" style="display:none"></div>
+
+    </section>
+
+    <!-- TABLEAU -->
+    <section class="card table-card">
+
+        <h2 class="card-title">3. Tableau d’avancement</h2>
+
+        <div class="table-scroll">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>État</th>
+                        <th>Avancement</th>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>C</th>
+                        <th>D</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td class="state-cell">Initial</td>
+                        <td>0</td>
+                        <td id="t-nA0">5</td>
+                        <td id="t-nB0">3</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+
+                    <tr>
+                        <td class="state-cell">En cours</td>
+                        <td>x</td>
+                        <td id="t-nAx" class="expression">5 − 2x</td>
+                        <td id="t-nBx" class="expression">3 − x</td>
+                        <td id="t-nCx" class="expression">x</td>
+                        <td id="t-nDx" class="expression">2x</td>
+                    </tr>
+
+                    <tr class="current-row">
+                        <td class="state-cell">État actuel</td>
+                        <td id="t-x-cur">0,00</td>
+                        <td id="t-nA-cur">5,00</td>
+                        <td id="t-nB-cur">3,00</td>
+                        <td id="t-nC-cur">0,00</td>
+                        <td id="t-nD-cur">0,00</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <p class="tip">
+            La ligne « État actuel » correspond à la valeur de x choisie
+            avec le curseur.
+        </p>
+
+    </section>
+
+    <!-- GRAPHIQUE -->
+    <section class="card chart-card">
+
+        <h2 class="chart-title">4. Évolution des quantités de matière</h2>
+
+        <p class="chart-subtitle">
+            Chaque courbe représente la quantité de matière d’une espèce
+            en fonction de l’avancement x.
+        </p>
+
+        <canvas id="chart"></canvas>
+
+    </section>
+
+</main>
+
+<footer>
+    Physique-Chimie au lycée
+</footer>
+
+<script>
+const coeffA = document.getElementById('coeff-a');
+const coeffB = document.getElementById('coeff-b');
+const coeffC = document.getElementById('coeff-c');
+const coeffD = document.getElementById('coeff-d');
+
+const inputNA = document.getElementById('n-A');
+const inputNB = document.getElementById('n-B');
+
+const xRange = document.getElementById('x-range');
+const xValue = document.getElementById('x-value');
+const xMaxScale = document.getElementById('x-max-scale');
+const limitingInfo = document.getElementById('limiting-info');
+
+const canvas = document.getElementById('chart');
+const ctx = canvas.getContext('2d');
+
+let xMax = 0;
+let limitingReactant = '';
+
+function fmt(value, decimals=2){
+    return Number(value).toLocaleString('fr-FR',{
+        minimumFractionDigits:decimals,
+        maximumFractionDigits:decimals
+    });
+}
+
+function cleanNumber(value){
+    return Number(value).toLocaleString('fr-FR',{
+        maximumFractionDigits:6
+    });
+}
+
+function calculateReaction(){
+
+    const a = Math.max(1, parseFloat(coeffA.value) || 1);
+    const b = Math.max(1, parseFloat(coeffB.value) || 1);
+    const c = Math.max(1, parseFloat(coeffC.value) || 1);
+    const d = Math.max(1, parseFloat(coeffD.value) || 1);
+
+    const nA0 = Math.max(0, parseFloat(inputNA.value) || 0);
+    const nB0 = Math.max(0, parseFloat(inputNB.value) || 0);
+
+    const xMaxA = nA0 / a;
+    const xMaxB = nB0 / b;
+
+    if(xMaxA < xMaxB){
+        xMax = xMaxA;
+        limitingReactant = 'A';
+    }
+    else if(xMaxB < xMaxA){
+        xMax = xMaxB;
+        limitingReactant = 'B';
+    }
+    else{
+        xMax = xMaxA;
+        limitingReactant = 'A et B (mélange stœchiométrique)';
+    }
+
+    xRange.max = xMax;
+
+    if(parseFloat(xRange.value) > xMax){
+        xRange.value = xMax;
+    }
+
+    xMaxScale.textContent =
+        `xmax = ${fmt(xMax)} mol`;
+
+    updateUI(a,b,c,d,nA0,nB0);
+}
+
+function updateUI(a,b,c,d,nA0,nB0){
+
+    const x = parseFloat(xRange.value);
+
+    xValue.textContent = `${fmt(x)} mol`;
+
+    document.getElementById('t-nA0').textContent = cleanNumber(nA0);
+    document.getElementById('t-nB0').textContent = cleanNumber(nB0);
+
+    document.getElementById('t-nAx').textContent =
+        `${cleanNumber(nA0)} − ${a}x`;
+
+    document.getElementById('t-nBx').textContent =
+        `${cleanNumber(nB0)} − ${b}x`;
+
+    document.getElementById('t-nCx').textContent = `${c}x`;
+    document.getElementById('t-nDx').textContent = `${d}x`;
+
+    const nA = Math.max(0,nA0-a*x);
+    const nB = Math.max(0,nB0-b*x);
+    const nC = c*x;
+    const nD = d*x;
+
+    document.getElementById('t-x-cur').textContent = fmt(x);
+    document.getElementById('t-nA-cur').textContent = fmt(nA);
+    document.getElementById('t-nB-cur').textContent = fmt(nB);
+    document.getElementById('t-nC-cur').textContent = fmt(nC);
+    document.getElementById('t-nD-cur').textContent = fmt(nD);
+
+    if(Math.abs(x-xMax)<0.001 && xMax>0){
+
+        limitingInfo.style.display='block';
+
+        limitingInfo.innerHTML =
+            `État final atteint : réactif limitant = <strong>${limitingReactant}</strong>
+            · <strong>x<sub>max</sub> = ${fmt(xMax)} mol</strong>`;
+
+    }else{
+        limitingInfo.style.display='none';
+    }
+
+    drawChart(a,b,c,d,nA0,nB0,x);
+}
+
+function drawChart(a,b,c,d,nA0,nB0,currentX){
+
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+
+    canvas.width = rect.width*dpr;
+    canvas.height = rect.height*dpr;
+
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+
+    const w = rect.width;
+    const h = rect.height;
+
+    const padLeft = 42;
+    const padRight = 16;
+    const padTop = 20;
+    const padBottom = 34;
+
+    ctx.clearRect(0,0,w,h);
+
+    const maxY = Math.max(
+        nA0,
+        nB0,
+        c*xMax,
+        d*xMax,
+        1
+    );
+
+    const mapX = val =>
+        padLeft +
+        (val/(xMax || 1)) *
+        (w-padLeft-padRight);
+
+    const mapY = val =>
+        (h-padBottom) -
+        (val/maxY) *
+        (h-padTop-padBottom);
+
+    /* Grille horizontale */
+    ctx.strokeStyle = '#e4dfd5';
+    ctx.lineWidth = 1;
+
+    for(let i=0;i<=4;i++){
+
+        const value = maxY*i/4;
+        const y = mapY(value);
+
+        ctx.beginPath();
+        ctx.moveTo(padLeft,y);
+        ctx.lineTo(w-padRight,y);
+        ctx.stroke();
+
+        ctx.fillStyle = '#65717e';
+        ctx.font = '10px Arial';
+        ctx.textAlign = 'right';
+        ctx.fillText(fmt(value,1),padLeft-6,y+3);
+    }
+
+    /* Axes */
+    ctx.strokeStyle = '#14273d';
+    ctx.lineWidth = 1.5;
+
+    ctx.beginPath();
+    ctx.moveTo(padLeft,padTop);
+    ctx.lineTo(padLeft,h-padBottom);
+    ctx.lineTo(w-padRight,h-padBottom);
+    ctx.stroke();
+
+    ctx.fillStyle = '#14273d';
+    ctx.font = '11px Arial';
+
+    ctx.textAlign = 'left';
+    ctx.fillText('n (mol)',5,padTop);
+
+    ctx.textAlign = 'right';
+    ctx.fillText('x (mol)',w-padRight,h-10);
+
+    const curves=[
+        {
+            val:x=>nA0-a*x,
+            col:'#8d4a46',
+            label:'A'
+        },
+        {
+            val:x=>nB0-b*x,
+            col:'#9a6a2b',
+            label:'B'
+        },
+        {
+            val:x=>c*x,
+            col:'#487052',
+            label:'C'
+        },
+        {
+            val:x=>d*x,
+            col:'#42627c',
+            label:'D'
+        }
+    ];
+
+    curves.forEach(curve=>{
+
+        ctx.beginPath();
+        ctx.strokeStyle=curve.col;
+        ctx.lineWidth=2.5;
+
+        ctx.moveTo(
+            mapX(0),
+            mapY(Math.max(0,curve.val(0)))
+        );
+
+        ctx.lineTo(
+            mapX(xMax),
+            mapY(Math.max(0,curve.val(xMax)))
+        );
+
+        ctx.stroke();
+
+        const curY=Math.max(0,curve.val(currentX));
+
+        ctx.beginPath();
+        ctx.fillStyle=curve.col;
+        ctx.arc(
+            mapX(currentX),
+            mapY(curY),
+            4.5,
+            0,
+            Math.PI*2
+        );
+        ctx.fill();
+
+    });
+
+    /* Ligne verticale de l'avancement actuel */
+    ctx.beginPath();
+    ctx.setLineDash([4,4]);
+    ctx.strokeStyle='#b08d2b';
+    ctx.lineWidth=1.5;
+
+    ctx.moveTo(mapX(currentX),mapY(0));
+    ctx.lineTo(mapX(currentX),mapY(maxY));
+
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    /* Légende */
+    const legend=[
+        ['A','#8d4a46'],
+        ['B','#9a6a2b'],
+        ['C','#487052'],
+        ['D','#42627c']
+    ];
+
+    let lx=padLeft;
+    const ly=10;
+
+    ctx.font='10px Arial';
+    ctx.textAlign='left';
+
+    legend.forEach(([label,col])=>{
+
+        ctx.fillStyle=col;
+        ctx.fillRect(lx,ly-7,9,9);
+
+        ctx.fillStyle='#26313d';
+        ctx.fillText(label,lx+13,ly+1);
+
+        lx+=30;
+    });
+}
+
+[coeffA,coeffB,coeffC,coeffD,inputNA,inputNB]
+.forEach(el=>{
+    el.addEventListener('input',calculateReaction);
+});
+
+xRange.addEventListener('input',()=>{
+    calculateReaction();
+});
+
+window.addEventListener('resize',calculateReaction);
+
+calculateReaction();
+</script>
+
+</body>
+</html>
