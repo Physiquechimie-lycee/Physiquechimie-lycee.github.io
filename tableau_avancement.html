@@ -1,204 +1,463 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Méthode - Tableau d'avancement</title>
-    <style>
-        :root {
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-color: #1e293b;
-            --text-muted: #64748b;
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --border: #e2e8f0;
-            --accent-bg: #eff6ff;
-            --success-bg: #f0fdf4;
-            --success-border: #bbf7d0;
-            --success-text: #166534;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<title>Méthode - Tableau d'avancement | Physique-Chimie au lycée</title>
 
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            padding: 20px;
-        }
+<meta name="description" content="Comprendre et réussir pas à pas l'étude d'une réaction chimique avec la méthode du tableau d'avancement.">
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+<style>
+:root {
+    --navy: #14273d;
+    --navy-light: #1f3552;
+    --gold: #b08d2b;
+    --gold-light: #d0b35a;
+    --cream: #faf9f5;
+    --white: #ffffff;
+    --text: #26313d;
+    --muted: #65717e;
+    --border: #ddd8cc;
+    --soft: #f1eee6;
+    --green-soft: #edf5ef;
+    --green: #37684a;
+    --shadow: 0 4px 16px rgba(20,39,61,0.08);
+}
 
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        h1 {
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        .intro {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
+body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.65;
+}
 
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
+/* =========================
+   BANDEAU
+========================= */
 
-        h2 {
-            color: var(--primary);
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 8px;
-            margin-bottom: 16px;
-            font-size: 1.4rem;
-        }
+header {
+    background: var(--navy);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+}
 
-        h3 {
-            margin: 16px 0 8px 0;
-            font-size: 1.1rem;
-        }
+.navbar {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.2rem;
+}
 
-        p, ul, ol {
-            margin-bottom: 12px;
-        }
+.logo {
+    color: white;
+    text-decoration: none;
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: bold;
+}
 
-        ul, ol {
-            padding-left: 20px;
-        }
+.nav-links {
+    display: flex;
+    gap: 0.45rem;
+}
 
-        li {
-            margin-bottom: 6px;
-        }
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: background 0.2s ease;
+}
 
-        .table-responsive {
-            overflow-x: auto;
-            margin: 16px 0;
-        }
+.nav-links a:hover {
+    background: var(--navy-light);
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: center;
-            font-size: 0.95rem;
-        }
+/* =========================
+   CONTENU
+========================= */
 
-        th, td {
-            border: 1px solid var(--border);
-            padding: 10px;
-        }
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 2rem 1.2rem 4rem;
+}
 
-        th {
-            background-color: var(--accent-bg);
-            color: var(--primary);
-        }
+.hero {
+    background: linear-gradient(135deg, var(--navy), var(--navy-light));
+    color: white;
+    border-radius: 14px;
+    padding: 2rem 1.6rem;
+    margin-bottom: 1.6rem;
+    box-shadow: var(--shadow);
+}
 
-        .equation {
-            background-color: var(--accent-bg);
-            padding: 12px;
-            border-radius: 6px;
-            text-align: center;
-            font-weight: bold;
-            margin: 12px 0;
-        }
+.hero h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(1.8rem, 5vw, 2.7rem);
+    line-height: 1.2;
+    margin: 0 0 0.7rem;
+}
 
-        .success {
-            background-color: var(--success-bg);
-            border: 1px solid var(--success-border);
-            color: var(--success-text);
-            padding: 16px;
-            border-radius: 6px;
-            margin-top: 16px;
-        }
+.hero p {
+    margin: 0;
+    max-width: 760px;
+    font-size: 1.05rem;
+    opacity: 0.94;
+}
 
-        .btn-animation {
-            display: inline-block;
-            width: 100%;
-            text-align: center;
-            background-color: var(--primary);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-weight: bold;
-            margin-top: 16px;
-            transition: background-color 0.2s ease;
-        }
+/* =========================
+   SOMMAIRE
+========================= */
 
-        .btn-animation:hover {
-            background-color: var(--primary-hover);
-        }
+.toc {
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--gold);
+    border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
 
-        /* Sommaire styling */
-        .sommaire-list {
-            list-style: none;
-            padding-left: 0;
-        }
+.toc h2 {
+    font-family: Georgia, serif;
+    font-size: 1.25rem;
+    color: var(--navy);
+    margin: 0 0 0.7rem;
+}
 
-        .sommaire-list li {
-            margin-bottom: 8px;
-        }
+.toc ol {
+    margin: 0;
+    padding-left: 1.4rem;
+}
 
-        .sommaire-list a {
-            color: var(--primary);
-            text-decoration: none;
-        }
+.toc li {
+    margin: 0.25rem 0;
+}
 
-        .sommaire-list a:hover {
-            text-decoration: underline;
-        }
-    </style>
+.toc a {
+    color: var(--navy);
+    text-decoration: none;
+}
+
+.toc a:hover {
+    color: var(--gold);
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+section {
+    scroll-margin-top: 80px;
+    margin-bottom: 2.3rem;
+}
+
+.card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.4rem;
+    box-shadow: var(--shadow);
+}
+
+h2 {
+    font-family: Georgia, serif;
+    color: var(--navy);
+    font-size: 1.65rem;
+    margin-top: 0;
+    border-bottom: 2px solid var(--gold-light);
+    padding-bottom: 0.45rem;
+}
+
+h3 {
+    color: var(--navy-light);
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+strong {
+    color: var(--navy);
+}
+
+/* =========================
+   ENCARTS
+========================= */
+
+.info {
+    background: #f5f2e9;
+    border-left: 4px solid var(--gold);
+    padding: 1rem 1.1rem;
+    border-radius: 6px;
+    margin: 1.2rem 0;
+}
+
+.warning {
+    background: #f8f3e9;
+    border-left: 4px solid var(--gold);
+    padding: 1rem 1.1rem;
+    border-radius: 6px;
+    margin: 1.2rem 0;
+}
+
+.success {
+    background: var(--green-soft);
+    border-left: 4px solid var(--green);
+    padding: 1rem 1.1rem;
+    border-radius: 6px;
+    margin: 1.2rem 0;
+}
+
+.method {
+    background: var(--navy);
+    color: white;
+    border-radius: 10px;
+    padding: 1.2rem 1.3rem;
+    margin: 1.4rem 0;
+}
+
+.method strong {
+    color: white;
+}
+
+.method ol {
+    margin-bottom: 0;
+}
+
+/* =========================
+   EQUATIONS ET BOUTONS
+========================= */
+
+.equation {
+    background: var(--soft);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+    font-size: 1.15rem;
+    font-family: Georgia, serif;
+    overflow-x: auto;
+}
+
+.btn-animation {
+    display: inline-block;
+    background-color: var(--navy);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.75rem 1.2rem;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-top: 1rem;
+    transition: background 0.2s ease;
+}
+
+.btn-animation:hover {
+    background-color: var(--navy-light);
+}
+
+/* =========================
+   TABLEAUX
+========================= */
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin: 1.3rem 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+table {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    border: 1px solid #cfcac0;
+    padding: 0.65rem 0.55rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+th {
+    background: var(--navy);
+    color: white;
+    font-weight: bold;
+}
+
+td:first-child {
+    font-weight: bold;
+    background: #f2efe8;
+}
+
+.equation-row td {
+    background: #f7f5ef;
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+}
+
+/* =========================
+   LISTES & RETOUR
+========================= */
+
+ul, ol {
+    padding-left: 1.4rem;
+}
+
+li {
+    margin-bottom: 0.45rem;
+}
+
+.back-top {
+    text-align: right;
+    margin-top: 1rem;
+}
+
+.back-top a {
+    color: var(--navy);
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+/* =========================
+   PIED DE PAGE
+========================= */
+
+footer {
+    background: var(--navy);
+    color: #e7ebef;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+footer a {
+    color: white;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+    .navbar {
+        padding: 0.7rem 0.7rem;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
+        padding: 0.45rem 0.55rem;
+    }
+
+    .container {
+        padding: 1.2rem 0.8rem 3rem;
+    }
+
+    .hero {
+        padding: 1.5rem 1.1rem;
+        border-radius: 10px;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .card {
+        padding: 1.1rem;
+        border-radius: 9px;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    body {
+        font-size: 0.97rem;
+    }
+
+    .equation {
+        font-size: 1rem;
+    }
+}
+</style>
 </head>
+
 <body>
 
-<div class="container">
+<header>
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            Physique-Chimie au lycée
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="animations.html">Animations</a>
+            <a href="Ouvrages.html">Ouvrages</a>
+        </div>
+    </nav>
+</header>
 
-    <header>
+<main class="container">
+
+    <div class="hero">
         <h1>Méthode : Le Tableau d'Avancement</h1>
-        <p class="intro">Comprendre et réussir pas à pas l'étude d'une réaction chimique</p>
-    </header>
+        <p>Comprendre et réussir pas à pas l'étude d'une réaction chimique.</p>
+    </div>
 
     <!-- SOMMAIRE -->
-    <section id="sommaire">
-        <div class="card">
-            <h2>Sommaire</h2>
-            <ul class="sommaire-list">
-                <li><a href="#equation">1. Écrire l'équation chimique équilibrée</a></li>
-                <li><a href="#quantites-initiales">2. Calculer les quantités de matière initiales</a></li>
-                <li><a href="#construction-tableau">3. Construire le tableau d'avancement</a></li>
-                <li><a href="#recherche-xmax">4. Chercher l'avancement maximal (x<sub>max</sub>)</a></li>
-                <li><a href="#reactif-limitant">5. Identifier le réactif limitant</a></li>
-                <li><a href="#bilan">6. Faire le bilan final</a></li>
-            </ul>
-            <a href="animation_avancement.html" class="btn-animation">Voir l'animation de l'avancement</a>
-        </div>
-    </section>
+    <nav class="toc" aria-label="Sommaire">
+        <h2>Sommaire</h2>
+        <ol>
+            <li><a href="#equation">Écrire l'équation chimique équilibrée</a></li>
+            <li><a href="#quantites-initiales">Calculer les quantités de matière initiales</a></li>
+            <li><a href="#construction-tableau">Construire le tableau d'avancement</a></li>
+            <li><a href="#recherche-xmax">Chercher l'avancement maximal (x<sub>max</sub>)</a></li>
+            <li><a href="#reactif-limitant">Identifier le réactif limitant</a></li>
+            <li><a href="#bilan">Faire le bilan final</a></li>
+        </ol>
+        <a href="animation_avancement.html" class="btn-animation">Voir l'animation de l'avancement</a>
+    </nav>
 
     <!-- ENONCE EXEMPLE -->
-    <div class="card" style="background-color: var(--accent-bg);">
+    <div class="card">
         <h2>Énoncé exemple</h2>
         <p>
             On mélange <strong>m = 0,054 g d'aluminium (Al)</strong> solide avec
             <strong>V = 50 mL</strong> d'une solution de sulfate de zinc contenant des ions
             <strong>Zn<sup>2+</sup></strong> à la concentration <strong>C = 0,034 mol/L</strong>.
         </p>
-        <p><em>Donnée : Masse molaire M(Al) = 27,0 g/mol</em></p>
+        <div class="info">
+            <strong>Donnée :</strong> Masse molaire M(Al) = 27,0 g/mol
+        </div>
     </div>
 
     <!-- 1 -->
@@ -220,6 +479,9 @@
                 <li>Charges : 3 × (+2) = +6 à gauche ; 2 × (+3) = +6 à droite.</li>
             </ul>
         </div>
+        <div class="back-top">
+            <a href="#top">↑ Retour au sommaire</a>
+        </div>
     </section>
 
     <!-- 2 -->
@@ -239,6 +501,9 @@
                 n<sub>0</sub>(Zn<sup>2+</sup>) = 0,034 × 0,050 = 1,7 × 10<sup>−3</sup> mol (soit 1,7 mmol)
             </div>
         </div>
+        <div class="back-top">
+            <a href="#top">↑ Retour au sommaire</a>
+        </div>
     </section>
 
     <!-- 3 -->
@@ -249,55 +514,55 @@
                 Le tableau permet de suivre l'évolution des quantités de matière au cours du temps à l'aide d'une variable appelée <strong>avancement (x)</strong>.
             </p>
 
-            <div class="table-responsive">
+            <div class="table-wrapper">
                 <table>
-                    <thead>
-                        <tr>
-                            <th>Équation</th>
-                            <th colspan="2">2 Al (s)</th>
-                            <th colspan="2">+ 3 Zn<sup>2+</sup> (aq)</th>
-                            <th>→</th>
-                            <th colspan="2">2 Al<sup>3+</sup> (aq)</th>
-                            <th colspan="2">+ 3 Zn (s)</th>
-                        </tr>
-                        <tr>
-                            <th>État</th>
-                            <th>Avancement (mol)</th>
-                            <th colspan="8">Quantités de matière (mol)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Initial</strong></td>
-                            <td>x = 0</td>
-                            <td colspan="2">2,0 × 10<sup>−3</sup></td>
-                            <td colspan="2">1,7 × 10<sup>−3</sup></td>
-                            <td></td>
-                            <td colspan="2">0</td>
-                            <td colspan="2">0</td>
-                        </tr>
-                        <tr>
-                            <td><strong>En cours</strong></td>
-                            <td>x</td>
-                            <td colspan="2">2,0 × 10<sup>−3</sup> − 2x</td>
-                            <td colspan="2">1,7 × 10<sup>−3</sup> − 3x</td>
-                            <td></td>
-                            <td colspan="2">2x</td>
-                            <td colspan="2">3x</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Final</strong></td>
-                            <td>x<sub>max</sub></td>
-                            <td colspan="2">2,0 × 10<sup>−3</sup> − 2x<sub>max</sub></td>
-                            <td colspan="2">1,7 × 10<sup>−3</sup> − 3x<sub>max</sub></td>
-                            <td></td>
-                            <td colspan="2">2x<sub>max</sub></td>
-                            <td colspan="2">3x<sub>max</sub></td>
-                        </tr>
-                    </tbody>
+                    <tr class="equation-row">
+                        <td>Équation</td>
+                        <td></td>
+                        <td colspan="2">2 Al (s) + 3 Zn<sup>2+</sup> (aq)</td>
+                        <td colspan="2">→ 2 Al<sup>3+</sup> (aq) + 3 Zn (s)</td>
+                    </tr>
+                    <tr>
+                        <th>État du système</th>
+                        <th>Avancement</th>
+                        <th>Al</th>
+                        <th>Zn²⁺</th>
+                        <th>Al³⁺</th>
+                        <th>Zn</th>
+                    </tr>
+                    <tr>
+                        <td>Initial</td>
+                        <td>x = 0</td>
+                        <td>2,0 × 10<sup>−3</sup></td>
+                        <td>1,7 × 10<sup>−3</sup></td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>En cours</td>
+                        <td>x</td>
+                        <td>2,0 × 10<sup>−3</sup> − 2x</td>
+                        <td>1,7 × 10<sup>−3</sup> − 3x</td>
+                        <td>2x</td>
+                        <td>3x</td>
+                    </tr>
+                    <tr>
+                        <td>Final</td>
+                        <td>x<sub>max</sub></td>
+                        <td>2,0 × 10<sup>−3</sup> − 2x<sub>max</sub></td>
+                        <td>1,7 × 10<sup>−3</sup> − 3x<sub>max</sub></td>
+                        <td>2x<sub>max</sub></td>
+                        <td>3x<sub>max</sub></td>
+                    </tr>
                 </table>
             </div>
-            <p><em>Remarque : N'oubliez pas de multiplier x par les coefficients stœchiométriques dans les lignes "En cours" et "Final".</em></p>
+
+            <div class="info">
+                <strong>Remarque :</strong> N'oubliez pas de multiplier x par les coefficients stœchiométriques dans les lignes "En cours" et "Final".
+            </div>
+        </div>
+        <div class="back-top">
+            <a href="#top">↑ Retour au sommaire</a>
         </div>
     </section>
 
@@ -325,6 +590,9 @@
                 x<sub>max2</sub> = (1,7 × 10<sup>−3</sup>) / 3 ≈ 5,7 × 10<sup>−4</sup> mol
             </div>
         </div>
+        <div class="back-top">
+            <a href="#top">↑ Retour au sommaire</a>
+        </div>
     </section>
 
     <!-- 5 -->
@@ -339,13 +607,21 @@
                 <li>x<sub>max1</sub> = 1,0 × 10<sup>−3</sup> mol = 10 × 10<sup>−4</sup> mol</li>
                 <li>x<sub>max2</sub> = 5,7 × 10<sup>−4</sup> mol</li>
             </ul>
-            <div class="equation">
-                x<sub>max2</sub> < x<sub>max1</sub>
+
+            <div class="success">
+                <div class="equation">
+                    x<sub>max2</sub> &lt; x<sub>max1</sub>
+                </div>
+                <p>
+                    <strong>Conclusion :</strong> L'avancement maximal de la réaction est <strong>x<sub>max</sub> = 5,7 × 10<sup>−4</sup> mol</strong>.
+                </p>
+                <p>
+                    Le réactif limitant est l'ion <strong>Zn<sup>2+</sup></strong> (il sera entièrement consommé en premier).
+                </p>
             </div>
-            <p>
-                <strong>Conclusion :</strong> L'avancement maximal de la réaction est <strong>x<sub>max</sub> = 5,7 × 10<sup>−4</sup> mol</strong>.<br>
-                Le réactif limitant est l'ion <strong>Zn<sup>2+</sup></strong> (il sera entièrement consommé en premier).
-            </p>
+        </div>
+        <div class="back-top">
+            <a href="#top">↑ Retour au sommaire</a>
         </div>
     </section>
 
@@ -357,7 +633,7 @@
                 Une fois x<sub>max</sub> connu, il suffit de remplacer
                 <strong>x</strong> par sa valeur dans la dernière ligne du tableau.
             </p>
-            <p>On utilise :</p>
+            <p>On использует :</p>
             <div class="equation">
                 x<sub>max</sub> = 5,7 × 10<sup>−4</sup> mol
             </div>
@@ -385,16 +661,23 @@
             <div class="success">
                 <strong>Bilan de matière final :</strong>
                 <ul>
-                    <li>n(Zn<sup>2+</sup>) = 0 mol</li>
+                    <li>n(Zn<sup>2+</sup>) ≈ 0 mol</li>
                     <li>n(Al) ≈ 8,6 × 10<sup>−4</sup> mol</li>
                     <li>n(Zn) ≈ 1,7 × 10<sup>−3</sup> mol</li>
                     <li>n(Al<sup>3+</sup>) ≈ 1,1 × 10<sup>−3</sup> mol</li>
                 </ul>
             </div>
         </div>
+        <div class="back-top">
+            <a href="#top">↑ Retour au sommaire</a>
+        </div>
     </section>
 
-</div>
+</main>
+
+<footer>
+    Physique-Chimie au lycée
+</footer>
 
 </body>
 </html>
