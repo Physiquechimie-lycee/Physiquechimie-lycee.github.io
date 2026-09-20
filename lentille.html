@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 
-
-<title>Lentille mince — animation interactive</title>
+<title>Lentille mince — Animation interactive | Physique-Chimie au lycée</title>
 
 <style>
 :root {
@@ -32,19 +30,74 @@
 
 body {
     margin: 0;
-    padding: 20px 12px 35px;
-    background:
-        radial-gradient(circle at top right,
-            rgba(176,141,43,0.10),
-            transparent 30%),
-        var(--cream);
+    background: var(--cream);
     color: var(--ink);
     font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.65;
 }
+
+/* =========================
+   BANDEAU / NAVIGATION
+========================= */
+
+header {
+    background: var(--navy);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+}
+
+.navbar {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.2rem;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 0.45rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: background 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background: var(--navy-light);
+}
+
+/* =========================
+   CONTENU PRINCIPAL
+========================= */
 
 .container {
     width: min(1100px, 100%);
     margin: auto;
+    padding: 2rem 1.2rem 4rem;
+}
+
+.hero-sim {
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 h1 {
@@ -52,20 +105,18 @@ h1 {
     color: var(--navy);
     font-family: Georgia, "Times New Roman", serif;
     font-size: 1.9rem;
-    text-align: center;
 }
 
 .intro {
     max-width: 760px;
-    margin: 0 auto 20px;
+    margin: 0 auto;
     color: var(--muted);
-    text-align: center;
     line-height: 1.5;
 }
 
 /* =========================
    CONTROLES
-   ========================= */
+========================= */
 
 .controls {
     display: grid;
@@ -146,8 +197,8 @@ input[type="range"] {
 }
 
 /* =========================
-   BOUTONS
-   ========================= */
+   BOUTONS ET ACTIONS
+========================= */
 
 .actions {
     display: flex;
@@ -179,11 +230,12 @@ button {
 .action-btn.primary {
     border-color: var(--gold);
     background: var(--gold);
+    color: #ffffff;
 }
 
 /* =========================
    ZONE D'ANIMATION
-   ========================= */
+========================= */
 
 .simulation {
     position: relative;
@@ -231,7 +283,7 @@ svg {
 
 /* =========================
    ELEMENTS SVG
-   ========================= */
+========================= */
 
 .axis {
     stroke: #7b8490;
@@ -300,8 +352,8 @@ svg {
 }
 
 /* =========================
-   INFORMATIONS
-   ========================= */
+   INFORMATIONS ET FORMULES
+========================= */
 
 .info-grid {
     display: grid;
@@ -331,10 +383,6 @@ svg {
     font-weight: 700;
 }
 
-/* =========================
-   EXPLICATION
-   ========================= */
-
 .formulas {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -360,17 +408,46 @@ svg {
 }
 
 /* =========================
+   PIED DE PAGE
+========================= */
+
+footer {
+    background: var(--navy);
+    color: #e7ebef;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+footer a {
+    color: white;
+}
+
+/* =========================
    MOBILE
-   ========================= */
+========================= */
 
-@media (max-width: 750px) {
-
-    body {
-        padding: 12px 8px 25px;
+@media (max-width: 650px) {
+    .navbar {
+        padding: 0.7rem 0.7rem;
     }
 
-    h1 {
-        font-size: 1.55rem;
+    .logo {
+        display: none;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
+        padding: 0.45rem 0.55rem;
+    }
+
+    .container {
+        padding: 1.2rem 0.8rem 3rem;
     }
 
     .controls {
@@ -389,10 +466,13 @@ svg {
     .formulas {
         grid-template-columns: 1fr;
     }
+
+    h1 {
+        font-size: 1.55rem;
+    }
 }
 
 @media (max-width: 430px) {
-
     .panel {
         padding: 13px;
     }
@@ -419,1602 +499,620 @@ svg {
     }
 }
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
+<header>
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            Physique-Chimie au lycée
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="animations.html" class="active">Animations</a>
+            <a href="Ouvrages.html">Ouvrages</a>
+        </div>
+    </nav>
+</header>
 
-```
-<h1>Lentille mince</h1>
+<main class="container">
 
-<p class="intro">
-    Déplace l'objet ou la lentille, modifie la distance focale
-    et observe directement la formation de l'image.
-</p>
+    <div class="hero-sim">
+        <h1>Lentille mince</h1>
+        <p class="intro">
+            Déplace l'objet ou la lentille, modifie la distance focale
+            et observe directement la formation de l'image.
+        </p>
+    </div>
 
+    <!-- =========================
+         CONTROLES
+    ========================= -->
 
-<!-- =========================
-     CONTROLES
-     ========================= -->
+    <div class="controls">
 
-<div class="controls">
+        <div class="panel">
+            <h2>Paramètres de la lentille</h2>
 
-    <div class="panel">
-
-        <h2>Paramètres de la lentille</h2>
-
-        <div class="control-row">
-
-            <label for="focal">
-                Distance focale
-            </label>
-
-            <input
-                type="range"
-                id="focal"
-                min="5"
-                max="40"
-                step="1"
-                value="15"
-            >
-
-            <div class="value" id="focalValue">
-                +15 cm
+            <div class="control-row">
+                <label for="focal">Distance focale</label>
+                <input type="range" id="focal" min="5" max="40" step="1" value="15">
+                <div class="value" id="focalValue">+15 cm</div>
             </div>
 
+            <div class="lens-type">
+                <button class="type-btn active" id="convBtn">Convergente</button>
+                <button class="type-btn" id="divBtn">Divergente</button>
+            </div>
         </div>
 
+        <div class="panel">
+            <h2>Position et taille de l'objet</h2>
 
-        <div class="lens-type">
-
-            <button
-                class="type-btn active"
-                id="convBtn">
-                Convergente
-            </button>
-
-            <button
-                class="type-btn"
-                id="divBtn">
-                Divergente
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div class="panel">
-
-        <h2>Position et taille de l'objet</h2>
-
-        <div class="control-row">
-
-            <label for="objectPos">
-                Position A
-            </label>
-
-            <input
-                type="range"
-                id="objectPos"
-                min="-60"
-                max="-5"
-                step="1"
-                value="-30"
-            >
-
-            <div class="value" id="objectPosValue">
-                -30 cm
+            <div class="control-row">
+                <label for="objectPos">Position A</label>
+                <input type="range" id="objectPos" min="-60" max="-5" step="1" value="-30">
+                <div class="value" id="objectPosValue">-30 cm</div>
             </div>
 
-        </div>
-
-
-        <div class="control-row">
-
-            <label for="objectHeight">
-                Hauteur AB
-            </label>
-
-            <input
-                type="range"
-                id="objectHeight"
-                min="3"
-                max="20"
-                step="1"
-                value="10"
-            >
-
-            <div class="value" id="objectHeightValue">
-                10 cm
+            <div class="control-row">
+                <label for="objectHeight">Hauteur AB</label>
+                <input type="range" id="objectHeight" min="3" max="20" step="1" value="10">
+                <div class="value" id="objectHeightValue">10 cm</div>
             </div>
-
         </div>
 
     </div>
 
-</div>
+    <!-- =========================
+         ACTIONS
+    ========================= -->
 
-
-<!-- =========================
-     ACTIONS
-     ========================= -->
-
-<div class="actions">
-
-    <button
-        class="action-btn primary"
-        id="infinityBtn">
-        Objet à l'infini
-    </button>
-
-    <button
-        class="action-btn"
-        id="gridBtn">
-        Grille
-    </button>
-
-    <button
-        class="action-btn"
-        id="raysBtn">
-        Rayons
-    </button>
-
-    <button
-        class="action-btn"
-        id="valuesBtn">
-        Valeurs
-    </button>
-
-    <button
-        class="action-btn"
-        id="resetBtn">
-        Réinitialiser
-    </button>
-
-</div>
-
-
-<!-- =========================
-     SIMULATION
-     ========================= -->
-
-<div class="simulation">
-
-    <div class="sim-header">
-
-        <strong>
-            Construction de l'image
-        </strong>
-
-        <span>
-            Fais glisser les points jaunes
-        </span>
-
+    <div class="actions">
+        <button class="action-btn primary" id="infinityBtn">Objet à l'infini</button>
+        <button class="action-btn" id="gridBtn">Grille</button>
+        <button class="action-btn" id="raysBtn">Rayons</button>
+        <button class="action-btn" id="valuesBtn">Valeurs</button>
+        <button class="action-btn" id="resetBtn">Réinitialiser</button>
     </div>
 
+    <!-- =========================
+         SIMULATION
+    ========================= -->
 
-    <div class="svg-wrap">
+    <div class="simulation">
+        <div class="sim-header">
+            <strong>Construction de l'image</strong>
+            <span>Fais glisser les points jaunes</span>
+        </div>
 
-        <svg
-            id="scene"
-            viewBox="0 0 1000 500"
-            preserveAspectRatio="xMidYMid meet">
+        <div class="svg-wrap">
+            <svg id="scene" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
+                <!-- grille -->
+                <g id="grid"></g>
 
-            <!-- grille -->
-            <g id="grid"></g>
+                <!-- axe optique -->
+                <line x1="20" y1="250" x2="980" y2="250" class="axis" />
 
-            <!-- axe optique -->
-            <line
-                x1="20"
-                y1="250"
-                x2="980"
-                y2="250"
-                class="axis"
-            />
+                <!-- lentille -->
+                <path id="lens" class="lens" d="" />
 
-            <!-- lentille -->
-            <path
-                id="lens"
-                class="lens"
-                d=""
-            />
+                <!-- foyers -->
+                <circle id="F" class="focus" r="6" />
+                <circle id="Fp" class="focus" r="6" />
 
-            <!-- foyers -->
-            <circle
-                id="F"
-                class="focus"
-                r="6"
-            />
+                <!-- labels foyers -->
+                <text id="FLabel" class="label">F</text>
+                <text id="FpLabel" class="label">F'</text>
 
-            <circle
-                id="Fp"
-                class="focus"
-                r="6"
-            />
+                <!-- rayons -->
+                <g id="rays"></g>
 
-            <!-- labels foyers -->
-            <text
-                id="FLabel"
-                class="label">
-                F
-            </text>
+                <!-- objet -->
+                <line id="object" class="object" />
+                <circle id="objectHandle" class="drag-point" r="7" />
+                <text id="objectLabel" class="label">AB</text>
 
-            <text
-                id="FpLabel"
-                class="label">
-                F'
-            </text>
+                <!-- image -->
+                <line id="image" class="image" />
+                <text id="imageLabel" class="label">A'B'</text>
 
-            <!-- rayons -->
-            <g id="rays"></g>
+                <!-- centre optique -->
+                <text id="lensLabel" class="label">O</text>
 
-            <!-- objet -->
-            <line
-                id="object"
-                class="object"
-            />
-
-            <circle
-                id="objectHandle"
-                class="drag-point"
-                r="7"
-            />
-
-            <text
-                id="objectLabel"
-                class="label">
-                AB
-            </text>
-
-            <!-- image -->
-            <line
-                id="image"
-                class="image"
-            />
-
-            <text
-                id="imageLabel"
-                class="label">
-                A'B'
-            </text>
-
-            <!-- lentille -->
-            <text
-                id="lensLabel"
-                class="label">
-                O
-            </text>
-
-            <!-- informations -->
-            <g id="sceneValues"></g>
-
-        </svg>
-
+                <!-- informations -->
+                <g id="sceneValues"></g>
+            </svg>
+        </div>
     </div>
 
-</div>
+    <!-- =========================
+         GRANDEURS OPTIQUES
+    ========================= -->
 
-
-<!-- =========================
-     GRANDEURS OPTIQUES
-     ========================= -->
-
-<div class="info-grid">
-
-    <div class="info-card">
-        <span class="label-info">
-            Distance focale
-        </span>
-        <span
-            class="number"
-            id="infoF">
-            +15 cm
-        </span>
+    <div class="info-grid">
+        <div class="info-card">
+            <span class="label-info">Distance focale</span>
+            <span class="number" id="infoF">+15 cm</span>
+        </div>
+        <div class="info-card">
+            <span class="label-info">Vergence</span>
+            <span class="number" id="infoC">+6,67 δ</span>
+        </div>
+        <div class="info-card">
+            <span class="label-info">OA</span>
+            <span class="number" id="infoOA">-30 cm</span>
+        </div>
+        <div class="info-card">
+            <span class="label-info">OA'</span>
+            <span class="number" id="infoOAp">+30 cm</span>
+        </div>
+        <div class="info-card">
+            <span class="label-info">AB</span>
+            <span class="number" id="infoAB">10 cm</span>
+        </div>
+        <div class="info-card">
+            <span class="label-info">A'B'</span>
+            <span class="number" id="infoABp">-10 cm</span>
+        </div>
+        <div class="info-card">
+            <span class="label-info">Grandissement γ</span>
+            <span class="number" id="infoGamma">-1</span>
+        </div>
+        <div class="info-card">
+            <span class="label-info">Nature de l'image</span>
+            <span class="number" id="infoNature">Réelle</span>
+        </div>
     </div>
 
-    <div class="info-card">
-        <span class="label-info">
-            Vergence
-        </span>
-        <span
-            class="number"
-            id="infoC">
-            +6,67 δ
-        </span>
+    <!-- =========================
+         FORMULES
+    ========================= -->
+
+    <div class="formulas">
+        <div class="formula">
+            <strong>Relation de conjugaison</strong>
+            <span>1/OA' − 1/OA = 1/f'</span>
+        </div>
+        <div class="formula">
+            <strong>Grandissement</strong>
+            <span>γ = A'B' / AB = OA' / OA</span>
+        </div>
+        <div class="formula">
+            <strong>Vergence</strong>
+            <span>C = 1/f' &nbsp; avec f' en m</span>
+        </div>
     </div>
 
-    <div class="info-card">
-        <span class="label-info">
-            OA
-        </span>
-        <span
-            class="number"
-            id="infoOA">
-            -30 cm
-        </span>
-    </div>
+</main>
 
-    <div class="info-card">
-        <span class="label-info">
-            OA'
-        </span>
-        <span
-            class="number"
-            id="infoOAp">
-            +30 cm
-        </span>
-    </div>
-
-    <div class="info-card">
-        <span class="label-info">
-            AB
-        </span>
-        <span
-            class="number"
-            id="infoAB">
-            10 cm
-        </span>
-    </div>
-
-    <div class="info-card">
-        <span class="label-info">
-            A'B'
-        </span>
-        <span
-            class="number"
-            id="infoABp">
-            -10 cm
-        </span>
-    </div>
-
-    <div class="info-card">
-        <span class="label-info">
-            Grandissement γ
-        </span>
-        <span
-            class="number"
-            id="infoGamma">
-            -1
-        </span>
-    </div>
-
-    <div class="info-card">
-        <span class="label-info">
-            Nature de l'image
-        </span>
-        <span
-            class="number"
-            id="infoNature">
-            Réelle
-        </span>
-    </div>
-
-</div>
-
-
-<!-- =========================
-     FORMULES
-     ========================= -->
-
-<div class="formulas">
-
-    <div class="formula">
-        <strong>Relation de conjugaison</strong>
-        <span>
-            1/OA' − 1/OA = 1/f'
-        </span>
-    </div>
-
-    <div class="formula">
-        <strong>Grandissement</strong>
-        <span>
-            γ = A'B' / AB = OA' / OA
-        </span>
-    </div>
-
-    <div class="formula">
-        <strong>Vergence</strong>
-        <span>
-            C = 1/f' &nbsp; avec f' en m
-        </span>
-    </div>
-
-</div>
-```
-
-</div>
+<footer>
+    Physique-Chimie au lycée
+</footer>
 
 <script>
-
 /* =========================================================
    ELEMENTS
    ========================================================= */
+const focalSlider = document.getElementById("focal");
+const objectPosSlider = document.getElementById("objectPos");
+const objectHeightSlider = document.getElementById("objectHeight");
 
-const focalSlider =
-    document.getElementById("focal");
+const focalValue = document.getElementById("focalValue");
+const objectPosValue = document.getElementById("objectPosValue");
+const objectHeightValue = document.getElementById("objectHeightValue");
 
-const objectPosSlider =
-    document.getElementById("objectPos");
+const lens = document.getElementById("lens");
+const object = document.getElementById("object");
+const image = document.getElementById("image");
+const objectHandle = document.getElementById("objectHandle");
 
-const objectHeightSlider =
-    document.getElementById("objectHeight");
+const F = document.getElementById("F");
+const Fp = document.getElementById("Fp");
+const FLabel = document.getElementById("FLabel");
+const FpLabel = document.getElementById("FpLabel");
 
-const focalValue =
-    document.getElementById("focalValue");
+const objectLabel = document.getElementById("objectLabel");
+const imageLabel = document.getElementById("imageLabel");
+const lensLabel = document.getElementById("lensLabel");
 
-const objectPosValue =
-    document.getElementById("objectPosValue");
-
-const objectHeightValue =
-    document.getElementById("objectHeightValue");
-
-const lens =
-    document.getElementById("lens");
-
-const object =
-    document.getElementById("object");
-
-const image =
-    document.getElementById("image");
-
-const objectHandle =
-    document.getElementById("objectHandle");
-
-const F =
-    document.getElementById("F");
-
-const Fp =
-    document.getElementById("Fp");
-
-const FLabel =
-    document.getElementById("FLabel");
-
-const FpLabel =
-    document.getElementById("FpLabel");
-
-const objectLabel =
-    document.getElementById("objectLabel");
-
-const imageLabel =
-    document.getElementById("imageLabel");
-
-const lensLabel =
-    document.getElementById("lensLabel");
-
-const rays =
-    document.getElementById("rays");
-
-const grid =
-    document.getElementById("grid");
-
-const sceneValues =
-    document.getElementById("sceneValues");
-
+const rays = document.getElementById("rays");
+const grid = document.getElementById("grid");
+const sceneValues = document.getElementById("sceneValues");
 
 /* =========================================================
    ETAT
    ========================================================= */
-
 let converging = true;
-
 let showGrid = false;
 let showRays = true;
 let showValues = true;
-
 let infinityMode = false;
-
 let lensX = 500;
 
-
-/*
- * Echelle graphique :
- * 1 cm = 6 px
- */
-
 const SCALE = 6;
-
 
 /* =========================================================
    UTILITAIRES
    ========================================================= */
-
 function fmt(value, decimals = 1) {
-
-    if (!Number.isFinite(value)) {
-        return "∞";
-    }
-
-    return value
-        .toFixed(decimals)
-        .replace(".", ",");
+    if (!Number.isFinite(value)) return "∞";
+    return value.toFixed(decimals).replace(".", ",");
 }
-
 
 function signed(value, decimals = 1) {
-
-    if (!Number.isFinite(value)) {
-        return "∞";
-    }
-
+    if (!Number.isFinite(value)) return "∞";
     const sign = value >= 0 ? "+" : "";
-
     return sign + fmt(value, decimals);
 }
-
 
 /* =========================================================
    CALCUL OPTIQUE
    ========================================================= */
-
 function calculate() {
-
-    const f =
-        Number(focalSlider.value) *
-        (converging ? 1 : -1);
-
-
-    const OA =
-        infinityMode
-            ? -Infinity
-            : Number(objectPosSlider.value);
-
-
-    const AB =
-        Number(objectHeightSlider.value);
-
-
-    /*
-     * Relation de conjugaison :
-     *
-     * 1/OA' - 1/OA = 1/f'
-     *
-     * donc
-     *
-     * OA' = f' × OA / (OA + f')
-     */
+    const f = Number(focalSlider.value) * (converging ? 1 : -1);
+    const OA = infinityMode ? -Infinity : Number(objectPosSlider.value);
+    const AB = Number(objectHeightSlider.value);
 
     let OAp;
-
     if (infinityMode) {
-
         OAp = f;
-
     } else {
-
-        OAp =
-            f * OA /
-            (OA + f);
-
+        OAp = (f * OA) / (OA + f);
     }
-
-
-    /*
-     * Grandissement
-     */
 
     let gamma;
-
     if (infinityMode) {
-
         gamma = 0;
-
     } else {
-
         gamma = OAp / OA;
-
     }
 
+    const ABp = gamma * AB;
 
-    const ABp =
-        gamma * AB;
-
-
-    return {
-        f,
-        OA,
-        OAp,
-        AB,
-        ABp,
-        gamma
-    };
-
+    return { f, OA, OAp, AB, ABp, gamma };
 }
-
 
 /* =========================================================
    DESSIN DE LA GRILLE
    ========================================================= */
-
 function drawGrid() {
-
     grid.innerHTML = "";
-
-    if (!showGrid) {
-        return;
-    }
+    if (!showGrid) return;
 
     for (let x = 20; x <= 980; x += 30) {
-
-        const line =
-            document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "line"
-            );
-
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
         line.setAttribute("x1", x);
         line.setAttribute("x2", x);
         line.setAttribute("y1", 80);
         line.setAttribute("y2", 430);
-
         line.setAttribute("class", "grid-line");
-
         grid.appendChild(line);
     }
 
-
     for (let y = 100; y <= 400; y += 30) {
-
-        const line =
-            document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "line"
-            );
-
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
         line.setAttribute("x1", 20);
         line.setAttribute("x2", 980);
         line.setAttribute("y1", y);
         line.setAttribute("y2", y);
-
         line.setAttribute("class", "grid-line");
-
         grid.appendChild(line);
     }
-
 }
-
 
 /* =========================================================
    DESSIN DE LA LENTILLE
    ========================================================= */
-
 function drawLens(f) {
-
-    /*
-     * Lentille convergente :
-     * forme biconvexe stylisée.
-     *
-     * Divergente :
-     * forme biconcave stylisée.
-     */
-
     let path;
-
     if (converging) {
-
-        path =
-            `M ${lensX - 9} 105
-             Q ${lensX - 27} 250 ${lensX - 9} 395
-             L ${lensX + 9} 395
-             Q ${lensX + 27} 250 ${lensX + 9} 105 Z`;
-
+        path = `M ${lensX - 9} 105
+                Q ${lensX - 27} 250 ${lensX - 9} 395
+                L ${lensX + 9} 395
+                Q ${lensX + 27} 250 ${lensX + 9} 105 Z`;
     } else {
-
-        path =
-            `M ${lensX - 9} 105
-             Q ${lensX + 8} 250 ${lensX - 9} 395
-             L ${lensX + 9} 395
-             Q ${lensX - 8} 250 ${lensX + 9} 105 Z`;
-
+        path = `M ${lensX - 9} 105
+                Q ${lensX + 8} 250 ${lensX - 9} 395
+                L ${lensX + 9} 395
+                Q ${lensX - 8} 250 ${lensX + 9} 105 Z`;
     }
 
     lens.setAttribute("d", path);
-
-    lensLabel.setAttribute(
-        "x",
-        lensX + 12
-    );
-
-    lensLabel.setAttribute(
-        "y",
-        268
-    );
-
+    lensLabel.setAttribute("x", lensX + 12);
+    lensLabel.setAttribute("y", 268);
 }
-
 
 /* =========================================================
    DESSIN DES FOYERS
    ========================================================= */
-
 function drawFoci(f) {
-
-    const fPx =
-        Math.abs(f) * SCALE;
-
-
-    const xF =
-        lensX - fPx;
-
-    const xFp =
-        lensX + fPx;
-
+    const fPx = Math.abs(f) * SCALE;
+    const xF = lensX - fPx;
+    const xFp = lensX + fPx;
 
     F.setAttribute("cx", xF);
     F.setAttribute("cy", 250);
-
     Fp.setAttribute("cx", xFp);
     Fp.setAttribute("cy", 250);
 
-
     FLabel.setAttribute("x", xF - 5);
     FLabel.setAttribute("y", 275);
-
     FpLabel.setAttribute("x", xFp - 5);
     FpLabel.setAttribute("y", 275);
-
 }
-
 
 /* =========================================================
    DESSIN OBJET + IMAGE
    ========================================================= */
-
 function drawObjects(data) {
-
-    const objectX =
-        infinityMode
-            ? 55
-            : lensX + data.OA * SCALE;
-
-
-    const objectTop =
-        250 - data.AB * 5;
-
+    const objectX = infinityMode ? 55 : lensX + data.OA * SCALE;
+    const objectTop = 250 - data.AB * 5;
 
     object.setAttribute("x1", objectX);
     object.setAttribute("y1", 250);
-
     object.setAttribute("x2", objectX);
     object.setAttribute("y2", objectTop);
 
+    objectHandle.setAttribute("cx", objectX);
+    objectHandle.setAttribute("cy", objectTop);
 
-    objectHandle.setAttribute(
-        "cx",
-        objectX
-    );
-
-    objectHandle.setAttribute(
-        "cy",
-        objectTop
-    );
-
-
-    objectLabel.setAttribute(
-        "x",
-        objectX - 12
-    );
-
-    objectLabel.setAttribute(
-        "y",
-        objectTop - 10
-    );
-
-
-    /*
-     * Image
-     */
+    objectLabel.setAttribute("x", objectX - 12);
+    objectLabel.setAttribute("y", objectTop - 10);
 
     let imageX;
-
     if (Number.isFinite(data.OAp)) {
-
-        imageX =
-            lensX +
-            data.OAp * SCALE;
-
+        imageX = lensX + data.OAp * SCALE;
     } else {
-
-        imageX =
-            lensX + 250;
-
+        imageX = lensX + 250;
     }
 
-
-    let imageTop =
-        250 - data.ABp * 5;
-
-
-    /*
-     * Limite graphique
-     */
-
-    imageTop =
-        Math.max(
-            70,
-            Math.min(430, imageTop)
-        );
-
+    let imageTop = 250 - data.ABp * 5;
+    imageTop = Math.max(70, Math.min(430, imageTop));
 
     image.setAttribute("x1", imageX);
     image.setAttribute("y1", 250);
-
     image.setAttribute("x2", imageX);
     image.setAttribute("y2", imageTop);
 
-
-    imageLabel.setAttribute(
-        "x",
-        imageX + 8
-    );
-
-    imageLabel.setAttribute(
-        "y",
-        imageTop - 8
-    );
-
+    imageLabel.setAttribute("x", imageX + 8);
+    imageLabel.setAttribute("y", imageTop - 8);
 }
-
 
 /* =========================================================
    RAYONS PRINCIPAUX
    ========================================================= */
-
 function drawRays(data) {
-
     rays.innerHTML = "";
+    if (!showRays) return;
 
-    if (!showRays) {
-        return;
-    }
+    const objectX = infinityMode ? 55 : lensX + data.OA * SCALE;
+    const objectY = 250 - data.AB * 5;
+    const imageX = lensX + (Number.isFinite(data.OAp) ? data.OAp * SCALE : 250);
+    const imageY = 250 - data.ABp * 5;
 
-
-    const objectX =
-        infinityMode
-            ? 55
-            : lensX + data.OA * SCALE;
-
-    const objectY =
-        250 - data.AB * 5;
-
-
-    const imageX =
-        lensX +
-        (Number.isFinite(data.OAp)
-            ? data.OAp * SCALE
-            : 250);
-
-
-    const imageY =
-        250 -
-        data.ABp * 5;
-
-
-    /*
-     * Rayon parallèle à l'axe :
-     *
-     * après la lentille, il passe par F'
-     */
-
-    addLine(
-        objectX,
-        objectY,
-        lensX,
-        objectY,
-        "ray"
-    );
-
+    addLine(objectX, objectY, lensX, objectY, "ray");
 
     if (converging) {
-
-        addLine(
-            lensX,
-            objectY,
-            imageX,
-            imageY,
-            "ray"
-        );
-
+        addLine(lensX, objectY, imageX, imageY, "ray");
     } else {
-
-        /*
-         * Pour une divergente :
-         * le rayon sort en divergeant
-         * comme s'il provenait de F.
-         */
-
-        const fX =
-            lensX -
-            Math.abs(data.f) * SCALE;
-
-        const slope =
-            (objectY - 250) /
-            (lensX - fX);
-
-        const endX =
-            950;
-
-        const endY =
-            objectY +
-            slope *
-            (endX - lensX);
-
-        addLine(
-            lensX,
-            objectY,
-            endX,
-            endY,
-            "ray"
-        );
-
+        const fX = lensX - Math.abs(data.f) * SCALE;
+        const slope = (objectY - 250) / (lensX - fX);
+        const endX = 950;
+        const endY = objectY + slope * (endX - lensX);
+        addLine(lensX, objectY, endX, endY, "ray");
     }
 
-
-    /*
-     * Rayon passant par O
-     */
-
-    addLine(
-        objectX,
-        objectY,
-        lensX,
-        250 + (objectY - 250) *
-        ((lensX - objectX) /
-        (lensX - objectX)),
-        "ray secondary"
-    );
-
-    addLine(
-        lensX,
-        250,
-        imageX,
-        imageY,
-        "ray secondary"
-    );
-
-
-    /*
-     * Rayon passant par F :
-     * parallèle après la lentille
-     */
+    addLine(objectX, objectY, lensX, 250, "ray secondary");
+    addLine(lensX, 250, imageX, imageY, "ray secondary");
 
     if (converging) {
-
-        const fX =
-            lensX -
-            Math.abs(data.f) * SCALE;
-
-        addLine(
-            objectX,
-            objectY,
-            fX,
-            250,
-            "ray secondary"
-        );
-
-        addLine(
-            lensX,
-            250,
-            950,
-            250,
-            "ray secondary"
-        );
-
+        const fX = lensX - Math.abs(data.f) * SCALE;
+        addLine(objectX, objectY, fX, 250, "ray secondary");
+        addLine(lensX, 250, 950, 250, "ray secondary");
     }
-
 }
 
-
-/* =========================================================
-   AJOUT LIGNE SVG
-   ========================================================= */
-
-function addLine(
-    x1,
-    y1,
-    x2,
-    y2,
-    className
-) {
-
-    const line =
-        document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "line"
-        );
-
+function addLine(x1, y1, x2, y2, className) {
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
     line.setAttribute("x1", x1);
     line.setAttribute("y1", y1);
-
     line.setAttribute("x2", x2);
     line.setAttribute("y2", y2);
-
-    line.setAttribute(
-        "class",
-        className
-    );
-
+    line.setAttribute("class", className);
     rays.appendChild(line);
-
 }
-
 
 /* =========================================================
    INFORMATIONS
    ========================================================= */
-
 function updateInfo(data) {
+    focalValue.textContent = signed(data.f) + " cm";
+    objectPosValue.textContent = infinityMode ? "∞" : signed(data.OA) + " cm";
+    objectHeightValue.textContent = fmt(data.AB) + " cm";
 
-    focalValue.textContent =
-        signed(data.f) + " cm";
-
-
-    objectPosValue.textContent =
-        infinityMode
-            ? "∞"
-            : signed(data.OA) + " cm";
-
-
-    objectHeightValue.textContent =
-        fmt(data.AB) + " cm";
-
-
-    document.getElementById("infoF")
-        .textContent =
-        signed(data.f) + " cm";
-
-
-    const vergence =
-        1 / (data.f / 100);
-
-
-    document.getElementById("infoC")
-        .textContent =
-        signed(vergence, 2) + " δ";
-
-
-    document.getElementById("infoOA")
-        .textContent =
-        infinityMode
-            ? "−∞"
-            : signed(data.OA) + " cm";
-
-
-    document.getElementById("infoOAp")
-        .textContent =
-        signed(data.OAp) + " cm";
-
-
-    document.getElementById("infoAB")
-        .textContent =
-        signed(data.AB) + " cm";
-
-
-    document.getElementById("infoABp")
-        .textContent =
-        signed(data.ABp) + " cm";
-
-
-    document.getElementById("infoGamma")
-        .textContent =
-        Number.isFinite(data.gamma)
-            ? signed(data.gamma, 2)
-            : "0";
-
+    document.getElementById("infoF").textContent = signed(data.f) + " cm";
+    const vergence = 1 / (data.f / 100);
+    document.getElementById("infoC").textContent = signed(vergence, 2) + " δ";
+    document.getElementById("infoOA").textContent = infinityMode ? "−∞" : signed(data.OA) + " cm";
+    document.getElementById("infoOAp").textContent = signed(data.OAp) + " cm";
+    document.getElementById("infoAB").textContent = signed(data.AB) + " cm";
+    document.getElementById("infoABp").textContent = signed(data.ABp) + " cm";
+    document.getElementById("infoGamma").textContent = Number.isFinite(data.gamma) ? signed(data.gamma, 2) : "0";
 
     let nature;
-
-
     if (data.gamma === 0) {
-
         nature = "À l'infini";
-
     } else if (data.OAp > 0) {
-
-        nature = data.gamma < 0
-            ? "Réelle, renversée"
-            : "Réelle, droite";
-
+        nature = data.gamma < 0 ? "Réelle, renversée" : "Réelle, droite";
     } else {
-
-        nature = data.gamma < 0
-            ? "Virtuelle, renversée"
-            : "Virtuelle, droite";
-
+        nature = data.gamma < 0 ? "Virtuelle, renversée" : "Virtuelle, droite";
     }
-
-
-    document.getElementById("infoNature")
-        .textContent =
-        nature;
-
+    document.getElementById("infoNature").textContent = nature;
 }
-
 
 /* =========================================================
    AFFICHAGE DES VALEURS DANS LE DESSIN
    ========================================================= */
-
 function drawSceneValues(data) {
-
     sceneValues.innerHTML = "";
-
-    if (!showValues) {
-        return;
-    }
-
+    if (!showValues) return;
 
     const values = [
-
         `f' = ${signed(data.f)} cm`,
-
-        `C = ${signed(
-            1 / (data.f / 100),
-            2
-        )} δ`,
-
-        `OA = ${
-            infinityMode
-                ? "−∞"
-                : signed(data.OA)
-        } cm`,
-
+        `C = ${signed(1 / (data.f / 100), 2)} δ`,
+        `OA = ${infinityMode ? "−∞" : signed(data.OA)} cm`,
         `OA' = ${signed(data.OAp)} cm`,
-
         `γ = ${signed(data.gamma, 2)}`
-
     ];
 
-
-    values.forEach(
-        (text, index) => {
-
-            const t =
-                document.createElementNS(
-                    "http://www.w3.org/2000/svg",
-                    "text"
-                );
-
-            t.setAttribute(
-                "x",
-                35
-            );
-
-            t.setAttribute(
-                "y",
-                35 + index * 19
-            );
-
-            t.setAttribute(
-                "class",
-                "small-label"
-            );
-
-            t.textContent = text;
-
-            sceneValues.appendChild(t);
-
-        }
-    );
-
+    values.forEach((text, index) => {
+        const t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        t.setAttribute("x", 35);
+        t.setAttribute("y", 35 + index * 19);
+        t.setAttribute("class", "small-label");
+        t.textContent = text;
+        sceneValues.appendChild(t);
+    });
 }
-
 
 /* =========================================================
    MISE A JOUR COMPLETE
    ========================================================= */
-
 function update() {
-
-    const data =
-        calculate();
-
-
+    const data = calculate();
     drawGrid();
-
     drawLens(data.f);
-
     drawFoci(data.f);
-
     drawObjects(data);
-
     drawRays(data);
-
     drawSceneValues(data);
-
     updateInfo(data);
-
 }
 
+/* =========================================================
+   CONTROLES ET LISTENERS
+   ========================================================= */
+focalSlider.addEventListener("input", update);
+
+objectPosSlider.addEventListener("input", () => {
+    infinityMode = false;
+    update();
+});
+
+objectHeightSlider.addEventListener("input", update);
+
+document.getElementById("convBtn").addEventListener("click", () => {
+    converging = true;
+    document.getElementById("convBtn").classList.add("active");
+    document.getElementById("divBtn").classList.remove("active");
+    update();
+});
+
+document.getElementById("divBtn").addEventListener("click", () => {
+    converging = false;
+    document.getElementById("divBtn").classList.add("active");
+    document.getElementById("convBtn").classList.remove("active");
+    update();
+});
+
+document.getElementById("infinityBtn").addEventListener("click", () => {
+    infinityMode = !infinityMode;
+    document.getElementById("infinityBtn").textContent = infinityMode ? "Faire revenir l'objet" : "Objet à l'infini";
+    update();
+});
+
+document.getElementById("gridBtn").addEventListener("click", () => {
+    showGrid = !showGrid;
+    update();
+});
+
+document.getElementById("raysBtn").addEventListener("click", () => {
+    showRays = !showRays;
+    update();
+});
+
+document.getElementById("valuesBtn").addEventListener("click", () => {
+    showValues = !showValues;
+    update();
+});
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+    focalSlider.value = 15;
+    objectPosSlider.value = -30;
+    objectHeightSlider.value = 10;
+    converging = true;
+    infinityMode = false;
+    showGrid = false;
+    showRays = true;
+    showValues = true;
+
+    document.getElementById("convBtn").classList.add("active");
+    document.getElementById("divBtn").classList.remove("active");
+    document.getElementById("infinityBtn").textContent = "Objet à l'infini";
+
+    update();
+});
 
 /* =========================================================
-   CONTROLES
+   GLISSER-DEPLACER
    ========================================================= */
-
-focalSlider.addEventListener(
-    "input",
-    update
-);
-
-
-objectPosSlider.addEventListener(
-    "input",
-    () => {
-
-        infinityMode = false;
-
-        update();
-
-    }
-);
-
-
-objectHeightSlider.addEventListener(
-    "input",
-    update
-);
-
-
-/*
- * Type de lentille
- */
-
-document.getElementById("convBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            converging = true;
-
-            document
-                .getElementById("convBtn")
-                .classList.add("active");
-
-            document
-                .getElementById("divBtn")
-                .classList.remove("active");
-
-            update();
-
-        }
-    );
-
-
-document.getElementById("divBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            converging = false;
-
-            document
-                .getElementById("divBtn")
-                .classList.add("active");
-
-            document
-                .getElementById("convBtn")
-                .classList.remove("active");
-
-            update();
-
-        }
-    );
-
-
-/*
- * Objet à l'infini
- */
-
-document.getElementById("infinityBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            infinityMode = !infinityMode;
-
-            document.getElementById(
-                "infinityBtn"
-            ).textContent =
-                infinityMode
-                    ? "Faire revenir l'objet"
-                    : "Objet à l'infini";
-
-            update();
-
-        }
-    );
-
-
-/*
- * Grille
- */
-
-document.getElementById("gridBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            showGrid = !showGrid;
-
-            update();
-
-        }
-    );
-
-
-/*
- * Rayons
- */
-
-document.getElementById("raysBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            showRays = !showRays;
-
-            update();
-
-        }
-    );
-
-
-/*
- * Valeurs
- */
-
-document.getElementById("valuesBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            showValues = !showValues;
-
-            update();
-
-        }
-    );
-
-
-/*
- * Réinitialisation
- */
-
-document.getElementById("resetBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            focalSlider.value = 15;
-
-            objectPosSlider.value = -30;
-
-            objectHeightSlider.value = 10;
-
-            converging = true;
-
-            infinityMode = false;
-
-            showGrid = false;
-
-            showRays = true;
-
-            showValues = true;
-
-
-            document
-                .getElementById("convBtn")
-                .classList.add("active");
-
-            document
-                .getElementById("divBtn")
-                .classList.remove("active");
-
-
-            document.getElementById(
-                "infinityBtn"
-            ).textContent =
-                "Objet à l'infini";
-
-
-            update();
-
-        }
-    );
-
-
-/* =========================================================
-   GLISSER-DEPLACER L'OBJET
-   ========================================================= */
-
 let draggingObject = false;
 
-objectHandle.addEventListener(
-    "pointerdown",
-    event => {
-
-        draggingObject = true;
-
-        objectHandle.setPointerCapture(
-            event.pointerId
-        );
-
-        infinityMode = false;
-
-    }
-);
-
-
-objectHandle.addEventListener(
-    "pointermove",
-    event => {
-
-        if (!draggingObject) {
-            return;
-        }
-
-
-        const svg =
-            document.getElementById("scene");
-
-        const rect =
-            svg.getBoundingClientRect();
-
-
-        const x =
-            (event.clientX - rect.left)
-            / rect.width * 1000;
-
-
-        let OA =
-            (x - lensX) / SCALE;
-
-
-        OA =
-            Math.max(
-                -60,
-                Math.min(-5, OA)
-            );
-
-
-        objectPosSlider.value =
-            Math.round(OA);
-
-
-        update();
-
-    }
-);
-
-
-objectHandle.addEventListener(
-    "pointerup",
-    () => {
-
-        draggingObject = false;
-
-    }
-);
-
-
-/* =========================================================
-   GLISSER-DEPLACER LE SOMMET DE L'OBJET
-   ========================================================= */
-
-object.addEventListener(
-    "pointerdown",
-    event => {
-
-        object.setPointerCapture(
-            event.pointerId
-        );
-
-    }
-);
-
-
-object.addEventListener(
-    "pointermove",
-    event => {
-
-        if (
-            event.buttons === 0
-        ) {
-            return;
-        }
-
-
-        const svg =
-            document.getElementById("scene");
-
-        const rect =
-            svg.getBoundingClientRect();
-
-
-        const y =
-            (event.clientY - rect.top)
-            / rect.height * 500;
-
-
-        let height =
-            (250 - y) / 5;
-
-
-        height =
-            Math.max(
-                3,
-                Math.min(20, height)
-            );
-
-
-        objectHeightSlider.value =
-            Math.round(height);
-
-
-        update();
-
-    }
-);
-
-
-/* =========================================================
-   GLISSER-DEPLACER LA LENTILLE
-   ========================================================= */
-
-lens.addEventListener(
-    "pointerdown",
-    event => {
-
-        lens.setPointerCapture(
-            event.pointerId
-        );
-
-    }
-);
-
-
-lens.addEventListener(
-    "pointermove",
-    event => {
-
-        if (event.buttons === 0) {
-            return;
-        }
-
-
-        const svg =
-            document.getElementById("scene");
-
-        const rect =
-            svg.getBoundingClientRect();
-
-
-        const x =
-            (event.clientX - rect.left)
-            / rect.width * 1000;
-
-
-        lensX =
-            Math.max(
-                300,
-                Math.min(700, x)
-            );
-
-
-        update();
-
-    }
-);
-
+objectHandle.addEventListener("pointerdown", event => {
+    draggingObject = true;
+    objectHandle.setPointerCapture(event.pointerId);
+    infinityMode = false;
+});
+
+objectHandle.addEventListener("pointermove", event => {
+    if (!draggingObject) return;
+    const svg = document.getElementById("scene");
+    const rect = svg.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 1000;
+    let OA = (x - lensX) / SCALE;
+    OA = Math.max(-60, Math.min(-5, OA));
+    objectPosSlider.value = Math.round(OA);
+    update();
+});
+
+objectHandle.addEventListener("pointerup", () => {
+    draggingObject = false;
+});
+
+object.addEventListener("pointerdown", event => {
+    object.setPointerCapture(event.pointerId);
+});
+
+object.addEventListener("pointermove", event => {
+    if (event.buttons === 0) return;
+    const svg = document.getElementById("scene");
+    const rect = svg.getBoundingClientRect();
+    const y = ((event.clientY - rect.top) / rect.height) * 500;
+    let height = (250 - y) / 5;
+    height = Math.max(3, Math.min(20, height));
+    objectHeightSlider.value = Math.round(height);
+    update();
+});
+
+lens.addEventListener("pointerdown", event => {
+    lens.setPointerCapture(event.pointerId);
+});
+
+lens.addEventListener("pointermove", event => {
+    if (event.buttons === 0) return;
+    const svg = document.getElementById("scene");
+    const rect = svg.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 1000;
+    lensX = Math.max(300, Math.min(700, x));
+    update();
+});
 
 /* =========================================================
    INITIALISATION
    ========================================================= */
-
 update();
-
 </script>
 
 </body>
