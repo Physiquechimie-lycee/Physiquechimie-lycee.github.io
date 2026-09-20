@@ -1,11 +1,40 @@
-/
- /Exercice-conversions.html
- /preparer-grand-oral.html
- /aide_conversions.html
- /tableau_avancement.html
- /animation_avancement.html
- /animations.html
- /Ouvrages.html
- /index.html
- /lentille.html
- 
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://physiquechimie-lycee.github.io/</loc>
+  </url>
+
+  <url>
+    <loc>https://physiquechimie-lycee.github.io/Exercice-conversions.html</loc>
+  </url>
+
+  <url>
+    <loc>https://physiquechimie-lycee.github.io/preparer-grand-oral.html</loc>
+  </url>
+
+  <url>
+    <loc>https://physiquechimie-lycee.github.io/aide_conversions.html</loc>
+  </url>
+
+  <url>
+    <loc>https://physiquechimie-lycee.github.io/tableau_avancement.html</loc>
+  </url>
+
+  <url>
+    <loc>https://physiquechimie-lycee.github.io/animation_avancement.html</loc>
+  </url>
+
+  <url>
+    <loc>https://physiquechimie-lycee.github.io/animations.html</loc>
+  </url>
+
+  <url>
+    <loc>https://physiquechimie-lycee.github.io/Ouvrages.html</loc>
+  </url>
+
+  <url>
+    <loc>https://physiquechimie-lycee.github.io/lentille.html</loc>
+  </url>
+
+</urlset>
