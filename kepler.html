@@ -496,8 +496,8 @@
     }
     drawOrbit();
 
-      // ============================================================
-    // DEUXIÈME LOI DE KEPLER — AIRES ÉGALES POUR DES DURÉES ÉGALES
+       // ============================================================
+    // DEUXIÈME LOI DE KEPLER — LOI DES AIRES
     // ============================================================
 
     const canvas2 = document.getElementById('canvasAires');
@@ -506,91 +506,155 @@
     const cx2 = 300;
     const cy2 = 160;
 
+    // ------------------------------------------------------------
     // Paramètres de l'ellipse
-    const a2 = 200;
-    const b2 = 140;
-    const e2 = 0.45;
+    // ------------------------------------------------------------
+
+    const a2 = 200;       // demi-grand axe
+    const e2 = 0.45;      // excentricité
+    const b2 = a2 * Math.sqrt(1 - e2 * e2);
+
+    // Distance du centre au foyer
     const c2 = a2 * e2;
 
     // Soleil = foyer gauche
     const sunX = cx2 - c2;
     const sunY = cy2;
 
-    // Nombre d'intervalles de même durée
-    const nbSecteurs = 8;
-
-    // Incrément d'anomalie moyenne correspondant à T/8
-    const deltaM = 2 * Math.PI / nbSecteurs;
-
-    // Position de départ du mouvement
-    let M = 0;
-
-    // Vitesse de l'animation
-    const vitesse = 0.018;
-
-    // Tableau des positions déjà parcourues
-    let positions = [];
-
     // ------------------------------------------------------------
-    // Résolution de l'équation de Kepler
-    // M = E - e sin(E)
+    // Coordonnées polaires autour du Soleil
+    //
+    // theta = 0 : périhélie
+    // theta = pi : aphélie
     // ------------------------------------------------------------
-    function solveKepler(M, e) {
 
-        let E = M;
+    const p2 = a2 * (1 - e2 * e2);
 
-        for (let i = 0; i < 10; i++) {
-            E -= (E - e * Math.sin(E) - M)
-                / (1 - e * Math.cos(E));
-        }
+    function radius(theta) {
 
-        return E;
+        return p2 / (1 + e2 * Math.cos(theta));
     }
 
-    // ------------------------------------------------------------
-    // Coordonnées d'un point de l'ellipse
-    // ------------------------------------------------------------
-    function ellipsePoint(E) {
+    function polarPoint(theta) {
+
+        const r = radius(theta);
 
         return {
-            x: cx2 + a2 * Math.cos(E),
-            y: cy2 + b2 * Math.sin(E)
+            x: sunX + r * Math.cos(theta),
+            y: sunY + r * Math.sin(theta)
         };
     }
 
     // ------------------------------------------------------------
-    // Dessine l'aire correspondant à un intervalle
+    // Animation
     // ------------------------------------------------------------
-    function drawSector(M1, M2, opacity) {
 
-        const E1 = solveKepler(M1, e2);
-        const E2 = solveKepler(M2, e2);
+    // On démarre au périhélie
+    let theta = 0;
+
+    // Facteur d'animation
+    const vitesse = 0.018;
+
+    // ------------------------------------------------------------
+    // Aires déjà parcourues
+    //
+    // On mémorise les positions toutes les T/8.
+    // ------------------------------------------------------------
+
+    const nbSecteurs = 8;
+
+    // Pour une ellipse :
+    //
+    // aire balayée = 1/2 * r² * dtheta
+    //
+    // et la loi des aires impose :
+    //
+    // r² dtheta/dt = constante
+    //
+    // On utilise donc directement cette relation.
+    //
+    // L'incrément d'aire par image est constant.
+    // ------------------------------------------------------------
+
+    const aireParImage = 1;
+
+    let aireCumulee = 0;
+
+    // Aire totale de l'ellipse
+    const aireEllipse = Math.PI * a2 * b2;
+
+    // Aire correspondant à T/8
+    const aireSecteur = aireEllipse / nbSecteurs;
+
+    // Limites des secteurs
+    let secteurs = [0];
+
+    // Aire du secteur courant
+    let aireCourante = 0;
+
+    // ------------------------------------------------------------
+    // Calcul de l'angle suivant à partir d'une petite aire
+    //
+    // dA = 1/2 r² dtheta
+    //
+    // donc :
+    //
+    // dtheta = 2 dA / r²
+    // ------------------------------------------------------------
+
+    function avancePlanete() {
+
+        const r = radius(theta);
+
+        const dtheta = (2 * aireParImage) / (r * r);
+
+        theta += dtheta;
+
+        aireCumulee += aireParImage;
+
+        // Nouveau secteur de durée T/8
+        if (aireCumulee >= aireSecteur) {
+
+            aireCumulee = 0;
+
+            secteurs.push(theta);
+
+            if (secteurs.length > nbSecteurs) {
+
+                theta = 0;
+                aireCumulee = 0;
+                secteurs = [0];
+            }
+        }
+    }
+
+    // ------------------------------------------------------------
+    // Dessin d'une aire balayée
+    // ------------------------------------------------------------
+
+    function drawSector(theta1, theta2) {
 
         ctx2.beginPath();
 
-        // Départ au Soleil
         ctx2.moveTo(sunX, sunY);
 
-        // Premier rayon
-        const P1 = ellipsePoint(E1);
-        ctx2.lineTo(P1.x, P1.y);
-
-        // Arc de l'ellipse
         const n = 80;
 
-        for (let i = 1; i <= n; i++) {
+        for (let i = 0; i <= n; i++) {
 
-            const E = E1 + (E2 - E1) * i / n;
-            const P = ellipsePoint(E);
+            const t =
+                theta1 +
+                (theta2 - theta1) * i / n;
+
+            const P = polarPoint(t);
 
             ctx2.lineTo(P.x, P.y);
         }
 
-        // Retour au Soleil
         ctx2.lineTo(sunX, sunY);
         ctx2.closePath();
 
-        ctx2.fillStyle = `rgba(208,179,90,${opacity})`;
+        ctx2.fillStyle = 'rgba(208,179,90,0.30)';
         ctx2.fill();
 
         ctx2.strokeStyle = '#d0b35a';
@@ -601,13 +665,19 @@
     // ------------------------------------------------------------
     // Dessin principal
     // ------------------------------------------------------------
+
     function drawAreas() {
 
-        ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+        ctx2.clearRect(
+            0,
+            0,
+            canvas2.width,
+            canvas2.height
+        );
 
-        // ========================================================
+        // --------------------------------------------------------
         // ELLIPSE
-        // ========================================================
+        // --------------------------------------------------------
 
         ctx2.beginPath();
 
@@ -625,32 +695,24 @@
         ctx2.lineWidth = 2;
         ctx2.stroke();
 
-        // ========================================================
+        // --------------------------------------------------------
         // AIRES BALAYÉES
-        // ========================================================
+        // --------------------------------------------------------
 
-        // Chaque secteur correspond exactement à :
-        // ΔM = 2π/8
-        //
-        // donc exactement à la même durée :
-        // Δt = T/8
-        //
-        // et donc exactement à la même aire.
-
-        for (let i = 0; i < positions.length - 1; i++) {
+        for (let i = 0; i < secteurs.length - 1; i++) {
 
             drawSector(
-                positions[i],
-                positions[i + 1],
-                0.28
+                secteurs[i],
+                secteurs[i + 1]
             );
         }
 
-        // ========================================================
+        // --------------------------------------------------------
         // SOLEIL
-        // ========================================================
+        // --------------------------------------------------------
 
         ctx2.beginPath();
+
         ctx2.arc(
             sunX,
             sunY,
@@ -671,12 +733,11 @@
             sunY - 18
         );
 
-        // ========================================================
-        // POSITION ACTUELLE DE LA PLANÈTE
-        // ========================================================
+        // --------------------------------------------------------
+        // PLANÈTE
+        // --------------------------------------------------------
 
-        const E = solveKepler(M, e2);
-        const P = ellipsePoint(E);
+        const P = polarPoint(theta);
 
         // Rayon Soleil-planète
         ctx2.beginPath();
@@ -702,15 +763,15 @@
         ctx2.fillStyle = '#d0b35a';
         ctx2.fill();
 
-        // ========================================================
+        // --------------------------------------------------------
         // ANNOTATIONS
-        // ========================================================
+        // --------------------------------------------------------
 
         ctx2.fillStyle = '#ffffff';
         ctx2.font = 'bold 13px Arial';
 
         ctx2.fillText(
-            '8 intervalles de même durée Δt = T/8',
+            'Aires balayées pendant des durées égales',
             18,
             25
         );
@@ -718,41 +779,22 @@
         ctx2.font = '12px Arial';
 
         ctx2.fillText(
-            'Périhélie',
-            cx2 - a2 - 5,
-            cy2 + 30
+            'Périhélie : vitesse maximale',
+            20,
+            300
         );
 
         ctx2.fillText(
-            'Aphélie',
-            cx2 + a2 - 40,
-            cy2 + 30
+            'Aphélie : vitesse minimale',
+            400,
+            300
         );
 
-        // ========================================================
+        // --------------------------------------------------------
         // AVANCEMENT
-        // ========================================================
+        // --------------------------------------------------------
 
-        M += vitesse;
-
-        // Enregistrer les limites des intervalles
-        const prochainSecteur =
-            Math.floor(M / deltaM);
-
-        while (positions.length <= prochainSecteur) {
-
-            positions.push(
-                positions.length * deltaM
-            );
-        }
-
-        // Une révolution terminée
-        if (M >= 2 * Math.PI) {
-
-            M = 0;
-
-            positions = [0];
-        }
+        avancePlanete();
 
         requestAnimationFrame(drawAreas);
     }
