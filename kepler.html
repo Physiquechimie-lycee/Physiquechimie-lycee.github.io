@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les lois de Kepler</title>
+    <!-- Graphiques (Chart.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Rendu des formules mathématiques (MathJax) -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            /* Charte du site : bleu marine / or / crème */
+            --navy: #14273d;
+            --navy-light: #1f3552;
+            --gold: #b08d2b;
+            --gold-light: #d0b35a;
+            --cream: #faf9f5;
+            --white: #ffffff;
+            --text: #263442;
+            --muted: #5d6874;
+            --border: #e5e0d4;
+            --soft-gold: #f5f0e2;
+
+            --primary-color: var(--navy);
+            --accent-color: var(--gold);
+            --bg-color: var(--cream);
+            --card-bg: var(--white);
+            --text-color: var(--text);
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.65;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Bandeau principal commun au site */
+        .site-header {
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            color: var(--white);
+            padding: 0 20px;
+            box-shadow: 0 3px 12px rgba(20,39,61,0.18);
+        }
+
+        .site-header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            min-height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .site-brand {
+            color: var(--white);
+            text-decoration: none;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 1.15rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .site-nav {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .site-nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 10px 13px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .site-nav a:hover,
+        .site-nav a:focus {
+            background-color: rgba(208,179,90,0.18);
+            color: var(--gold-light);
+        }
+
+        .site-nav a.active {
+            color: var(--gold-light);
+        }
+
+        @media (max-width: 650px) {
+            .site-header-inner {
+                min-height: auto;
+                padding: 12px 0;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .site-nav {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .site-nav a {
+                padding: 8px 10px;
+            }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 34px auto 50px;
+            background: var(--card-bg);
+            padding: 38px 42px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(20,39,61,0.07);
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                margin: 18px 12px 35px;
+                padding: 24px 18px;
+                border-radius: 8px;
+            }
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-family: Georgia, 'Times New Roman', serif;
+            text-align: center;
+            font-size: clamp(1.8rem, 5vw, 2.35rem);
+            border-bottom: 3px solid var(--gold-light);
+            padding-bottom: 12px;
+            margin: 0 0 30px;
+        }
+
+        h2 {
+            color: var(--navy);
+            font-family: Georgia, 'Times New Roman', serif;
+            margin-top: 42px;
+            border-left: 4px solid var(--gold);
+            padding-left: 12px;
+        }
+
+        h3 {
+            color: var(--navy-light);
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        a {
+            color: var(--navy-light);
+        }
+
+        .intro {
+            font-size: 1.06em;
+            background-color: var(--soft-gold);
+            padding: 17px 18px;
+            border-radius: 7px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .remark {
+            background-color: #fbf8ef;
+            border-left: 4px solid var(--gold-light);
+            padding: 13px 16px;
+            margin: 18px 0;
+            border-radius: 5px;
+            font-style: italic;
+        }
+
+        .canvas-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 22px 0;
+            background: var(--navy);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.28);
+            overflow: hidden;
+        }
+
+        canvas {
+            background-color: var(--navy);
+            max-width: 100%;
+            height: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 11px;
+            text-align: center;
+        }
+
+        th {
+            background-color: var(--navy);
+            color: var(--white);
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #fcfbf8;
+        }
+
+        .chart-box {
+            position: relative;
+            margin: 20px 0;
+            height: 350px;
+        }
+
+        .demo-box {
+            background-color: #fcfbf8;
+            border: 1px solid var(--border);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+
+        .highlight-result {
+            background-color: var(--soft-gold);
+            border: 1px solid var(--gold-light);
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+            margin: 18px 0;
+            color: var(--navy);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="site-brand" href="index.html">Physique-Chimie au lycée</a>
+            <nav class="site-nav" aria-label="Navigation principale">
+                <a href="index.html">Accueil</a>
+                <a href="animations.html" class="active">Animations</a>
+                <a href="Ouvrages.html">Ouvrages</a>
+            </nav>
+        </div>
+    </header>
+
+<div class="container">
+    <h1>Les lois de Kepler</h1>
+
+    <p class="intro">
+        Les lois de Kepler sont incontournables en spécialité physique. Elles sont abordées dans de nombreux sujets de bac. Vous trouverez ci-dessous quelques informations et compléments indispensables à leur compréhension. Elles sont traitées ici niveau lycée uniquement.
+    </p>
+
+    <!-- PREMIÈRE LOI -->
+    <h2>Première loi de Kepler ou loi des orbites</h2>
+    <p>
+        Selon la première loi de Kepler, dans le référentiel héliocentrique, la trajectoire de chaque planète est une ellipse dont le Soleil occupe l'un des foyers.
+    </p>
+
+    <div class="canvas-container">
+        <canvas id="canvasOrbit" width="600" height="320"></canvas>
+    </div>
+
+    <div class="remark">
+        <strong>Remarque :</strong> Les ellipses des planètes étant de faibles excentricités, dans de nombreux cas, en terminale, les trajectoires seront considérées comme circulaires.
+    </div>
+
+    <!-- DEUXIÈME LOI -->
+    <h2>Seconde loi de Kepler ou loi des aires</h2>
+    <p>
+        La seconde loi de Kepler stipule que le segment de droite reliant le centre du Soleil au centre d'une planète balaie des aires égales pendant des durées égales.
+    </p>
+
+    <div class="canvas-container">
+        <canvas id="canvasAires" width="600" height="320"></canvas>
+    </div>
+
+    <p>
+        Afin de respecter la loi des aires, on constate une accélération de l’astre à la périhélie et un ralentissement à l’aphélie.
+    </p>
+
+    <div class="remark">
+        <strong>Remarque importante :</strong> Cette loi permet d’affirmer que dans une trajectoire circulaire la vitesse est constante !
+    </div>
+
+    <!-- TROISIÈME LOI -->
+    <h2>Troisième loi de Kepler ou loi des périodes</h2>
+    <p>
+        Selon la troisième loi de Kepler, le carré de la période de révolution d'une planète est proportionnel au cube du demi-grand axe de son orbite.
+    </p>
+    
+    <div class="highlight-result">
+        Soit : \(T^2 = \text{constante} \times a^3 \quad \text{donc} \quad \frac{T^2}{a^3} = \text{constante}\)
+    </div>
+
+    <h3>Application aux satellites de Jupiter</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Satellite</th>
+                <th>Demi-grand axe \(a\) (\(\text{km}\))</th>
+                <th>Période \(T\) (jours)</th>
+                <th>\(a^3\) (\(10^{17} \text{ m}^3\))</th>
+                <th>\(T^2\) (\(10^9 \text{ s}^2\))</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Io</strong></td>
+                <td>421 700</td>
+                <td>1,769</td>
+                <td>0,750</td>
+                <td>2,336</td>
+            </tr>
+            <tr>
+                <td><strong>Europe</strong></td>
+                <td>671 100</td>
+                <td>3,551</td>
+                <td>3,025</td>
+                <td>9,418</td>
+            </tr>
+            <tr>
+                <td><strong>Ganymède</strong></td>
+                <td>1 070 400</td>
+                <td>7,155</td>
+                <td>12,263</td>
+                <td>38,228</td>
+            </tr>
+            <tr>
+                <td><strong>Callisto</strong></td>
+                <td>1 882 700</td>
+                <td>16,689</td>
+                <td>66,742</td>
+                <td>207,816</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="chart-box">
+        <canvas id="chartKepler"></canvas>
+    </div>
+
+    <div class="highlight-result">
+        Constante de Jupiter = \(\frac{T^2}{a^3} \approx 3,11 \times 10^{-16} \text{ s}^2\cdot\text{m}^{-3}\)
+    </div>
+
+    <div class="remark">
+        <strong>Remarque :</strong> Chaque astre attracteur possède sa propre constante.
+    </div>
+
+    <!-- DÉMONSTRATION -->
+    <h2>Démonstration à connaître</h2>
+
+    <div class="demo-box">
+        <p><strong>Contexte :</strong><br>
+        Soit un astre A de masse \(m_A\) en orbite circulaire uniforme de rayon \(R\) autour d’un astre B de masse \(m_B\).</p>
+
+        <p><strong>Système étudié :</strong><br>
+        L’astre A dans le repère de Frenet.</p>
+
+        <p><strong>Référentiel d’étude :</strong><br>
+        Le référentiel lié à l’astre B (géocentrique si c’est la Terre, ...).</p>
+
+        <hr style="border: 0; border-top: 1px solid #e5e0d4; margin: 20px 0;">
+
+        <p><strong>Démonstration :</strong></p>
+
+        <p>L’expression de l’accélération dans le repère de Frenet est :
+        \[\vec{a} = a_n \vec{u}_n + a_t \vec{u}_t = \frac{v^2}{R}\vec{u}_n + \frac{\mathrm{d}v}{\mathrm{d}t}\vec{u}_t\]
+        </p>
+
+        <p>Si le mouvement est circulaire uniforme, alors \(\frac{\mathrm{d}v}{\mathrm{d}t} = 0\), ce qui nous amène :
+        \[\vec{a} = \frac{v^2}{R}\vec{u}_n + 0 \times \vec{u}_t = \frac{v^2}{R}\vec{u}_n\]
+        soit en norme :
+        \[\vert{}\vert{}\vec{a}\vert{}\vert{} = \frac{v^2}{R}\vert{}\vert{}\vec{u}_n\vert{}\vert{} \quad \text{(la norme d'un vecteur unitaire vaut 1)}\]
+        On trouve donc :
+        \[a = \frac{v^2}{R} \quad \text{(1)}\]
+        </p>
+
+        <p>D’après la seconde loi de Newton :
+        \[\sum \vec{F}_{\text{ext}} = m \vec{a}\]
+        Soit pour notre système {A} :
+        \[\sum \vec{F}_{\text{ext}} = m_A \vec{a} \quad \text{(2)}\]
+        </p>
+
+        <p>La seule force qui s’applique sur {A} est la force d’attraction gravitationnelle de B :
+        \[\vec{F}_{B/A} = G \frac{m_A m_B}{R^2} \vec{u}_n \quad \text{(3)}\]
+        </p>
+
+        <p>On déduit de (2) et (3) que :
+        \[G \frac{m_A m_B}{R^2} \vec{u}_n = m_A \vec{a} \quad \text{soit en norme} \quad G \frac{m_A m_B}{R^2} = m_A a\]
+        Après simplification par \(m_A\), on trouve :
+        \[a = G \frac{m_B}{R^2} \quad \text{(4)}\]
+        </p>
+
+        <p>On déduit de (1) et (4) que :
+        \[\frac{v^2}{R} = G \frac{m_B}{R^2} \quad \implies \quad v = \sqrt{G \frac{m_B}{R}} \quad \text{(5)}\]
+        </p>
+
+        <p>Le mouvement est circulaire, on sait que la vitesse d’un corps est égale à la distance divisée par le temps. En une période \(T\), le système {A} parcourt une distance \(d = 2\pi R\).
+        \[v = \frac{d}{T} = \frac{2\pi R}{T} \quad \text{(6)}\]
+        </p>
+
+        <p>On égalise les expressions (5) et (6) :
+        \[\frac{2\pi R}{T} = \sqrt{G \frac{m_B}{R}} \implies \frac{4\pi^2 R^2}{T^2} = G \frac{m_B}{R}\]
+        </p>
+
+        <p>La troisième loi de Kepler apparaît après simplification :
+        \[\frac{T^2}{R^3} = \frac{4\pi^2}{G m_B}\]
+        soit après généralisation aux ellipses (avec \(R = a\)) :
+        \[\frac{T^2}{a^3} = \frac{4\pi^2}{G m_B} = \text{constante}\]
+        </p>
+
+        <p style="text-align: center; color: #c53030; font-weight: bold; margin-top: 20px;">
+            Cette démonstration est à connaître et maîtriser !
+        </p>
+    </div>
+</div>
+
+<script>
+    // --- Schéma Animé 1 : Première Loi ---
+    const canvas1 = document.getElementById('canvasOrbit');
+    const ctx1 = canvas1.getContext('2d');
+    
+    let angle1 = 0;
+    function drawOrbit() {
+        ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+        
+        const cx = 300, cy = 160;
+        const a = 200, b = 160; // b augmenté pour rendre l'ellipse moins aplatie et les foyers moins excentrés
+        const c = Math.sqrt(a*a - b*b); // Distance focale désormais réduite
+
+        // Grand axe
+        ctx1.beginPath();
+        ctx1.setLineDash([5, 5]);
+        ctx1.strokeStyle = '#d0b35a';
+        ctx1.moveTo(cx - a, cy);
+        ctx1.lineTo(cx + a, cy);
+        ctx1.stroke();
+        ctx1.setLineDash([]);
+
+        // Ellipse
+        ctx1.beginPath();
+        ctx1.ellipse(cx, cy, a, b, 0, 0, 2 * Math.PI);
+        ctx1.strokeStyle = '#d0b35a';
+        ctx1.lineWidth = 2;
+        ctx1.stroke();
+
+        // Foyers
+        const F1x = cx - c, F1y = cy; // Soleil
+        const F2x = cx + c, F2y = cy; // Foyer vide
+
+        // Dessin Foyer vide
+        ctx1.beginPath();
+        ctx1.arc(F2x, F2y, 4, 0, 2 * Math.PI);
+        ctx1.fillStyle = '#c5c9ce';
+        ctx1.fill();
+        ctx1.fillStyle = '#c5c9ce';
+        ctx1.fillText("Foyer (vide)", F2x - 30, F2y + 20);
+
+        // Soleil (Foyer 1)
+        ctx1.beginPath();
+        ctx1.arc(F1x, F1y, 12, 0, 2 * Math.PI);
+        ctx1.fillStyle = '#d0b35a';
+        ctx1.fill();
+        ctx1.fillStyle = '#ffffff';
+        ctx1.font = "12px sans-serif";
+        ctx1.fillText("Soleil (Foyer)", F1x - 35, F1y - 20);
+
+        // Légendes axe et demi-grand axe
+        ctx1.strokeStyle = '#b08d2b';
+        ctx1.beginPath();
+        ctx1.moveTo(cx, cy - 10);
+        ctx1.lineTo(cx + a, cy - 10);
+        ctx1.stroke();
+        ctx1.fillStyle = '#d0b35a';
+        ctx1.fillText("Demi-grand axe a", cx + a/2 - 40, cy - 15);
+
+        // Position planète
+        const px = cx + a * Math.cos(angle1);
+        const py = cy + b * Math.sin(angle1);
+
+        // Planète
+        ctx1.beginPath();
+        ctx1.arc(px, py, 6, 0, 2 * Math.PI);
+        ctx1.fillStyle = '#d0b35a';
+        ctx1.fill();
+
+        angle1 += 0.01;
+        requestAnimationFrame(drawOrbit);
+    }
+    drawOrbit();
+
+    // --- Schéma Animé 2 : Deuxième Loi (Loi des aires) ---
+    const canvas2 = document.getElementById('canvasAires');
+    const ctx2 = canvas2.getContext('2d');
+    
+    let E = 0; // Anomalie eccentrique
+    const a2 = 200, b2 = 140; // b2 augmenté
+    const e2 = 0.45; // Excentricité adoucie pour recentrer le Soleil
+    const c2 = a2 * e2;
+    const cx2 = 300, cy2 = 160;
+    const sunX = cx2 - c2, sunY = cy2;
+
+    let sectors = [];
+
+    function drawAreas() {
+        ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+
+        // Ellipse
+        ctx2.beginPath();
+        ctx2.ellipse(cx2, cy2, a2, b2, 0, 0, 2 * Math.PI);
+        ctx2.strokeStyle = '#d0b35a';
+        ctx2.lineWidth = 1;
+        ctx2.stroke();
+
+        // Soleil
+        ctx2.beginPath();
+        ctx2.arc(sunX, sunY, 10, 0, 2 * Math.PI);
+        ctx2.fillStyle = '#d0b35a';
+        ctx2.fill();
+
+        // Calcul position selon Kepler (vitesse variable)
+        const M = E - e2 * Math.sin(E); // Équation de Kepler
+        const x = cx2 + a2 * Math.cos(E);
+        const y = cy2 + b2 * Math.sin(E);
+
+        // Mémoriser des secteurs balayés à intervalles réguliers de temps
+        if (Math.floor(M * 5) > sectors.length && sectors.length < 8) {
+            sectors.push({x: x, y: y});
+        }
+
+        // Dessiner l'aire courante
+        ctx2.beginPath();
+        ctx2.moveTo(sunX, sunY);
+        ctx2.lineTo(x, y);
+        ctx2.strokeStyle = '#d0b35a';
+        ctx2.stroke();
+
+        // Planète
+        ctx2.beginPath();
+        ctx2.arc(x, y, 7, 0, 2 * Math.PI);
+        ctx2.fillStyle = '#d0b35a';
+        ctx2.fill();
+
+        // Annotations Périhélie / Aphélie
+        ctx2.fillStyle = '#ffffff';
+        ctx2.font = "12px sans-serif";
+        ctx2.fillText("Périhélie (Vitesse max)", cx2 - a2 - 10, cy2 + 30);
+        ctx2.fillText("Aphélie (Vitesse min)", cx2 + a2 - 80, cy2 + 30);
+
+        // Vitesse angulaire varie de façon inversement proportionnelle à la distance
+        const r = Math.sqrt((x - sunX)**2 + (y - sunY)**2);
+        const speed = 1000 / (r * r); 
+
+        E += speed;
+        if (E > 2 * Math.PI) {
+            E = 0;
+            sectors = [];
+        }
+
+        requestAnimationFrame(drawAreas);
+    }
+    drawAreas();
+
+    // --- Graphique Chart.js (Troisième Loi) ---
+    const ctxChart = document.getElementById('chartKepler').getContext('2d');
+    new Chart(ctxChart, {
+        type: 'line',
+        data: {
+            datasets: [{
+                label: 'Satellites de Jupiter',
+                data: [
+                    { x: 0.750, y: 2.336 },
+                    { x: 3.025, y: 9.418 },
+                    { x: 12.263, y: 38.228 },
+                    { x: 66.742, y: 207.816 }
+                ],
+                backgroundColor: '#d0b35a',
+                borderColor: '#d0b35a',
+                pointRadius: 6,
+                pointHoverRadius: 8,
+                showLine: true,
+                fill: false,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: 'a³ (10¹⁷ m³)',
+                        color: '#263442',
+                        font: { weight: 'bold' }
+                    },
+                    min: 0
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'T² (10⁹ s²)',
+                        color: '#263442',
+                        font: { weight: 'bold' }
+                    },
+                    min: 0
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const names = ['Io', 'Europe', 'Ganymède', 'Callisto'];
+                            return `${names[context.dataIndex]} : a³ = ${context.raw.x}, T² = ${context.raw.y}`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
