@@ -495,9 +495,8 @@
         requestAnimationFrame(drawOrbit);
     }
     drawOrbit();
-
-       // ============================================================
-    // DEUXIÈME LOI DE KEPLER — LOI DES AIRES
+// ============================================================
+    // DEUXIÈME LOI DE KEPLER — AIRES ÉGALES POUR DES DURÉES ÉGALES
     // ============================================================
 
     const canvas2 = document.getElementById('canvasAires');
@@ -506,299 +505,164 @@
     const cx2 = 300;
     const cy2 = 160;
 
-    // ------------------------------------------------------------
     // Paramètres de l'ellipse
-    // ------------------------------------------------------------
-
-    const a2 = 200;       // demi-grand axe
-    const e2 = 0.45;      // excentricité
-    const b2 = a2 * Math.sqrt(1 - e2 * e2);
-
-    // Distance du centre au foyer
+    const a2 = 200;
+    const b2 = 140;
+    const e2 = 0.45;
     const c2 = a2 * e2;
 
     // Soleil = foyer gauche
     const sunX = cx2 - c2;
     const sunY = cy2;
 
+    // Nombre d'intervalles de même durée
+    const nbSecteurs = 8;
+
+    // Incrément d'anomalie moyenne correspondant à T/8
+    const deltaM = 2 * Math.PI / nbSecteurs;
+
+    // Position de départ du mouvement (0 = Périhélie)
+    let M = 0;
+
+    // Vitesse de l'animation
+    const vitesse = 0.015;
+
+    // Tableau des limites d'intervalles
+    let positions = [];
+
     // ------------------------------------------------------------
-    // Coordonnées polaires autour du Soleil
-    //
-    // theta = 0 : périhélie
-    // theta = pi : aphélie
+    // Résolution de l'équation de Kepler : M = E - e sin(E)
     // ------------------------------------------------------------
-
-    const p2 = a2 * (1 - e2 * e2);
-
-    function radius(theta) {
-
-        return p2 / (1 + e2 * Math.cos(theta));
+    function solveKepler(M, e) {
+        let E = M;
+        for (let i = 0; i < 10; i++) {
+            E -= (E - e * Math.sin(E) - M) / (1 - e * Math.cos(E));
+        }
+        return E;
     }
 
-    function polarPoint(theta) {
-
-        const r = radius(theta);
-
+    // ------------------------------------------------------------
+    // Coordonnées cartésiennes d'un point sur l'ellipse
+    // Orienté pour que M = 0 corresponde au Périhélie (près du Soleil)
+    // ------------------------------------------------------------
+    function ellipsePoint(E) {
         return {
-            x: sunX + r * Math.cos(theta),
-            y: sunY + r * Math.sin(theta)
+            x: cx2 - a2 * Math.cos(E), // Signe négatif pour placer M=0 à la périhélie (gauche)
+            y: cy2 + b2 * Math.sin(E)
         };
     }
 
     // ------------------------------------------------------------
-    // Animation
+    // Dessine l'aire correspondant à un intervalle
     // ------------------------------------------------------------
-
-    // On démarre au périhélie
-    let theta = 0;
-
-    // Facteur d'animation
-    const vitesse = 0.018;
-
-    // ------------------------------------------------------------
-    // Aires déjà parcourues
-    //
-    // On mémorise les positions toutes les T/8.
-    // ------------------------------------------------------------
-
-    const nbSecteurs = 8;
-
-    // Pour une ellipse :
-    //
-    // aire balayée = 1/2 * r² * dtheta
-    //
-    // et la loi des aires impose :
-    //
-    // r² dtheta/dt = constante
-    //
-    // On utilise donc directement cette relation.
-    //
-    // L'incrément d'aire par image est constant.
-    // ------------------------------------------------------------
-
-    const aireParImage = 1;
-
-    let aireCumulee = 0;
-
-    // Aire totale de l'ellipse
-    const aireEllipse = Math.PI * a2 * b2;
-
-    // Aire correspondant à T/8
-    const aireSecteur = aireEllipse / nbSecteurs;
-
-    // Limites des secteurs
-    let secteurs = [0];
-
-    // Aire du secteur courant
-    let aireCourante = 0;
-
-    // ------------------------------------------------------------
-    // Calcul de l'angle suivant à partir d'une petite aire
-    //
-    // dA = 1/2 r² dtheta
-    //
-    // donc :
-    //
-    // dtheta = 2 dA / r²
-    // ------------------------------------------------------------
-
-    function avancePlanete() {
-
-        const r = radius(theta);
-
-        const dtheta = (2 * aireParImage) / (r * r);
-
-        theta += dtheta;
-
-        aireCumulee += aireParImage;
-
-        // Nouveau secteur de durée T/8
-        if (aireCumulee >= aireSecteur) {
-
-            aireCumulee = 0;
-
-            secteurs.push(theta);
-
-            if (secteurs.length > nbSecteurs) {
-
-                theta = 0;
-                aireCumulee = 0;
-                secteurs = [0];
-            }
-        }
-    }
-
-    // ------------------------------------------------------------
-    // Dessin d'une aire balayée
-    // ------------------------------------------------------------
-
-    function drawSector(theta1, theta2) {
+    function drawSector(M1, M2, opacity) {
+        const E1 = solveKepler(M1, e2);
+        const E2 = solveKepler(M2, e2);
 
         ctx2.beginPath();
-
         ctx2.moveTo(sunX, sunY);
 
-        const n = 80;
+        const P1 = ellipsePoint(E1);
+        ctx2.lineTo(P1.x, P1.y);
 
-        for (let i = 0; i <= n; i++) {
-
-            const t =
-                theta1 +
-                (theta2 - theta1) * i / n;
-
-            const P = polarPoint(t);
-
+        const n = 60;
+        for (let i = 1; i <= n; i++) {
+            const E = E1 + (E2 - E1) * i / n;
+            const P = ellipsePoint(E);
             ctx2.lineTo(P.x, P.y);
         }
 
         ctx2.lineTo(sunX, sunY);
         ctx2.closePath();
 
-        ctx2.fillStyle = 'rgba(208,179,90,0.30)';
+        ctx2.fillStyle = `rgba(208,179,90,${opacity})`;
         ctx2.fill();
 
         ctx2.strokeStyle = '#d0b35a';
-        ctx2.lineWidth = 1.5;
+        ctx2.lineWidth = 1.2;
         ctx2.stroke();
     }
 
     // ------------------------------------------------------------
     // Dessin principal
     // ------------------------------------------------------------
-
     function drawAreas() {
+        ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
 
-        ctx2.clearRect(
-            0,
-            0,
-            canvas2.width,
-            canvas2.height
-        );
-
-        // --------------------------------------------------------
-        // ELLIPSE
-        // --------------------------------------------------------
-
+        // Trajectoire elliptique
         ctx2.beginPath();
-
-        ctx2.ellipse(
-            cx2,
-            cy2,
-            a2,
-            b2,
-            0,
-            0,
-            2 * Math.PI
-        );
-
+        ctx2.ellipse(cx2, cy2, a2, b2, 0, 0, 2 * Math.PI);
         ctx2.strokeStyle = '#d0b35a';
         ctx2.lineWidth = 2;
         ctx2.stroke();
 
-        // --------------------------------------------------------
-        // AIRES BALAYÉES
-        // --------------------------------------------------------
-
-        for (let i = 0; i < secteurs.length - 1; i++) {
-
-            drawSector(
-                secteurs[i],
-                secteurs[i + 1]
-            );
+        // Dessin des secteurs d'aires égales
+        for (let i = 0; i < positions.length - 1; i++) {
+            drawSector(positions[i], positions[i + 1], 0.28);
         }
 
-        // --------------------------------------------------------
-        // SOLEIL
-        // --------------------------------------------------------
+        // Secteur en cours de balayage
+        if (positions.length > 0) {
+            const currentMStart = positions[positions.length - 1];
+            if (M > currentMStart) {
+                drawSector(currentMStart, M, 0.15);
+            }
+        }
 
+        // Soleil (Foyer)
         ctx2.beginPath();
-
-        ctx2.arc(
-            sunX,
-            sunY,
-            11,
-            0,
-            2 * Math.PI
-        );
-
+        ctx2.arc(sunX, sunY, 11, 0, 2 * Math.PI);
         ctx2.fillStyle = '#d0b35a';
         ctx2.fill();
 
         ctx2.fillStyle = '#ffffff';
         ctx2.font = '12px Arial';
+        ctx2.fillText('Soleil', sunX - 16, sunY - 16);
 
-        ctx2.fillText(
-            'Soleil',
-            sunX - 18,
-            sunY - 18
-        );
+        // Planète
+        const E = solveKepler(M, e2);
+        const P = ellipsePoint(E);
 
-        // --------------------------------------------------------
-        // PLANÈTE
-        // --------------------------------------------------------
-
-        const P = polarPoint(theta);
-
-        // Rayon Soleil-planète
+        // Rayon vecteur
         ctx2.beginPath();
-
         ctx2.moveTo(sunX, sunY);
         ctx2.lineTo(P.x, P.y);
-
         ctx2.strokeStyle = '#ffffff';
         ctx2.lineWidth = 1.5;
         ctx2.stroke();
 
-        // Planète
+        // Corps céleste
         ctx2.beginPath();
-
-        ctx2.arc(
-            P.x,
-            P.y,
-            7,
-            0,
-            2 * Math.PI
-        );
-
+        ctx2.arc(P.x, P.y, 7, 0, 2 * Math.PI);
         ctx2.fillStyle = '#d0b35a';
         ctx2.fill();
 
-        // --------------------------------------------------------
-        // ANNOTATIONS
-        // --------------------------------------------------------
-
+        // Textes et repères
         ctx2.fillStyle = '#ffffff';
         ctx2.font = 'bold 13px Arial';
-
-        ctx2.fillText(
-            'Aires balayées pendant des durées égales',
-            18,
-            25
-        );
+        ctx2.fillText('8 intervalles de même durée Δt = T/8', 18, 25);
 
         ctx2.font = '12px Arial';
+        ctx2.fillText('Périhélie', cx2 - a2 - 5, cy2 + 30);
+        ctx2.fillText('Aphélie', cx2 + a2 - 40, cy2 + 30);
 
-        ctx2.fillText(
-            'Périhélie : vitesse maximale',
-            20,
-            300
-        );
+        // Progression temporelle
+        M += vitesse;
 
-        ctx2.fillText(
-            'Aphélie : vitesse minimale',
-            400,
-            300
-        );
+        const prochainSecteur = Math.floor(M / deltaM);
+        while (positions.length <= prochainSecteur && positions.length <= nbSecteurs) {
+            positions.push(positions.length * deltaM);
+        }
 
-        // --------------------------------------------------------
-        // AVANCEMENT
-        // --------------------------------------------------------
-
-        avancePlanete();
+        if (M >= 2 * Math.PI) {
+            M = 0;
+            positions = [0];
+        }
 
         requestAnimationFrame(drawAreas);
     }
 
+    positions = [0];
     drawAreas();
 
     // --- Graphique Chart.js (Troisième Loi) ---
