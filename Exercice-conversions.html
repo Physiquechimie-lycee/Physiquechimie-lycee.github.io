@@ -1,1042 +1,315 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Entraînement aux conversions d'unités</title>
-
 <style>
-:root {
-    --navy: #14273d;
-    --navy-light: #1f3552;
-    --gold: #b08d2b;
-    --gold-light: #d0b35a;
-    --cream: #faf9f5;
-    --white: #ffffff;
-    --ink: #232a35;
-    --muted: #6b7280;
-    --line: #e3ddd0;
-    --soft: #f3f1eb;
-    --shadow: 0 12px 30px rgba(20,39,61,0.10);
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    min-height: 100vh;
-    padding: 16px 14px 24px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: var(--ink);
-    background:
-        radial-gradient(circle at top right, rgba(176,141,43,0.10), transparent 30%),
-        var(--cream);
-}
-
-.card {
-    width: min(500px, 100%);
-    margin: 0 auto;
-    padding: 28px 24px 25px;
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-top: 5px solid var(--gold);
-    border-radius: 16px;
-    box-shadow: var(--shadow);
-}
-
-h1 {
-    margin: 0 0 8px;
-    text-align: center;
-    color: var(--navy);
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.65rem;
-}
-
-.subtitle {
-    margin: 0 0 18px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 0.9rem;
-}
-
-/* =========================
-   NIVEAUX
-   ========================= */
-
-.level-title {
-    margin: 0 0 8px;
-    text-align: center;
-    color: var(--navy);
-    font-size: 0.82rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.levels {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 7px;
-    margin-bottom: 18px;
-}
-
-.level-btn {
-    padding: 9px 5px;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: var(--soft);
-    color: var(--navy);
-    font-size: 0.85rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: .2s ease;
-}
-
-.level-btn:hover {
-    border-color: var(--gold);
-    background: #f8f4e9;
-}
-
-.level-btn.active {
-    background: var(--navy);
-    color: var(--white);
-    border-color: var(--navy);
-}
-
-.level-description {
-    min-height: 32px;
-    margin: -8px 0 16px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 0.78rem;
-    line-height: 1.4;
-}
-
-/* =========================
-   SCORE
-   ========================= */
-
-.streak {
-    margin-bottom: 15px;
-    text-align: center;
-    color: var(--gold);
-    font-weight: 700;
-    font-size: 0.95rem;
-}
-
-/* =========================
-   QUESTION
-   ========================= */
-
-.question {
-    margin-bottom: 18px;
-    padding: 18px 15px;
-    background: var(--cream);
-    border-left: 4px solid var(--gold);
-    border-radius: 8px;
-    color: var(--navy);
-    text-align: center;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.35rem;
-    font-weight: 700;
-}
-
-.input-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 14px;
-}
-
-.input-group input {
-    width: 100%;
-    min-width: 0;
-    padding: 12px;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    outline: none;
-    color: var(--ink);
-    font-size: 1.05rem;
-    text-align: center;
-}
-
-.input-group input:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px rgba(176,141,43,0.12);
-}
-
-.target-unit {
-    min-width: 55px;
-    color: var(--navy);
-    font-size: 1.05rem;
-    font-weight: 700;
-}
-
-.btn-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-}
-
-button {
-    font-family: inherit;
-}
-
-.main-btn,
-.help-btn {
-    padding: 11px 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.95rem;
-    font-weight: 700;
-    transition: .2s ease;
-}
-
-.main-btn {
-    border: 1px solid var(--gold);
-    background: var(--gold);
-    color: var(--navy);
-}
-
-.main-btn:hover {
-    background: var(--gold-light);
-    border-color: var(--gold-light);
-}
-
-.help-btn {
-    border: 1px solid var(--line);
-    background: var(--soft);
-    color: var(--navy);
-}
-
-.help-btn:hover {
-    border-color: var(--gold);
-    background: #f8f4e9;
-}
-
-.feedback {
-    min-height: 24px;
-    margin-top: 14px;
-    text-align: center;
-    font-size: 0.92rem;
-    font-weight: 700;
-}
-
-/* =========================
-   MODALES
-   ========================= */
-
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    padding: 20px;
-    background: rgba(20,39,61,0.72);
-}
-
-.modal-content {
-    width: min(500px, 100%);
-    max-height: 90vh;
-    overflow-y: auto;
-    margin: 8vh auto 0;
-    padding: 24px;
-    background: var(--white);
-    border-top: 5px solid var(--gold);
-    border-radius: 14px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-}
-
-.modal-content h2 {
-    margin-top: 0;
-    color: var(--navy);
-    font-family: Georgia, "Times New Roman", serif;
-}
-
-.modal-content p {
-    line-height: 1.55;
-}
-
-.close-btn {
-    display: block;
-    width: 100%;
-    margin-top: 18px;
-    padding: 10px;
-    border: 1px solid var(--navy);
-    border-radius: 8px;
-    background: var(--navy);
-    color: white;
-    cursor: pointer;
-    font-weight: 700;
-}
-
-/* =========================
-   TABLE DES PREFIXES
-   ========================= */
-
-.prefix-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    font-size: 0.9rem;
-}
-
-.prefix-table th,
-.prefix-table td {
-    padding: 8px;
-    border: 1px solid var(--line);
-    text-align: center;
-}
-
-.prefix-table th {
-    background: var(--navy);
-    color: var(--white);
-}
-
-.prefix-table tr:nth-child(even) {
-    background: var(--cream);
-}
-
-/* =========================
-   MOBILE
-   ========================= */
-
-@media (max-width: 600px) {
-    body {
-        padding: 12px 10px 18px;
-    }
-
-    .card {
-        padding: 23px 17px 20px;
-        border-radius: 13px;
-    }
-
-    h1 {
-        font-size: 1.45rem;
-    }
-
-    .question {
-        font-size: 1.2rem;
-        padding: 16px 10px;
-    }
-}
-
-@media (max-width: 380px) {
-    .levels {
-        gap: 5px;
-    }
-
-    .level-btn {
-        font-size: 0.78rem;
-        padding: 8px 3px;
-    }
-
-    .level-description {
-        font-size: 0.74rem;
-    }
-
-    .btn-group {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* =========================
-   BANDEAU DU SITE
-   ========================= */
-
-.site-header {
-    position: sticky;
-    top: 0;
-    z-index: 2000;
-    background: var(--navy);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.14);
-}
-
-.navbar {
-    width: min(1100px, 100%);
-    margin: 0 auto;
-    padding: 10px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.site-logo {
-    color: #fff;
-    text-decoration: none;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1rem;
-    font-weight: 700;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.nav-links a {
-    color: #fff;
-    text-decoration: none;
-    padding: 7px 11px;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: background .2s ease;
-}
-
-.nav-links a:hover {
-    background: var(--navy-light);
-}
-
-@media (max-width: 600px) {
-    .navbar {
-        justify-content: center;
-        padding: 8px 6px;
-    }
-
-    .site-logo {
-        display: none;
-    }
-
-    .nav-links {
-        width: 100%;
-        justify-content: space-around;
-    }
-
-    .nav-links a {
-        font-size: 0.84rem;
-        padding: 7px 9px;
-    }
-}
-
+:root{--navy:#14273d;--navy-light:#1f3552;--gold:#b08d2b;--gold-light:#d0b35a;--cream:#faf9f5;--white:#fff;--ink:#232a35;--muted:#6b7280;--line:#e3ddd0;--soft:#f3f1eb;--shadow:0 12px 30px rgba(20,39,61,.10)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:16px 14px 24px;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:radial-gradient(circle at top right,rgba(176,141,43,.10),transparent 30%),var(--cream)}
+.card{width:min(500px,100%);margin:0 auto;padding:28px 24px 25px;background:var(--white);border:1px solid var(--line);border-top:5px solid var(--gold);border-radius:16px;box-shadow:var(--shadow)}
+h1{margin:0 0 8px;text-align:center;color:var(--navy);font-family:Georgia,"Times New Roman",serif;font-size:1.65rem}
+.subtitle{margin:0 0 18px;text-align:center;color:var(--muted);font-size:.9rem}
+.level-title{margin:0 0 8px;text-align:center;color:var(--navy);font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px}
+.level-btn{padding:9px 5px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--navy);font-family:inherit;font-size:.85rem;font-weight:700;cursor:pointer;transition:.2s ease}
+.level-btn:hover{border-color:var(--gold);background:#f8f4e9}
+.level-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.level-description{min-height:32px;margin:0 0 12px;text-align:center;color:var(--muted);font-size:.78rem;line-height:1.4}
+.streak{margin-bottom:15px;text-align:center;color:var(--gold);font-weight:700;font-size:.95rem}
+.question{margin-bottom:18px;padding:18px 15px;background:var(--cream);border-left:4px solid var(--gold);border-radius:8px;color:var(--navy);text-align:center;font-family:Georgia,"Times New Roman",serif;font-size:1.35rem;font-weight:700}
+.input-group{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.input-group input{width:100%;min-width:0;padding:12px;border:1px solid var(--line);border-radius:8px;outline:none;color:var(--ink);font-size:1.05rem;text-align:center}
+.input-group input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(176,141,43,.12)}
+.target-unit{min-width:55px;color:var(--navy);font-size:1.05rem;font-weight:700}
+.btn-group{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+button{font-family:inherit}
+.main-btn,.help-btn{padding:11px 10px;border-radius:8px;cursor:pointer;font-size:.95rem;font-weight:700;transition:.2s ease}
+.main-btn{border:1px solid var(--gold);background:var(--gold);color:var(--navy)}
+.main-btn:hover{background:var(--gold-light);border-color:var(--gold-light)}
+.help-btn{border:1px solid var(--line);background:var(--soft);color:var(--navy)}
+.help-btn:hover{border-color:var(--gold);background:#f8f4e9}
+.feedback{min-height:24px;margin-top:14px;text-align:center;font-size:.92rem;font-weight:700}
+.method{margin-top:6px;color:var(--muted);font-size:.82rem;font-weight:400;line-height:1.5}
+.modal{display:none;position:fixed;inset:0;z-index:1000;padding:20px;background:rgba(20,39,61,.72)}
+.modal-content{width:min(500px,100%);max-height:90vh;overflow-y:auto;margin:8vh auto 0;padding:24px;background:var(--white);border-top:5px solid var(--gold);border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.modal-content h2{margin-top:0;color:var(--navy);font-family:Georgia,"Times New Roman",serif}
+.modal-content p{line-height:1.55}
+.close-btn{display:block;width:100%;margin-top:18px;padding:10px;border:1px solid var(--navy);border-radius:8px;background:var(--navy);color:#fff;cursor:pointer;font-weight:700}
+.prefix-table{width:100%;border-collapse:collapse;margin-top:15px;font-size:.9rem}
+.prefix-table th,.prefix-table td{padding:8px;border:1px solid var(--line);text-align:center}
+.prefix-table th{background:var(--navy);color:var(--white)}
+.prefix-table tr:nth-child(even){background:var(--cream)}
+@media(max-width:600px){body{padding:12px 10px 18px}.card{padding:23px 17px 20px;border-radius:13px}h1{font-size:1.45rem}.question{font-size:1.2rem;padding:16px 10px}}
+@media(max-width:380px){.levels{gap:5px}.level-btn{font-size:.78rem;padding:8px 3px}.level-description{font-size:.74rem}.btn-group{grid-template-columns:1fr}}
+.site-header{position:sticky;top:0;z-index:2000;background:var(--navy);box-shadow:0 2px 10px rgba(0,0,0,.14)}
+.navbar{width:min(1100px,100%);margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.site-logo{color:#fff;text-decoration:none;font-family:Georgia,"Times New Roman",serif;font-size:1rem;font-weight:700}
+.nav-links{display:flex;align-items:center;gap:5px}
+.nav-links a{color:#fff;text-decoration:none;padding:7px 11px;border-radius:6px;font-size:.9rem;font-weight:600;transition:background .2s ease}
+.nav-links a:hover{background:var(--navy-light)}
+@media(max-width:600px){.navbar{justify-content:center;padding:8px 6px}.site-logo{display:none}.nav-links{width:100%;justify-content:space-around}.nav-links a{font-size:.84rem;padding:7px 9px}}
 </style>
-
 </head>
-
 <body>
 
-
 <header class="site-header">
-    <nav class="navbar">
-        <a href="index.html" class="site-logo">Physique-Chimie au lycée</a>
-        <div class="nav-links">
-            <a href="index.html">Accueil</a>
-            <a href="animations.html">Animations</a>
-            <a href="Ouvrages.html">Ouvrages</a>
-        </div>
-    </nav>
+  <nav class="navbar">
+    <a href="index.html" class="site-logo">Physique-Chimie au lycée</a>
+    <div class="nav-links">
+      <a href="index.html">Accueil</a>
+      <a href="animations.html">Animations</a>
+      <a href="Ouvrages.html">Ouvrages</a>
+    </div>
+  </nav>
 </header>
 
-
 <div class="card">
+  <h1>Conversions d'unités</h1>
+  <p class="subtitle">Choisis ton niveau puis entraîne-toi.</p>
 
- 
-<h1>Conversions d'unités</h1>
+  <div class="level-title">Niveau</div>
+  <div class="levels" id="levels">
+    <button class="level-btn active" data-level="easy">Facile</button>
+    <button class="level-btn" data-level="medium">Intermédiaire</button>
+    <button class="level-btn" data-level="hard">Difficile</button>
+  </div>
 
-<p class="subtitle">
-    Choisis ton niveau puis entraîne-toi.
-</p>
+  <div class="level-title">Grandeur</div>
+  <div class="levels" id="modes">
+    <button class="level-btn active" data-power="1">Simple</button>
+    <button class="level-btn" data-power="2">Surfaces (²)</button>
+    <button class="level-btn" data-power="3">Volumes (³)</button>
+  </div>
 
-<div class="level-title">Niveau</div>
+  <div class="level-description" id="level-description"></div>
+  <div class="streak">Série : <span id="streak">0</span> &nbsp;·&nbsp; Record : <span id="best">0</span></div>
+  <div class="question" id="question">...</div>
 
-<div class="levels">
-    <button class="level-btn active" data-level="easy">
-        Facile
-    </button>
-
-    <button class="level-btn" data-level="medium">
-        Intermédiaire
-    </button>
-
-    <button class="level-btn" data-level="hard">
-        Difficile
-    </button>
-</div>
-
-<div class="level-description" id="level-description">
-    k, h, da, unité, d, c et m — sans puissance de 10
-</div>
-
-<div class="streak">
-    Série : <span id="streak">0</span>
-</div>
-
-<div class="question" id="question">
-    ...
-</div>
-
-<div class="input-group">
-    <input
-        type="text"
-        id="answer"
-        placeholder="ex : 1,5 ou 1.5e3"
-        autocomplete="off"
-        inputmode="decimal"
-    >
-
+  <div class="input-group">
+    <input type="text" id="answer" autocomplete="off" autocapitalize="off" spellcheck="false">
     <span class="target-unit" id="target-unit">...</span>
+  </div>
+
+  <div class="btn-group">
+    <button class="main-btn" id="main-btn" onclick="checkAnswer()">Valider</button>
+    <button class="help-btn" onclick="openHelp()">Aide</button>
+  </div>
+
+  <div class="feedback" id="feedback" aria-live="polite"></div>
 </div>
-
-<div class="btn-group">
-    <button class="main-btn" onclick="checkAnswer()">
-        Valider
-    </button>
-
-    <button class="help-btn" onclick="openHelp()">
-        Aide
-    </button>
-</div>
-
-<div class="feedback" id="feedback"></div>
- 
-
-</div>
-
-<!-- =========================
-     MODALE DE RÉCOMPENSE
-     ========================= -->
 
 <div class="modal" id="modal-reward">
-    <div class="modal-content">
-
- 
+  <div class="modal-content">
     <h2 id="reward-title"></h2>
-
     <p id="reward-message"></p>
-
-    <button
-        class="close-btn"
-        onclick="closeModal('modal-reward')">
-        Continuer
-    </button>
-
+    <button class="close-btn" onclick="closeModal('modal-reward')">Continuer</button>
+  </div>
 </div>
- 
-
-</div>
-
-<!-- =========================
-     MODALE D'AIDE
-     ========================= -->
 
 <div class="modal" id="modal-help">
-    <div class="modal-content">
-
- 
+  <div class="modal-content">
     <h2>Les préfixes</h2>
-
-    <p>
-        Chaque préfixe correspond à une puissance de 10.
-    </p>
-
+    <p>Chaque préfixe correspond à une puissance de 10.</p>
     <table class="prefix-table">
-        <thead>
-            <tr>
-                <th>Préfixe</th>
-                <th>Symbole</th>
-                <th>Puissance</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>giga</td>
-                <td>G</td>
-                <td>10⁹</td>
-            </tr>
-            <tr>
-                <td>méga</td>
-                <td>M</td>
-                <td>10⁶</td>
-            </tr>
-            <tr>
-                <td>kilo</td>
-                <td>k</td>
-                <td>10³</td>
-            </tr>
-            <tr>
-                <td>hecto</td>
-                <td>h</td>
-                <td>10²</td>
-            </tr>
-            <tr>
-                <td>déca</td>
-                <td>da</td>
-                <td>10¹</td>
-            </tr>
-            <tr>
-                <td>unité</td>
-                <td>—</td>
-                <td>10⁰</td>
-            </tr>
-            <tr>
-                <td>déci</td>
-                <td>d</td>
-                <td>10⁻¹</td>
-            </tr>
-            <tr>
-                <td>centi</td>
-                <td>c</td>
-                <td>10⁻²</td>
-            </tr>
-            <tr>
-                <td>milli</td>
-                <td>m</td>
-                <td>10⁻³</td>
-            </tr>
-            <tr>
-                <td>micro</td>
-                <td>µ</td>
-                <td>10⁻⁶</td>
-            </tr>
-            <tr>
-                <td>nano</td>
-                <td>n</td>
-                <td>10⁻⁹</td>
-            </tr>
-        </tbody>
+      <thead><tr><th>Préfixe</th><th>Symbole</th><th>Puissance</th></tr></thead>
+      <tbody>
+        <tr><td>giga</td><td>G</td><td>10⁹</td></tr>
+        <tr><td>méga</td><td>M</td><td>10⁶</td></tr>
+        <tr><td>kilo</td><td>k</td><td>10³</td></tr>
+        <tr><td>hecto</td><td>h</td><td>10²</td></tr>
+        <tr><td>déca</td><td>da</td><td>10¹</td></tr>
+        <tr><td>unité</td><td>—</td><td>10⁰</td></tr>
+        <tr><td>déci</td><td>d</td><td>10⁻¹</td></tr>
+        <tr><td>centi</td><td>c</td><td>10⁻²</td></tr>
+        <tr><td>milli</td><td>m</td><td>10⁻³</td></tr>
+        <tr><td>micro</td><td>µ</td><td>10⁻⁶</td></tr>
+        <tr><td>nano</td><td>n</td><td>10⁻⁹</td></tr>
+      </tbody>
     </table>
-
-    <button
-        class="close-btn"
-        onclick="closeModal('modal-help')">
-        Fermer
-    </button>
-
-</div>
- 
-
+    <p><strong>Carrés et cubes :</strong> l'exposant s'applique aussi au préfixe.<br>
+    1 dm² = (10⁻¹ m)² = 10⁻² m² et 1 cm³ = (10⁻² m)³ = 10⁻⁶ m³.</p>
+    <p><strong>Écrire une puissance de 10 :</strong> 1,5×10^-3 ou 1,5e-3. Les espaces sont acceptés (256 000).</p>
+    <button class="close-btn" onclick="closeModal('modal-help')">Fermer</button>
+  </div>
 </div>
 
 <script>
+const $ = id => document.getElementById(id);
+const SUP = {'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
+const sup = n => String(n).replace(/[-\d]/g, c => SUP[c]);
 
-const units = ['g', 'm', 'L', 'V', 'A', 'N'];
-
-
-/*
- * Tous les préfixes disponibles
- */
-
-const prefixes = [
-    { symbol: 'n',  exp: -9 },
-    { symbol: 'µ',  exp: -6 },
-    { symbol: 'm',  exp: -3 },
-    { symbol: 'c',  exp: -2 },
-    { symbol: 'd',  exp: -1 },
-    { symbol: '',   exp:  0 },
-    { symbol: 'da', exp:  1 },
-    { symbol: 'h',  exp:  2 },
-    { symbol: 'k',  exp:  3 },
-    { symbol: 'M',  exp:  6 },
-    { symbol: 'G',  exp:  9 }
+const all = [
+  {symbol:'n',exp:-9},{symbol:'µ',exp:-6},{symbol:'m',exp:-3},{symbol:'c',exp:-2},{symbol:'d',exp:-1},
+  {symbol:'',exp:0},{symbol:'da',exp:1},{symbol:'h',exp:2},{symbol:'k',exp:3},{symbol:'M',exp:6},{symbol:'G',exp:9}
 ];
-
-
-/*
- * Préfixes utilisés selon le niveau
- */
+const pick = (...s) => all.filter(p => s.includes(p.symbol));
+const units = ['g','m','L','V','A','N'];
 
 const levels = {
-
-    easy: {
-        description:
-            'k, h, da, unité, d, c et m — sans puissance de 10',
-
-        prefixes: [
-            { symbol: 'm',  exp: -3 },
-            { symbol: 'c',  exp: -2 },
-            { symbol: 'd',  exp: -1 },
-            { symbol: '',   exp:  0 },
-            { symbol: 'da', exp:  1 },
-            { symbol: 'h',  exp:  2 },
-            { symbol: 'k',  exp:  3 }
-        ]
-    },
-
-    medium: {
-        description:
-            'De méga à micro — la notation scientifique peut être utile',
-
-        prefixes: [
-            { symbol: 'µ', exp: -6 },
-            { symbol: 'm', exp: -3 },
-            { symbol: 'c', exp: -2 },
-            { symbol: 'd', exp: -1 },
-            { symbol: '',  exp:  0 },
-            { symbol: 'da', exp: 1 },
-            { symbol: 'h', exp:  2 },
-            { symbol: 'k', exp:  3 },
-            { symbol: 'M', exp:  6 }
-        ]
-    },
-
-    hard: {
-        description:
-            'Tous les préfixes, de giga à nano',
-
-        prefixes: prefixes
-    }
-
+  easy:   {description:'k, h, da, unité, d, c et m — sans puissance de 10', prefixes: pick('m','c','d','','da','h','k')},
+  medium: {description:'De méga à micro — la notation scientifique peut être utile', prefixes: pick('µ','m','c','d','','da','h','k','M')},
+  hard:   {description:'Tous les préfixes, de giga à nano', prefixes: all}
 };
+const powerPrefixes = pick('m','c','d','');
 
+let level = 'easy', power = 1, streak = 0, best = 0;
+let target = 0, cur = null, locked = false, waiting = false, timer = null;
 
-let currentLevel = 'easy';
-let streak = 0;
-let currentTargetValue = 0;
+try { best = parseInt(localStorage.getItem('pcl_best'), 10) || 0; } catch (e) {}
 
+const randInt = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
+const rnd = arr => arr[Math.floor(Math.random() * arr.length)];
+const fmt = v => v.toLocaleString('fr-FR', {maximumFractionDigits: 1});
 
-/*
- * Nombre aléatoire entier
- */
-
-function getRandom(min, max) {
-    return Math.floor(
-        Math.random() * (max - min + 1)
-    ) + min;
+function formatAnswer(v) {
+  const a = Math.abs(v);
+  if (a >= 1e-3 && a < 1e7)
+    return Number(v.toPrecision(12)).toLocaleString('fr-FR', {maximumFractionDigits: 12});
+  const [m, e] = v.toExponential(6).split('e');
+  return Number(m).toLocaleString('fr-FR', {maximumFractionDigits: 6}) + ' × 10' + sup(parseInt(e, 10));
 }
-
-
-/*
- * Choisit un élément aléatoire dans un tableau
- */
-
-function randomItem(array) {
-    return array[
-        Math.floor(Math.random() * array.length)
-    ];
-}
-
-
-/*
- * Génération d'une question
- */
-
-function generateQuestion() {
-
-    const levelPrefixes =
-        levels[currentLevel].prefixes;
-
-    const unit =
-        randomItem(units);
-
-    let srcIndex =
-        getRandom(0, levelPrefixes.length - 1);
-
-    let targetIndex =
-        getRandom(0, levelPrefixes.length - 1);
-
-    while (targetIndex === srcIndex) {
-        targetIndex =
-            getRandom(0, levelPrefixes.length - 1);
-    }
-
-    const srcPrefix =
-        levelPrefixes[srcIndex];
-
-    const targetPrefix =
-        levelPrefixes[targetIndex];
-
-
-    /*
-     * Niveau facile :
-     *
-     * On génère volontairement des valeurs
-     * donnant des résultats simples à lire.
-     */
-
-    let baseValue;
-
-    if (currentLevel === 'easy') {
-
-        baseValue = getRandom(1, 999);
-
-        /*
-         * Pour le niveau facile, on choisit
-         * principalement des valeurs entières.
-         * La conversion reste limitée à la gamme
-         * kilo → milli.
-         */
-
-    } else {
-
-        baseValue =
-            getRandom(10, 999) / 10;
-
-    }
-
-
-    const expDiff =
-        srcPrefix.exp - targetPrefix.exp;
-
-    currentTargetValue =
-        baseValue * Math.pow(10, expDiff);
-
-
-    document.getElementById('question').innerText =
-        `${baseValue} ${srcPrefix.symbol}${unit} = ?`;
-
-
-    document.getElementById('target-unit').innerText =
-        `${targetPrefix.symbol}${unit}`;
-
-
-    const input =
-        document.getElementById('answer');
-
-    input.value = '';
-
-    input.focus();
-
-    document.getElementById('feedback').innerText = '';
-
-}
-
-
-/*
- * Lecture de la réponse
- */
 
 function parseInput(val) {
-
-    if (!val) return NaN;
-
-    let clean =
-        val.trim()
-           .replace(',', '.')
-           .replace(/10\^/i, 'e')
-           .replace(/\*10\^/i, 'e');
-
-    return parseFloat(clean);
+  if (!val) return NaN;
+  const s = val.replace(/\s/g, '').replace(/,/g, '.').replace('−', '-');
+  const m = s.match(/^(-?\d*\.?\d+)(?:[×x*·]10\^?\(?(-?\d+)\)?|e(-?\d+))?$/i);
+  if (!m) return NaN;
+  const exp = m[2] !== undefined ? m[2] : m[3];
+  const base = parseFloat(m[1]);
+  return exp !== undefined ? base * Math.pow(10, parseInt(exp, 10)) : base;
 }
 
+function say(html, color) {
+  const f = $('feedback');
+  f.innerHTML = html;
+  f.style.color = color || '';
+}
 
-/*
- * Vérification
- */
+function updateStreak() {
+  $('streak').textContent = streak;
+  $('best').textContent = best;
+}
+
+function generateQuestion() {
+  clearTimeout(timer);
+  locked = false;
+  waiting = false;
+  $('main-btn').textContent = 'Valider';
+
+  const list = power > 1 ? powerPrefixes : levels[level].prefixes;
+  const unit = power > 1 ? 'm' : rnd(units);
+  const suf = power === 2 ? '²' : power === 3 ? '³' : '';
+  const a = rnd(list);
+  let b;
+  do { b = rnd(list); } while (b === a);
+
+  const base = level === 'easy' ? randInt(1, 999) : randInt(10, 999) / 10;
+  const n = (a.exp - b.exp) * power;
+  target = Number(base + 'e' + n);
+  cur = {a, b, unit, suf, n};
+
+  $('question').textContent = fmt(base) + ' ' + a.symbol + unit + suf + ' = ?';
+  $('target-unit').textContent = b.symbol + unit + suf;
+  $('level-description').textContent = power > 1
+    ? 'mm, cm, dm et m — ' + (power === 2 ? 'surfaces (carrés)' : 'volumes (cubes)')
+    : levels[level].description;
+
+  const simple = level === 'easy' && power === 1;
+  const input = $('answer');
+  input.inputMode = simple ? 'decimal' : 'text';
+  input.placeholder = simple ? 'ex : 1,5' : 'ex : 1,5 ou 1,5e-3';
+  input.value = '';
+  input.focus();
+  say('');
+  updateStreak();
+}
 
 function checkAnswer() {
+  if (waiting) { generateQuestion(); return; }
+  if (locked) return;
 
-    const inputVal =
-        document.getElementById('answer').value;
+  const v = parseInput($('answer').value);
+  if (isNaN(v)) {
+    say('Entre une valeur numérique (ex : 1,5 ou 1,5×10^-3).', '#9b2c2c');
+    return;
+  }
+  locked = true;
 
-    const userVal =
-        parseInput(inputVal);
-
-
-    if (isNaN(userVal)) {
-
-        document.getElementById('feedback').innerText =
-            'Entre une valeur numérique.';
-
-        document.getElementById('feedback').style.color =
-            '#9b2c2c';
-
-        return;
+  if (Math.abs(v - target) <= Math.abs(target) * 1e-9) {
+    streak++;
+    if (streak > best) {
+      best = streak;
+      try { localStorage.setItem('pcl_best', best); } catch (e) {}
     }
+    updateStreak();
+    say('Correct.', '#39724a');
 
-
-    const relativeError =
-        Math.abs(
-            (userVal - currentTargetValue)
-            / currentTargetValue
-        );
-
-
-    if (relativeError < 0.001) {
-
-        streak++;
-
-        document.getElementById('streak').innerText =
-            streak;
-
-        document.getElementById('feedback').innerText =
-            'Correct.';
-
-        document.getElementById('feedback').style.color =
-            '#39724a';
-
-
-        if (streak === 5) {
-
-            showModal(
-                'modal-reward',
-                '5 conversions réussies',
-                'Tu maîtrises bien cette série. Continue.'
-            );
-
-        } else if (streak === 10) {
-
-            showModal(
-                'modal-reward',
-                '10 conversions réussies',
-                'Série de 10 réussites. Le niveau suivant peut être tenté.'
-            );
-
-            streak = 0;
-
-            document.getElementById('streak').innerText =
-                streak;
-
-        } else {
-
-            setTimeout(
-                generateQuestion,
-                1000
-            );
-
-        }
-
+    if (streak === 5) {
+      showModal('modal-reward', '5 conversions réussies', 'Tu maîtrises bien cette série. Continue.');
+    } else if (streak === 10) {
+      showModal('modal-reward', '10 conversions réussies',
+        "10 d'affilée : tu peux passer au niveau suivant.");
+      streak = 0;
+      updateStreak();
     } else {
-
-        streak = 0;
-
-        document.getElementById('streak').innerText =
-            streak;
-
-        document.getElementById('feedback').innerText =
-            'Incorrect. Essaie encore.';
-
-        document.getElementById('feedback').style.color =
-            '#9b2c2c';
-
-        setTimeout(
-            generateQuestion,
-            2500
-        );
-
+      timer = setTimeout(generateQuestion, 1000);
     }
-
+  } else {
+    streak = 0;
+    updateStreak();
+    const {a, b, unit, suf, n} = cur;
+    const diff = a.exp - b.exp;
+    say(
+      'Incorrect. Réponse : <strong>' + formatAnswer(target) + ' ' + b.symbol + unit + suf + '</strong>' +
+      '<div class="method">1 ' + a.symbol + unit + ' = 10' + sup(a.exp) + ' ' + unit +
+      ' et 1 ' + b.symbol + unit + ' = 10' + sup(b.exp) + ' ' + unit + '.<br>' +
+      (power > 1
+        ? 'On multiplie par (10' + sup(diff) + ')' + suf + ' = 10' + sup(n) + '.'
+        : 'On multiplie par 10' + sup(n) + '.') + '</div>',
+      '#9b2c2c'
+    );
+    locked = false;
+    waiting = true;
+    $('main-btn').textContent = 'Question suivante';
+  }
 }
 
-
-/*
- * Gestion des niveaux
- */
-
-document.querySelectorAll('.level-btn')
-    .forEach(button => {
-
-        button.addEventListener('click', () => {
-
-            currentLevel =
-                button.dataset.level;
-
-
-            /*
-             * Apparence du bouton actif
-             */
-
-            document.querySelectorAll('.level-btn')
-                .forEach(btn => {
-                    btn.classList.remove('active');
-                });
-
-            button.classList.add('active');
-
-
-            /*
-             * Description du niveau
-             */
-
-            document.getElementById(
-                'level-description'
-            ).innerText =
-                levels[currentLevel].description;
-
-
-            /*
-             * Nouvelle série
-             */
-
-            streak = 0;
-
-            document.getElementById('streak').innerText =
-                streak;
-
-            generateQuestion();
-
-        });
-
-    });
-
-
-/*
- * Affichage d'une modale
- */
+function bind(sel, key, cb) {
+  const buttons = document.querySelectorAll(sel + ' .level-btn');
+  buttons.forEach(btn => btn.addEventListener('click', () => {
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    cb(btn.dataset[key]);
+    streak = 0;
+    generateQuestion();
+  }));
+}
+bind('#levels', 'level', v => { level = v; });
+bind('#modes', 'power', v => { power = Number(v); });
 
 function showModal(id, title, msg) {
-
-    document.getElementById('reward-title').innerText =
-        title;
-
-    document.getElementById('reward-message').innerText =
-        msg;
-
-    document.getElementById(id).style.display =
-        'block';
-
+  $('reward-title').textContent = title;
+  $('reward-message').textContent = msg;
+  $(id).style.display = 'block';
 }
-
-
-/*
- * Ouverture de l'aide
- */
-
-function openHelp() {
-
-    document.getElementById('modal-help')
-        .style.display = 'block';
-
-}
-
-
-/*
- * Fermeture des modales
- */
-
+function openHelp() { $('modal-help').style.display = 'block'; }
 function closeModal(id) {
-
-    document.getElementById(id)
-        .style.display = 'none';
-
-
-    if (id === 'modal-reward') {
-
-        generateQuestion();
-
-    }
-
+  $(id).style.display = 'none';
+  if (id === 'modal-reward') generateQuestion();
+  else $('answer').focus();
 }
 
-
-/*
- * Validation avec Entrée
- */
-
-document.getElementById('answer')
-    .addEventListener('keypress', function(e) {
-
-        if (e.key === 'Enter') {
-
-            checkAnswer();
-
-        }
-
-    });
-
-
-/*
- * Première question
- */
+document.querySelectorAll('.modal').forEach(m =>
+  m.addEventListener('click', e => { if (e.target === m) closeModal(m.id); }));
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape')
+    document.querySelectorAll('.modal').forEach(m => { if (m.style.display === 'block') closeModal(m.id); });
+});
+$('answer').addEventListener('keydown', e => { if (e.key === 'Enter') checkAnswer(); });
 
 generateQuestion();
-
 </script>
-
 </body>
 </html>
